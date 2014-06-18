@@ -26,4 +26,16 @@ ComexUrbano::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_protocol => 'http',
+      :s3_credentials => {
+          :bucket => 'comex_urbano',
+          :access_key_id => 'AKIAIU4SZHJL7WDODQ4A',
+          :secret_access_key => '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'
+      }
+  }
 end
