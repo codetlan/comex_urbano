@@ -1,5 +1,13 @@
 class Video < ActiveRecord::Base
 
+  def self.search(search)
+    if search
+      where('name LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%")
+    else
+      Video.all
+    end
+  end
+
   def youtube_embed(youtube_url)
     if youtube_url[/youtu\.be\/([^\?]*)/]
       @youtube_id = "http://www.youtube.com/embed/"+$1

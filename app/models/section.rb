@@ -1,4 +1,5 @@
 class Section < ActiveRecord::Base
+  belongs_to :category
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :main_banner, styles: {
       thumb: '100x100>',

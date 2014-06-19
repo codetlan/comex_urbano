@@ -35,6 +35,8 @@ end
 gem 'devise'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'jquery-rails'
+#gem 'declarative_authorization'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

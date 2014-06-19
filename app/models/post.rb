@@ -8,4 +8,12 @@ class Post < ActiveRecord::Base
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
+  def self.search(search)
+    if search
+      where('title LIKE ? OR introduction LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      Post.all
+    end
+  end
 end
