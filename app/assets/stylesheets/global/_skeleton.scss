@@ -53,7 +53,23 @@
   }
 }
 
+.search {
+  margin: 20px 0;
+  @include clearfix;
+
+  .search-form {
+    float: right;
+
+    input[type="text"] {
+      padding: 5px 10px;
+      width: 200px;
+    }
+  }
+}
+
 .footer {
+  margin-top: 60px;
+
   .footer-navigation {
     @include clearfix;
 
@@ -62,11 +78,15 @@
       display: block;
       width: 25%;
       float: left;
+
+      a {
+        padding-bottom: 10px;
+      }
     }   
   }
 
   .footer-links-rights {
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   .footer-links {
@@ -80,5 +100,90 @@
   .footer-brand {
     margin-top: 25px;
     padding: 30px 0;
+  }
+}
+
+.filters {
+  margin: 40px 0 60px 0;
+  padding-bottom: 10px;
+  @include clearfix;
+
+  .page-navigation {
+    ul li {
+      float: left;
+      padding-right: 25px;
+
+      a {
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+  .years-timeline {
+    float: right;
+
+    ul li {
+      float: left;
+      padding-left: 25px;
+
+      a {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
+
+.title-page {
+  margin-bottom: 40px;
+  width: 60%;
+}
+
+.ytube-subscribe {
+  margin-bottom: 25px;
+}
+
+.side-lastest-videos {
+  .label-videos {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .video-box + .video-box {
+    margin-top: 30px;
+  }
+}
+
+.video-box {
+  .video-image {
+    position: relative;
+
+    .i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -33px 0 0 -33px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .video-description {
+    padding: 10px;
+  }
+}
+
+.ads-list {
+  .ad {
+    margin-top: 30px;
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
   }
 }
