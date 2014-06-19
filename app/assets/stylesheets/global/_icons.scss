@@ -1,0 +1,8 @@
+// Icons
+.i {
+  background: url('/assets/icons.png') no-repeat;
+  vertical-align: middle;
+  @include inline-block;
+}
+
+.play { width: 66px; height: 66px; background-position: 0 0; }

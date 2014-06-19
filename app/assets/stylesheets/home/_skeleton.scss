@@ -1,0 +1,46 @@
+.featured-post {
+  .image {
+    position: relative;
+
+    .i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -33px 0 0 -33px;
+    }
+    
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .description {
+    padding: 15px;
+    @include clearfix;
+  }
+
+  .category {
+    float: left;
+  }
+
+  .title {
+    float: right;
+  }
+}
+
+.posts-list {
+  .post {
+    @include clearfix;
+
+    .post-image {
+      float: left;
+      margin-right: 20px;
+    }
+
+    & + .post {
+      margin-top: 40px;
+    }
+  }
+}
