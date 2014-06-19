@@ -7,20 +7,24 @@ class Admin::PostsController < ApplicationController
   def index
     #@posts = Post.all
     @posts = Post.search(params[:search])
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /posts/1/edit
   def edit
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # POST /posts

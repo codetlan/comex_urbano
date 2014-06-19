@@ -6,20 +6,24 @@ class Admin::VideosController < ApplicationController
   def index
     #@videos = Video.all
     @videos = Video.search(params[:search])
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /videos/1
   # GET /videos/1.json
   def show
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /videos/new
   def new
     @video = Video.new
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /videos/1/edit
   def edit
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # POST /videos

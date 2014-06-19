@@ -5,20 +5,24 @@ class Admin::SectionsController < ApplicationController
   # GET /sections.json
   def index
     @sections = Section.all
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /sections/1
   # GET /sections/1.json
   def show
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /sections/new
   def new
     @section = Section.new
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /sections/1/edit
   def edit
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # POST /sections

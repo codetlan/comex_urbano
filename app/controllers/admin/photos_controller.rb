@@ -6,20 +6,24 @@ class Admin::PhotosController < ApplicationController
   def index
     #@photos = Photo.all
     @photos = Photo.search(params[:search])
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /photos/new
   def new
     @photo = Photo.new
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /photos/1/edit
   def edit
+    @categories = Category.all.where('active = ?', 1)
   end
 
   # POST /photos

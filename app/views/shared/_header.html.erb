@@ -11,10 +11,9 @@
           <div class="header-right-content">
             <div class="navigation">
               <ul>
-                <li><a href="">Videos</a></li>
-                <li><a href="">Galería</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">¿Qué es urbano?</a></li>
+                <% @categories.each do |category| %>
+                    <li><%= link_to category.name, '/' + category.link %></li>
+                <% end %>
               </ul>
             </div>
             <div class="social-links">

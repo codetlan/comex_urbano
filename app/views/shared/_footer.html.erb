@@ -5,18 +5,9 @@
         <div class="col col-12">
           <div class="col-inner">
             <ul>
-              <li class="footer-nav-item">
-                <%= link_to "Video", "#" %>
-              </li>
-              <li class="footer-nav-item">
-                <%= link_to "Galería", "#" %>
-              </li>
-              <li class="footer-nav-item">
-                <%= link_to "Blog", "#" %>
-              </li>
-              <li class="footer-nav-item">
-                <%= link_to "¿Qué es urbano?", "#" %>
-              </li>
+              <% @categories.each do |category| %>
+                  <li class="footer-nav-item"><%= link_to category.name, '/' + category.link %></li>
+              <% end %>
             </ul>
           </div>
         </div>
@@ -36,6 +27,7 @@
             </div>
             <div class="footer-rights">
               <p>Copyright © 2014 Consoricio Comex, S.A de C.V</p>
+
               <p>Términos y Condiciones Aviso de Privacidad Soporte técnico</p>
             </div>
           </div>
@@ -49,7 +41,7 @@
         <div class="col col-12">
           <div class="col-inner">
             <%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
-              <%= image_tag 'comex-logo.png' %>
+                <%= image_tag 'comex-logo.png' %>
             <% end %>
           </div>
         </div>

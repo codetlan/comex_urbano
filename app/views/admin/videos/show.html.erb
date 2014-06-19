@@ -12,7 +12,7 @@
 
 <p>
   <strong>Link:</strong>
-  <%= @video.link %>
+  <iframe width="300" height="200" src="<%= @video.youtube_embed(@video.link) %>"></iframe>
 </p>
 
 <p>
