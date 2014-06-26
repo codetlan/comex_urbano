@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v1.11.0
+ * jQuery JavaScript Library v1.11.1
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -9,7 +9,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2014-01-23T21:02Z
+ * Date: 2014-05-01T17:42Z
  */
 
 
@@ -60,14 +60,12 @@ var toString = class2type.toString;
 
 var hasOwn = class2type.hasOwnProperty;
 
-var trim = "".trim;
-
 var support = {};
 
 
 
 var
-	version = "1.11.0",
+	version = "1.11.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -76,7 +74,8 @@ var
 		return new jQuery.fn.init( selector, context );
 	},
 
-	// Make sure we trim BOM and NBSP (here's looking at you, Safari 5.0 and IE)
+	// Support: Android<4.1, IE<9
+	// Make sure we trim BOM and NBSP
 	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
 
 	// Matches dashed string for camelizing
@@ -109,10 +108,10 @@ jQuery.fn = jQuery.prototype = {
 	get: function( num ) {
 		return num != null ?
 
-			// Return a 'clean' array
+			// Return just the one element from the set
 			( num < 0 ? this[ num + this.length ] : this[ num ] ) :
 
-			// Return just the object
+			// Return all the elements in a clean array
 			slice.call( this );
 	},
 
@@ -271,7 +270,7 @@ jQuery.extend({
 		// parseFloat NaNs numeric-cast false positives (null|true|false|"")
 		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
 		// subtraction forces infinities to NaN
-		return obj - parseFloat( obj ) >= 0;
+		return !jQuery.isArray( obj ) && obj - parseFloat( obj ) >= 0;
 	},
 
 	isEmptyObject: function( obj ) {
@@ -402,20 +401,12 @@ jQuery.extend({
 		return obj;
 	},
 
-	// Use native String.trim function wherever possible
-	trim: trim && !trim.call("\uFEFF\xA0") ?
-		function( text ) {
-			return text == null ?
-				"" :
-				trim.call( text );
-		} :
-
-		// Otherwise use our own trimming functionality
-		function( text ) {
-			return text == null ?
-				"" :
-				( text + "" ).replace( rtrim, "" );
-		},
+	// Support: Android<4.1, IE<9
+	trim: function( text ) {
+		return text == null ?
+			"" :
+			( text + "" ).replace( rtrim, "" );
+	},
 
 	// results is for internal usage only
 	makeArray: function( arr, results ) {
@@ -594,14 +585,14 @@ function isArraylike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v1.10.16
+ * Sizzle CSS Selector Engine v1.10.19
  * http://sizzlejs.com/
  *
  * Copyright 2013 jQuery Foundation, Inc. and other contributors
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2014-01-13
+ * Date: 2014-04-18
  */
 (function( window ) {
 
@@ -610,7 +601,9 @@ var i,
 	Expr,
 	getText,
 	isXML,
+	tokenize,
 	compile,
+	select,
 	outermostContext,
 	sortInput,
 	hasDuplicate,
@@ -677,17 +670,23 @@ var i,
 	// Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
 	identifier = characterEncoding.replace( "w", "w#" ),
 
-	// Acceptable operators http://www.w3.org/TR/selectors/#attribute-selectors
-	attributes = "\\[" + whitespace + "*(" + characterEncoding + ")" + whitespace +
-		"*(?:([*^$|!~]?=)" + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + identifier + ")|)|)" + whitespace + "*\\]",
+	// Attribute selectors: http://www.w3.org/TR/selectors/#attribute-selectors
+	attributes = "\\[" + whitespace + "*(" + characterEncoding + ")(?:" + whitespace +
+		// Operator (capture 2)
+		"*([*^$|!~]?=)" + whitespace +
+		// "Attribute values must be CSS identifiers [capture 5] or strings [capture 3 or capture 4]"
+		"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + identifier + "))|)" + whitespace +
+		"*\\]",
 
-	// Prefer arguments quoted,
-	//   then not containing pseudos/brackets,
-	//   then attribute selectors/non-parenthetical expressions,
-	//   then anything else
-	// These preferences are here to reduce the number of selectors
-	//   needing tokenize in the PSEUDO preFilter
-	pseudos = ":(" + characterEncoding + ")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|" + attributes.replace( 3, 8 ) + ")*)|.*)\\)|)",
+	pseudos = ":(" + characterEncoding + ")(?:\\((" +
+		// To reduce the number of selectors needing tokenize in the preFilter, prefer arguments:
+		// 1. quoted (capture 3; capture 4 or capture 5)
+		"('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|" +
+		// 2. simple (capture 6)
+		"((?:\\\\.|[^\\\\()[\\]]|" + attributes + ")*)|" +
+		// 3. anything else (capture 2)
+		".*" +
+		")\\)|)",
 
 	// Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
 	rtrim = new RegExp( "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$", "g" ),
@@ -732,7 +731,7 @@ var i,
 	funescape = function( _, escaped, escapedWhitespace ) {
 		var high = "0x" + escaped - 0x10000;
 		// NaN means non-codepoint
-		// Support: Firefox
+		// Support: Firefox<24
 		// Workaround erroneous numeric interpretation of +"0x"
 		return high !== high || escapedWhitespace ?
 			escaped :
@@ -1128,7 +1127,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				var m = context.getElementById( id );
 				// Check parentNode to catch when Blackberry 4.6 returns
 				// nodes that are no longer in the document #6963
-				return m && m.parentNode ? [m] : [];
+				return m && m.parentNode ? [ m ] : [];
 			}
 		};
 		Expr.filter["ID"] = function( id ) {
@@ -1208,11 +1207,13 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// setting a boolean content attribute,
 			// since its presence should be enough
 			// http://bugs.jquery.com/ticket/12359
-			div.innerHTML = "<select t=''><option selected=''></option></select>";
+			div.innerHTML = "<select msallowclip=''><option selected=''></option></select>";
 
-			// Support: IE8, Opera 10-12
+			// Support: IE8, Opera 11-12.16
 			// Nothing should be selected when empty strings follow ^= or $= or *=
-			if ( div.querySelectorAll("[t^='']").length ) {
+			// The test attribute must be unknown in Opera but "safe" for WinRT
+			// http://msdn.microsoft.com/en-us/library/ie/hh465388.aspx#attribute_section
+			if ( div.querySelectorAll("[msallowclip^='']").length ) {
 				rbuggyQSA.push( "[*^$]=" + whitespace + "*(?:''|\"\")" );
 			}
 
@@ -1255,7 +1256,8 @@ setDocument = Sizzle.setDocument = function( node ) {
 		});
 	}
 
-	if ( (support.matchesSelector = rnative.test( (matches = docElem.webkitMatchesSelector ||
+	if ( (support.matchesSelector = rnative.test( (matches = docElem.matches ||
+		docElem.webkitMatchesSelector ||
 		docElem.mozMatchesSelector ||
 		docElem.oMatchesSelector ||
 		docElem.msMatchesSelector) )) ) {
@@ -1436,7 +1438,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 		} catch(e) {}
 	}
 
-	return Sizzle( expr, document, null, [elem] ).length > 0;
+	return Sizzle( expr, document, null, [ elem ] ).length > 0;
 };
 
 Sizzle.contains = function( context, elem ) {
@@ -1565,7 +1567,7 @@ Expr = Sizzle.selectors = {
 			match[1] = match[1].replace( runescape, funescape );
 
 			// Move the given value to match[3] whether quoted or unquoted
-			match[3] = ( match[4] || match[5] || "" ).replace( runescape, funescape );
+			match[3] = ( match[3] || match[4] || match[5] || "" ).replace( runescape, funescape );
 
 			if ( match[2] === "~=" ) {
 				match[3] = " " + match[3] + " ";
@@ -1608,15 +1610,15 @@ Expr = Sizzle.selectors = {
 
 		"PSEUDO": function( match ) {
 			var excess,
-				unquoted = !match[5] && match[2];
+				unquoted = !match[6] && match[2];
 
 			if ( matchExpr["CHILD"].test( match[0] ) ) {
 				return null;
 			}
 
 			// Accept quoted arguments as-is
-			if ( match[3] && match[4] !== undefined ) {
-				match[2] = match[4];
+			if ( match[3] ) {
+				match[2] = match[4] || match[5] || "";
 
 			// Strip excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
@@ -2021,7 +2023,7 @@ function setFilters() {}
 setFilters.prototype = Expr.filters = Expr.pseudos;
 Expr.setFilters = new setFilters();
 
-function tokenize( selector, parseOnly ) {
+tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 	var matched, match, tokens, type,
 		soFar, groups, preFilters,
 		cached = tokenCache[ selector + " " ];
@@ -2086,7 +2088,7 @@ function tokenize( selector, parseOnly ) {
 			Sizzle.error( selector ) :
 			// Cache the tokens
 			tokenCache( selector, groups ).slice( 0 );
-}
+};
 
 function toSelector( tokens ) {
 	var i = 0,
@@ -2163,6 +2165,15 @@ function elementMatcher( matchers ) {
 			return true;
 		} :
 		matchers[0];
+}
+
+function multipleContexts( selector, contexts, results ) {
+	var i = 0,
+		len = contexts.length;
+	for ( ; i < len; i++ ) {
+		Sizzle( selector, contexts[i], results );
+	}
+	return results;
 }
 
 function condense( unmatched, map, filter, context, xml ) {
@@ -2433,7 +2444,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 		superMatcher;
 }
 
-compile = Sizzle.compile = function( selector, group /* Internal Use Only */ ) {
+compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 	var i,
 		setMatchers = [],
 		elementMatchers = [],
@@ -2441,12 +2452,12 @@ compile = Sizzle.compile = function( selector, group /* Internal Use Only */ ) {
 
 	if ( !cached ) {
 		// Generate a function of recursive functions that can be used to check each element
-		if ( !group ) {
-			group = tokenize( selector );
+		if ( !match ) {
+			match = tokenize( selector );
 		}
-		i = group.length;
+		i = match.length;
 		while ( i-- ) {
-			cached = matcherFromTokens( group[i] );
+			cached = matcherFromTokens( match[i] );
 			if ( cached[ expando ] ) {
 				setMatchers.push( cached );
 			} else {
@@ -2456,74 +2467,83 @@ compile = Sizzle.compile = function( selector, group /* Internal Use Only */ ) {
 
 		// Cache the compiled function
 		cached = compilerCache( selector, matcherFromGroupMatchers( elementMatchers, setMatchers ) );
+
+		// Save selector and tokenization
+		cached.selector = selector;
 	}
 	return cached;
 };
 
-function multipleContexts( selector, contexts, results ) {
-	var i = 0,
-		len = contexts.length;
-	for ( ; i < len; i++ ) {
-		Sizzle( selector, contexts[i], results );
-	}
-	return results;
-}
-
-function select( selector, context, results, seed ) {
+/**
+ * A low-level selection function that works with Sizzle's compiled
+ *  selector functions
+ * @param {String|Function} selector A selector or a pre-compiled
+ *  selector function built with Sizzle.compile
+ * @param {Element} context
+ * @param {Array} [results]
+ * @param {Array} [seed] A set of elements to match against
+ */
+select = Sizzle.select = function( selector, context, results, seed ) {
 	var i, tokens, token, type, find,
-		match = tokenize( selector );
+		compiled = typeof selector === "function" && selector,
+		match = !seed && tokenize( (selector = compiled.selector || selector) );
 
-	if ( !seed ) {
-		// Try to minimize operations if there is only one group
-		if ( match.length === 1 ) {
+	results = results || [];
 
-			// Take a shortcut and set the context if the root selector is an ID
-			tokens = match[0] = match[0].slice( 0 );
-			if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
-					support.getById && context.nodeType === 9 && documentIsHTML &&
-					Expr.relative[ tokens[1].type ] ) {
+	// Try to minimize operations if there is no seed and only one group
+	if ( match.length === 1 ) {
 
-				context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
-				if ( !context ) {
-					return results;
-				}
-				selector = selector.slice( tokens.shift().value.length );
+		// Take a shortcut and set the context if the root selector is an ID
+		tokens = match[0] = match[0].slice( 0 );
+		if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
+				support.getById && context.nodeType === 9 && documentIsHTML &&
+				Expr.relative[ tokens[1].type ] ) {
+
+			context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
+			if ( !context ) {
+				return results;
+
+			// Precompiled matchers will still verify ancestry, so step up a level
+			} else if ( compiled ) {
+				context = context.parentNode;
 			}
 
-			// Fetch a seed set for right-to-left matching
-			i = matchExpr["needsContext"].test( selector ) ? 0 : tokens.length;
-			while ( i-- ) {
-				token = tokens[i];
+			selector = selector.slice( tokens.shift().value.length );
+		}
 
-				// Abort if we hit a combinator
-				if ( Expr.relative[ (type = token.type) ] ) {
-					break;
-				}
-				if ( (find = Expr.find[ type ]) ) {
-					// Search, expanding context for leading sibling combinators
-					if ( (seed = find(
-						token.matches[0].replace( runescape, funescape ),
-						rsibling.test( tokens[0].type ) && testContext( context.parentNode ) || context
-					)) ) {
+		// Fetch a seed set for right-to-left matching
+		i = matchExpr["needsContext"].test( selector ) ? 0 : tokens.length;
+		while ( i-- ) {
+			token = tokens[i];
 
-						// If seed is empty or no tokens remain, we can return early
-						tokens.splice( i, 1 );
-						selector = seed.length && toSelector( tokens );
-						if ( !selector ) {
-							push.apply( results, seed );
-							return results;
-						}
+			// Abort if we hit a combinator
+			if ( Expr.relative[ (type = token.type) ] ) {
+				break;
+			}
+			if ( (find = Expr.find[ type ]) ) {
+				// Search, expanding context for leading sibling combinators
+				if ( (seed = find(
+					token.matches[0].replace( runescape, funescape ),
+					rsibling.test( tokens[0].type ) && testContext( context.parentNode ) || context
+				)) ) {
 
-						break;
+					// If seed is empty or no tokens remain, we can return early
+					tokens.splice( i, 1 );
+					selector = seed.length && toSelector( tokens );
+					if ( !selector ) {
+						push.apply( results, seed );
+						return results;
 					}
+
+					break;
 				}
 			}
 		}
 	}
 
-	// Compile and execute a filtering function
+	// Compile and execute a filtering function if one is not provided
 	// Provide `match` to avoid retokenization if we modified the selector above
-	compile( selector, match )(
+	( compiled || compile( selector, match ) )(
 		seed,
 		context,
 		!documentIsHTML,
@@ -2531,7 +2551,7 @@ function select( selector, context, results, seed ) {
 		rsibling.test( selector ) && testContext( context.parentNode ) || context
 	);
 	return results;
-}
+};
 
 // One-time assignments
 
@@ -3424,8 +3444,9 @@ jQuery.extend({
 		readyList.resolveWith( document, [ jQuery ] );
 
 		// Trigger any bound ready events
-		if ( jQuery.fn.trigger ) {
-			jQuery( document ).trigger("ready").off("ready");
+		if ( jQuery.fn.triggerHandler ) {
+			jQuery( document ).triggerHandler( "ready" );
+			jQuery( document ).off( "ready" );
 		}
 	}
 });
@@ -3533,23 +3554,21 @@ support.ownLast = i !== "0";
 // false until the test is run
 support.inlineBlockNeedsLayout = false;
 
+// Execute ASAP in case we need to set body.style.zoom
 jQuery(function() {
-	// We need to execute this one support test ASAP because we need to know
-	// if body.style.zoom needs to be set.
+	// Minified: var a,b,c,d
+	var val, div, body, container;
 
-	var container, div,
-		body = document.getElementsByTagName("body")[0];
-
-	if ( !body ) {
+	body = document.getElementsByTagName( "body" )[ 0 ];
+	if ( !body || !body.style ) {
 		// Return for frameset docs that don't have a body
 		return;
 	}
 
 	// Setup
-	container = document.createElement( "div" );
-	container.style.cssText = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px;margin-top:1px";
-
 	div = document.createElement( "div" );
+	container = document.createElement( "div" );
+	container.style.cssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";
 	body.appendChild( container ).appendChild( div );
 
 	if ( typeof div.style.zoom !== strundefined ) {
@@ -3557,9 +3576,10 @@ jQuery(function() {
 		// Check if natively block-level elements act like inline-block
 		// elements when setting their display to 'inline' and giving
 		// them layout
-		div.style.cssText = "border:0;margin:0;width:1px;padding:1px;display:inline;zoom:1";
+		div.style.cssText = "display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1";
 
-		if ( (support.inlineBlockNeedsLayout = ( div.offsetWidth === 3 )) ) {
+		support.inlineBlockNeedsLayout = val = div.offsetWidth === 3;
+		if ( val ) {
 			// Prevent IE 6 from affecting layout for positioned elements #11048
 			// Prevent IE from shrinking the body in IE 7 mode #12869
 			// Support: IE<8
@@ -3568,9 +3588,6 @@ jQuery(function() {
 	}
 
 	body.removeChild( container );
-
-	// Null elements to avoid leaks in IE
-	container = div = null;
 });
 
 
@@ -3893,12 +3910,15 @@ jQuery.fn.extend({
 				if ( elem.nodeType === 1 && !jQuery._data( elem, "parsedAttrs" ) ) {
 					i = attrs.length;
 					while ( i-- ) {
-						name = attrs[i].name;
 
-						if ( name.indexOf("data-") === 0 ) {
-							name = jQuery.camelCase( name.slice(5) );
-
-							dataAttr( elem, name, data[ name ] );
+						// Support: IE11+
+						// The attrs elements can be null (#14894)
+						if ( attrs[ i ] ) {
+							name = attrs[ i ].name;
+							if ( name.indexOf( "data-" ) === 0 ) {
+								name = jQuery.camelCase( name.slice(5) );
+								dataAttr( elem, name, data[ name ] );
+							}
 						}
 					}
 					jQuery._data( elem, "parsedAttrs", true );
@@ -4138,13 +4158,13 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 
 
 (function() {
-	var fragment = document.createDocumentFragment(),
-		div = document.createElement("div"),
-		input = document.createElement("input");
+	// Minified: var a,b,c
+	var input = document.createElement( "input" ),
+		div = document.createElement( "div" ),
+		fragment = document.createDocumentFragment();
 
 	// Setup
-	div.setAttribute( "className", "t" );
-	div.innerHTML = "  <link/><table></table><a href='/a'>a</a>";
+	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 
 	// IE strips leading whitespace when .innerHTML is used
 	support.leadingWhitespace = div.firstChild.nodeType === 3;
@@ -4204,9 +4224,6 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 			support.deleteExpando = false;
 		}
 	}
-
-	// Null elements to avoid leaks in IE.
-	fragment = div = input = null;
 })();
 
 
@@ -4232,7 +4249,7 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 
 var rformElems = /^(?:input|select|textarea)$/i,
 	rkeyEvent = /^key/,
-	rmouseEvent = /^(?:mouse|contextmenu)|click/,
+	rmouseEvent = /^(?:mouse|pointer|contextmenu)|click/,
 	rfocusMorph = /^(?:focusinfocus|focusoutblur)$/,
 	rtypenamespace = /^([^.]*)(?:\.(.+)|)$/;
 
@@ -4835,8 +4852,9 @@ jQuery.event = {
 		beforeunload: {
 			postDispatch: function( event ) {
 
-				// Even when returnValue equals to undefined Firefox will still show alert
-				if ( event.result !== undefined ) {
+				// Support: Firefox 20+
+				// Firefox doesn't alert if the returnValue field is not set.
+				if ( event.result !== undefined && event.originalEvent ) {
 					event.originalEvent.returnValue = event.result;
 				}
 			}
@@ -4902,11 +4920,9 @@ jQuery.Event = function( src, props ) {
 		// Events bubbling up the document may have been marked as prevented
 		// by a handler lower down the tree; reflect the correct value.
 		this.isDefaultPrevented = src.defaultPrevented ||
-				src.defaultPrevented === undefined && (
-				// Support: IE < 9
-				src.returnValue === false ||
-				// Support: Android < 4.0
-				src.getPreventDefault && src.getPreventDefault() ) ?
+				src.defaultPrevented === undefined &&
+				// Support: IE < 9, Android < 4.0
+				src.returnValue === false ?
 			returnTrue :
 			returnFalse;
 
@@ -4969,7 +4985,14 @@ jQuery.Event.prototype = {
 		e.cancelBubble = true;
 	},
 	stopImmediatePropagation: function() {
+		var e = this.originalEvent;
+
 		this.isImmediatePropagationStopped = returnTrue;
+
+		if ( e && e.stopImmediatePropagation ) {
+			e.stopImmediatePropagation();
+		}
+
 		this.stopPropagation();
 	}
 };
@@ -4977,7 +5000,9 @@ jQuery.Event.prototype = {
 // Create mouseenter/leave events using mouseover/out and event-time checks
 jQuery.each({
 	mouseenter: "mouseover",
-	mouseleave: "mouseout"
+	mouseleave: "mouseout",
+	pointerenter: "pointerover",
+	pointerleave: "pointerout"
 }, function( orig, fix ) {
 	jQuery.event.special[ orig ] = {
 		delegateType: fix,
@@ -5981,14 +6006,15 @@ var iframe,
  */
 // Called only from within defaultDisplay
 function actualDisplay( name, doc ) {
-	var elem = jQuery( doc.createElement( name ) ).appendTo( doc.body ),
+	var style,
+		elem = jQuery( doc.createElement( name ) ).appendTo( doc.body ),
 
 		// getDefaultComputedStyle might be reliably used only on attached element
-		display = window.getDefaultComputedStyle ?
+		display = window.getDefaultComputedStyle && ( style = window.getDefaultComputedStyle( elem[ 0 ] ) ) ?
 
 			// Use of this method is a temporary fix (more like optmization) until something better comes along,
 			// since it was removed from specification and supported only in FF
-			window.getDefaultComputedStyle( elem[ 0 ] ).display : jQuery.css( elem[ 0 ], "display" );
+			style.display : jQuery.css( elem[ 0 ], "display" );
 
 	// We don't have any data stored on the element,
 	// so use "detach" method as fast way to get rid of the element
@@ -6034,67 +6060,46 @@ function defaultDisplay( nodeName ) {
 
 
 (function() {
-	var a, shrinkWrapBlocksVal,
-		div = document.createElement( "div" ),
-		divReset =
-			"-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;" +
-			"display:block;padding:0;margin:0;border:0";
-
-	// Setup
-	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
-	a = div.getElementsByTagName( "a" )[ 0 ];
-
-	a.style.cssText = "float:left;opacity:.5";
-
-	// Make sure that element opacity exists
-	// (IE uses filter instead)
-	// Use a regex to work around a WebKit issue. See #5145
-	support.opacity = /^0.5/.test( a.style.opacity );
-
-	// Verify style float existence
-	// (IE uses styleFloat instead of cssFloat)
-	support.cssFloat = !!a.style.cssFloat;
-
-	div.style.backgroundClip = "content-box";
-	div.cloneNode( true ).style.backgroundClip = "";
-	support.clearCloneStyle = div.style.backgroundClip === "content-box";
-
-	// Null elements to avoid leaks in IE.
-	a = div = null;
+	var shrinkWrapBlocksVal;
 
 	support.shrinkWrapBlocks = function() {
-		var body, container, div, containerStyles;
-
-		if ( shrinkWrapBlocksVal == null ) {
-			body = document.getElementsByTagName( "body" )[ 0 ];
-			if ( !body ) {
-				// Test fired too early or in an unsupported environment, exit.
-				return;
-			}
-
-			containerStyles = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px";
-			container = document.createElement( "div" );
-			div = document.createElement( "div" );
-
-			body.appendChild( container ).appendChild( div );
-
-			// Will be changed later if needed.
-			shrinkWrapBlocksVal = false;
-
-			if ( typeof div.style.zoom !== strundefined ) {
-				// Support: IE6
-				// Check if elements with layout shrink-wrap their children
-				div.style.cssText = divReset + ";width:1px;padding:1px;zoom:1";
-				div.innerHTML = "<div></div>";
-				div.firstChild.style.width = "5px";
-				shrinkWrapBlocksVal = div.offsetWidth !== 3;
-			}
-
-			body.removeChild( container );
-
-			// Null elements to avoid leaks in IE.
-			body = container = div = null;
+		if ( shrinkWrapBlocksVal != null ) {
+			return shrinkWrapBlocksVal;
 		}
+
+		// Will be changed later if needed.
+		shrinkWrapBlocksVal = false;
+
+		// Minified: var b,c,d
+		var div, body, container;
+
+		body = document.getElementsByTagName( "body" )[ 0 ];
+		if ( !body || !body.style ) {
+			// Test fired too early or in an unsupported environment, exit.
+			return;
+		}
+
+		// Setup
+		div = document.createElement( "div" );
+		container = document.createElement( "div" );
+		container.style.cssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";
+		body.appendChild( container ).appendChild( div );
+
+		// Support: IE6
+		// Check if elements with layout shrink-wrap their children
+		if ( typeof div.style.zoom !== strundefined ) {
+			// Reset CSS: box-sizing; display; margin; border
+			div.style.cssText =
+				// Support: Firefox<29, Android 2.3
+				// Vendor-prefix box-sizing
+				"-webkit-box-sizing:content-box;-moz-box-sizing:content-box;" +
+				"box-sizing:content-box;display:block;margin:0;border:0;" +
+				"padding:1px;width:1px;zoom:1";
+			div.appendChild( document.createElement( "div" ) ).style.width = "5px";
+			shrinkWrapBlocksVal = div.offsetWidth !== 3;
+		}
+
+		body.removeChild( container );
 
 		return shrinkWrapBlocksVal;
 	};
@@ -6243,92 +6248,46 @@ function addGetHookIf( conditionFn, hookFn ) {
 
 
 (function() {
-	var a, reliableHiddenOffsetsVal, boxSizingVal, boxSizingReliableVal,
-		pixelPositionVal, reliableMarginRightVal,
-		div = document.createElement( "div" ),
-		containerStyles = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px",
-		divReset =
-			"-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;" +
-			"display:block;padding:0;margin:0;border:0";
+	// Minified: var b,c,d,e,f,g, h,i
+	var div, style, a, pixelPositionVal, boxSizingReliableVal,
+		reliableHiddenOffsetsVal, reliableMarginRightVal;
 
 	// Setup
+	div = document.createElement( "div" );
 	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 	a = div.getElementsByTagName( "a" )[ 0 ];
+	style = a && a.style;
 
-	a.style.cssText = "float:left;opacity:.5";
+	// Finish early in limited (non-browser) environments
+	if ( !style ) {
+		return;
+	}
 
-	// Make sure that element opacity exists
-	// (IE uses filter instead)
-	// Use a regex to work around a WebKit issue. See #5145
-	support.opacity = /^0.5/.test( a.style.opacity );
+	style.cssText = "float:left;opacity:.5";
+
+	// Support: IE<9
+	// Make sure that element opacity exists (as opposed to filter)
+	support.opacity = style.opacity === "0.5";
 
 	// Verify style float existence
 	// (IE uses styleFloat instead of cssFloat)
-	support.cssFloat = !!a.style.cssFloat;
+	support.cssFloat = !!style.cssFloat;
 
 	div.style.backgroundClip = "content-box";
 	div.cloneNode( true ).style.backgroundClip = "";
 	support.clearCloneStyle = div.style.backgroundClip === "content-box";
 
-	// Null elements to avoid leaks in IE.
-	a = div = null;
+	// Support: Firefox<29, Android 2.3
+	// Vendor-prefix box-sizing
+	support.boxSizing = style.boxSizing === "" || style.MozBoxSizing === "" ||
+		style.WebkitBoxSizing === "";
 
 	jQuery.extend(support, {
 		reliableHiddenOffsets: function() {
-			if ( reliableHiddenOffsetsVal != null ) {
-				return reliableHiddenOffsetsVal;
-			}
-
-			var container, tds, isSupported,
-				div = document.createElement( "div" ),
-				body = document.getElementsByTagName( "body" )[ 0 ];
-
-			if ( !body ) {
-				// Return for frameset docs that don't have a body
-				return;
-			}
-
-			// Setup
-			div.setAttribute( "className", "t" );
-			div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
-
-			container = document.createElement( "div" );
-			container.style.cssText = containerStyles;
-
-			body.appendChild( container ).appendChild( div );
-
-			// Support: IE8
-			// Check if table cells still have offsetWidth/Height when they are set
-			// to display:none and there are still other visible table cells in a
-			// table row; if so, offsetWidth/Height are not reliable for use when
-			// determining if an element has been hidden directly using
-			// display:none (it is still safe to use offsets if a parent element is
-			// hidden; don safety goggles and see bug #4512 for more information).
-			div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
-			tds = div.getElementsByTagName( "td" );
-			tds[ 0 ].style.cssText = "padding:0;margin:0;border:0;display:none";
-			isSupported = ( tds[ 0 ].offsetHeight === 0 );
-
-			tds[ 0 ].style.display = "";
-			tds[ 1 ].style.display = "none";
-
-			// Support: IE8
-			// Check if empty table cells still have offsetWidth/Height
-			reliableHiddenOffsetsVal = isSupported && ( tds[ 0 ].offsetHeight === 0 );
-
-			body.removeChild( container );
-
-			// Null elements to avoid leaks in IE.
-			div = body = null;
-
-			return reliableHiddenOffsetsVal;
-		},
-
-		boxSizing: function() {
-			if ( boxSizingVal == null ) {
+			if ( reliableHiddenOffsetsVal == null ) {
 				computeStyleTests();
 			}
-			return boxSizingVal;
+			return reliableHiddenOffsetsVal;
 		},
 
 		boxSizingReliable: function() {
@@ -6345,84 +6304,86 @@ function addGetHookIf( conditionFn, hookFn ) {
 			return pixelPositionVal;
 		},
 
+		// Support: Android 2.3
 		reliableMarginRight: function() {
-			var body, container, div, marginDiv;
-
-			// Use window.getComputedStyle because jsdom on node.js will break without it.
-			if ( reliableMarginRightVal == null && window.getComputedStyle ) {
-				body = document.getElementsByTagName( "body" )[ 0 ];
-				if ( !body ) {
-					// Test fired too early or in an unsupported environment, exit.
-					return;
-				}
-
-				container = document.createElement( "div" );
-				div = document.createElement( "div" );
-				container.style.cssText = containerStyles;
-
-				body.appendChild( container ).appendChild( div );
-
-				// Check if div with explicit width and no margin-right incorrectly
-				// gets computed margin-right based on width of container. (#3333)
-				// Fails in WebKit before Feb 2011 nightlies
-				// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
-				marginDiv = div.appendChild( document.createElement( "div" ) );
-				marginDiv.style.cssText = div.style.cssText = divReset;
-				marginDiv.style.marginRight = marginDiv.style.width = "0";
-				div.style.width = "1px";
-
-				reliableMarginRightVal =
-					!parseFloat( ( window.getComputedStyle( marginDiv, null ) || {} ).marginRight );
-
-				body.removeChild( container );
+			if ( reliableMarginRightVal == null ) {
+				computeStyleTests();
 			}
-
 			return reliableMarginRightVal;
 		}
 	});
 
 	function computeStyleTests() {
-		var container, div,
-			body = document.getElementsByTagName( "body" )[ 0 ];
+		// Minified: var b,c,d,j
+		var div, body, container, contents;
 
-		if ( !body ) {
+		body = document.getElementsByTagName( "body" )[ 0 ];
+		if ( !body || !body.style ) {
 			// Test fired too early or in an unsupported environment, exit.
 			return;
 		}
 
-		container = document.createElement( "div" );
+		// Setup
 		div = document.createElement( "div" );
-		container.style.cssText = containerStyles;
-
+		container = document.createElement( "div" );
+		container.style.cssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";
 		body.appendChild( container ).appendChild( div );
 
 		div.style.cssText =
-			"-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;" +
-				"position:absolute;display:block;padding:1px;border:1px;width:4px;" +
-				"margin-top:1%;top:1%";
+			// Support: Firefox<29, Android 2.3
+			// Vendor-prefix box-sizing
+			"-webkit-box-sizing:border-box;-moz-box-sizing:border-box;" +
+			"box-sizing:border-box;display:block;margin-top:1%;top:1%;" +
+			"border:1px;padding:1px;width:4px;position:absolute";
 
-		// Workaround failing boxSizing test due to offsetWidth returning wrong value
-		// with some non-1 values of body zoom, ticket #13543
-		jQuery.swap( body, body.style.zoom != null ? { zoom: 1 } : {}, function() {
-			boxSizingVal = div.offsetWidth === 4;
-		});
-
-		// Will be changed later if needed.
-		boxSizingReliableVal = true;
-		pixelPositionVal = false;
+		// Support: IE<9
+		// Assume reasonable values in the absence of getComputedStyle
+		pixelPositionVal = boxSizingReliableVal = false;
 		reliableMarginRightVal = true;
 
-		// Use window.getComputedStyle because jsdom on node.js will break without it.
+		// Check for getComputedStyle so that this code is not run in IE<9.
 		if ( window.getComputedStyle ) {
 			pixelPositionVal = ( window.getComputedStyle( div, null ) || {} ).top !== "1%";
 			boxSizingReliableVal =
 				( window.getComputedStyle( div, null ) || { width: "4px" } ).width === "4px";
+
+			// Support: Android 2.3
+			// Div with explicit width and no margin-right incorrectly
+			// gets computed margin-right based on width of container (#3333)
+			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
+			contents = div.appendChild( document.createElement( "div" ) );
+
+			// Reset CSS: box-sizing; display; margin; border; padding
+			contents.style.cssText = div.style.cssText =
+				// Support: Firefox<29, Android 2.3
+				// Vendor-prefix box-sizing
+				"-webkit-box-sizing:content-box;-moz-box-sizing:content-box;" +
+				"box-sizing:content-box;display:block;margin:0;border:0;padding:0";
+			contents.style.marginRight = contents.style.width = "0";
+			div.style.width = "1px";
+
+			reliableMarginRightVal =
+				!parseFloat( ( window.getComputedStyle( contents, null ) || {} ).marginRight );
+		}
+
+		// Support: IE8
+		// Check if table cells still have offsetWidth/Height when they are set
+		// to display:none and there are still other visible table cells in a
+		// table row; if so, offsetWidth/Height are not reliable for use when
+		// determining if an element has been hidden directly using
+		// display:none (it is still safe to use offsets if a parent element is
+		// hidden; don safety goggles and see bug #4512 for more information).
+		div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
+		contents = div.getElementsByTagName( "td" );
+		contents[ 0 ].style.cssText = "margin:0;border:0;padding:0;display:none";
+		reliableHiddenOffsetsVal = contents[ 0 ].offsetHeight === 0;
+		if ( reliableHiddenOffsetsVal ) {
+			contents[ 0 ].style.display = "";
+			contents[ 1 ].style.display = "none";
+			reliableHiddenOffsetsVal = contents[ 0 ].offsetHeight === 0;
 		}
 
 		body.removeChild( container );
-
-		// Null elements to avoid leaks in IE.
-		div = body = null;
 	}
 
 })();
@@ -6462,8 +6423,8 @@ var
 
 	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
 	cssNormalTransform = {
-		letterSpacing: 0,
-		fontWeight: 400
+		letterSpacing: "0",
+		fontWeight: "400"
 	},
 
 	cssPrefixes = [ "Webkit", "O", "Moz", "ms" ];
@@ -6520,13 +6481,10 @@ function showHide( elements, show ) {
 				values[ index ] = jQuery._data( elem, "olddisplay", defaultDisplay(elem.nodeName) );
 			}
 		} else {
+			hidden = isHidden( elem );
 
-			if ( !values[ index ] ) {
-				hidden = isHidden( elem );
-
-				if ( display && display !== "none" || !hidden ) {
-					jQuery._data( elem, "olddisplay", hidden ? display : jQuery.css( elem, "display" ) );
-				}
+			if ( display && display !== "none" || !hidden ) {
+				jQuery._data( elem, "olddisplay", hidden ? display : jQuery.css( elem, "display" ) );
 			}
 		}
 	}
@@ -6599,7 +6557,7 @@ function getWidthOrHeight( elem, name, extra ) {
 	var valueIsBorderBox = true,
 		val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
 		styles = getStyles( elem ),
-		isBorderBox = support.boxSizing() && jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
+		isBorderBox = support.boxSizing && jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
 	// some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
@@ -6655,6 +6613,8 @@ jQuery.extend({
 	cssNumber: {
 		"columnCount": true,
 		"fillOpacity": true,
+		"flexGrow": true,
+		"flexShrink": true,
 		"fontWeight": true,
 		"lineHeight": true,
 		"opacity": true,
@@ -6723,9 +6683,6 @@ jQuery.extend({
 				// Support: IE
 				// Swallow errors from 'invalid' CSS values (#5509)
 				try {
-					// Support: Chrome, Safari
-					// Setting style to blank string required to delete "style: x !important;"
-					style[ name ] = "";
 					style[ name ] = value;
 				} catch(e) {}
 			}
@@ -6782,7 +6739,7 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 			if ( computed ) {
 				// certain elements can have dimension info if we invisibly show them
 				// however, it must have a current display style that would benefit from this
-				return elem.offsetWidth === 0 && rdisplayswap.test( jQuery.css( elem, "display" ) ) ?
+				return rdisplayswap.test( jQuery.css( elem, "display" ) ) && elem.offsetWidth === 0 ?
 					jQuery.swap( elem, cssShow, function() {
 						return getWidthOrHeight( elem, name, extra );
 					}) :
@@ -6797,7 +6754,7 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 					elem,
 					name,
 					extra,
-					support.boxSizing() && jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+					support.boxSizing && jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
 					styles
 				) : 0
 			);
@@ -7146,7 +7103,7 @@ function createTween( value, prop, animation ) {
 
 function defaultPrefilter( elem, props, opts ) {
 	/* jshint validthis: true */
-	var prop, value, toggle, tween, hooks, oldfire, display, dDisplay,
+	var prop, value, toggle, tween, hooks, oldfire, display, checkDisplay,
 		anim = this,
 		orig = {},
 		style = elem.style,
@@ -7190,16 +7147,16 @@ function defaultPrefilter( elem, props, opts ) {
 		// Set display property to inline-block for height/width
 		// animations on inline elements that are having width/height animated
 		display = jQuery.css( elem, "display" );
-		dDisplay = defaultDisplay( elem.nodeName );
-		if ( display === "none" ) {
-			display = dDisplay;
-		}
-		if ( display === "inline" &&
-				jQuery.css( elem, "float" ) === "none" ) {
+
+		// Test default display if display is currently "none"
+		checkDisplay = display === "none" ?
+			jQuery._data( elem, "olddisplay" ) || defaultDisplay( elem.nodeName ) : display;
+
+		if ( checkDisplay === "inline" && jQuery.css( elem, "float" ) === "none" ) {
 
 			// inline-level elements accept inline-block;
 			// block-level elements need to be inline with layout
-			if ( !support.inlineBlockNeedsLayout || dDisplay === "inline" ) {
+			if ( !support.inlineBlockNeedsLayout || defaultDisplay( elem.nodeName ) === "inline" ) {
 				style.display = "inline-block";
 			} else {
 				style.zoom = 1;
@@ -7234,6 +7191,10 @@ function defaultPrefilter( elem, props, opts ) {
 				}
 			}
 			orig[ prop ] = dataShow && dataShow[ prop ] || jQuery.style( elem, prop );
+
+		// Any non-fx value stops us from restoring the original display value
+		} else {
+			display = undefined;
 		}
 	}
 
@@ -7275,6 +7236,10 @@ function defaultPrefilter( elem, props, opts ) {
 				}
 			}
 		}
+
+	// If this is a noop like .hide().hide(), restore an overwritten display value
+	} else if ( (display === "none" ? defaultDisplay( elem.nodeName ) : display) === "inline" ) {
+		style.display = display;
 	}
 }
 
@@ -7691,10 +7656,11 @@ jQuery.fn.delay = function( time, type ) {
 
 
 (function() {
-	var a, input, select, opt,
-		div = document.createElement("div" );
+	// Minified: var a,b,c,d,e
+	var input, div, select, a, opt;
 
 	// Setup
+	div = document.createElement( "div" );
 	div.setAttribute( "className", "t" );
 	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 	a = div.getElementsByTagName("a")[ 0 ];
@@ -7742,9 +7708,6 @@ jQuery.fn.delay = function( time, type ) {
 	input.value = "t";
 	input.setAttribute( "type", "radio" );
 	support.radioValue = input.value === "t";
-
-	// Null elements to avoid leaks in IE.
-	a = input = select = opt = div = null;
 })();
 
 
@@ -7818,7 +7781,9 @@ jQuery.extend({
 				var val = jQuery.find.attr( elem, "value" );
 				return val != null ?
 					val :
-					jQuery.text( elem );
+					// Support: IE10-11+
+					// option.text throws exceptions (#14686, #14858)
+					jQuery.trim( jQuery.text( elem ) );
 			}
 		},
 		select: {
@@ -9982,7 +9947,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		off = url.indexOf(" ");
 
 	if ( off >= 0 ) {
-		selector = url.slice( off, url.length );
+		selector = jQuery.trim( url.slice( off, url.length ) );
 		url = url.slice( 0, off );
 	}
 
@@ -10295,6 +10260,12 @@ jQuery.fn.andSelf = jQuery.fn.addBack;
 // derived from file names, and jQuery is normally delivered in a lowercase
 // file name. Do this after creating the global so that if an AMD module wants
 // to call noConflict to hide this version of jQuery, it will work.
+
+// Note that for maximum portability, libraries that are not jQuery should
+// declare themselves as anonymous modules, and avoid setting a global if an
+// AMD loader is present. jQuery is a special case. For more information, see
+// https://github.com/jrburke/requirejs/wiki/Updating-existing-libraries#wiki-anon
+
 if ( typeof define === "function" && define.amd ) {
 	define( "jquery", [], function() {
 		return jQuery;
@@ -10360,10 +10331,10 @@ return jQuery;
 
   $.rails = rails = {
     // Link elements bound by jquery-ujs
-    linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote], a[data-disable-with]',
+    linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote], a[data-disable-with], a[data-disable]',
 
     // Button elements bound by jquery-ujs
-    buttonClickSelector: 'button[data-remote]',
+    buttonClickSelector: 'button[data-remote], button[data-confirm]',
 
     // Select elements bound by jquery-ujs
     inputChangeSelector: 'select[data-remote], input[data-remote], textarea[data-remote]',
@@ -10375,10 +10346,10 @@ return jQuery;
     formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type])',
 
     // Form input elements disabled during form submission
-    disableSelector: 'input[data-disable-with], button[data-disable-with], textarea[data-disable-with]',
+    disableSelector: 'input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled',
 
     // Form input elements re-enabled after form submission
-    enableSelector: 'input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled',
+    enableSelector: 'input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled',
 
     // Form required input elements
     requiredInputSelector: 'input[name][required]:not([disabled]),textarea[name][required]:not([disabled])',
@@ -10387,7 +10358,10 @@ return jQuery;
     fileInputSelector: 'input[type=file]',
 
     // Link onClick disable selector with possible reenable after remote submission
-    linkDisableSelector: 'a[data-disable-with]',
+    linkDisableSelector: 'a[data-disable-with], a[data-disable]',
+
+    // Button onClick disable selector with possible reenable after remote submission
+    buttonDisableSelector: 'button[data-remote][data-disable-with], button[data-remote][data-disable]',
 
     // Make sure that every Ajax request sends the CSRF token
     CSRFProtection: function(xhr) {
@@ -10467,7 +10441,11 @@ return jQuery;
             if (settings.dataType === undefined) {
               xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
             }
-            return rails.fire(element, 'ajax:beforeSend', [xhr, settings]);
+            if (rails.fire(element, 'ajax:beforeSend', [xhr, settings])) {
+              element.trigger('ajax:send', xhr);
+            } else {
+              return false;
+            }
           },
           success: function(data, status, xhr) {
             element.trigger('ajax:success', [data, status, xhr]);
@@ -10492,9 +10470,7 @@ return jQuery;
         // Only pass url to `ajax` options if not blank
         if (url) { options.url = url; }
 
-        var jqxhr = rails.ajax(options);
-        element.trigger('ajax:send', jqxhr);
-        return jqxhr;
+        return rails.ajax(options);
       } else {
         return false;
       }
@@ -10521,18 +10497,36 @@ return jQuery;
       form.submit();
     },
 
+    // Helper function that returns form elements that match the specified CSS selector
+    // If form is actually a "form" element this will return associated elements outside the from that have
+    // the html form attribute set
+    formElements: function(form, selector) {
+      return form.is('form') ? $(form[0].elements).filter(selector) : form.find(selector);
+    },
+
     /* Disables form elements:
       - Caches element value in 'ujs:enable-with' data store
       - Replaces element text with value of 'data-disable-with' attribute
       - Sets disabled property to true
     */
     disableFormElements: function(form) {
-      form.find(rails.disableSelector).each(function() {
-        var element = $(this), method = element.is('button') ? 'html' : 'val';
-        element.data('ujs:enable-with', element[method]());
-        element[method](element.data('disable-with'));
-        element.prop('disabled', true);
+      rails.formElements(form, rails.disableSelector).each(function() {
+        rails.disableFormElement($(this));
       });
+    },
+
+    disableFormElement: function(element) {
+      var method, replacement;
+
+      method = element.is('button') ? 'html' : 'val';
+      replacement = element.data('disable-with');
+
+      element.data('ujs:enable-with', element[method]());
+      if (replacement !== undefined) {
+        element[method](replacement);
+      }
+
+      element.prop('disabled', true);
     },
 
     /* Re-enables disabled form elements:
@@ -10540,11 +10534,15 @@ return jQuery;
       - Sets disabled property to false
     */
     enableFormElements: function(form) {
-      form.find(rails.enableSelector).each(function() {
-        var element = $(this), method = element.is('button') ? 'html' : 'val';
-        if (element.data('ujs:enable-with')) element[method](element.data('ujs:enable-with'));
-        element.prop('disabled', false);
+      rails.formElements(form, rails.enableSelector).each(function() {
+        rails.enableFormElement($(this));
       });
+    },
+
+    enableFormElement: function(element) {
+      var method = element.is('button') ? 'html' : 'val';
+      if (element.data('ujs:enable-with')) element[method](element.data('ujs:enable-with'));
+      element.prop('disabled', false);
     },
 
    /* For 'data-confirm' attribute:
@@ -10607,8 +10605,13 @@ return jQuery;
     //  replace element's html with the 'data-disable-with' after storing original html
     //  and prevent clicking on it
     disableElement: function(element) {
+      var replacement = element.data('disable-with');
+
       element.data('ujs:enable-with', element.html()); // store enabled state
-      element.html(element.data('disable-with')); // set to disabled state
+      if (replacement !== undefined) {
+        element.html(replacement);
+      }
+
       element.bind('click.railsDisable', function(e) { // prevent further clicking
         return rails.stopEverything(e);
       });
@@ -10622,7 +10625,6 @@ return jQuery;
       }
       element.unbind('click.railsDisable'); // enable element
     }
-
   };
 
   if (rails.fire($document, 'rails:attachBindings')) {
@@ -10631,6 +10633,10 @@ return jQuery;
 
     $document.delegate(rails.linkDisableSelector, 'ajax:complete', function() {
         rails.enableElement($(this));
+    });
+
+    $document.delegate(rails.buttonDisableSelector, 'ajax:complete', function() {
+        rails.enableFormElement($(this));
     });
 
     $document.delegate(rails.linkClickSelector, 'click.rails', function(e) {
@@ -10661,7 +10667,15 @@ return jQuery;
       var button = $(this);
       if (!rails.allowAction(button)) return rails.stopEverything(e);
 
-      rails.handleRemote(button);
+      if (button.is(rails.buttonDisableSelector)) rails.disableFormElement(button);
+
+      var handleRemote = rails.handleRemote(button);
+      // response from rails.handleRemote() will either be false or a deferred object promise.
+      if (handleRemote === false) {
+        rails.enableFormElement(button);
+      } else {
+        handleRemote.error( function() { rails.enableFormElement(button); } );
+      }
       return false;
     });
 
@@ -10676,17 +10690,21 @@ return jQuery;
     $document.delegate(rails.formSubmitSelector, 'submit.rails', function(e) {
       var form = $(this),
         remote = form.data('remote') !== undefined,
-        blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector),
-        nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
+        blankRequiredInputs,
+        nonBlankFileInputs;
 
       if (!rails.allowAction(form)) return rails.stopEverything(e);
 
       // skip other logic when required values are missing or file upload is present
-      if (blankRequiredInputs && form.attr("novalidate") == undefined && rails.fire(form, 'ajax:aborted:required', [blankRequiredInputs])) {
-        return rails.stopEverything(e);
+      if (form.attr('novalidate') == undefined) {
+        blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector);
+        if (blankRequiredInputs && rails.fire(form, 'ajax:aborted:required', [blankRequiredInputs])) {
+          return rails.stopEverything(e);
+        }
       }
 
       if (remote) {
+        nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
         if (nonBlankFileInputs) {
           // slight timeout so that the submit button gets properly serialized
           // (make it easy for event handler to serialize form without disabled values)
@@ -10720,7 +10738,7 @@ return jQuery;
       button.closest('form').data('ujs:submit-button', data);
     });
 
-    $document.delegate(rails.formSubmitSelector, 'ajax:beforeSend.rails', function(event) {
+    $document.delegate(rails.formSubmitSelector, 'ajax:send.rails', function(event) {
       if (this == event.target) rails.disableFormElements($(this));
     });
 
@@ -11336,6 +11354,1350 @@ return jQuery;
 
 
 }).call(this);
+/**
+ * BxSlider v4.1.2 - Fully loaded, responsive content slider
+ * http://bxslider.com
+ *
+ * Copyright 2014, Steven Wanderski - http://stevenwanderski.com - http://bxcreative.com
+ * Written while drinking Belgian ales and listening to jazz
+ *
+ * Released under the MIT license - http://opensource.org/licenses/MIT
+ */
+
+
+;(function($){
+
+  var plugin = {};
+
+  var defaults = {
+
+    // GENERAL
+    mode: 'horizontal',
+    slideSelector: '',
+    infiniteLoop: true,
+    hideControlOnEnd: false,
+    speed: 500,
+    easing: null,
+    slideMargin: 0,
+    startSlide: 0,
+    randomStart: false,
+    captions: false,
+    ticker: false,
+    tickerHover: false,
+    adaptiveHeight: false,
+    adaptiveHeightSpeed: 500,
+    video: false,
+    useCSS: true,
+    preloadImages: 'visible',
+    responsive: true,
+    slideZIndex: 50,
+    wrapperClass: 'bx-wrapper',
+
+    // TOUCH
+    touchEnabled: true,
+    swipeThreshold: 50,
+    oneToOneTouch: true,
+    preventDefaultSwipeX: true,
+    preventDefaultSwipeY: false,
+
+    // PAGER
+    pager: true,
+    pagerType: 'full',
+    pagerShortSeparator: ' / ',
+    pagerSelector: null,
+    buildPager: null,
+    pagerCustom: null,
+
+    // CONTROLS
+    controls: true,
+    nextText: 'Next',
+    prevText: 'Prev',
+    nextSelector: null,
+    prevSelector: null,
+    autoControls: false,
+    startText: 'Start',
+    stopText: 'Stop',
+    autoControlsCombine: false,
+    autoControlsSelector: null,
+
+    // AUTO
+    auto: false,
+    pause: 4000,
+    autoStart: true,
+    autoDirection: 'next',
+    autoHover: false,
+    autoDelay: 0,
+    autoSlideForOnePage: false,
+
+    // CAROUSEL
+    minSlides: 1,
+    maxSlides: 1,
+    moveSlides: 0,
+    slideWidth: 0,
+
+    // CALLBACKS
+    onSliderLoad: function() {},
+    onSlideBefore: function() {},
+    onSlideAfter: function() {},
+    onSlideNext: function() {},
+    onSlidePrev: function() {},
+    onSliderResize: function() {}
+  }
+
+  $.fn.bxSlider = function(options){
+
+    if(this.length == 0) return this;
+
+    // support mutltiple elements
+    if(this.length > 1){
+      this.each(function(){$(this).bxSlider(options)});
+      return this;
+    }
+
+    // create a namespace to be used throughout the plugin
+    var slider = {};
+    // set a reference to our slider element
+    var el = this;
+    plugin.el = this;
+
+    /**
+     * Makes slideshow responsive
+     */
+    // first get the original window dimens (thanks alot IE)
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
+
+
+
+    /**
+     * ===================================================================================
+     * = PRIVATE FUNCTIONS
+     * ===================================================================================
+     */
+
+    /**
+     * Initializes namespace settings to be used throughout plugin
+     */
+    var init = function(){
+      // merge user-supplied options with the defaults
+      slider.settings = $.extend({}, defaults, options);
+      // parse slideWidth setting
+      slider.settings.slideWidth = parseInt(slider.settings.slideWidth);
+      // store the original children
+      slider.children = el.children(slider.settings.slideSelector);
+      // check if actual number of slides is less than minSlides / maxSlides
+      if(slider.children.length < slider.settings.minSlides) slider.settings.minSlides = slider.children.length;
+      if(slider.children.length < slider.settings.maxSlides) slider.settings.maxSlides = slider.children.length;
+      // if random start, set the startSlide setting to random number
+      if(slider.settings.randomStart) slider.settings.startSlide = Math.floor(Math.random() * slider.children.length);
+      // store active slide information
+      slider.active = { index: slider.settings.startSlide }
+      // store if the slider is in carousel mode (displaying / moving multiple slides)
+      slider.carousel = slider.settings.minSlides > 1 || slider.settings.maxSlides > 1;
+      // if carousel, force preloadImages = 'all'
+      if(slider.carousel) slider.settings.preloadImages = 'all';
+      // calculate the min / max width thresholds based on min / max number of slides
+      // used to setup and update carousel slides dimensions
+      slider.minThreshold = (slider.settings.minSlides * slider.settings.slideWidth) + ((slider.settings.minSlides - 1) * slider.settings.slideMargin);
+      slider.maxThreshold = (slider.settings.maxSlides * slider.settings.slideWidth) + ((slider.settings.maxSlides - 1) * slider.settings.slideMargin);
+      // store the current state of the slider (if currently animating, working is true)
+      slider.working = false;
+      // initialize the controls object
+      slider.controls = {};
+      // initialize an auto interval
+      slider.interval = null;
+      // determine which property to use for transitions
+      slider.animProp = slider.settings.mode == 'vertical' ? 'top' : 'left';
+      // determine if hardware acceleration can be used
+      slider.usingCSS = slider.settings.useCSS && slider.settings.mode != 'fade' && (function(){
+        // create our test div element
+        var div = document.createElement('div');
+        // css transition properties
+        var props = ['WebkitPerspective', 'MozPerspective', 'OPerspective', 'msPerspective'];
+        // test for each property
+        for(var i in props){
+          if(div.style[props[i]] !== undefined){
+            slider.cssPrefix = props[i].replace('Perspective', '').toLowerCase();
+            slider.animProp = '-' + slider.cssPrefix + '-transform';
+            return true;
+          }
+        }
+        return false;
+      }());
+      // if vertical mode always make maxSlides and minSlides equal
+      if(slider.settings.mode == 'vertical') slider.settings.maxSlides = slider.settings.minSlides;
+      // save original style data
+      el.data("origStyle", el.attr("style"));
+      el.children(slider.settings.slideSelector).each(function() {
+        $(this).data("origStyle", $(this).attr("style"));
+      });
+      // perform all DOM / CSS modifications
+      setup();
+    }
+
+    /**
+     * Performs all DOM and CSS modifications
+     */
+    var setup = function(){
+      // wrap el in a wrapper
+      el.wrap('<div class="' + slider.settings.wrapperClass + '"><div class="bx-viewport"></div></div>');
+      // store a namspace reference to .bx-viewport
+      slider.viewport = el.parent();
+      // add a loading div to display while images are loading
+      slider.loader = $('<div class="bx-loading" />');
+      slider.viewport.prepend(slider.loader);
+      // set el to a massive width, to hold any needed slides
+      // also strip any margin and padding from el
+      el.css({
+        width: slider.settings.mode == 'horizontal' ? (slider.children.length * 100 + 215) + '%' : 'auto',
+        position: 'relative'
+      });
+      // if using CSS, add the easing property
+      if(slider.usingCSS && slider.settings.easing){
+        el.css('-' + slider.cssPrefix + '-transition-timing-function', slider.settings.easing);
+      // if not using CSS and no easing value was supplied, use the default JS animation easing (swing)
+      }else if(!slider.settings.easing){
+        slider.settings.easing = 'swing';
+      }
+      var slidesShowing = getNumberSlidesShowing();
+      // make modifications to the viewport (.bx-viewport)
+      slider.viewport.css({
+        width: '100%',
+        overflow: 'hidden',
+        position: 'relative'
+      });
+      slider.viewport.parent().css({
+        maxWidth: getViewportMaxWidth()
+      });
+      // make modification to the wrapper (.bx-wrapper)
+      if(!slider.settings.pager) {
+        slider.viewport.parent().css({
+        margin: '0 auto 0px'
+        });
+      }
+      // apply css to all slider children
+      slider.children.css({
+        'float': slider.settings.mode == 'horizontal' ? 'left' : 'none',
+        listStyle: 'none',
+        position: 'relative'
+      });
+      // apply the calculated width after the float is applied to prevent scrollbar interference
+      slider.children.css('width', getSlideWidth());
+      // if slideMargin is supplied, add the css
+      if(slider.settings.mode == 'horizontal' && slider.settings.slideMargin > 0) slider.children.css('marginRight', slider.settings.slideMargin);
+      if(slider.settings.mode == 'vertical' && slider.settings.slideMargin > 0) slider.children.css('marginBottom', slider.settings.slideMargin);
+      // if "fade" mode, add positioning and z-index CSS
+      if(slider.settings.mode == 'fade'){
+        slider.children.css({
+          position: 'absolute',
+          zIndex: 0,
+          display: 'none'
+        });
+        // prepare the z-index on the showing element
+        slider.children.eq(slider.settings.startSlide).css({zIndex: slider.settings.slideZIndex, display: 'block'});
+      }
+      // create an element to contain all slider controls (pager, start / stop, etc)
+      slider.controls.el = $('<div class="bx-controls" />');
+      // if captions are requested, add them
+      if(slider.settings.captions) appendCaptions();
+      // check if startSlide is last slide
+      slider.active.last = slider.settings.startSlide == getPagerQty() - 1;
+      // if video is true, set up the fitVids plugin
+      if(slider.settings.video) el.fitVids();
+      // set the default preload selector (visible)
+      var preloadSelector = slider.children.eq(slider.settings.startSlide);
+      if (slider.settings.preloadImages == "all") preloadSelector = slider.children;
+      // only check for control addition if not in "ticker" mode
+      if(!slider.settings.ticker){
+        // if pager is requested, add it
+        if(slider.settings.pager) appendPager();
+        // if controls are requested, add them
+        if(slider.settings.controls) appendControls();
+        // if auto is true, and auto controls are requested, add them
+        if(slider.settings.auto && slider.settings.autoControls) appendControlsAuto();
+        // if any control option is requested, add the controls wrapper
+        if(slider.settings.controls || slider.settings.autoControls || slider.settings.pager) slider.viewport.after(slider.controls.el);
+      // if ticker mode, do not allow a pager
+      }else{
+        slider.settings.pager = false;
+      }
+      // preload all images, then perform final DOM / CSS modifications that depend on images being loaded
+      loadElements(preloadSelector, start);
+    }
+
+    var loadElements = function(selector, callback){
+      var total = selector.find('img, iframe').length;
+      if (total == 0){
+        callback();
+        return;
+      }
+      var count = 0;
+      selector.find('img, iframe').each(function(){
+        $(this).one('load', function() {
+          if(++count == total) callback();
+        }).each(function() {
+          if(this.complete) $(this).load();
+        });
+      });
+    }
+
+    /**
+     * Start the slider
+     */
+    var start = function(){
+      // if infinite loop, prepare additional slides
+      if(slider.settings.infiniteLoop && slider.settings.mode != 'fade' && !slider.settings.ticker){
+        var slice = slider.settings.mode == 'vertical' ? slider.settings.minSlides : slider.settings.maxSlides;
+        var sliceAppend = slider.children.slice(0, slice).clone().addClass('bx-clone');
+        var slicePrepend = slider.children.slice(-slice).clone().addClass('bx-clone');
+        el.append(sliceAppend).prepend(slicePrepend);
+      }
+      // remove the loading DOM element
+      slider.loader.remove();
+      // set the left / top position of "el"
+      setSlidePosition();
+      // if "vertical" mode, always use adaptiveHeight to prevent odd behavior
+      if (slider.settings.mode == 'vertical') slider.settings.adaptiveHeight = true;
+      // set the viewport height
+      slider.viewport.height(getViewportHeight());
+      // make sure everything is positioned just right (same as a window resize)
+      el.redrawSlider();
+      // onSliderLoad callback
+      slider.settings.onSliderLoad(slider.active.index);
+      // slider has been fully initialized
+      slider.initialized = true;
+      // bind the resize call to the window
+      if (slider.settings.responsive) $(window).bind('resize', resizeWindow);
+      // if auto is true and has more than 1 page, start the show
+      if (slider.settings.auto && slider.settings.autoStart && (getPagerQty() > 1 || slider.settings.autoSlideForOnePage)) initAuto();
+      // if ticker is true, start the ticker
+      if (slider.settings.ticker) initTicker();
+      // if pager is requested, make the appropriate pager link active
+      if (slider.settings.pager) updatePagerActive(slider.settings.startSlide);
+      // check for any updates to the controls (like hideControlOnEnd updates)
+      if (slider.settings.controls) updateDirectionControls();
+      // if touchEnabled is true, setup the touch events
+      if (slider.settings.touchEnabled && !slider.settings.ticker) initTouch();
+    }
+
+    /**
+     * Returns the calculated height of the viewport, used to determine either adaptiveHeight or the maxHeight value
+     */
+    var getViewportHeight = function(){
+      var height = 0;
+      // first determine which children (slides) should be used in our height calculation
+      var children = $();
+      // if mode is not "vertical" and adaptiveHeight is false, include all children
+      if(slider.settings.mode != 'vertical' && !slider.settings.adaptiveHeight){
+        children = slider.children;
+      }else{
+        // if not carousel, return the single active child
+        if(!slider.carousel){
+          children = slider.children.eq(slider.active.index);
+        // if carousel, return a slice of children
+        }else{
+          // get the individual slide index
+          var currentIndex = slider.settings.moveSlides == 1 ? slider.active.index : slider.active.index * getMoveBy();
+          // add the current slide to the children
+          children = slider.children.eq(currentIndex);
+          // cycle through the remaining "showing" slides
+          for (i = 1; i <= slider.settings.maxSlides - 1; i++){
+            // if looped back to the start
+            if(currentIndex + i >= slider.children.length){
+              children = children.add(slider.children.eq(i - 1));
+            }else{
+              children = children.add(slider.children.eq(currentIndex + i));
+            }
+          }
+        }
+      }
+      // if "vertical" mode, calculate the sum of the heights of the children
+      if(slider.settings.mode == 'vertical'){
+        children.each(function(index) {
+          height += $(this).outerHeight();
+        });
+        // add user-supplied margins
+        if(slider.settings.slideMargin > 0){
+          height += slider.settings.slideMargin * (slider.settings.minSlides - 1);
+        }
+      // if not "vertical" mode, calculate the max height of the children
+      }else{
+        height = Math.max.apply(Math, children.map(function(){
+          return $(this).outerHeight(false);
+        }).get());
+      }
+
+      if(slider.viewport.css('box-sizing') == 'border-box'){
+        height += parseFloat(slider.viewport.css('padding-top')) + parseFloat(slider.viewport.css('padding-bottom')) +
+              parseFloat(slider.viewport.css('border-top-width')) + parseFloat(slider.viewport.css('border-bottom-width'));
+      }else if(slider.viewport.css('box-sizing') == 'padding-box'){
+        height += parseFloat(slider.viewport.css('padding-top')) + parseFloat(slider.viewport.css('padding-bottom'));
+      }
+
+      return height;
+    }
+
+    /**
+     * Returns the calculated width to be used for the outer wrapper / viewport
+     */
+    var getViewportMaxWidth = function(){
+      var width = '100%';
+      if(slider.settings.slideWidth > 0){
+        if(slider.settings.mode == 'horizontal'){
+          width = (slider.settings.maxSlides * slider.settings.slideWidth) + ((slider.settings.maxSlides - 1) * slider.settings.slideMargin);
+        }else{
+          width = slider.settings.slideWidth;
+        }
+      }
+      return width;
+    }
+
+    /**
+     * Returns the calculated width to be applied to each slide
+     */
+    var getSlideWidth = function(){
+      // start with any user-supplied slide width
+      var newElWidth = slider.settings.slideWidth;
+      // get the current viewport width
+      var wrapWidth = slider.viewport.width();
+      // if slide width was not supplied, or is larger than the viewport use the viewport width
+      if(slider.settings.slideWidth == 0 ||
+        (slider.settings.slideWidth > wrapWidth && !slider.carousel) ||
+        slider.settings.mode == 'vertical'){
+        newElWidth = wrapWidth;
+      // if carousel, use the thresholds to determine the width
+      }else if(slider.settings.maxSlides > 1 && slider.settings.mode == 'horizontal'){
+        if(wrapWidth > slider.maxThreshold){
+          // newElWidth = (wrapWidth - (slider.settings.slideMargin * (slider.settings.maxSlides - 1))) / slider.settings.maxSlides;
+        }else if(wrapWidth < slider.minThreshold){
+          newElWidth = (wrapWidth - (slider.settings.slideMargin * (slider.settings.minSlides - 1))) / slider.settings.minSlides;
+        }
+      }
+      return newElWidth;
+    }
+
+    /**
+     * Returns the number of slides currently visible in the viewport (includes partially visible slides)
+     */
+    var getNumberSlidesShowing = function(){
+      var slidesShowing = 1;
+      if(slider.settings.mode == 'horizontal' && slider.settings.slideWidth > 0){
+        // if viewport is smaller than minThreshold, return minSlides
+        if(slider.viewport.width() < slider.minThreshold){
+          slidesShowing = slider.settings.minSlides;
+        // if viewport is larger than minThreshold, return maxSlides
+        }else if(slider.viewport.width() > slider.maxThreshold){
+          slidesShowing = slider.settings.maxSlides;
+        // if viewport is between min / max thresholds, divide viewport width by first child width
+        }else{
+          var childWidth = slider.children.first().width() + slider.settings.slideMargin;
+          slidesShowing = Math.floor((slider.viewport.width() +
+            slider.settings.slideMargin) / childWidth);
+        }
+      // if "vertical" mode, slides showing will always be minSlides
+      }else if(slider.settings.mode == 'vertical'){
+        slidesShowing = slider.settings.minSlides;
+      }
+      return slidesShowing;
+    }
+
+    /**
+     * Returns the number of pages (one full viewport of slides is one "page")
+     */
+    var getPagerQty = function(){
+      var pagerQty = 0;
+      // if moveSlides is specified by the user
+      if(slider.settings.moveSlides > 0){
+        if(slider.settings.infiniteLoop){
+          pagerQty = Math.ceil(slider.children.length / getMoveBy());
+        }else{
+          // use a while loop to determine pages
+          var breakPoint = 0;
+          var counter = 0
+          // when breakpoint goes above children length, counter is the number of pages
+          while (breakPoint < slider.children.length){
+            ++pagerQty;
+            breakPoint = counter + getNumberSlidesShowing();
+            counter += slider.settings.moveSlides <= getNumberSlidesShowing() ? slider.settings.moveSlides : getNumberSlidesShowing();
+          }
+        }
+      // if moveSlides is 0 (auto) divide children length by sides showing, then round up
+      }else{
+        pagerQty = Math.ceil(slider.children.length / getNumberSlidesShowing());
+      }
+      return pagerQty;
+    }
+
+    /**
+     * Returns the number of indivual slides by which to shift the slider
+     */
+    var getMoveBy = function(){
+      // if moveSlides was set by the user and moveSlides is less than number of slides showing
+      if(slider.settings.moveSlides > 0 && slider.settings.moveSlides <= getNumberSlidesShowing()){
+        return slider.settings.moveSlides;
+      }
+      // if moveSlides is 0 (auto)
+      return getNumberSlidesShowing();
+    }
+
+    /**
+     * Sets the slider's (el) left or top position
+     */
+    var setSlidePosition = function(){
+      // if last slide, not infinite loop, and number of children is larger than specified maxSlides
+      if(slider.children.length > slider.settings.maxSlides && slider.active.last && !slider.settings.infiniteLoop){
+        if (slider.settings.mode == 'horizontal'){
+          // get the last child's position
+          var lastChild = slider.children.last();
+          var position = lastChild.position();
+          // set the left position
+          setPositionProperty(-(position.left - (slider.viewport.width() - lastChild.outerWidth())), 'reset', 0);
+        }else if(slider.settings.mode == 'vertical'){
+          // get the last showing index's position
+          var lastShowingIndex = slider.children.length - slider.settings.minSlides;
+          var position = slider.children.eq(lastShowingIndex).position();
+          // set the top position
+          setPositionProperty(-position.top, 'reset', 0);
+        }
+      // if not last slide
+      }else{
+        // get the position of the first showing slide
+        var position = slider.children.eq(slider.active.index * getMoveBy()).position();
+        // check for last slide
+        if (slider.active.index == getPagerQty() - 1) slider.active.last = true;
+        // set the repective position
+        if (position != undefined){
+          if (slider.settings.mode == 'horizontal') setPositionProperty(-position.left, 'reset', 0);
+          else if (slider.settings.mode == 'vertical') setPositionProperty(-position.top, 'reset', 0);
+        }
+      }
+    }
+
+    /**
+     * Sets the el's animating property position (which in turn will sometimes animate el).
+     * If using CSS, sets the transform property. If not using CSS, sets the top / left property.
+     *
+     * @param value (int)
+     *  - the animating property's value
+     *
+     * @param type (string) 'slider', 'reset', 'ticker'
+     *  - the type of instance for which the function is being
+     *
+     * @param duration (int)
+     *  - the amount of time (in ms) the transition should occupy
+     *
+     * @param params (array) optional
+     *  - an optional parameter containing any variables that need to be passed in
+     */
+    var setPositionProperty = function(value, type, duration, params){
+      // use CSS transform
+      if(slider.usingCSS){
+        // determine the translate3d value
+        var propValue = slider.settings.mode == 'vertical' ? 'translate3d(0, ' + value + 'px, 0)' : 'translate3d(' + value + 'px, 0, 0)';
+        // add the CSS transition-duration
+        el.css('-' + slider.cssPrefix + '-transition-duration', duration / 1000 + 's');
+        if(type == 'slide'){
+          // set the property value
+          el.css(slider.animProp, propValue);
+          // bind a callback method - executes when CSS transition completes
+          el.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
+            // unbind the callback
+            el.unbind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd');
+            updateAfterSlideTransition();
+          });
+        }else if(type == 'reset'){
+          el.css(slider.animProp, propValue);
+        }else if(type == 'ticker'){
+          // make the transition use 'linear'
+          el.css('-' + slider.cssPrefix + '-transition-timing-function', 'linear');
+          el.css(slider.animProp, propValue);
+          // bind a callback method - executes when CSS transition completes
+          el.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
+            // unbind the callback
+            el.unbind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd');
+            // reset the position
+            setPositionProperty(params['resetValue'], 'reset', 0);
+            // start the loop again
+            tickerLoop();
+          });
+        }
+      // use JS animate
+      }else{
+        var animateObj = {};
+        animateObj[slider.animProp] = value;
+        if(type == 'slide'){
+          el.animate(animateObj, duration, slider.settings.easing, function(){
+            updateAfterSlideTransition();
+          });
+        }else if(type == 'reset'){
+          el.css(slider.animProp, value)
+        }else if(type == 'ticker'){
+          el.animate(animateObj, speed, 'linear', function(){
+            setPositionProperty(params['resetValue'], 'reset', 0);
+            // run the recursive loop after animation
+            tickerLoop();
+          });
+        }
+      }
+    }
+
+    /**
+     * Populates the pager with proper amount of pages
+     */
+    var populatePager = function(){
+      var pagerHtml = '';
+      var pagerQty = getPagerQty();
+      // loop through each pager item
+      for(var i=0; i < pagerQty; i++){
+        var linkContent = '';
+        // if a buildPager function is supplied, use it to get pager link value, else use index + 1
+        if(slider.settings.buildPager && $.isFunction(slider.settings.buildPager)){
+          linkContent = slider.settings.buildPager(i);
+          slider.pagerEl.addClass('bx-custom-pager');
+        }else{
+          linkContent = i + 1;
+          slider.pagerEl.addClass('bx-default-pager');
+        }
+        // var linkContent = slider.settings.buildPager && $.isFunction(slider.settings.buildPager) ? slider.settings.buildPager(i) : i + 1;
+        // add the markup to the string
+        pagerHtml += '<div class="bx-pager-item"><a href="" data-slide-index="' + i + '" class="bx-pager-link">' + linkContent + '</a></div>';
+      };
+      // populate the pager element with pager links
+      slider.pagerEl.html(pagerHtml);
+    }
+
+    /**
+     * Appends the pager to the controls element
+     */
+    var appendPager = function(){
+      if(!slider.settings.pagerCustom){
+        // create the pager DOM element
+        slider.pagerEl = $('<div class="bx-pager" />');
+        // if a pager selector was supplied, populate it with the pager
+        if(slider.settings.pagerSelector){
+          $(slider.settings.pagerSelector).html(slider.pagerEl);
+        // if no pager selector was supplied, add it after the wrapper
+        }else{
+          slider.controls.el.addClass('bx-has-pager').append(slider.pagerEl);
+        }
+        // populate the pager
+        populatePager();
+      }else{
+        slider.pagerEl = $(slider.settings.pagerCustom);
+      }
+      // assign the pager click binding
+      slider.pagerEl.on('click', 'a', clickPagerBind);
+    }
+
+    /**
+     * Appends prev / next controls to the controls element
+     */
+    var appendControls = function(){
+      slider.controls.next = $('<a class="bx-next" href="">' + slider.settings.nextText + '</a>');
+      slider.controls.prev = $('<a class="bx-prev" href="">' + slider.settings.prevText + '</a>');
+      // bind click actions to the controls
+      slider.controls.next.bind('click', clickNextBind);
+      slider.controls.prev.bind('click', clickPrevBind);
+      // if nextSlector was supplied, populate it
+      if(slider.settings.nextSelector){
+        $(slider.settings.nextSelector).append(slider.controls.next);
+      }
+      // if prevSlector was supplied, populate it
+      if(slider.settings.prevSelector){
+        $(slider.settings.prevSelector).append(slider.controls.prev);
+      }
+      // if no custom selectors were supplied
+      if(!slider.settings.nextSelector && !slider.settings.prevSelector){
+        // add the controls to the DOM
+        slider.controls.directionEl = $('<div class="bx-controls-direction" />');
+        // add the control elements to the directionEl
+        slider.controls.directionEl.append(slider.controls.prev).append(slider.controls.next);
+        // slider.viewport.append(slider.controls.directionEl);
+        slider.controls.el.addClass('bx-has-controls-direction').append(slider.controls.directionEl);
+      }
+    }
+
+    /**
+     * Appends start / stop auto controls to the controls element
+     */
+    var appendControlsAuto = function(){
+      slider.controls.start = $('<div class="bx-controls-auto-item"><a class="bx-start" href="">' + slider.settings.startText + '</a></div>');
+      slider.controls.stop = $('<div class="bx-controls-auto-item"><a class="bx-stop" href="">' + slider.settings.stopText + '</a></div>');
+      // add the controls to the DOM
+      slider.controls.autoEl = $('<div class="bx-controls-auto" />');
+      // bind click actions to the controls
+      slider.controls.autoEl.on('click', '.bx-start', clickStartBind);
+      slider.controls.autoEl.on('click', '.bx-stop', clickStopBind);
+      // if autoControlsCombine, insert only the "start" control
+      if(slider.settings.autoControlsCombine){
+        slider.controls.autoEl.append(slider.controls.start);
+      // if autoControlsCombine is false, insert both controls
+      }else{
+        slider.controls.autoEl.append(slider.controls.start).append(slider.controls.stop);
+      }
+      // if auto controls selector was supplied, populate it with the controls
+      if(slider.settings.autoControlsSelector){
+        $(slider.settings.autoControlsSelector).html(slider.controls.autoEl);
+      // if auto controls selector was not supplied, add it after the wrapper
+      }else{
+        slider.controls.el.addClass('bx-has-controls-auto').append(slider.controls.autoEl);
+      }
+      // update the auto controls
+      updateAutoControls(slider.settings.autoStart ? 'stop' : 'start');
+    }
+
+    /**
+     * Appends image captions to the DOM
+     */
+    var appendCaptions = function(){
+      // cycle through each child
+      slider.children.each(function(index){
+        // get the image title attribute
+        var title = $(this).find('img:first').attr('title');
+        // append the caption
+        if (title != undefined && ('' + title).length) {
+                    $(this).append('<div class="bx-caption"><span>' + title + '</span></div>');
+                }
+      });
+    }
+
+    /**
+     * Click next binding
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var clickNextBind = function(e){
+      // if auto show is running, stop it
+      if (slider.settings.auto) el.stopAuto();
+      el.goToNextSlide();
+      e.preventDefault();
+    }
+
+    /**
+     * Click prev binding
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var clickPrevBind = function(e){
+      // if auto show is running, stop it
+      if (slider.settings.auto) el.stopAuto();
+      el.goToPrevSlide();
+      e.preventDefault();
+    }
+
+    /**
+     * Click start binding
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var clickStartBind = function(e){
+      el.startAuto();
+      e.preventDefault();
+    }
+
+    /**
+     * Click stop binding
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var clickStopBind = function(e){
+      el.stopAuto();
+      e.preventDefault();
+    }
+
+    /**
+     * Click pager binding
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var clickPagerBind = function(e){
+      // if auto show is running, stop it
+      if (slider.settings.auto) el.stopAuto();
+      var pagerLink = $(e.currentTarget);
+      if(pagerLink.attr('data-slide-index') !== undefined){
+        var pagerIndex = parseInt(pagerLink.attr('data-slide-index'));
+        // if clicked pager link is not active, continue with the goToSlide call
+        if(pagerIndex != slider.active.index) el.goToSlide(pagerIndex);
+        e.preventDefault();
+      }
+    }
+
+    /**
+     * Updates the pager links with an active class
+     *
+     * @param slideIndex (int)
+     *  - index of slide to make active
+     */
+    var updatePagerActive = function(slideIndex){
+      // if "short" pager type
+      var len = slider.children.length; // nb of children
+      if(slider.settings.pagerType == 'short'){
+        if(slider.settings.maxSlides > 1) {
+          len = Math.ceil(slider.children.length/slider.settings.maxSlides);
+        }
+        slider.pagerEl.html( (slideIndex + 1) + slider.settings.pagerShortSeparator + len);
+        return;
+      }
+      // remove all pager active classes
+      slider.pagerEl.find('a').removeClass('active');
+      // apply the active class for all pagers
+      slider.pagerEl.each(function(i, el) { $(el).find('a').eq(slideIndex).addClass('active'); });
+    }
+
+    /**
+     * Performs needed actions after a slide transition
+     */
+    var updateAfterSlideTransition = function(){
+      // if infinte loop is true
+      if(slider.settings.infiniteLoop){
+        var position = '';
+        // first slide
+        if(slider.active.index == 0){
+          // set the new position
+          position = slider.children.eq(0).position();
+        // carousel, last slide
+        }else if(slider.active.index == getPagerQty() - 1 && slider.carousel){
+          position = slider.children.eq((getPagerQty() - 1) * getMoveBy()).position();
+        // last slide
+        }else if(slider.active.index == slider.children.length - 1){
+          position = slider.children.eq(slider.children.length - 1).position();
+        }
+        if(position){
+          if (slider.settings.mode == 'horizontal') { setPositionProperty(-position.left, 'reset', 0); }
+          else if (slider.settings.mode == 'vertical') { setPositionProperty(-position.top, 'reset', 0); }
+        }
+      }
+      // declare that the transition is complete
+      slider.working = false;
+      // onSlideAfter callback
+      slider.settings.onSlideAfter(slider.children.eq(slider.active.index), slider.oldIndex, slider.active.index);
+    }
+
+    /**
+     * Updates the auto controls state (either active, or combined switch)
+     *
+     * @param state (string) "start", "stop"
+     *  - the new state of the auto show
+     */
+    var updateAutoControls = function(state){
+      // if autoControlsCombine is true, replace the current control with the new state
+      if(slider.settings.autoControlsCombine){
+        slider.controls.autoEl.html(slider.controls[state]);
+      // if autoControlsCombine is false, apply the "active" class to the appropriate control
+      }else{
+        slider.controls.autoEl.find('a').removeClass('active');
+        slider.controls.autoEl.find('a:not(.bx-' + state + ')').addClass('active');
+      }
+    }
+
+    /**
+     * Updates the direction controls (checks if either should be hidden)
+     */
+    var updateDirectionControls = function(){
+      if(getPagerQty() == 1){
+        slider.controls.prev.addClass('disabled');
+        slider.controls.next.addClass('disabled');
+      }else if(!slider.settings.infiniteLoop && slider.settings.hideControlOnEnd){
+        // if first slide
+        if (slider.active.index == 0){
+          slider.controls.prev.addClass('disabled');
+          slider.controls.next.removeClass('disabled');
+        // if last slide
+        }else if(slider.active.index == getPagerQty() - 1){
+          slider.controls.next.addClass('disabled');
+          slider.controls.prev.removeClass('disabled');
+        // if any slide in the middle
+        }else{
+          slider.controls.prev.removeClass('disabled');
+          slider.controls.next.removeClass('disabled');
+        }
+      }
+    }
+
+    /**
+     * Initialzes the auto process
+     */
+    var initAuto = function(){
+      // if autoDelay was supplied, launch the auto show using a setTimeout() call
+      if(slider.settings.autoDelay > 0){
+        var timeout = setTimeout(el.startAuto, slider.settings.autoDelay);
+      // if autoDelay was not supplied, start the auto show normally
+      }else{
+        el.startAuto();
+      }
+      // if autoHover is requested
+      if(slider.settings.autoHover){
+        // on el hover
+        el.hover(function(){
+          // if the auto show is currently playing (has an active interval)
+          if(slider.interval){
+            // stop the auto show and pass true agument which will prevent control update
+            el.stopAuto(true);
+            // create a new autoPaused value which will be used by the relative "mouseout" event
+            slider.autoPaused = true;
+          }
+        }, function(){
+          // if the autoPaused value was created be the prior "mouseover" event
+          if(slider.autoPaused){
+            // start the auto show and pass true agument which will prevent control update
+            el.startAuto(true);
+            // reset the autoPaused value
+            slider.autoPaused = null;
+          }
+        });
+      }
+    }
+
+    /**
+     * Initialzes the ticker process
+     */
+    var initTicker = function(){
+      var startPosition = 0;
+      // if autoDirection is "next", append a clone of the entire slider
+      if(slider.settings.autoDirection == 'next'){
+        el.append(slider.children.clone().addClass('bx-clone'));
+      // if autoDirection is "prev", prepend a clone of the entire slider, and set the left position
+      }else{
+        el.prepend(slider.children.clone().addClass('bx-clone'));
+        var position = slider.children.first().position();
+        startPosition = slider.settings.mode == 'horizontal' ? -position.left : -position.top;
+      }
+      setPositionProperty(startPosition, 'reset', 0);
+      // do not allow controls in ticker mode
+      slider.settings.pager = false;
+      slider.settings.controls = false;
+      slider.settings.autoControls = false;
+      // if autoHover is requested
+      if(slider.settings.tickerHover && !slider.usingCSS){
+        // on el hover
+        slider.viewport.hover(function(){
+          el.stop();
+        }, function(){
+          // calculate the total width of children (used to calculate the speed ratio)
+          var totalDimens = 0;
+          slider.children.each(function(index){
+            totalDimens += slider.settings.mode == 'horizontal' ? $(this).outerWidth(true) : $(this).outerHeight(true);
+          });
+          // calculate the speed ratio (used to determine the new speed to finish the paused animation)
+          var ratio = slider.settings.speed / totalDimens;
+          // determine which property to use
+          var property = slider.settings.mode == 'horizontal' ? 'left' : 'top';
+          // calculate the new speed
+          var newSpeed = ratio * (totalDimens - (Math.abs(parseInt(el.css(property)))));
+          tickerLoop(newSpeed);
+        });
+      }
+      // start the ticker loop
+      tickerLoop();
+    }
+
+    /**
+     * Runs a continuous loop, news ticker-style
+     */
+    var tickerLoop = function(resumeSpeed){
+      speed = resumeSpeed ? resumeSpeed : slider.settings.speed;
+      var position = {left: 0, top: 0};
+      var reset = {left: 0, top: 0};
+      // if "next" animate left position to last child, then reset left to 0
+      if(slider.settings.autoDirection == 'next'){
+        position = el.find('.bx-clone').first().position();
+      // if "prev" animate left position to 0, then reset left to first non-clone child
+      }else{
+        reset = slider.children.first().position();
+      }
+      var animateProperty = slider.settings.mode == 'horizontal' ? -position.left : -position.top;
+      var resetValue = slider.settings.mode == 'horizontal' ? -reset.left : -reset.top;
+      var params = {resetValue: resetValue};
+      setPositionProperty(animateProperty, 'ticker', speed, params);
+    }
+
+    /**
+     * Initializes touch events
+     */
+    var initTouch = function(){
+      // initialize object to contain all touch values
+      slider.touch = {
+        start: {x: 0, y: 0},
+        end: {x: 0, y: 0}
+      }
+      slider.viewport.bind('touchstart', onTouchStart);
+    }
+
+    /**
+     * Event handler for "touchstart"
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var onTouchStart = function(e){
+      if(slider.working){
+        e.preventDefault();
+      }else{
+        // record the original position when touch starts
+        slider.touch.originalPos = el.position();
+        var orig = e.originalEvent;
+        // record the starting touch x, y coordinates
+        slider.touch.start.x = orig.changedTouches[0].pageX;
+        slider.touch.start.y = orig.changedTouches[0].pageY;
+        // bind a "touchmove" event to the viewport
+        slider.viewport.bind('touchmove', onTouchMove);
+        // bind a "touchend" event to the viewport
+        slider.viewport.bind('touchend', onTouchEnd);
+      }
+    }
+
+    /**
+     * Event handler for "touchmove"
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var onTouchMove = function(e){
+      var orig = e.originalEvent;
+      // if scrolling on y axis, do not prevent default
+      var xMovement = Math.abs(orig.changedTouches[0].pageX - slider.touch.start.x);
+      var yMovement = Math.abs(orig.changedTouches[0].pageY - slider.touch.start.y);
+      // x axis swipe
+      if((xMovement * 3) > yMovement && slider.settings.preventDefaultSwipeX){
+        e.preventDefault();
+      // y axis swipe
+      }else if((yMovement * 3) > xMovement && slider.settings.preventDefaultSwipeY){
+        e.preventDefault();
+      }
+      if(slider.settings.mode != 'fade' && slider.settings.oneToOneTouch){
+        var value = 0;
+        // if horizontal, drag along x axis
+        if(slider.settings.mode == 'horizontal'){
+          var change = orig.changedTouches[0].pageX - slider.touch.start.x;
+          value = slider.touch.originalPos.left + change;
+        // if vertical, drag along y axis
+        }else{
+          var change = orig.changedTouches[0].pageY - slider.touch.start.y;
+          value = slider.touch.originalPos.top + change;
+        }
+        setPositionProperty(value, 'reset', 0);
+      }
+    }
+
+    /**
+     * Event handler for "touchend"
+     *
+     * @param e (event)
+     *  - DOM event object
+     */
+    var onTouchEnd = function(e){
+      slider.viewport.unbind('touchmove', onTouchMove);
+      var orig = e.originalEvent;
+      var value = 0;
+      // record end x, y positions
+      slider.touch.end.x = orig.changedTouches[0].pageX;
+      slider.touch.end.y = orig.changedTouches[0].pageY;
+      // if fade mode, check if absolute x distance clears the threshold
+      if(slider.settings.mode == 'fade'){
+        var distance = Math.abs(slider.touch.start.x - slider.touch.end.x);
+        if(distance >= slider.settings.swipeThreshold){
+          slider.touch.start.x > slider.touch.end.x ? el.goToNextSlide() : el.goToPrevSlide();
+          el.stopAuto();
+        }
+      // not fade mode
+      }else{
+        var distance = 0;
+        // calculate distance and el's animate property
+        if(slider.settings.mode == 'horizontal'){
+          distance = slider.touch.end.x - slider.touch.start.x;
+          value = slider.touch.originalPos.left;
+        }else{
+          distance = slider.touch.end.y - slider.touch.start.y;
+          value = slider.touch.originalPos.top;
+        }
+        // if not infinite loop and first / last slide, do not attempt a slide transition
+        if(!slider.settings.infiniteLoop && ((slider.active.index == 0 && distance > 0) || (slider.active.last && distance < 0))){
+          setPositionProperty(value, 'reset', 200);
+        }else{
+          // check if distance clears threshold
+          if(Math.abs(distance) >= slider.settings.swipeThreshold){
+            distance < 0 ? el.goToNextSlide() : el.goToPrevSlide();
+            el.stopAuto();
+          }else{
+            // el.animate(property, 200);
+            setPositionProperty(value, 'reset', 200);
+          }
+        }
+      }
+      slider.viewport.unbind('touchend', onTouchEnd);
+    }
+
+    /**
+     * Window resize event callback
+     */
+    var resizeWindow = function(e){
+      // don't do anything if slider isn't initialized.
+      if(!slider.initialized) return;
+      // get the new window dimens (again, thank you IE)
+      var windowWidthNew = $(window).width();
+      var windowHeightNew = $(window).height();
+      // make sure that it is a true window resize
+      // *we must check this because our dinosaur friend IE fires a window resize event when certain DOM elements
+      // are resized. Can you just die already?*
+      if(windowWidth != windowWidthNew || windowHeight != windowHeightNew){
+        // set the new window dimens
+        windowWidth = windowWidthNew;
+        windowHeight = windowHeightNew;
+        // update all dynamic elements
+        el.redrawSlider();
+        // Call user resize handler
+        slider.settings.onSliderResize.call(el, slider.active.index);
+      }
+    }
+
+    /**
+     * ===================================================================================
+     * = PUBLIC FUNCTIONS
+     * ===================================================================================
+     */
+
+    /**
+     * Performs slide transition to the specified slide
+     *
+     * @param slideIndex (int)
+     *  - the destination slide's index (zero-based)
+     *
+     * @param direction (string)
+     *  - INTERNAL USE ONLY - the direction of travel ("prev" / "next")
+     */
+    el.goToSlide = function(slideIndex, direction){
+      // if plugin is currently in motion, ignore request
+      if(slider.working || slider.active.index == slideIndex) return;
+      // declare that plugin is in motion
+      slider.working = true;
+      // store the old index
+      slider.oldIndex = slider.active.index;
+      // if slideIndex is less than zero, set active index to last child (this happens during infinite loop)
+      if(slideIndex < 0){
+        slider.active.index = getPagerQty() - 1;
+      // if slideIndex is greater than children length, set active index to 0 (this happens during infinite loop)
+      }else if(slideIndex >= getPagerQty()){
+        slider.active.index = 0;
+      // set active index to requested slide
+      }else{
+        slider.active.index = slideIndex;
+      }
+      // onSlideBefore, onSlideNext, onSlidePrev callbacks
+      slider.settings.onSlideBefore(slider.children.eq(slider.active.index), slider.oldIndex, slider.active.index);
+      if(direction == 'next'){
+        slider.settings.onSlideNext(slider.children.eq(slider.active.index), slider.oldIndex, slider.active.index);
+      }else if(direction == 'prev'){
+        slider.settings.onSlidePrev(slider.children.eq(slider.active.index), slider.oldIndex, slider.active.index);
+      }
+      // check if last slide
+      slider.active.last = slider.active.index >= getPagerQty() - 1;
+      // update the pager with active class
+      if(slider.settings.pager) updatePagerActive(slider.active.index);
+      // // check for direction control update
+      if(slider.settings.controls) updateDirectionControls();
+      // if slider is set to mode: "fade"
+      if(slider.settings.mode == 'fade'){
+        // if adaptiveHeight is true and next height is different from current height, animate to the new height
+        if(slider.settings.adaptiveHeight && slider.viewport.height() != getViewportHeight()){
+          slider.viewport.animate({height: getViewportHeight()}, slider.settings.adaptiveHeightSpeed);
+        }
+        // fade out the visible child and reset its z-index value
+        slider.children.filter(':visible').fadeOut(slider.settings.speed).css({zIndex: 0});
+        // fade in the newly requested slide
+        slider.children.eq(slider.active.index).css('zIndex', slider.settings.slideZIndex+1).fadeIn(slider.settings.speed, function(){
+          $(this).css('zIndex', slider.settings.slideZIndex);
+          updateAfterSlideTransition();
+        });
+      // slider mode is not "fade"
+      }else{
+        // if adaptiveHeight is true and next height is different from current height, animate to the new height
+        if(slider.settings.adaptiveHeight && slider.viewport.height() != getViewportHeight()){
+          slider.viewport.animate({height: getViewportHeight()}, slider.settings.adaptiveHeightSpeed);
+        }
+        var moveBy = 0;
+        var position = {left: 0, top: 0};
+        // if carousel and not infinite loop
+        if(!slider.settings.infiniteLoop && slider.carousel && slider.active.last){
+          if(slider.settings.mode == 'horizontal'){
+            // get the last child position
+            var lastChild = slider.children.eq(slider.children.length - 1);
+            position = lastChild.position();
+            // calculate the position of the last slide
+            moveBy = slider.viewport.width() - lastChild.outerWidth();
+          }else{
+            // get last showing index position
+            var lastShowingIndex = slider.children.length - slider.settings.minSlides;
+            position = slider.children.eq(lastShowingIndex).position();
+          }
+          // horizontal carousel, going previous while on first slide (infiniteLoop mode)
+        }else if(slider.carousel && slider.active.last && direction == 'prev'){
+          // get the last child position
+          var eq = slider.settings.moveSlides == 1 ? slider.settings.maxSlides - getMoveBy() : ((getPagerQty() - 1) * getMoveBy()) - (slider.children.length - slider.settings.maxSlides);
+          var lastChild = el.children('.bx-clone').eq(eq);
+          position = lastChild.position();
+        // if infinite loop and "Next" is clicked on the last slide
+        }else if(direction == 'next' && slider.active.index == 0){
+          // get the last clone position
+          position = el.find('> .bx-clone').eq(slider.settings.maxSlides).position();
+          slider.active.last = false;
+        // normal non-zero requests
+        }else if(slideIndex >= 0){
+          var requestEl = slideIndex * getMoveBy();
+          position = slider.children.eq(requestEl).position();
+        }
+
+        /* If the position doesn't exist
+         * (e.g. if you destroy the slider on a next click),
+         * it doesn't throw an error.
+         */
+        if ("undefined" !== typeof(position)) {
+          var value = slider.settings.mode == 'horizontal' ? -(position.left - moveBy) : -position.top;
+          // plugin values to be animated
+          setPositionProperty(value, 'slide', slider.settings.speed);
+        }
+      }
+    }
+
+    /**
+     * Transitions to the next slide in the show
+     */
+    el.goToNextSlide = function(){
+      // if infiniteLoop is false and last page is showing, disregard call
+      if (!slider.settings.infiniteLoop && slider.active.last) return;
+      var pagerIndex = parseInt(slider.active.index) + 1;
+      el.goToSlide(pagerIndex, 'next');
+    }
+
+    /**
+     * Transitions to the prev slide in the show
+     */
+    el.goToPrevSlide = function(){
+      // if infiniteLoop is false and last page is showing, disregard call
+      if (!slider.settings.infiniteLoop && slider.active.index == 0) return;
+      var pagerIndex = parseInt(slider.active.index) - 1;
+      el.goToSlide(pagerIndex, 'prev');
+    }
+
+    /**
+     * Starts the auto show
+     *
+     * @param preventControlUpdate (boolean)
+     *  - if true, auto controls state will not be updated
+     */
+    el.startAuto = function(preventControlUpdate){
+      // if an interval already exists, disregard call
+      if(slider.interval) return;
+      // create an interval
+      slider.interval = setInterval(function(){
+        slider.settings.autoDirection == 'next' ? el.goToNextSlide() : el.goToPrevSlide();
+      }, slider.settings.pause);
+      // if auto controls are displayed and preventControlUpdate is not true
+      if (slider.settings.autoControls && preventControlUpdate != true) updateAutoControls('stop');
+    }
+
+    /**
+     * Stops the auto show
+     *
+     * @param preventControlUpdate (boolean)
+     *  - if true, auto controls state will not be updated
+     */
+    el.stopAuto = function(preventControlUpdate){
+      // if no interval exists, disregard call
+      if(!slider.interval) return;
+      // clear the interval
+      clearInterval(slider.interval);
+      slider.interval = null;
+      // if auto controls are displayed and preventControlUpdate is not true
+      if (slider.settings.autoControls && preventControlUpdate != true) updateAutoControls('start');
+    }
+
+    /**
+     * Returns current slide index (zero-based)
+     */
+    el.getCurrentSlide = function(){
+      return slider.active.index;
+    }
+
+    /**
+     * Returns current slide element
+     */
+    el.getCurrentSlideElement = function(){
+      return slider.children.eq(slider.active.index);
+    }
+
+    /**
+     * Returns number of slides in show
+     */
+    el.getSlideCount = function(){
+      return slider.children.length;
+    }
+
+    /**
+     * Update all dynamic slider elements
+     */
+    el.redrawSlider = function(){
+      // resize all children in ratio to new screen size
+      slider.children.add(el.find('.bx-clone')).width(getSlideWidth());
+      // adjust the height
+      slider.viewport.css('height', getViewportHeight());
+      // update the slide position
+      if(!slider.settings.ticker) setSlidePosition();
+      // if active.last was true before the screen resize, we want
+      // to keep it last no matter what screen size we end on
+      if (slider.active.last) slider.active.index = getPagerQty() - 1;
+      // if the active index (page) no longer exists due to the resize, simply set the index as last
+      if (slider.active.index >= getPagerQty()) slider.active.last = true;
+      // if a pager is being displayed and a custom pager is not being used, update it
+      if(slider.settings.pager && !slider.settings.pagerCustom){
+        populatePager();
+        updatePagerActive(slider.active.index);
+      }
+    }
+
+    /**
+     * Destroy the current instance of the slider (revert everything back to original state)
+     */
+    el.destroySlider = function(){
+      // don't do anything if slider has already been destroyed
+      if(!slider.initialized) return;
+      slider.initialized = false;
+      $('.bx-clone', this).remove();
+      slider.children.each(function() {
+        $(this).data("origStyle") != undefined ? $(this).attr("style", $(this).data("origStyle")) : $(this).removeAttr('style');
+      });
+      $(this).data("origStyle") != undefined ? this.attr("style", $(this).data("origStyle")) : $(this).removeAttr('style');
+      $(this).unwrap().unwrap();
+      if(slider.controls.el) slider.controls.el.remove();
+      if(slider.controls.next) slider.controls.next.remove();
+      if(slider.controls.prev) slider.controls.prev.remove();
+      if(slider.pagerEl && slider.settings.controls) slider.pagerEl.remove();
+      $('.bx-caption', this).remove();
+      if(slider.controls.autoEl) slider.controls.autoEl.remove();
+      clearInterval(slider.interval);
+      if(slider.settings.responsive) $(window).unbind('resize', resizeWindow);
+    }
+
+    /**
+     * Reload the slider (revert all DOM changes, and re-initialize)
+     */
+    el.reloadSlider = function(settings){
+      if (settings != undefined) options = settings;
+      el.destroySlider();
+      init();
+    }
+
+    init();
+
+    // returns the current jQuery object
+    return this;
+  }
+
+})(jQuery);
 (function() {
 
 
@@ -11357,19 +12719,32 @@ return jQuery;
 
 
 
-$(function () {
-    $("#videos_search input").keyup(function(){
+
+$(document).ready(function () {
+    $("#videos_search input").keyup(function () {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
         return false;
     });
 
-    $("#photos_search input").keyup(function(){
+    $("#photos_search input").keyup(function () {
         $.get($("#photos_search").attr("action"), $("#photos_search").serialize(), null, "script");
         return false;
     });
 
-    $("#posts_search input").keyup(function(){
+    $("#posts_search input").keyup(function () {
         $.get($("#posts_search").attr("action"), $("#posts_search").serialize(), null, "script");
         return false;
+    });
+
+    $('.slider').bxSlider({
+        autoHover: true,
+        pager: false,
+        controls: false,
+        auto: true,
+        pause: 4000
+    });
+
+    $('.mobile-menu').click(function () {
+        $('.navigation').toggle();
     });
 });

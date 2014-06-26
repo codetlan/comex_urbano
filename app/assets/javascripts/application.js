@@ -15,19 +15,32 @@
 //= require turbolinks
 //= require_tree .
 
-$(function () {
-    $("#videos_search input").keyup(function(){
+
+$(document).ready(function () {
+    $("#videos_search input").keyup(function () {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
         return false;
     });
 
-    $("#photos_search input").keyup(function(){
+    $("#photos_search input").keyup(function () {
         $.get($("#photos_search").attr("action"), $("#photos_search").serialize(), null, "script");
         return false;
     });
 
-    $("#posts_search input").keyup(function(){
+    $("#posts_search input").keyup(function () {
         $.get($("#posts_search").attr("action"), $("#posts_search").serialize(), null, "script");
         return false;
+    });
+
+    $('.slider').bxSlider({
+        autoHover: true,
+        pager: false,
+        controls: false,
+        auto: true,
+        pause: 4000
+    });
+
+    $('.mobile-menu').click(function () {
+        $('.navigation').toggle();
     });
 });
