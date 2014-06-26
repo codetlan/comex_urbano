@@ -49,15 +49,21 @@ p {
 .header {
   background: $black-color;
 
+  .mobile-menu {
+    border: 1px solid shade($white-color, 70%);
+    border-radius: $radius;
+  }
+}
+
+.site-links {
   .navigation {
     ul li {
       list-style: none;
 
       a {
-        color: $white-color;
         font-family: $font-bold;
         text-transform: uppercase;
-        font-size: 12px;
+        font-size: 16px;
       }
     }
   }
@@ -65,15 +71,27 @@ p {
   .social-links ul {
     list-style: none;
   }
-}
 
-.search {
   .search-form {
     input[type="text"] {
       border: 0;
       background-color: #383838;
       font-size: 13px;
       color: $white-color;
+    }
+  }
+
+  @include max-screen(580px) {
+    .navigation {
+      background: $black-color;
+
+      ul li {
+        border-top: 1px solid shade($white-color, 70%);
+
+        a {
+          color: $white-color;
+        }
+      }
     }
   }
 }
@@ -108,9 +126,16 @@ p {
     text-align: center;
   }
 
-  .footer-brand {
-    text-align: center;
-    background-color: $black-color;
+  @include max-screen(690px) {
+    .footer-navigation {
+      ul li {
+        border: 0;
+
+        a.active {
+          border-width: 3px !important;
+        }
+      }
+    } 
   }
 }
 
@@ -148,6 +173,18 @@ p {
           border-bottom: 10px solid $black-color;
         }
       }
+    }
+  }
+
+  @include max-screen(690px) {
+    border: 0;
+
+    .page-navigation ul li a.active {
+      border-width: 3px;
+    }
+
+    .years-timeline ul li a.active {
+      border-width: 3px;
     }
   }
 }

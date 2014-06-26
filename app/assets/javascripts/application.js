@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+  $('.slider').bxSlider({
+  	autoHover: true,
+  	pager: false,
+  	controls: false,
+  	auto: true,
+  	pause: 4000
+  });
+
+  $('.mobile-menu').click(function() {
+  	$('.navigation').toggle();
+  });
+});
