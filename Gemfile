@@ -28,7 +28,9 @@ group :assets do
 
 # Use jquery as the JavaScript library
   gem 'jquery-rails'
+
 end
+gem "jquery-fileupload-rails"
 
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

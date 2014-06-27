@@ -7,23 +7,27 @@ class VideosController < ApplicationController
     #@videos = Video.all
     @videos = Video.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
+    @landing_page = LandingPage.first
   end
 
   # GET /videos/1
   # GET /videos/1.json
   def show
     @categories = Category.all.where('active = ?', 1)
+    @landing_page = LandingPage.first
   end
 
   # GET /videos/new
   def new
     @video = Video.new
     @categories = Category.all.where('active = ?', 1)
+    @landing_page = LandingPage.first
   end
 
   # GET /videos/1/edit
   def edit
     @categories = Category.all.where('active = ?', 1)
+    @landing_page = LandingPage.first
   end
 
   # POST /videos

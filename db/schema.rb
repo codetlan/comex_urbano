@@ -11,13 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619002057) do
+ActiveRecord::Schema.define(version: 20140627005731) do
+
+  create_table "banners", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "active"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
     t.string   "link"
     t.integer  "position"
     t.integer  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "landing_pages", force: true do |t|
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "youtube"
+    t.string   "vimeo"
+    t.string   "copyright"
+    t.string   "terms"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

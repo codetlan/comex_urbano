@@ -1,4 +1,6 @@
 ComexUrbano::Application.routes.draw do
+  resources :landing_pages
+
   resources :roles
 
   devise_for :users
@@ -10,6 +12,7 @@ ComexUrbano::Application.routes.draw do
   resources :categories
   resources :videos
 
+  get '/admin' => 'home#admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

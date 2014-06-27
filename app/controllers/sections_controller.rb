@@ -6,6 +6,7 @@ class SectionsController < ApplicationController
   def index
     @sections = Section.all
     @categories = Category.all.where('active = ?', 1)
+    @landing_page = LandingPage.first
   end
 
   # GET /sections/1

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery-fileupload/basic
 
 
 $(document).ready(function () {
@@ -42,5 +43,12 @@ $(document).ready(function () {
 
     $('.mobile-menu').click(function () {
         $('.navigation').toggle();
+    });
+
+    $('.search-form input').keyup(function () {
+        console.log($(".search-form").attr("action"));
+        $.get($(".search-form").attr("action"), $(".search-form").serialize(), null, "script");
+        return false;
+
     });
 });

@@ -6,7 +6,7 @@
           <div class="col-inner">
             <ul>
               <% @categories.each do |category| %>
-                  <li class="footer-nav-item"><%= link_to category.name, '/' + category.link, class: 'active' %></li>
+                  <li class="footer-nav-item"><%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '' %></li>
               <% end %>
             </ul>
           </div>
@@ -20,15 +20,15 @@
         <div class="col col-12">
           <div class="col-inner">
             <div class="footer-links">
-              <%= link_to image_tag('fb-black.png') %>
-              <%= link_to image_tag('twitter-black.png') %>
-              <%= link_to image_tag('youtube-black.png') %>
+              <%= link_to image_tag('fb-black.png'), @landing_page.facebook, :target => '_blank' %>
+              <%= link_to image_tag('twitter-black.png'), @landing_page.twitter, :target => '_blank' %>
+              <%= link_to image_tag('youtube-black.png'), @landing_page.youtube, :target => '_blank' %>
               <%= link_to image_tag('vimeo-black.png') %>
             </div>
             <div class="footer-rights">
-              <p>Copyright © 2014 Consoricio Comex, S.A de C.V</p>
+              <p><%= @landing_page.copyright %></p>
 
-              <p>Términos y Condiciones Aviso de Privacidad Soporte técnico</p>
+              <p><%= @landing_page.terms %></p>
             </div>
           </div>
         </div>

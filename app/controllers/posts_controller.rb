@@ -8,6 +8,7 @@ class PostsController < ApplicationController
     #@posts = Post.all
     @posts = Post.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
+    @landing_page = LandingPage.first
   end
 
   # GET /posts/1

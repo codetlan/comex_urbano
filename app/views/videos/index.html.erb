@@ -1,12 +1,10 @@
-<h1>Listing videos</h1>
-
-<%= form_tag videos_path, :method => 'get', :id => 'videos_search' do %>
+<!--<= form_tag videos_path, :method => 'get', :id => 'videos_search' do %>
     <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
+      <= text_field_tag :search, params[:search] %>
+      <= submit_tag "Search", :name => nil %>
     </p>
-<% end %>
+< end %>-->
 
 <div id="videos"><%= render 'videos' %></div>
 
-<%= link_to 'New Video', new_video_path %>
+<!--<= link_to 'New Video', new_video_path %>-->

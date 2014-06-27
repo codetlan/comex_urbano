@@ -5,7 +5,7 @@
         <div class="col-inner">
           <div class="brand">
             <%= link_to root_path do %>
-              <%= image_tag 'comex-urbano-logo.png' %>
+                <%= image_tag 'comex-urbano-logo.png' %>
             <% end %>
           </div>
           <div class="header-right-content">
@@ -14,7 +14,7 @@
             </div>
             <div class="comex-logo-brand">
               <%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
-                <%= image_tag 'comex-logo.png' %>
+                  <%= image_tag 'comex-logo.png' %>
               <% end %>
             </div>
           </div>
@@ -39,17 +39,17 @@
             </div>
             <div class="social-links">
               <ul>
-                <li><%= link_to image_tag('fb.png'), "#" %></li>
-                <li><%= link_to image_tag('twitter.png'), "#" %></li>
-                <li><%= link_to image_tag('youtube.png'), "#" %></li>
+                <li><%= link_to image_tag('fb.png'), @landing_page.facebook, :target => '_blank' %></li>
+                <li><%= link_to image_tag('twitter.png'), @landing_page.twitter, :target => '_blank' %></li>
+                <li><%= link_to image_tag('youtube.png'), @landing_page.youtube, :target => '_blank' %></li>
                 <li><%= link_to image_tag('vimeo.png'), "#" %></li>
               </ul>
             </div>
           </div>
-          
+
           <div class="site-search">
-            <form action="#" class="search-form">
-              <input type="text" placeholder="Buscar">
+            <form action="<%= request.fullpath %>" class="search-form" method='get'>
+              <input id="search" name="search" type="text" placeholder="Buscar">
             </form>
           </div>
         </div>

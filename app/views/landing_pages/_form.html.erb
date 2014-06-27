@@ -1,0 +1,52 @@
+<%= form_for(@landing_page) do |f| %>
+    <% if @landing_page.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@landing_page.errors.count, "error") %> prohibited this landing_page from being saved:</h2>
+
+          <ul>
+            <% @landing_page.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :facebook %>
+      <br>
+      <%= f.text_field :facebook %>
+    </div>
+    <div class="field">
+      <%= f.label :twitter %>
+      <br>
+      <%= f.text_field :twitter %>
+    </div>
+    <div class="field">
+      <%= f.label :youtube %>
+      <br>
+      <%= f.text_field :youtube %>
+    </div>
+    <div class="field">
+      <%= f.label :vimeo %>
+      <br>
+      <%= f.text_field :vimeo %>
+    </div>
+    <div class="field">
+      <%= f.label :copyright %>
+      <br>
+      <%= f.text_field :copyright %>
+    </div>
+    <div class="field">
+      <%= f.label :terms %>
+      <br>
+      <%= f.text_field :terms %>
+    </div>
+    <div class="field">
+      <%= f.label :terms %>
+      <br>
+      <%= f.file_field :photo %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

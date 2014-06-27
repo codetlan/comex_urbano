@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @landing_page.facebook %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @landing_page.twitter %>
+</p>
+
+<p>
+  <strong>Youtube:</strong>
+  <%= @landing_page.youtube %>
+</p>
+
+<p>
+  <strong>Vimeo:</strong>
+  <%= @landing_page.vimeo %>
+</p>
+
+<p>
+  <strong>Copyright:</strong>
+  <%= @landing_page.copyright %>
+</p>
+
+<p>
+  <strong>Terms:</strong>
+  <%= @landing_page.terms %>
+</p>
+
+<%= link_to 'Edit', edit_landing_page_path(@landing_page) %> |
+<%= link_to 'Back', landing_pages_path %>
