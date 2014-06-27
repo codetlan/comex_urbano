@@ -9,7 +9,6 @@ class HomeController < ApplicationController
 
   def admin
     @categories = Category.all.where('active = ?', 1)
-    @landing_page = LandingPage.first
     @landing_pages = LandingPage.all
 
     #respond_to do |format|

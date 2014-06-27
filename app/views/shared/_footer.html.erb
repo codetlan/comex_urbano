@@ -19,17 +19,20 @@
       <div class="cols-12">
         <div class="col col-12">
           <div class="col-inner">
-            <div class="footer-links">
-              <%= link_to image_tag('fb-black.png'), @landing_page.facebook, :target => '_blank' %>
-              <%= link_to image_tag('twitter-black.png'), @landing_page.twitter, :target => '_blank' %>
-              <%= link_to image_tag('youtube-black.png'), @landing_page.youtube, :target => '_blank' %>
-              <%= link_to image_tag('vimeo-black.png') %>
-            </div>
-            <div class="footer-rights">
-              <p><%= @landing_page.copyright %></p>
+            <% @landing_pages.each do |landing_page| %>
+                <div class="footer-links">
+                  <%= link_to image_tag('fb-black.png'), landing_page.facebook, :target => '_blank' %>
+                  <%= link_to image_tag('twitter-black.png'), landing_page.twitter, :target => '_blank' %>
+                  <%= link_to image_tag('youtube-black.png'), landing_page.youtube, :target => '_blank' %>
+                  <%= link_to image_tag('vimeo-black.png') %>
 
-              <p><%= @landing_page.terms %></p>
-            </div>
+                </div>
+                <div class="footer-rights">
+                  <p><%= landing_page.copyright %></p>
+
+                  <p><%= landing_page.terms %></p>
+                </div>
+            <% end %>
           </div>
         </div>
       </div>
