@@ -4,6 +4,8 @@ class Devise::RegistrationsController < DeviseController
 
   # GET /resource/sign_up
   def new
+    @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
     build_resource({})
     respond_with self.resource
   end
