@@ -7,7 +7,7 @@ class PhotosController < ApplicationController
     #@photos = Photo.all
     @photos = Photo.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
-    @landing_page = LandingPage.first
+    @landing_pages = LandingPage.all
   end
 
   # GET /photos/1

@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     @categories = Category.all.where('active = ?', 1)
-    @landing_page = LandingPage.first
+    @landing_pages = LandingPage.all
     @videos = Video.all
   end
 

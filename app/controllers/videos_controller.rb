@@ -7,7 +7,7 @@ class VideosController < ApplicationController
     #@videos = Video.all
     @videos = Video.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
-    @landing_page = LandingPage.first
+    @landing_pages = LandingPage.all
   end
 
   # GET /videos/1
