@@ -1,4 +1,4 @@
-<%= form_for(@landing_page) do |f| %>
+<%= form_for @landing_page, :html => { :class => 'form-horizontal', multipart: true }  do |f| %>
     <% if @landing_page.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@landing_page.errors.count, "error") %> prohibited this landing_page from being saved:</h2>
@@ -41,10 +41,17 @@
       <br>
       <%= f.text_field :terms %>
     </div>
-    <div class="field">
-      <%= f.label :terms %>
-      <br>
-      <%= f.file_field :photo %>
+    <div class="control-group">
+      <%= f.label :banners, :class => 'control-label' %>
+      <div class="controls">
+        <!-- The magic is coming ...look at my eyes....shazammmm -->
+        <!-- Use HTML5 multiple attribute to enable multiple selection
+             and pass back to controller all files as an array, ready
+             for paperclip!!
+             file_field_tag, since images is not a gallery attribute
+         -->
+        <%= file_field_tag "photos[]",  type: :file, multiple: true %>
+      </div>
     </div>
     <div class="actions">
       <%= f.submit %>

@@ -1,3 +1,3 @@
 class LandingPage < ActiveRecord::Base
-  has_many :banners, as: :imageable
+    has_many :banners, :dependent => :destroy
 end

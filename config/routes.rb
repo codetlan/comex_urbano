@@ -11,6 +11,8 @@ ComexUrbano::Application.routes.draw do
   resources :photos
   resources :categories
   resources :videos
+  resources :banners
+
 
   get '/admin' => 'home#admin'
 

@@ -5,6 +5,7 @@ class CreateBanners < ActiveRecord::Migration
       t.string :description
       t.integer :active
       t.attachment :photo
+      t.integer :landing_page_id
 
       t.timestamps
     end
