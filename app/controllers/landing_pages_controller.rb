@@ -21,6 +21,7 @@ class LandingPagesController < ApplicationController
     @landing_page = LandingPage.new
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+
     @landing_page.banners.build
   end
 

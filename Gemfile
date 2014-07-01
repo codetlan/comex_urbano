@@ -53,6 +53,7 @@ gem 'devise'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'jquery-rails'
+gem 'seed_dump'
 #gem 'declarative_authorization'
 
 # Use ActiveModel has_secure_password
