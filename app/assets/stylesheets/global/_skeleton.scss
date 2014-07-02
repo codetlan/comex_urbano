@@ -18,6 +18,7 @@ img + img {
 
 
 .header {
+  z-index: 100;
   padding: 15px 0;
 
   .brand {
@@ -78,6 +79,10 @@ img + img {
 
   .site-search {
     float: right;
+
+    @include max-screen(770px) {
+      display: none;
+    }
   }
 
   .navigation {
@@ -86,10 +91,14 @@ img + img {
 
     ul li {
       float: left;
-      padding-left: 85px;
+      padding-left: 90px;
 
-      @include max-screen(1170px) {
-        padding-left: 45px;
+      @include max-screen(1200px) {
+        padding-left: 65px;
+      }
+
+      @include max-screen(1060px) {
+        padding-left: 35px; 
       }
 
       &:first-child {
@@ -99,12 +108,12 @@ img + img {
   }
 
   .social-links {
-    margin: 4px 0 0 20px;
+    margin: 4px 40px 0 0px;
     float: left;
 
     ul li {
       float: left;
-      padding: 0px 10px;
+      padding: 0px 5px;
     }
 
     @include max-screen(940px) {
@@ -117,7 +126,7 @@ img + img {
 
     input[type="text"] {
       padding: 5px 10px;
-      width: 170px;
+      width: 202px;
     }
   }
 
@@ -142,10 +151,6 @@ img + img {
           display: block;
         }
       }
-    }
-
-    .site-search {
-      display: none;
     }
   }
 }
@@ -345,12 +350,16 @@ img + img {
   img {
     width: 100%;
   }
+
+  @include max-screen(580px) {
+    margin: 30px 0 -10px 0;
+  }
 }
 
 .videos-list {
   margin-bottom: 35px;
 
   .video-box {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
 }

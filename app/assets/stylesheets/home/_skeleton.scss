@@ -33,7 +33,14 @@
     }
 
     .post-description {
-      margin-left: 320px;
+      margin-left: 340px;
+      height: 187px;
+      display: table;
+
+      .post-va {
+        display: table-cell;
+        vertical-align: middle;
+      }
     }
 
     & + .post {
@@ -47,6 +54,7 @@
 
       .post-description {
         margin-left: 220px;
+        height: auto;
       }
     }
 

@@ -37,6 +37,9 @@
                 <% end %>
               </ul>
             </div>
+          </div>
+
+          <div class="site-search">
             <div class="social-links">
               <ul>
                 <% @landing_pages.each do |landing_page| %>
@@ -47,9 +50,6 @@
                 <% end %>
               </ul>
             </div>
-          </div>
-
-          <div class="site-search">
             <form action="<%= request.fullpath %>" class="search-form" method='get'>
               <input id="search" name="search" type="text" placeholder="Buscar">
             </form>
