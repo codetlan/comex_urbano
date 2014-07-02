@@ -1,10 +1,227 @@
-<!--<= form_tag videos_path, :method => 'get', :id => 'videos_search' do %>
-    <p>
-      <= text_field_tag :search, params[:search] %>
-      <= submit_tag "Search", :name => nil %>
-    </p>
-< end %>-->
+<div class="section-heading">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <%= image_tag 'sections/videos-section.jpg' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="filters-wrap">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="filters">
+            <div class="page-navigation">
+              <ul>
+                <li>
+                  <%= link_to 'Ultimos videos', '#', class: 'active' %>
+                </li>
+                <li>
+                  <%= link_to 'Más vistos', '#' %>
+                </li>
+              </ul>
+            </div>
+            <div class="years-timeline">
+              <ul>
+                <li>
+                  <%= link_to '2014', '#', class: 'active' %>
+                </li>
+                <li>
+                  <%= link_to '2013', '#' %>
+                </li>
+                <li>
+                  <%= link_to '2012', '#' %>
+                </li>
+                <li>
+                  <%= link_to '2011', '#' %>
+                </li>
+                <li>
+                  <%= link_to '2010', '#' %>
+                </li>
+                <li>
+                  <%= link_to '2009', '#' %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-ytube-subs">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <%= render partial: 'shared/youtube_subscribe' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="videos-list">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-4">
+        <div class="col-inner">
+          <div class="video-box">
+            <div class="video-image">
+              <%= link_to '#' do %>
+                <i class="i play"></i>
+                <%= image_tag 'placeholder/videos-2.jpg' %>
+              <% end %>
+            </div>
+            <div class="video-description">
+              <%= link_to '#' do %>
+                <h3>Festival Internacional Comex Urbano</h3>
+              <% end %>
+              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="col-inner">
+          <div class="video-box">
+            <div class="video-image">
+              <%= link_to '#' do %>
+                <i class="i play"></i>
+                <%= image_tag 'placeholder/videos-1.jpg' %>
+              <% end %>
+            </div>
+            <div class="video-description">
+              <%= link_to '#' do %>
+                <h3>Festival Internacional Comex Urbano</h3>
+              <% end %>
+              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="col-inner">
+          <div class="video-box">
+            <div class="video-image">
+              <%= link_to '#' do %>
+                <i class="i play"></i>
+                <%= image_tag 'placeholder/videos-3.jpg' %>
+              <% end %>
+            </div>
+            <div class="video-description">
+              <%= link_to '#' do %>
+                <h3>Festival Internacional Comex Urbano</h3>
+              <% end %>
+              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="col-inner">
+          <div class="video-box">
+            <div class="video-image">
+              <%= link_to '#' do %>
+                <i class="i play"></i>
+                <%= image_tag 'placeholder/videos-4.jpg' %>
+              <% end %>
+            </div>
+            <div class="video-description">
+              <%= link_to '#' do %>
+                <h3>Festival Internacional Comex Urbano</h3>
+              <% end %>
+              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="col-inner">
+          <div class="video-box">
+            <div class="video-image">
+              <%= link_to '#' do %>
+                <i class="i play"></i>
+                <%= image_tag 'placeholder/videos-5.jpg' %>
+              <% end %>
+            </div>
+            <div class="video-description">
+              <%= link_to '#' do %>
+                <h3>Festival Internacional Comex Urbano</h3>
+              <% end %>
+              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-4">
+        <div class="col-inner">
+          <div class="video-box">
+            <div class="video-image">
+              <%= link_to '#' do %>
+                <i class="i play"></i>
+                <%= image_tag 'placeholder/videos-6.jpg' %>
+              <% end %>
+            </div>
+            <div class="video-description">
+              <%= link_to '#' do %>
+                <h3>Festival Internacional Comex Urbano</h3>
+              <% end %>
+              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div id="videos"><%= render 'videos' %></div>
+<div class="wrapper">
+  <div class="cols-12">
+    <div class="col col-12">
+      <div class="col-inner">
+        <div class="title-page">
+          <h1>ARTE URBANO</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!--<= link_to 'New Video', new_video_path %>-->
+<div class="main-content">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-9">
+        <div class="col-inner">
+          <%= image_tag 'sections/arte-urbano.jpg' %>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt quam. Praesent ut congue enim. Nulla sed ultrices nunc. Nunc pharetra tristique magna, id tincidunt nisl venenatis at. Aliquam mollis diam vel velit interdum faucibus. Aenean purus nulla, pharetra vel molestie quis, pretium a nulla. Donec non urna et nulla iaculis euismod et id nulla.</p>
+
+          <p>Vivamus condimentum tempor accumsan. Duis eget elit imperdiet, elementum quam at, interdum neque. In condimentum est in lacinia volutpat. In a sollicitudin nisi, a volutpat nunc. Cras sit amet orci congue, fermentum nisl vel, posuere velit. Suspendisse a orci ac mi convallis rhoncus et quis odio. Nunc at leo sem. Mauris non tristique mi.</p>
+
+          <p>Nam consectetur auctor mi ut bibendum. Donec elementum mi libero, ut vestibulum dolor lobortis quis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam sollicitudin sem eu sem tristique convallis. Proin quis risus eleifend, ornare urna in, eleifend tortor. Aliquam quis semper arcu. Quisque facilisis leo ut eros suscipit laoreet. Integer pretium urna eget tristique ullamcorper. Mauris aliquet vitae tortor eu dignissim. Suspendisse volutpat id neque et pretium. Sed dapibus, velit ut cursus faucibus, purus dolor tempor mauris, varius dictum risus tortor cursus tortor.</p>
+        </div>
+      </div>
+      <div class="col col-3">
+        <div class="col-inner">
+          <div class="sidebar">
+            <div class="ads-list">
+              <div class="ad">
+                <%= link_to '#' do %>
+                    <%= image_tag 'placeholder/placead1.jpg' %>
+                <% end %>
+              </div>
+              <div class="ad">
+                <%= link_to '#' do %>
+                    <%= image_tag 'placeholder/placead2.jpg' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
