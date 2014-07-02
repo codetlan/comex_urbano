@@ -81,9 +81,9 @@ ActiveRecord::Schema.define(version: 20140627005731) do
   end
 
   create_table "sections", force: true do |t|
-    t.string   "title"
+    t.string   "name"
     t.text     "description"
-    t.integer  "category_id"
+    t.string   "title"
     t.integer  "active"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,6 +1,12 @@
 
+body {
+  @include max-screen(580px) {
+    padding-top: 65px;
+  }
+}
+
 .header {
-  padding: 30px 0;
+  padding: 15px 0;
 
   .brand {
     float: left;
@@ -27,6 +33,11 @@
   }
 
   @include max-screen(580px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+
     .brand {
       margin-top: 3px;
 
@@ -63,7 +74,11 @@
 
     ul li {
       float: left;
-      padding-left: 30px;
+      padding-left: 85px;
+
+      @include max-screen(1170px) {
+        padding-left: 45px;
+      }
 
       &:first-child {
         padding-left: 0;
@@ -95,13 +110,15 @@
   }
 
   @include max-screen(580px) {
+    margin: 0;
+
     .navigation {
       display: none;
       width: 100%;
       float: none;
       left: 0;
-      top: 87px;
-      position: absolute;
+      top: 56px;
+      position: fixed;
       z-index: 10;
 
       ul li {
@@ -113,6 +130,10 @@
           display: block;
         }
       }
+    }
+
+    .site-search {
+      display: none;
     }
   }
 }
@@ -158,6 +179,15 @@
         }
       }
     } 
+  }
+}
+
+.comex-footer-brand {
+  padding: 20px 0;
+  display: none;
+
+  @include max-screen(580px) {
+    display: block;
   }
 }
 

@@ -11,11 +11,9 @@ end
 group :assets do
 
 # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.0'
-
-  gem 'sprockets', '<= 2.11.0'
-
-  gem 'bourbon', '~> 4.0.2'
+gem 'sass-rails', '~> 4.0.0'
+gem 'sprockets', '<= 2.11.0'
+gem 'bourbon', '~> 4.0.2'
 
 # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
@@ -52,7 +50,6 @@ end
 gem 'devise'
 gem 'paperclip'
 gem 'aws-sdk'
-gem 'jquery-rails'
 gem 'seed_dump'
 #gem 'declarative_authorization'
 

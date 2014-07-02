@@ -64,6 +64,7 @@ p {
         font-family: $font-bold;
         text-transform: uppercase;
         font-size: 16px;
+        letter-spacing: 2px;
       }
     }
   }
@@ -137,6 +138,11 @@ p {
       }
     } 
   }
+}
+
+.comex-footer-brand {
+  background: $black-color;
+  text-align: center;
 }
 
 .filters {
