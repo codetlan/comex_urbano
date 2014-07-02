@@ -3,8 +3,8 @@ User.create!([
 ])
 
 Banner.create!([
-  {name: 'Arte Urbano', description: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', active: 1, photo_file_name: "featured-image2.jpg", photo_content_type: "image/jpeg", photo_file_size: 358088, photo_updated_at: "2014-06-27 16:42:58", landing_page_id: 1},
-  {name: 'Arte Contemporaneo', description: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', active: 1, photo_file_name: "featured-image.jpg", photo_content_type: "image/jpeg", photo_file_size: 511217, photo_updated_at: "2014-06-27 16:43:07", landing_page_id: 1}
+  {name: 'Arte Urbano', description: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', active: 1, photo_file_name: "banner1.png", photo_content_type: "image/png", photo_file_size: 1627015, photo_updated_at: "2014-06-27 16:42:58", landing_page_id: 1},
+  {name: 'Arte Contemporaneo', description: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', active: 1, photo_file_name: "banner_principal.png", photo_content_type: "image/png", photo_file_size: 650965, photo_updated_at: "2014-06-27 16:43:07", landing_page_id: 1}
 ])
 Category.create!([
   {name: "Videos", link: "videos", position: 1, active: 1},
