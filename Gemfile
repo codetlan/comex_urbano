@@ -25,7 +25,8 @@ gem 'bourbon', '~> 4.0.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-  gem 'jquery-rails'
+gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 end
 gem "jquery-fileupload-rails"
