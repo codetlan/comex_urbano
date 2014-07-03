@@ -14,7 +14,9 @@ class VideosController < ApplicationController
   # GET /videos/1.json
   def show
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
     @landing_page = LandingPage.first
+    @videos = Video.all
   end
 
   # GET /videos/new
