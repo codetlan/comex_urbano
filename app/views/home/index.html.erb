@@ -7,19 +7,19 @@
 
             <div class="featured-post">
               <div class="image">
-                <%= link_to '#' do %>
+                <%= link_to '/videos/1' do %>
                     <i class="i play"></i>
                     <%= image_tag 'placeholder/featured-image.jpg' %>
                 <% end %>
               </div>
               <div class="description">
                 <div class="category">
-                  <%= link_to '#' do %>
+                  <%= link_to '/videos/1' do %>
                       <p>Festival Internacional Comex urbano</p>
                   <% end %>
                 </div>
                 <div class="title">
-                  <%= link_to '#' do %>
+                  <%= link_to '/videos/1' do %>
                       <h3>FICU es un festival que da apertura al arte urbano y digital en México</h3>
                   <% end %>
                 </div>
@@ -27,19 +27,19 @@
             </div>
             <div class="featured-post">
               <div class="image">
-                <%= link_to '#' do %>
+                <%= link_to '/videos/2' do %>
                     <i class="i play"></i>
                     <%= image_tag 'placeholder/featured-image2.jpg' %>
                 <% end %>
               </div>
               <div class="description">
                 <div class="category">
-                  <%= link_to '#' do %>
+                  <%= link_to '/videos/2' do %>
                       <p>Festival Internacional Arte urbano</p>
                   <% end %>
                 </div>
                 <div class="title">
-                  <%= link_to '#' do %>
+                  <%= link_to '/videos/2' do %>
                       <h3>FIC</h3>
                   <% end %>
                 </div>
@@ -107,13 +107,13 @@
           <div class="posts-list">
             <div class="post">
               <div class="post-image">
-                <%= link_to '#' do %>
+                <%= link_to '/videos/1' do %>
                     <%= image_tag 'placeholder/post2.jpg' %>
                 <% end %>
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href=""><h3>Festival Internacional Comex urbano</h3></a>
+                  <a href="/videos/1"><h3>Festival Internacional Comex urbano</h3></a>
 
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
@@ -122,13 +122,13 @@
             </div>
             <div class="post">
               <div class="post-image">
-                <%= link_to '#' do %>
+                <%= link_to '/videos/2' do %>
                     <%= image_tag 'placeholder/post1.jpg' %>
                 <% end %>
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href=""><h3>Festival Internacional Comex urbano</h3></a>
+                  <a href="/videos/2"><h3>Festival Internacional Comex urbano</h3></a>
 
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
@@ -208,7 +208,7 @@
               </div>
               <% @videos.each do |video| %>
                   <div class="video-box">
-                    <div class="video-image">
+                    <div class="video">
                       <%= link_to '#' do %>
                           <!--<i class="i play"></i>--<
                           <!--<= image_tag 'placeholder/vid1.jpg' %>-->
@@ -238,3 +238,4 @@
       </div>
     </div>
   </div>
+</div>

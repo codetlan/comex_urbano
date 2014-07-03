@@ -57,114 +57,26 @@
 <div class="videos-list">
   <div class="wrapper">
     <div class="cols-12">
-      <div class="col col-4">
-        <div class="col-inner">
-          <div class="video-box">
-            <div class="video-image">
-              <%= link_to '#' do %>
-                <i class="i play"></i>
-                <%= image_tag 'placeholder/videos-2.jpg' %>
-              <% end %>
-            </div>
-            <div class="video-description">
-              <%= link_to '#' do %>
-                <h3>Festival Internacional Comex Urbano</h3>
-              <% end %>
-              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col col-4">
-        <div class="col-inner">
-          <div class="video-box">
-            <div class="video-image">
-              <%= link_to '#' do %>
-                <i class="i play"></i>
-                <%= image_tag 'placeholder/videos-1.jpg' %>
-              <% end %>
-            </div>
-            <div class="video-description">
-              <%= link_to '#' do %>
-                <h3>Festival Internacional Comex Urbano</h3>
-              <% end %>
-              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
+      <% @videos.each do |video| %>
+          <div class="col col-4">
+            <div class="col-inner">
+              <div class="video-box">
+                <div class="video">
+                  <%= link_to '/videos/'+video.id.to_s do %>
+                      <!--<i class="i play"></i>-->
+                      <iframe width="100%" height="100%" src="<%= video.youtube_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
+                <% end %>
+                </div>
+                <div class="video-description">
+                  <%= link_to '/videos/'+video.id.to_s do %>
+                      <h3><%= video.name %></h3>
+                  <% end %>
+                  <p><%= video.description %></p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col col-4">
-        <div class="col-inner">
-          <div class="video-box">
-            <div class="video-image">
-              <%= link_to '#' do %>
-                <i class="i play"></i>
-                <%= image_tag 'placeholder/videos-3.jpg' %>
-              <% end %>
-            </div>
-            <div class="video-description">
-              <%= link_to '#' do %>
-                <h3>Festival Internacional Comex Urbano</h3>
-              <% end %>
-              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col col-4">
-        <div class="col-inner">
-          <div class="video-box">
-            <div class="video-image">
-              <%= link_to '#' do %>
-                <i class="i play"></i>
-                <%= image_tag 'placeholder/videos-4.jpg' %>
-              <% end %>
-            </div>
-            <div class="video-description">
-              <%= link_to '#' do %>
-                <h3>Festival Internacional Comex Urbano</h3>
-              <% end %>
-              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col col-4">
-        <div class="col-inner">
-          <div class="video-box">
-            <div class="video-image">
-              <%= link_to '#' do %>
-                <i class="i play"></i>
-                <%= image_tag 'placeholder/videos-5.jpg' %>
-              <% end %>
-            </div>
-            <div class="video-description">
-              <%= link_to '#' do %>
-                <h3>Festival Internacional Comex Urbano</h3>
-              <% end %>
-              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col col-4">
-        <div class="col-inner">
-          <div class="video-box">
-            <div class="video-image">
-              <%= link_to '#' do %>
-                <i class="i play"></i>
-                <%= image_tag 'placeholder/videos-6.jpg' %>
-              <% end %>
-            </div>
-            <div class="video-description">
-              <%= link_to '#' do %>
-                <h3>Festival Internacional Comex Urbano</h3>
-              <% end %>
-              <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
@@ -187,11 +99,22 @@
       <div class="col col-9">
         <div class="col-inner">
           <%= image_tag 'sections/arte-urbano.jpg' %>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt quam. Praesent ut congue enim. Nulla sed ultrices nunc. Nunc pharetra tristique magna, id tincidunt nisl venenatis at. Aliquam mollis diam vel velit interdum faucibus. Aenean purus nulla, pharetra vel molestie quis, pretium a nulla. Donec non urna et nulla iaculis euismod et id nulla.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt quam.
+            Praesent ut congue enim. Nulla sed ultrices nunc. Nunc pharetra tristique magna, id tincidunt nisl venenatis
+            at. Aliquam mollis diam vel velit interdum faucibus. Aenean purus nulla, pharetra vel molestie quis, pretium
+            a nulla. Donec non urna et nulla iaculis euismod et id nulla.</p>
 
-          <p>Vivamus condimentum tempor accumsan. Duis eget elit imperdiet, elementum quam at, interdum neque. In condimentum est in lacinia volutpat. In a sollicitudin nisi, a volutpat nunc. Cras sit amet orci congue, fermentum nisl vel, posuere velit. Suspendisse a orci ac mi convallis rhoncus et quis odio. Nunc at leo sem. Mauris non tristique mi.</p>
+          <p>Vivamus condimentum tempor accumsan. Duis eget elit imperdiet, elementum quam at, interdum neque. In
+            condimentum est in lacinia volutpat. In a sollicitudin nisi, a volutpat nunc. Cras sit amet orci congue,
+            fermentum nisl vel, posuere velit. Suspendisse a orci ac mi convallis rhoncus et quis odio. Nunc at leo sem.
+            Mauris non tristique mi.</p>
 
-          <p>Nam consectetur auctor mi ut bibendum. Donec elementum mi libero, ut vestibulum dolor lobortis quis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam sollicitudin sem eu sem tristique convallis. Proin quis risus eleifend, ornare urna in, eleifend tortor. Aliquam quis semper arcu. Quisque facilisis leo ut eros suscipit laoreet. Integer pretium urna eget tristique ullamcorper. Mauris aliquet vitae tortor eu dignissim. Suspendisse volutpat id neque et pretium. Sed dapibus, velit ut cursus faucibus, purus dolor tempor mauris, varius dictum risus tortor cursus tortor.</p>
+          <p>Nam consectetur auctor mi ut bibendum. Donec elementum mi libero, ut vestibulum dolor lobortis quis. Class
+            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam sollicitudin
+            sem eu sem tristique convallis. Proin quis risus eleifend, ornare urna in, eleifend tortor. Aliquam quis
+            semper arcu. Quisque facilisis leo ut eros suscipit laoreet. Integer pretium urna eget tristique
+            ullamcorper. Mauris aliquet vitae tortor eu dignissim. Suspendisse volutpat id neque et pretium. Sed
+            dapibus, velit ut cursus faucibus, purus dolor tempor mauris, varius dictum risus tortor cursus tortor.</p>
         </div>
       </div>
       <div class="col col-3">
