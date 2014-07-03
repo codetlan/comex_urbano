@@ -52,6 +52,7 @@ gem 'devise'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'seed_dump'
+gem 'meta_request'
 #gem 'declarative_authorization'
 
 # Use ActiveModel has_secure_password

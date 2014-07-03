@@ -14,7 +14,7 @@ ComexUrbano::Application.routes.draw do
   resources :banners
 
 
-  get '/admin' => 'home#admin'
+  get '/admin' => 'admin#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
