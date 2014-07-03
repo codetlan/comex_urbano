@@ -1,0 +1,30 @@
+<% if user_signed_in? %>
+	<div class="wrapper">
+		<div class="cols-12">
+			<div class="col col-2">
+				<div class="col-inner">
+					<ul>
+						<li>
+							<%= link_to 'Videos', '#' %>
+						</li>
+						<li>
+							<%= link_to 'Categorias', '#' %>
+						</li>
+						<li>
+				      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+				    </li>
+					</ul>	
+				</div>
+			</div>
+			<div class="col col-10">
+				<div class="col-inner">
+					<%= render :template => "landing_pages/index" %>
+				</div>
+			</div>
+		</div>
+	</div>
+<% else %>
+  <li>
+   	<%= link_to('Login', new_user_session_path) %>
+  </li>
+<% end %>
