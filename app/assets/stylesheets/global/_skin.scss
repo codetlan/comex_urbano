@@ -197,9 +197,9 @@ p {
 }
 
 .title-page {
-  border-bottom: 3px solid $gray-color;
 
   h1 {
+    border-bottom: 3px solid $gray-color;
     text-transform: uppercase;
   }
 }
@@ -239,5 +239,34 @@ p {
       font-family: $font-bold;
       @include text-size-regular;
     }
+  }
+}
+
+
+.post-show-header-wrap {
+  .post-show-video {
+    background: $black-color;
+
+    .video {
+
+    }
+
+    .post-desc {
+      h1 {
+        color: $white-color;
+        border: 6px solid $white-color;
+      }
+
+      p {
+        color: $white-color;
+        @include text-size-regular;
+      }
+    }
+  }
+}
+
+.post-meta {
+  .tags a {
+    color: $blue-color;
   }
 }

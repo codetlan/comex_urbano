@@ -11,12 +11,23 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 
+function responsiveNavigation() {
+    var winWidth = $(window).width(),
+        nav = $('.navigation');
+
+    if ( winWidth <= 580 ) {
+        nav.hide();
+    } else {
+        nav.show();
+    };  
+}
 
 $(document).ready(function () {
     $("#videos_search input").keyup(function () {
@@ -52,4 +63,10 @@ $(document).ready(function () {
         return false;
 
     });
+
+    $(window).resize(function() {
+      responsiveNavigation();  
+    });
+
+    responsiveNavigation();
 });
