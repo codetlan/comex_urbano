@@ -13,11 +13,31 @@ ComexUrbano::Application.routes.draw do
   resources :sections
   resources :photos
   resources :categories
-  resources :videos
+
+  resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
+    get 'list', on: :collection
+  end
+
+  resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
+    get 'list', on: :collection
+  end
+
+  resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
+    get 'list', on: :collection
+  end
+
+  resources :videos, :photos, :posts, only: [:index, :show]
+
+
   resources :banners
 
+  #namespace :admin do
+   # resources :videos
+  #end
 
   get '/admin' => 'admin#index'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,4 +1,6 @@
 class Devise::SessionsController < DeviseController
+  layout 'admin'
+
   prepend_before_filter :require_no_authentication, only: [ :new, :create ]
   prepend_before_filter :allow_params_authentication!, only: :create
   prepend_before_filter only: [ :create, :destroy ] { request.env["devise.skip_timeout"] = true }
@@ -7,6 +9,7 @@ class Devise::SessionsController < DeviseController
   def new
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     respond_with(resource, serialize_options(resource))
@@ -18,7 +21,6 @@ class Devise::SessionsController < DeviseController
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     sign_in(resource_name, resource)
     yield resource if block_given?
-    puts resource.to_yaml
     respond_with resource, location: after_sign_in_path_for(resource)
   end
 

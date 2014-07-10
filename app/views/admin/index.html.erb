@@ -1,30 +1,36 @@
 <% if user_signed_in? %>
-	<div class="wrapper">
-		<div class="cols-12">
-			<div class="col col-2">
-				<div class="col-inner">
-					<ul>
-						<li>
-							<%= link_to 'Videos', '/videos/new' %>
-						</li>
-						<li>
-							<%= link_to 'Categorias', '/categories/new' %>
-						</li>
-						<li>
-				      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-				    </li>
-					</ul>	
-				</div>
-			</div>
-			<div class="col col-10">
-				<div class="col-inner">
-					<%= render :template => "landing_pages/index" %>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-2">
+          <div class="col-inner">
+            <ul>
+              <li>
+                <%= link_to 'Videos', '/admin/videos/list' %>
+              </li>
+              <li>
+                <%= link_to 'Galeria', '/admin/photos/list' %>
+              </li>
+              <li>
+                <%= link_to 'Blog', '/admin/posts/list' %>
+              </li>
+              <li>
+                <%= link_to 'Categorias', '/categories/new' %>
+              </li>
+              <li>
+                <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col col-10">
+          <div class="col-inner">
+            <%= render :template => "landing_pages/index" %>
+          </div>
+        </div>
+      </div>
+    </div>
 <% else %>
-  <li>
-   	<%= link_to('Login', new_user_session_path) %>
-  </li>
+    <li>
+      <%= render :template => "devise/sessions/new" %>
+    </li>
 <% end %>

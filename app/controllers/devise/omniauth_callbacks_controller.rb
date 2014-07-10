@@ -1,4 +1,6 @@
 class Devise::OmniauthCallbacksController < DeviseController
+  layout 'admin'
+
   prepend_before_filter { request.env["devise.skip_timeout"] = true }
 
   def passthru

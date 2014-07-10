@@ -1,4 +1,6 @@
 class Devise::ConfirmationsController < DeviseController
+  layout 'admin'
+
   # GET /resource/confirmation/new
   def new
     self.resource = resource_class.new

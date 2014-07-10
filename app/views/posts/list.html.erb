@@ -1,0 +1,58 @@
+<div class="wrapper">
+  <div class="cols-12">
+    <div class="col col-2">
+      <div class="col-inner">
+        <ul>
+          <li>
+            <%= link_to 'Videos', '/admin/videos/list' %>
+          </li>
+          <li>
+            <%= link_to 'Galeria', '/admin/posts/list' %>
+          </li>
+          <li>
+            <%= link_to 'Blog', '/admin/blogs/list' %>
+          </li>
+          <li>
+            <%= link_to 'Categorias', '/categories/new' %>
+          </li>
+          <li>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col col-10">
+      <div class="col-inner">
+        <%= link_to 'Nuevo Post', new_post_path %>
+
+        <br><br>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Introduction</th>
+            <th>Description</th>
+            <th>Active</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= post.introduction %></td>
+                <td><%= post.description.html_safe %></td>
+                <td><%= link_to 'Edit', edit_post_path(post) %></td>
+                <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

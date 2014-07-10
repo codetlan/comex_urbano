@@ -1,4 +1,7 @@
 class PhotosController < ApplicationController
+  layout 'admin', :only => [:list, :new, :edit]
+
+  before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   # GET /photos
@@ -38,8 +41,8 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo }
+        format.html { redirect_to '/admin/photos/list', notice: 'Photo was successfully created.' }
+        format.json { render action: 'list', status: :created, location: @photo }
       else
         format.html { render action: 'new' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
@@ -50,12 +53,13 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
   def update
+    puts 'entraaa'
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to '/admin/photos/list', notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'list' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
@@ -66,9 +70,13 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to photos_url }
+      format.html { redirect_to '/admin/photos/list' }
       format.json { head :no_content }
     end
+  end
+
+  def list
+    @photos = Photo.all
   end
 
   private
