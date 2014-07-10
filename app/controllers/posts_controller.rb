@@ -15,12 +15,14 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /posts/new
   def new
     @post = Post.new
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /posts/1/edit
