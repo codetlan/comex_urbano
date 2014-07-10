@@ -1,61 +1,64 @@
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "544def9f-8b89-4b7d-a20c-07b4a9e4fe33", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-<div class="header">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-12">
-        <div class="col-inner">
-          <div class="brand">
-            <%= link_to root_path do %>
-                <%= image_tag 'comex-urbano-logo.png' %>
-            <% end %>
-          </div>
-          <div class="header-right-content">
-            <div class="mobile-menu">
-              <%= image_tag 'menu.png' %>
-            </div>
-            <div class="comex-logo-brand">
-              <%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
-                  <%= image_tag 'comex-logo.png' %>
+
+<div class="header-wrap">
+  <div class="header">
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-12">
+          <div class="col-inner">
+            <div class="brand">
+              <%= link_to root_path do %>
+                  <%= image_tag 'comex-urbano-logo.png' %>
               <% end %>
+            </div>
+            <div class="header-right-content">
+              <div class="mobile-menu">
+                <%= image_tag 'menu.png' %>
+              </div>
+              <div class="comex-logo-brand">
+                <%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
+                    <%= image_tag 'comex-logo.png' %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="site-links">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-12">
-        <div class="col-inner">
-          <div class="site-navigation">
-            <div class="navigation">
-              <ul>
-                <% @categories.each do |category| %>
-                    <li><%= link_to category.name, '/' + category.link %></li>
-                <% end %>
-              </ul>
+  <div class="site-links">
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-12">
+          <div class="col-inner">
+            <div class="site-navigation">
+              <div class="navigation">
+                <ul>
+                  <% @categories.each do |category| %>
+                      <li><%= link_to category.name, '/' + category.link %></li>
+                  <% end %>
+                </ul>
+              </div>
             </div>
-          </div>
 
-          <div class="site-search">
-            <div class="social-links">
-              <ul>
-                <% @landing_pages.each do |landing_page| %>
-                    <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
-                    <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
-                    <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
-                    <li><%= link_to image_tag('vimeo.png'), "#" %></li>
-                <% end %>
-              </ul>
+            <div class="site-search">
+              <div class="social-links">
+                <ul>
+                  <% @landing_pages.each do |landing_page| %>
+                      <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
+                      <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
+                      <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
+                      <li><%= link_to image_tag('vimeo.png'), "#" %></li>
+                  <% end %>
+                </ul>
+              </div>
+              <form action="<%= request.fullpath %>" class="search-form" method='get'>
+                <input id="search" name="search" type="text" placeholder="Buscar">
+              </form>
             </div>
-            <form action="<%= request.fullpath %>" class="search-form" method='get'>
-              <input id="search" name="search" type="text" placeholder="Buscar">
-            </form>
           </div>
         </div>
       </div>
