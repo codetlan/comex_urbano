@@ -1,4 +1,6 @@
 ComexUrbano::Application.routes.draw do
+  resources :abouts
+
   resources :landing_pages
 
   resources :roles

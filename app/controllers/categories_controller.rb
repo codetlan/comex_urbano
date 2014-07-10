@@ -5,23 +5,27 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    @landing_pages = LandingPage.all
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /categories/new
   def new
     @category = Category.new
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /categories/1/edit
   def edit
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # POST /categories
