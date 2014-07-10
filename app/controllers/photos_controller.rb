@@ -14,17 +14,21 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
+    @videos = Video.all
   end
 
   # GET /photos/new
   def new
     @photo = Photo.new
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /photos/1/edit
   def edit
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # POST /photos
