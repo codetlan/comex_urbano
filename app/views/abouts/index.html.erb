@@ -1,29 +1,71 @@
-<h1>Vista para que es arte urbano</h1>
+<div class="section-heading">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <%= image_tag 'about/header.jpg' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="about-page">
+  <div class="about-page-intro">
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-12">
+          <div class="col-inner">
+            <% @abouts.each_with_index do |about, index| %>
+                <% if index == 0 %>
+                    <div class="title-page">
+                      <h1><%= about.name %></h1>
+                    </div>
+                    <%= about.description.html_safe %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <tbody>
-    <% @abouts.each do |about| %>
-      <tr>
-        <td><%= about.name %></td>
-        <td><%= about.description %></td>
-        <td><%= link_to 'Show', about %></td>
-        <td><%= link_to 'Edit', edit_about_path(about) %></td>
-        <td><%= link_to 'Destroy', about, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<!--<= link_to 'New About', new_about_path %>-->
+  <div class="main-content">
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-9">
+          <div class="col-inner">
+            <% @abouts.each_with_index do |about, index| %>
+                <% if index == 1 %>
+                    <div class="title-page">
+                      <h1 class="title"><%= about.name %></h1>
+                    </div>
+                    <%= about.description.html_safe %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col col-3">
+          <div class="col-inner">
+            <div class="sidebar">
+              <div class="side-lastest-videos">
+                <div class="ads-list">
+                  <div class="ad">
+                    <%= link_to '#' do %>
+                        <%= image_tag 'placeholder/placead1.jpg' %>
+                    <% end %>
+                  </div>
+                  <div class="ad">
+                    <%= link_to '#' do %>
+                        <%= image_tag 'placeholder/placead2.jpg' %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

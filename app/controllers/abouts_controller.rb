@@ -7,20 +7,27 @@ class AboutsController < ApplicationController
     @abouts = About.all
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+    @videos = Video.all
   end
 
   # GET /abouts/1
   # GET /abouts/1.json
   def show
+    @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /abouts/new
   def new
     @about = About.new
+    @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # GET /abouts/1/edit
   def edit
+    @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # POST /abouts
