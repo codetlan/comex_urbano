@@ -71,7 +71,7 @@
                   <%= link_to '/videos/'+video.id.to_s do %>
                       <h3><%= video.name %></h3>
                   <% end %>
-                  <p><%= truncate(video.description, :length => 120) %></p>
+                  <p><%= truncate(video.description, :length => 50) %></p>
                 </div>
               </div>
             </div>
