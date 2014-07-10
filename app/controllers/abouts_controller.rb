@@ -7,6 +7,7 @@ class AboutsController < ApplicationController
     @abouts = About.all
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+    @videos = Video.all
   end
 
   # GET /abouts/1

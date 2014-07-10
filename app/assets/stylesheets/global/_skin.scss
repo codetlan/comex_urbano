@@ -12,6 +12,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: $black-color;
   font-family: $font-bold;
+  font-weight: bold;
 }
 
 h1 {
@@ -198,10 +199,16 @@ p {
 
 .title-page {
 
-  h1 {
-    border-bottom: 3px solid $gray-color;
+  h1, .title {
+    border-bottom: 5px solid $gray-color;
     text-transform: uppercase;
   }
+}
+
+.about-page {
+   p {
+    @include text-size-large;
+   }
 }
 
 .ytube-subscribe {

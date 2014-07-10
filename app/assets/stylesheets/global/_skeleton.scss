@@ -284,11 +284,11 @@ img + img {
 }
 
 .title-page {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
-  h1 {
-    width: 60%;
+  h1, .title {
     margin-bottom: 20px;
+    @include inline-block; 
   }
 }
 
@@ -427,4 +427,8 @@ img + img {
   .tags {
     margin-bottom: 25px;
   }
+}
+
+.about-page-intro {
+  margin-bottom: 50px;
 }
