@@ -11,7 +11,7 @@
             <div class="post-desc">
               <div class="post-desc-inner">
                 <h1><%= @post.title %></h1>
-                <p><%= @post.introduction %></p>
+                <p><%= truncate(@post.introduction, :length => 20) %></p>
                 <div class="share-links">
                   <span class='st_fblike_hcount' displayText='Facebook Like'></span>
                   <span class='st_twitter_hcount' displayText='Tweet'></span>
