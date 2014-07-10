@@ -1,4 +1,7 @@
 class AboutsController < ApplicationController
+  layout 'admin', :only => [:list, :new, :edit]
+
+  before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_about, only: [:show, :edit, :update, :destroy]
 
   # GET /abouts
@@ -37,8 +40,8 @@ class AboutsController < ApplicationController
 
     respond_to do |format|
       if @about.save
-        format.html { redirect_to @about, notice: 'About was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @about }
+        format.html { redirect_to '/admin/abouts/list', notice: 'About was successfully created.' }
+        format.json { render action: 'list', status: :created, location: @about }
       else
         format.html { render action: 'new' }
         format.json { render json: @about.errors, status: :unprocessable_entity }
@@ -51,10 +54,10 @@ class AboutsController < ApplicationController
   def update
     respond_to do |format|
       if @about.update(about_params)
-        format.html { redirect_to @about, notice: 'About was successfully updated.' }
+        format.html { redirect_to '/admin/abouts/list', notice: 'About was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'list' }
         format.json { render json: @about.errors, status: :unprocessable_entity }
       end
     end
@@ -65,10 +68,15 @@ class AboutsController < ApplicationController
   def destroy
     @about.destroy
     respond_to do |format|
-      format.html { redirect_to abouts_url }
+      format.html { redirect_to '/admin/abouts/list' }
       format.json { head :no_content }
     end
   end
+
+  def list
+    @abouts = About.all
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

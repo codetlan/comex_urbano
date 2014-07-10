@@ -26,7 +26,7 @@
     </div>
     <div class="col col-10">
       <div class="col-inner">
-        <%= link_to 'Nueva Imagen', new_photo_path %>
+        <%= link_to 'Nueva Pregunta', new_about_path %>
 
         <br><br>
 
@@ -35,21 +35,18 @@
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Image</th>
-            <th></th>
             <th></th>
             <th></th>
           </tr>
           </thead>
 
           <tbody>
-          <% @photos.each do |photo| %>
+          <% @abouts.each do |about| %>
               <tr>
-                <td><%= photo.name %></td>
-                <td><%= photo.description %></td>
-                <td><%= image_tag photo.image.url(:square) %></td>
-                <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-                <td><%= link_to 'Destroy', photo, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+                <td><%= about.name %></td>
+                <td><%= about.description.html_safe %></td>
+                <td><%= link_to 'Edit', edit_about_path(about) %></td>
+                <td><%= link_to 'Destroy', about, method: :delete, data: {confirm: 'Are you sure?'} %></td>
               </tr>
           <% end %>
           </tbody>

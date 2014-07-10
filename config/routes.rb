@@ -26,7 +26,11 @@ ComexUrbano::Application.routes.draw do
     get 'list', on: :collection
   end
 
-  resources :videos, :photos, :posts, only: [:index, :show]
+  resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
+    get 'list', on: :collection
+  end
+
+  resources :videos, :photos, :posts, :abouts, only: [:index, :show]
 
 
   resources :banners

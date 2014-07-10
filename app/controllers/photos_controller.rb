@@ -53,7 +53,6 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
   def update
-    puts 'entraaa'
     respond_to do |format|
       if @photo.update(photo_params)
         format.html { redirect_to '/admin/photos/list', notice: 'Photo was successfully updated.' }
