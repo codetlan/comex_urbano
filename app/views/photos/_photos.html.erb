@@ -14,7 +14,7 @@
   <% @photos.each do |photo| %>
       <tr>
         <td><%= photo.name %></td>
-        <td><%= photo.description %></td>
+        <%=  photo.description %>
         <td><a href="/photos/<%= photo.id.to_s %>"><%= image_tag photo.image.url(:square) %></a></td>
         <!--<td><= link_to 'Show', photo %></td>
         <td><= link_to 'Edit', edit_photo_path(photo) %></td>

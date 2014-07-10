@@ -28,6 +28,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @categories = Category.all.where('active = ?', 1)
+    @landing_pages = LandingPage.all
   end
 
   # POST /posts

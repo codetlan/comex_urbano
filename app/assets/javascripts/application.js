@@ -17,6 +17,7 @@
 //= require_tree .
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require ckeditor/init
 
 function responsiveNavigation() {
     var winWidth = $(window).width(),

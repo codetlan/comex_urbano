@@ -1,4 +1,5 @@
 ComexUrbano::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   resources :abouts
 
   resources :landing_pages
