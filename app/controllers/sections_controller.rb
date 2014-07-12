@@ -1,4 +1,8 @@
 class SectionsController < ApplicationController
+  layout 'admin'
+
+  before_filter :authenticate_user!
+
   before_action :set_section, only: [:show, :edit, :update, :destroy]
 
   # GET /sections
@@ -74,6 +78,6 @@ class SectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
-      params.require(:section).permit(:title, :description,  :active, :main_banner, :secondary_banner)
+      params.require(:section).permit(:title, :description,  :active, :main_banner, :secondary_banner, :category_id)
     end
 end

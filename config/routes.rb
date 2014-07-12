@@ -2,35 +2,39 @@ ComexUrbano::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :abouts
 
-  resources :landing_pages
 
   resources :roles
 
   devise_for :users
 
 
-  resources :posts
-  resources :sections
-  resources :photos
   resources :categories
 
+  resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
+
+  resources :landing_pages, path: '/admin/landing_pages', only: [:list, :new, :edit, :create, :update] do
+    get '/'  => 'landing_pages#list', on: :collection
+  end
+
   resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
-    get 'list', on: :collection
+    get '/'  => 'videos#list', on: :collection
   end
 
   resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
-    get 'list', on: :collection
+    get '/' => 'photos#list', on: :collection
   end
 
   resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
-    get 'list', on: :collection
+    get '/' => 'posts#list', on: :collection
   end
 
   resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
-    get 'list', on: :collection
+    get '/' => 'abouts#list', on: :collection
   end
 
   resources :videos, :photos, :posts, :abouts, only: [:index, :show]
+
+
 
 
   resources :banners

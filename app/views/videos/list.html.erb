@@ -4,16 +4,19 @@
       <div class="col-inner">
         <ul>
           <li>
-            <%= link_to 'Videos', '/admin/videos/list' %>
+            <%= link_to 'Home', '/admin/landing_pages' %>
           </li>
           <li>
-            <%= link_to 'Galeria', '/admin/photos/list' %>
+            <%= link_to 'Videos', '/admin/videos' %>
           </li>
           <li>
-            <%= link_to 'Blog', '/admin/posts/list' %>
+            <%= link_to 'Galeria', '/admin/photos' %>
           </li>
           <li>
-            <%= link_to '¿Que es arte urbano?', '/admin/abouts/list' %>
+            <%= link_to 'Blog', '/admin/posts' %>
+          </li>
+          <li>
+            <%= link_to '¿Que es arte urbano?', '/admin/abouts' %>
           </li>
           <li>
             <%= link_to 'Categorias', '/categories/new' %>
@@ -48,7 +51,7 @@
           <% @videos.each do |video| %>
               <tr>
                 <td><%= video.name %></td>
-                <td><%= video.description %></td>
+                <td><%= video.description.html_safe %></td>
                 <td>
                   <iframe width="300" height="200" src="<%= video.youtube_embed(video.link) %>"></iframe>
                 </td>

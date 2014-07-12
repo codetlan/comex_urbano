@@ -17,7 +17,7 @@
   <% @videos.each do |video| %>
       <tr>
         <td><%= video.name %></td>
-        <td><%= video.description %></td>
+        <td><%= video.description.html_safe %></td>
         <td>
           <iframe width="300" height="200" src="<%= video.youtube_embed(video.link) %>"></iframe>
         </td>

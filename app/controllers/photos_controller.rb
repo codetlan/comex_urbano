@@ -41,7 +41,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to '/admin/photos/list', notice: 'Photo was successfully created.' }
+        format.html { redirect_to '/admin/photos', notice: 'Photo was successfully created.' }
         format.json { render action: 'list', status: :created, location: @photo }
       else
         format.html { render action: 'new' }
@@ -55,7 +55,7 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to '/admin/photos/list', notice: 'Photo was successfully updated.' }
+        format.html { redirect_to '/admin/photos', notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -69,7 +69,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/photos/list' }
+      format.html { redirect_to '/admin/photos' }
       format.json { head :no_content }
     end
   end

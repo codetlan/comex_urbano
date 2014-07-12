@@ -1,4 +1,7 @@
 class LandingPagesController < ApplicationController
+  layout 'admin', :only => [:list, :new, :edit]
+
+  before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_landing_page, only: [:show, :edit, :update, :destroy]
 
   # GET /landing_pages
@@ -46,8 +49,8 @@ class LandingPagesController < ApplicationController
           }
         end
 
-        format.html { redirect_to @landing_page, notice: 'Gallery was successfully created.' }
-        format.json { render json: @landing_page, status: :created, location: @landing_page }
+        format.html { redirect_to '/admin/landing_pages', notice: 'Gallery was successfully created.' }
+        format.json { render json: 'list', status: :created, location: @landing_page }
       else
         format.html { render action: "new" }
         format.json { render json: @landing_page.errors, status: :unprocessable_entity }
@@ -66,10 +69,10 @@ class LandingPagesController < ApplicationController
             @landing_page.banners.update(photo: photo)
           }
         end
-        format.html { redirect_to @landing_page, notice: 'Landing page was successfully updated.' }
+        format.html { redirect_to '/admin/landing_pages', notice: 'Landing page was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'list' }
         format.json { render json: @landing_page.errors, status: :unprocessable_entity }
       end
     end
@@ -80,9 +83,14 @@ class LandingPagesController < ApplicationController
   def destroy
     @landing_page.destroy
     respond_to do |format|
-      format.html { redirect_to landing_pages_url }
+      format.html { redirect_to '/admin/landing_pages' }
       format.json { head :no_content }
     end
+  end
+
+
+  def list
+    @landing_pages = LandingPage.all
   end
 
   private

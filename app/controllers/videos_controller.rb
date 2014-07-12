@@ -11,6 +11,7 @@ class VideosController < ApplicationController
     @videos = Video.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+    @section = Section.all.where('category_id = ?', 1)
   end
 
   # GET /videos/1
@@ -42,7 +43,7 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if @video.save
-        format.html { redirect_to '/admin/videos/list', notice: 'Video was successfully created.' }
+        format.html { redirect_to '/admin/videos', notice: 'Video was successfully created.' }
         format.json { render action: 'list', status: :created, location: @video }
       else
         format.html { render action: 'new' }
@@ -56,7 +57,7 @@ class VideosController < ApplicationController
   def update
     respond_to do |format|
       if @video.update(video_params)
-        format.html { redirect_to '/admin/videos/list', notice: 'Video was successfully updated.' }
+        format.html { redirect_to '/admin/videos', notice: 'Video was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -70,7 +71,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/videos/list'}
+      format.html { redirect_to '/admin/videos'}
       format.json { head :no_content }
     end
   end
@@ -83,10 +84,11 @@ class VideosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_video
       @video = Video.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:name, :description, :link, :visit, :active)
+      params.require(:video).permit(:name, :description, :link, :visit, :active, :section_id)
     end
 end

@@ -1,4 +1,5 @@
 class Video < ActiveRecord::Base
+  belongs_to :section
 
   def self.search(search)
     if search
@@ -17,4 +18,5 @@ class Video < ActiveRecord::Base
       @youtube_id = "http://www.youtube.com/embed/"+$5
     end
   end
+
 end

@@ -42,7 +42,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to '/admin/posts/list', notice: 'Post was successfully created.' }
+        format.html { redirect_to '/admin/posts', notice: 'Post was successfully created.' }
         format.json { render action: 'list', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to '/admin/posts/list', notice: 'Post was successfully updated.' }
+        format.html { redirect_to '/admin/posts', notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -70,7 +70,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/posts/list' }
+      format.html { redirect_to '/admin/posts' }
       format.json { head :no_content }
     end
   end

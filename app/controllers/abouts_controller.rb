@@ -40,7 +40,7 @@ class AboutsController < ApplicationController
 
     respond_to do |format|
       if @about.save
-        format.html { redirect_to '/admin/abouts/list', notice: 'About was successfully created.' }
+        format.html { redirect_to '/admin/abouts', notice: 'About was successfully created.' }
         format.json { render action: 'list', status: :created, location: @about }
       else
         format.html { render action: 'new' }
@@ -54,7 +54,7 @@ class AboutsController < ApplicationController
   def update
     respond_to do |format|
       if @about.update(about_params)
-        format.html { redirect_to '/admin/abouts/list', notice: 'About was successfully updated.' }
+        format.html { redirect_to '/admin/abouts', notice: 'About was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -68,7 +68,7 @@ class AboutsController < ApplicationController
   def destroy
     @about.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/abouts/list' }
+      format.html { redirect_to '/admin/abouts' }
       format.json { head :no_content }
     end
   end

@@ -11,9 +11,9 @@ end
 group :assets do
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
-gem 'sprockets', '<= 2.11.0'
-gem 'bourbon', '~> 4.0.2'
+  gem 'sass-rails', '~> 4.0.0'
+  gem 'sprockets', '<= 2.11.0'
+  gem 'bourbon', '~> 4.0.2'
 
 # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
@@ -25,8 +25,9 @@ gem 'bourbon', '~> 4.0.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'jquery-turbolinks'
+  gem 'jquery-rails'
+  gem 'jquery-turbolinks'
+  gem 'jquery_datepicker'
 
 end
 gem "jquery-fileupload-rails"
@@ -54,6 +55,7 @@ gem 'aws-sdk'
 gem 'seed_dump'
 gem 'meta_request'
 gem 'ckeditor'
+gem 'truncate_html'
 #gem 'declarative_authorization'
 
 # Use ActiveModel has_secure_password

@@ -19,6 +19,7 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 
+
 function responsiveNavigation() {
     var winWidth = $(window).width(),
         nav = $('.navigation');
@@ -70,4 +71,7 @@ $(document).ready(function () {
     });
 
     responsiveNavigation();
+
+    $('#video_posted_at').datepicker();
+
 });

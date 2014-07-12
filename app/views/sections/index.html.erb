@@ -9,7 +9,6 @@
       <th>Active</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -17,11 +16,9 @@
     <% @sections.each do |section| %>
       <tr>
         <td><%= section.title %></td>
-        <td><%= section.description %></td>
+        <td><%= section.description.html_safe %></td>
         <td><%= image_tag section.main_banner.url(:medium) %></td>
-        <td><%= image_tag section.secondary_banner.url(:medium) %></td>
         <td><%= section.active %></td>
-        <td><%= link_to 'Show', section %></td>
         <td><%= link_to 'Edit', edit_section_path(section) %></td>
         <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

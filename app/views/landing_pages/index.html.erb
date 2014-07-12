@@ -1,4 +1,4 @@
-<h1>Home Admin</h1>
+<h1>Datos de Home</h1>
 
 <table>
   <thead>
@@ -9,7 +9,6 @@
     <th>Vimeo</th>
     <th>Copyright</th>
     <th>Terms</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -27,9 +26,8 @@
         <% landing_page.banners.each do |banner| %>
         <td><%= image_tag banner.photo.url(:thumb) %></td>
         <% end %>
-        <td><%= link_to 'Show', landing_page %></td>
         <td><%= link_to 'Edit', edit_landing_page_path(landing_page) %></td>
-        <td><%= link_to 'Destroy', landing_page, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <!--<td><= link_to 'Destroy', landing_page, method: :delete, data: {confirm: 'Are you sure?'} %></td>-->
       </tr>
   <% end %>
   </tbody>
@@ -37,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New Landing page', new_landing_page_path %>
+<!--<= link_to 'New Landing page', new_landing_page_path %>-->
