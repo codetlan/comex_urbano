@@ -10,7 +10,7 @@ Category.create!([
                      {name: "Videos", link: "videos", position: 1, active: 1},
                      {name: "Galeria", link: "photos", position: 2, active: 1},
                      {name: "Blog", link: "posts", position: 3, active: 1},
-                     {name: "¿Ques es urbano?", link: "about", position: 4, active: 1}
+                     {name: "¿Ques es urbano?", link: "abouts", position: 4, active: 1}
                  ])
 LandingPage.create!([
                         {facebook: "http://www.facebook.com", twitter: "http://www.twitter.com", youtube: "http://www.youtube.com", vimeo: "http://www.vimeo.com", copyright: "Copyright 2014 Consorcio Comex, S.A. de C.V", terms: "Aviso de Privacidad"}
