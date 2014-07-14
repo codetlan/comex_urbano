@@ -29,7 +29,6 @@ function responsiveNavigation() {
     } else {
         nav.show();
     }
-    ;
 }
 
 $(document).ready(function () {
