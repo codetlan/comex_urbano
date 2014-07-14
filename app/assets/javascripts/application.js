@@ -73,7 +73,5 @@ $(document).ready(function () {
 
     responsiveNavigation();
 
-    $('#video_posted_at').datepicker();
-
 })
 ;
