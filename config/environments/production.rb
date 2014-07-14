@@ -55,7 +55,9 @@ ComexUrbano::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = 'https://urbano-demo.herokuapp.com'
+
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
@@ -81,10 +83,6 @@ ComexUrbano::Application.configure do
   config.assets.precompile += %w( ckeditor/* )
 
   config.action_mailer.default_url_options = { :host => 'urbano-demo.herokuapp.com' }
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = "http://assets.example.com"
-  config.action_controller.asset_host = 'https://urbano-demo.herokuapp.com'
 
   config.paperclip_defaults = {
       :storage => :s3,
