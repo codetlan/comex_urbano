@@ -20,7 +20,7 @@
         <td><%= section.title %></td>
         <td><%= section.description.html_safe %></td>
         <td><%= image_tag section.main_banner.url(:medium) %></td>
-        <td><%= section.category.name %></td>
+        <td><%= section.category.present? ? section.category.name : '' %></td>
         <td><%= section.active %></td>
         <td><%= link_to 'Edit', edit_section_path(section) %></td>
         <td><%= link_to 'Destroy', section, method: :delete, data: {confirm: 'Are you sure?'} %></td>
