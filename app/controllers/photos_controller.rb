@@ -11,6 +11,7 @@ class PhotosController < ApplicationController
     @photos = Photo.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+    @section = Section.joins(:category).where('categories.name = ?', 'Galeria')
   end
 
   # GET /photos/1

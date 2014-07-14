@@ -1,12 +1,127 @@
-<h1>vISTA DE gALERIA</h1>
+<% @section.each do |section| %>
+    <div class="section-heading">
+      <div class="wrapper">
+        <div class="cols-12">
+          <div class="col col-12">
+            <div class="col-inner">
+              <%= image_tag section.main_banner.url(:original) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="filters-wrap">
+      <div class="wrapper">
+        <div class="cols-12">
+          <div class="col col-12">
+            <div class="col-inner">
+              <div class="filters">
+                <div class="page-navigation">
+                  <ul>
+                    <li>
+                      <%= link_to 'Ultimos videos', '#', class: 'active' %>
+                    </li>
+                    <li>
+                      <%= link_to 'Más vistos', '#' %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="years-timeline">
+                  <ul>
+                    <li>
+                      <%= link_to '2014', '#', class: 'active' %>
+                    </li>
+                    <li>
+                      <%= link_to '2013', '#' %>
+                    </li>
+                    <li>
+                      <%= link_to '2012', '#' %>
+                    </li>
+                    <li>
+                      <%= link_to '2011', '#' %>
+                    </li>
+                    <li>
+                      <%= link_to '2010', '#' %>
+                    </li>
+                    <li>
+                      <%= link_to '2009', '#' %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'shared/section_youtube_subscribe' %>
+    <div class="videos-list">
+      <div class="wrapper">
+        <div class="cols-12">
+          <% section.photos.each do |photo| %>
+              <div class="col col-4">
+                <div class="col-inner">
+                  <div class="video-box">
+                    <div class="video">
+                      <%= link_to '/photos/'+photo.id.to_s do %>
+                          <!--<i class="i play"></i>-->
 
-<!--<= form_tag photos_path, :method => 'get', :id => 'photos_search' do %>
-    <p>
-      <= text_field_tag :search, params[:search] %>
-      <= submit_tag "Search", :name => nil %>
-    </p>
-< end %>-->
+                      <% end %>
+                    </div>
+                    <div class="video-description">
+                      <%= link_to '/photos/'+photo.id.to_s do %>
+                          <h3>photo</h3>
+                          <%= truncate_html(photo.description) %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-<div id="photos"><%= render 'photos' %></div>
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-12">
+          <div class="col-inner">
+            <div class="title-page">
+              <h1><%= section.title %></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!--<= link_to 'New Photo', new_photo_path %>-->
+    <div class="main-content">
+      <div class="wrapper">
+        <div class="cols-12">
+          <div class="col col-9">
+            <div class="col-inner">
+              <!--<= image_tag 'sections/arte-urbano.jpg' %>-->
+              <%= section.description.html_safe %>
+            </div>
+          </div>
+          <div class="col col-3">
+            <div class="col-inner">
+              <div class="sidebar">
+                <div class="ads-list">
+                  <div class="ad">
+                    <%= link_to '#' do %>
+                        <%= image_tag 'placeholder/placead1.jpg' %>
+                    <% end %>
+                  </div>
+                  <div class="ad">
+                    <%= link_to '#' do %>
+                        <%= image_tag 'placeholder/placead2.jpg' %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

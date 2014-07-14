@@ -24,11 +24,12 @@ function responsiveNavigation() {
     var winWidth = $(window).width(),
         nav = $('.navigation');
 
-    if ( winWidth <= 580 ) {
+    if (winWidth <= 580) {
         nav.hide();
     } else {
         nav.show();
-    };  
+    }
+    ;
 }
 
 $(document).ready(function () {
@@ -66,12 +67,13 @@ $(document).ready(function () {
 
     });
 
-    $(window).resize(function() {
-      responsiveNavigation();  
+    $(window).resize(function () {
+        responsiveNavigation();
     });
 
     responsiveNavigation();
 
     $('#video_posted_at').datepicker();
 
-});
+})
+;

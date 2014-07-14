@@ -8,13 +8,11 @@ ComexUrbano::Application.routes.draw do
   devise_for :users
 
 
-  resources :categories
-
   resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
 
-  resources :landing_pages, path: '/admin/landing_pages', only: [:list, :new, :edit, :create, :update] do
-    get '/'  => 'landing_pages#list', on: :collection
-  end
+  resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
+
+  resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
 
   resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
     get '/'  => 'videos#list', on: :collection

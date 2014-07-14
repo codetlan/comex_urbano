@@ -1,63 +1,28 @@
-<div class="wrapper">
-  <div class="cols-12">
-    <div class="col col-2">
-      <div class="col-inner">
-        <ul>
-          <li>
-            <%= link_to 'Home', '/admin/landing_pages' %>
-          </li>
-          <li>
-            <%= link_to 'Videos', '/admin/videos' %>
-          </li>
-          <li>
-            <%= link_to 'Galeria', '/admin/photos' %>
-          </li>
-          <li>
-            <%= link_to 'Blog', '/admin/posts' %>
-          </li>
-          <li>
-            <%= link_to '¿Que es arte urbano?', '/admin/abouts' %>
-          </li>
-          <li>
-            <%= link_to 'Categorias', '/categories/new' %>
-          </li>
-          <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col col-10">
-      <div class="col-inner">
-        <%= link_to 'Nueva Imagen', new_photo_path %>
+<%= link_to 'Nueva Imagen', new_photo_path %>
 
-        <br><br>
+<br><br>
 
-        <table>
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-          </thead>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
 
-          <tbody>
-          <% @photos.each do |photo| %>
-              <tr>
-                <td><%= photo.name %></td>
-                <td><%= photo.description %></td>
-                <td><%= image_tag photo.image.url(:square) %></td>
-                <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-                <td><%= link_to 'Destroy', photo, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  <tbody>
+  <% @photos.each do |photo| %>
+      <tr>
+        <td><%= photo.name %></td>
+        <td><%= photo.description %></td>
+        <td><%= image_tag photo.image.url(:square) %></td>
+        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
+        <td><%= link_to 'Destroy', photo, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,60 +1,25 @@
-<div class="wrapper">
-  <div class="cols-12">
-    <div class="col col-2">
-      <div class="col-inner">
-        <ul>
-          <li>
-            <%= link_to 'Home', '/admin/landing_pages' %>
-          </li>
-          <li>
-            <%= link_to 'Videos', '/admin/videos' %>
-          </li>
-          <li>
-            <%= link_to 'Galeria', '/admin/photos' %>
-          </li>
-          <li>
-            <%= link_to 'Blog', '/admin/posts' %>
-          </li>
-          <li>
-            <%= link_to '¿Que es arte urbano?', '/admin/abouts' %>
-          </li>
-          <li>
-            <%= link_to 'Categorias', '/categories/new' %>
-          </li>
-          <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col col-10">
-      <div class="col-inner">
-        <%= link_to 'Nueva Pregunta', new_about_path %>
+<%= link_to 'Nueva Pregunta', new_about_path %>
 
-        <br><br>
+<br><br>
 
-        <table>
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-          </tr>
-          </thead>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
 
-          <tbody>
-          <% @abouts.each do |about| %>
-              <tr>
-                <td><%= about.name %></td>
-                <td><%= about.description.html_safe %></td>
-                <td><%= link_to 'Edit', edit_about_path(about) %></td>
-                <td><%= link_to 'Destroy', about, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  <tbody>
+  <% @abouts.each do |about| %>
+      <tr>
+        <td><%= about.name %></td>
+        <td><%= about.description.html_safe %></td>
+        <td><%= link_to 'Edit', edit_about_path(about) %></td>
+        <td><%= link_to 'Destroy', about, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

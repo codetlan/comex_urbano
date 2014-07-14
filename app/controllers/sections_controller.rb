@@ -37,8 +37,8 @@ class SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to @section, notice: 'Section was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @section }
+        format.html { redirect_to '/admin/sections', notice: 'Section was successfully created.' }
+        format.json { render action: 'list', status: :created, location: @section }
       else
         format.html { render action: 'new' }
         format.json { render json: @section.errors, status: :unprocessable_entity }
@@ -51,10 +51,10 @@ class SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to @section, notice: 'Section was successfully updated.' }
+        format.html { redirect_to '/admin/sections', notice: 'Section was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'list' }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +65,7 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url }
+      format.html { redirect_to '/admin/sections' }
       format.json { head :no_content }
     end
   end

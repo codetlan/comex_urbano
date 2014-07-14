@@ -1,4 +1,6 @@
 class Photo < ActiveRecord::Base
+  belongs_to :section
+
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, styles: {
       thumb: '100x100>',

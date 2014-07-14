@@ -16,9 +16,6 @@
         <td><%= photo.name %></td>
         <%=  photo.description %>
         <td><a href="/photos/<%= photo.id.to_s %>"><%= image_tag photo.image.url(:square) %></a></td>
-        <!--<td><= link_to 'Show', photo %></td>
-        <td><= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
   <% end %>
   </tbody>

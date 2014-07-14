@@ -1,68 +1,32 @@
-<div class="wrapper">
-  <div class="cols-12">
-    <div class="col col-2">
-      <div class="col-inner">
-        <ul>
-          <li>
-            <%= link_to 'Home', '/admin/landing_pages' %>
-          </li>
-          <li>
-            <%= link_to 'Videos', '/admin/videos' %>
-          </li>
-          <li>
-            <%= link_to 'Galeria', '/admin/photos' %>
-          </li>
-          <li>
-            <%= link_to 'Blog', '/admin/posts' %>
-          </li>
-          <li>
-            <%= link_to '¿Que es arte urbano?', '/admin/abouts' %>
-          </li>
-          <li>
-            <%= link_to 'Categorias', '/categories/new' %>
-          </li>
-          <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col col-10">
-      <div class="col-inner">
+<table>
+  <thead>
+  <tr>
+    <th>Facebook</th>
+    <th>Twitter</th>
+    <th>Youtube</th>
+    <th>Vimeo</th>
+    <th>Copyright</th>
+    <th>Terms</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
 
-        <table>
-          <thead>
-          <tr>
-            <th>Facebook</th>
-            <th>Twitter</th>
-            <th>Youtube</th>
-            <th>Vimeo</th>
-            <th>Copyright</th>
-            <th>Terms</th>
-            <th></th>
-            <th></th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <% @landing_pages.each do |landing_page| %>
-              <tr>
-                <td><%= landing_page.facebook %></td>
-                <td><%= landing_page.twitter %></td>
-                <td><%= landing_page.youtube %></td>
-                <td><%= landing_page.vimeo %></td>
-                <td><%= landing_page.copyright %></td>
-                <td><%= landing_page.terms %></td>
-                <% landing_page.banners.each do |banner| %>
-                    <td><%= image_tag banner.photo.url(:thumb) %></td>
-                <% end %>
-                <td><%= link_to 'Edit', edit_landing_page_path(landing_page) %></td>
-                <!--<td><= link_to 'Destroy', landing_page, method: :delete, data: {confirm: 'Are you sure?'} %></td>-->
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  <tbody>
+  <% @landing_pages.each do |landing_page| %>
+      <tr>
+        <td><%= landing_page.facebook %></td>
+        <td><%= landing_page.twitter %></td>
+        <td><%= landing_page.youtube %></td>
+        <td><%= landing_page.vimeo %></td>
+        <td><%= landing_page.copyright %></td>
+        <td><%= landing_page.terms %></td>
+        <% landing_page.banners.each do |banner| %>
+            <td><%= image_tag banner.photo.url(:thumb) %></td>
+        <% end %>
+        <td><%= link_to 'Edit', edit_landing_page_path(landing_page) %></td>
+        <!--<td><= link_to 'Destroy', landing_page, method: :delete, data: {confirm: 'Are you sure?'} %></td>-->
+      </tr>
+  <% end %>
+  </tbody>
+</table>

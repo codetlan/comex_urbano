@@ -65,7 +65,7 @@
                     <div class="video">
                       <%= link_to '/videos/'+video.id.to_s do %>
                           <!--<i class="i play"></i>-->
-                          <iframe width="100%" height="100%" src="<%= video.youtube_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
+                              <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                       <% end %>
                     </div>
                     <div class="video-description">

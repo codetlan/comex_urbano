@@ -9,14 +9,15 @@ class Video < ActiveRecord::Base
     end
   end
 
-  def youtube_embed(youtube_url)
-    if youtube_url[/youtu\.be\/([^\?]*)/]
-      @youtube_id = "http://www.youtube.com/embed/"+$1
-    else
-      # Regex from # http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url/4811367#4811367
-      youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
-      @youtube_id = "http://www.youtube.com/embed/"+$5
+  def link_embed(link_url)
+    if link_url[/youtu\.be\/([^\?]*)/]
+      @link_id = "http://www.youtube.com/embed/"+$1
+    elsif link_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
+      @link_id = "http://www.youtube.com/embed/"+$5
+    elsif link_url[/vimeo\.com\/originals\/ownyourtomorrow\/([^\?]*)/]
+      @link_id = "http://player.vimeo.com/video/"+$1
+    elsif link_url[/vimeo\.com\/([^\?]*)/]
+      @link_id = "http://player.vimeo.com/video/"+$1
     end
   end
-
 end

@@ -1,7 +1,7 @@
 class LandingPagesController < ApplicationController
-  layout 'admin', :only => [:list, :new, :edit]
+  layout 'admin', :only => [:index, :list, :new, :edit]
 
-  before_filter :authenticate_user!, :only => [:list, :new, :edit]
+  before_filter :authenticate_user!, :only => [:index, :new, :edit]
   before_action :set_landing_page, only: [:show, :edit, :update, :destroy]
 
   # GET /landing_pages

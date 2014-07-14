@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <div class="cols-12">
+    <div class="col col-2">
+      <div class="col-inner">
+        <ul>
+          <li>
+            <%= link_to 'Home', '/admin' %>
+          </li>
+          <li>
+            <%= link_to 'Videos', '/admin/videos' %>
+          </li>
+          <li>
+            <%= link_to 'Galeria', '/admin/photos' %>
+          </li>
+          <li>
+            <%= link_to 'Blog', '/admin/posts' %>
+          </li>
+          <li>
+            <%= link_to '¿Que es arte urbano?', '/admin/abouts' %>
+          </li>
+          <li>
+            <%= link_to 'Secciones', '/admin/sections' %>
+          </li>
+          <li>
+            <%= link_to 'Categorias', '/admin/categories' %>
+          </li>
+          <li>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
