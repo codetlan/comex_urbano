@@ -52,7 +52,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'seed_dump'
 gem 'meta_request'
-gem 'ckeditor'
+gem 'ckeditor', '4.0.4'
 gem 'truncate_html'
 #gem 'declarative_authorization'
 
