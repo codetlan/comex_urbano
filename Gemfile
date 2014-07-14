@@ -27,8 +27,6 @@ group :assets do
 # Use jquery as the JavaScript library
   gem 'jquery-rails'
   gem 'jquery-turbolinks'
-  gem 'jquery_datepicker'
-
 end
 gem "jquery-fileupload-rails"
 
