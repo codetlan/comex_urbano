@@ -20,7 +20,7 @@
                 </div>
                 <div class="title">
                   <%= link_to '/videos/1' do %>
-                      <h3>FICU es un festival que da apertura al arte urbano y digital en México</h3>
+                    <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
                   <% end %>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="title">
                   <%= link_to '/videos/2' do %>
-                      <h3>FIC</h3>
+                      <p>FIC</p>
                   <% end %>
                 </div>
               </div>
@@ -113,10 +113,11 @@
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href="/videos/1"><h3>Festival Internacional Comex urbano</h3></a>
-
+                  <a href="/videos/1" class="post-title">Festival Internacional Comex urbano</a>
+                  <span class="post-date">11 sep 2014</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
+                  <a class="post-read-more" href="/videos/1">Leer más</a>
                 </div>
               </div>
             </div>
@@ -128,10 +129,11 @@
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href="/videos/2"><h3>Festival Internacional Comex urbano</h3></a>
-
+                  <a href="/videos/1" class="post-title">Festival Internacional Comex urbano</a>
+                  <span class="post-date">11 sep 2014</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
+                  <a class="post-read-more" href="/videos/1">Leer más</a>
                 </div>
               </div>
             </div>
@@ -143,10 +145,11 @@
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href=""><h3>Festival Internacional Comex urbano</h3></a>
-
+                  <a href="/videos/1" class="post-title">Festival Internacional Comex urbano</a>
+                  <span class="post-date">11 sep 2014</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
+                  <a class="post-read-more" href="/videos/1">Leer más</a>
                 </div>
               </div>
             </div>
@@ -158,10 +161,11 @@
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href=""><h3>Festival Internacional Comex urbano</h3></a>
-
+                  <a href="/videos/1" class="post-title">Festival Internacional Comex urbano</a>
+                  <span class="post-date">11 sep 2014</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
+                  <a class="post-read-more" href="/videos/1">Leer más</a>
                 </div>
               </div>
             </div>
@@ -173,10 +177,11 @@
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href=""><h3>Festival Internacional Comex urbano</h3></a>
-
+                  <a href="/videos/1" class="post-title">Festival Internacional Comex urbano</a>
+                  <span class="post-date">11 sep 2014</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
+                  <a class="post-read-more" href="/videos/1">Leer más</a>
                 </div>
               </div>
             </div>
@@ -188,10 +193,11 @@
               </div>
               <div class="post-description">
                 <div class="post-va">
-                  <a href=""><h3>Festival Internacional Comex urbano</h3></a>
-
+                  <a href="/videos/1" class="post-title">Festival Internacional Comex urbano</a>
+                  <span class="post-date">11 sep 2014</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
+                  <a class="post-read-more" href="/videos/1">Leer más</a>
                 </div>
               </div>
             </div>
@@ -204,7 +210,7 @@
             <%= render partial: 'shared/youtube_subscribe' %>
             <div class="side-lastest-videos">
               <div class="label-videos">
-                <h6>Ultimos</h6>
+                <h6>Últimos</h6>
               </div>
               <% @videos.each do |video| %>
                   <div class="video-box">

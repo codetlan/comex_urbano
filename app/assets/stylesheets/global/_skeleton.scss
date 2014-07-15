@@ -1,6 +1,6 @@
 
 body {
-  padding-top: 175px;
+  padding-top: 120px;
 
   @include max-screen(580px) {
     padding-top: 75px;
@@ -28,11 +28,11 @@ img + img {
 
 .header {
   z-index: 100;
-  padding: 5px 0;
+  padding: 14px 0 13px 0;
 
   .brand {
     float: left;
-    margin-top: 7px;
+    margin-top: 2px;
 
     img {
       min-width: 100%;
@@ -79,7 +79,7 @@ img + img {
 }
 
 .site-links {
-  padding: 5px 0;
+  height: 35px;
   @include clearfix;
 
   .site-navigation {
@@ -96,7 +96,7 @@ img + img {
 
   .navigation {
     float: left;
-    margin: 8px 10px 0 0;
+    margin: 5px 10px 0 0;
 
     ul li {
       float: left;
@@ -117,7 +117,7 @@ img + img {
   }
 
   .social-links {
-    margin: 4px 40px 0 0px;
+    margin: 5px 120px 0 0px;
     float: left;
 
     ul li {
@@ -132,10 +132,11 @@ img + img {
 
   .search-form {
     float: right;
+    margin-top: 3px;
 
     input[type="text"] {
-      padding: 5px 10px;
-      width: 202px;
+      padding: 2px 6px 3px 6px;
+      width: 128px;
     }
   }
 
@@ -182,14 +183,20 @@ img + img {
   }
 
   .footer-links-rights {
-    margin: 40px 0;
+    margin: 30px 0;
   }
 
   .footer-links {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     
     a {
       margin: 0px 10px;
+    }
+  }
+
+  .footer-rights {
+    p + p {
+      margin-top: 0;
     }
   }
 
@@ -297,6 +304,8 @@ img + img {
 
   h1, .title {
     margin-bottom: 20px;
+    padding-bottom: 10px;
+    width: 100%;
     @include inline-block; 
   }
 }
@@ -335,11 +344,15 @@ img + img {
   }
 
   .video-description {
-    padding: 10px;
+    padding: 5px 10px;
 
     h3 {
       margin-bottom: 5px;
     }
+  }
+
+  iframe {
+    display: block;
   }
 }
 
