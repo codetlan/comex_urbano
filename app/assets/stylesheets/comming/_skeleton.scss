@@ -1,0 +1,70 @@
+
+.comming-soon-page {
+	padding: 0;
+}
+
+.comming-soon {
+  height: 100%;
+
+  &.not-fit {
+		.comming-soon-header {
+			position: relative;
+			margin-bottom: 25px;
+		}
+
+		.comming-soon-content {
+			position: relative;
+		}
+
+		.comming-soon-footer {
+			position: relative;
+			margin-top: 25px;
+			bottom: 0;
+		}
+  }
+}
+
+.comming-soon-header {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	@include clearfix;
+
+	.social-links {
+		float: left;
+		margin: 20px;
+
+		ul li {
+			float: left;
+			margin-right: 10px;
+		}
+	}
+
+	.comex-brand {
+		float: right;
+		margin: 20px;
+	}
+}
+
+.comming-soon-content {
+	position: absolute;
+	width: 100%;
+
+	.banner {
+		height: 200px;
+		margin: 20px 0;
+	}
+}
+
+.comming-soon-footer {
+	position: absolute;
+	width: 100%;
+	bottom: 20px;
+	left: 0;
+
+	ul li {
+		@include inline-block;
+		padding: 5px;
+	}
+}

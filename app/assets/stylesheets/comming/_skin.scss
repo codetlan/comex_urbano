@@ -1,0 +1,29 @@
+.comming-soon {
+	background: $black-color; 
+}
+
+.comming-soon-content {
+	text-align: center;
+
+	.banner {
+		background: url('/assets/banner-comming.jpg') no-repeat;
+		background-size: cover;
+	  background-repeat: no-repeat;
+	  background-position: top center;
+	}
+
+	span {
+		color: $white-color;
+		font-size: 22px;
+		font-family: $font-bold;
+	}
+}
+
+.comming-soon-footer {
+	text-align: center;
+
+	p {
+		text-align: center;
+		color: $white-color;
+	}
+}
