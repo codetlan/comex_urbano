@@ -11,7 +11,7 @@ class VideosController < ApplicationController
     @videos = Video.search(params[:search])
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
-    @section = Section.joins(:category).where('categories.name = ?', 'Videos')
+    @section = Section.joins(:category).where('categories.name = ?', 'Videos').order('sections.created_at ASC').limit(1)
   end
 
   # GET /videos/1
