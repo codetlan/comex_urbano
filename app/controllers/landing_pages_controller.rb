@@ -41,15 +41,7 @@ class LandingPagesController < ApplicationController
 
     respond_to do |format|
       if @landing_page.save
-
-        if params[:photos]
-          #===== The magic is here ;)
-          params[:photos].each { |photo|
-            @landing_page.banners.create(photo: photo)
-          }
-        end
-
-        format.html { redirect_to '/admin/landing_pages', notice: 'Gallery was successfully created.' }
+        format.html { redirect_to '/admin', notice: 'Gallery was successfully created.' }
         format.json { render json: 'list', status: :created, location: @landing_page }
       else
         format.html { render action: "new" }
@@ -63,13 +55,13 @@ class LandingPagesController < ApplicationController
   def update
     respond_to do |format|
       if @landing_page.update(landing_page_params)
-        if params[:photos]
+        #if params[:photos]
           #===== The magic is here ;)
-          params[:photos].each { |photo|
-            @landing_page.banners.update(photo: photo)
-          }
-        end
-        format.html { redirect_to '/admin/landing_pages', notice: 'Landing page was successfully updated.' }
+          #params[:photos].each { |photo|
+        #@landing_page.update(params[:photos][:photo])
+         # }
+        #end
+        format.html { redirect_to '/admin', notice: 'Landing page was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -101,6 +93,6 @@ class LandingPagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landing_page_params
-      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos)
+      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, :banners_attributes)
     end
 end

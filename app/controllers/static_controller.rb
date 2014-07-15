@@ -15,4 +15,8 @@ class StaticController < ActionController::Base
   def about
     #@posts = Post.all
   end
+
+  def proximamente
+
+  end
 end

@@ -7,6 +7,8 @@ ComexUrbano::Application.routes.draw do
 
   devise_for :users
 
+  get '/proximamente' => 'static#proximamente'
+
 
   resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
 
