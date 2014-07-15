@@ -19,13 +19,26 @@
   }
 
   .description {
-    padding: 15px;
+    padding: 8px 15px;
     @include clearfix;
+  }
+
+  .category {
+    float: left;
+
+    p + p {
+      margin-top: 0;
+    }
+  }
+
+  .title {
+    float: right;
   }
 }
 
 .posts-list {
   .post {
+    padding-top: 15px;
     @include clearfix;
 
     .post-image {
@@ -43,8 +56,18 @@
       }
     }
 
+    .post-date {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .post-read-more {
+      margin-top: 9px;
+      display: block;
+    }
+
     & + .post {
-      margin-top: 40px;
+      margin-bottom: 12px;
     }
 
     @include max-screen(920px) {

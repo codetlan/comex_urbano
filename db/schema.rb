@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(version: 20140715043816) do
     t.string   "secondary_banner_content_type"
     t.integer  "secondary_banner_file_size"
     t.datetime "secondary_banner_updated_at"
-    t.integer  "category_id"
   end
 
   create_table "users", force: true do |t|
