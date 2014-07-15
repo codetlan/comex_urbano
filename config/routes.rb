@@ -1,49 +1,49 @@
 ComexUrbano::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  #resources :abouts
+  resources :abouts
 
 
-  #resources :roles
+  resources :roles
 
-  #devise_for :users
+  devise_for :users
 
-  #get '/proximamente' => 'static#proximamente'
-
-
-  #resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
-
-  #resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
-
-  #resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
-
-  #resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
-  #  get '/'  => 'videos#list', on: :collection
-  #end
-
-  #resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
-  #  get '/' => 'photos#list', on: :collection
-  #end
-
-  #resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
-  #  get '/' => 'posts#list', on: :collection
-  #end
-
-  #resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
-  #  get '/' => 'abouts#list', on: :collection
-  #end
-
-  #resources :videos, :photos, :posts, :abouts, only: [:index, :show]
+  get '/proximamente' => 'static#proximamente'
 
 
-  #resources :image
+  resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
 
-  #resources :banners
+  resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
+
+  resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
+
+  resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
+    get '/'  => 'videos#list', on: :collection
+  end
+
+  resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
+    get '/' => 'photos#list', on: :collection
+  end
+
+  resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
+    get '/' => 'posts#list', on: :collection
+  end
+
+  resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
+    get '/' => 'abouts#list', on: :collection
+  end
+
+  resources :videos, :photos, :posts, :abouts, only: [:index, :show]
+
+
+  resources :image
+
+  resources :banners
 
   #namespace :admin do
    # resources :videos
   #end
 
-  #get '/admin' => 'admin#index'
+  get '/admin' => 'admin#index'
 
 
 
@@ -51,7 +51,7 @@ ComexUrbano::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static#proximamente'
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
