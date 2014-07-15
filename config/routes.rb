@@ -1,43 +1,43 @@
 ComexUrbano::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  resources :abouts
+  #resources :abouts
 
 
-  resources :roles
+  #resources :roles
 
-  devise_for :users
+  #devise_for :users
 
   #get '/proximamente' => 'static#proximamente'
 
 
-  resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
+  #resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
 
-  resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
+  #resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
 
-  resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
+  #resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
 
-  resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
-    get '/'  => 'videos#list', on: :collection
-  end
+  #resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
+  #  get '/'  => 'videos#list', on: :collection
+  #end
 
-  resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
-    get '/' => 'photos#list', on: :collection
-  end
+  #resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
+  #  get '/' => 'photos#list', on: :collection
+  #end
 
-  resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
-    get '/' => 'posts#list', on: :collection
-  end
+  #resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
+  #  get '/' => 'posts#list', on: :collection
+  #end
 
-  resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
-    get '/' => 'abouts#list', on: :collection
-  end
+  #resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
+  #  get '/' => 'abouts#list', on: :collection
+  #end
 
-  resources :videos, :photos, :posts, :abouts, only: [:index, :show]
+  #resources :videos, :photos, :posts, :abouts, only: [:index, :show]
 
 
-  resources :image
+  #resources :image
 
-  resources :banners
+  #resources :banners
 
   #namespace :admin do
    # resources :videos
