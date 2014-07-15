@@ -7,7 +7,7 @@ ComexUrbano::Application.routes.draw do
 
   devise_for :users
 
-  get '/proximamente' => 'static#proximamente'
+  #get '/proximamente' => 'static#proximamente'
 
 
   resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
@@ -35,7 +35,7 @@ ComexUrbano::Application.routes.draw do
   resources :videos, :photos, :posts, :abouts, only: [:index, :show]
 
 
-
+  resources :image
 
   resources :banners
 
@@ -43,7 +43,7 @@ ComexUrbano::Application.routes.draw do
    # resources :videos
   #end
 
-  get '/admin' => 'admin#index'
+  #get '/admin' => 'admin#index'
 
 
 
@@ -51,7 +51,7 @@ ComexUrbano::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'static#proximamente'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

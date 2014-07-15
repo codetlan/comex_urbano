@@ -23,7 +23,7 @@
         <td><%= landing_page.vimeo %></td>
         <td><%= landing_page.copyright %></td>
         <td><%= landing_page.terms %></td>
-        <% landing_page.banners.each do |banner| %>
+        <% landing_page.images.each do |banner| %>
         <td><%= image_tag banner.photo.url(:thumb) %></td>
         <% end %>
         <td><%= link_to 'Edit', edit_landing_page_path(landing_page) %></td>
@@ -34,5 +34,7 @@
 </table>
 
 <br>
+
+
 
 <!--<= link_to 'New Landing page', new_landing_page_path %>-->

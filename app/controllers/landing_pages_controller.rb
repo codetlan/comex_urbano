@@ -10,6 +10,7 @@ class LandingPagesController < ApplicationController
     @landing_pages = LandingPage.all
     @categories = Category.all.where('active = ?', 1)
     @landing_page = LandingPage.first
+    @image = Image.new
   end
 
   # GET /landing_pages/1
@@ -25,13 +26,15 @@ class LandingPagesController < ApplicationController
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
 
-    @landing_page.banners.build
+    5.times { @landing_page.images.build }
   end
 
   # GET /landing_pages/1/edit
   def edit
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
+    @landing_page = LandingPage.find(params[:id])
+    5.times { @landing_page.images.build }
   end
 
   # POST /landing_pages
@@ -55,12 +58,6 @@ class LandingPagesController < ApplicationController
   def update
     respond_to do |format|
       if @landing_page.update(landing_page_params)
-        #if params[:photos]
-          #===== The magic is here ;)
-          #params[:photos].each { |photo|
-        #@landing_page.update(params[:photos][:photo])
-         # }
-        #end
         format.html { redirect_to '/admin', notice: 'Landing page was successfully updated.' }
         format.json { head :no_content }
       else
@@ -93,6 +90,6 @@ class LandingPagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landing_page_params
-      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, :banners_attributes)
+      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, images_attributes:[:photo, :landing_page_id])
     end
 end

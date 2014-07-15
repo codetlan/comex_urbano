@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715043816) do
+ActiveRecord::Schema.define(version: 20140715073649) do
 
   create_table "abouts", force: true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140715043816) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "landing_page_id"
   end
 
   create_table "banners", force: true do |t|
@@ -66,6 +67,16 @@ ActiveRecord::Schema.define(version: 20140715043816) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
+
+  create_table "images", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "landing_page_id"
+  end
 
   create_table "landing_pages", force: true do |t|
     t.string   "facebook"
@@ -129,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140715043816) do
     t.string   "secondary_banner_content_type"
     t.integer  "secondary_banner_file_size"
     t.datetime "secondary_banner_updated_at"
+    t.integer  "category_id"
   end
 
   create_table "users", force: true do |t|
