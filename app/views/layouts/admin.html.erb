@@ -10,7 +10,35 @@
       var CKEDITOR_BASEPATH = '/ckeditor/';
   </script>
 </head>
-<body>
+<body class="admin-page">
+
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="container">
+
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <%= link_to root_path, class: "navbar-brand" do %>
+        	<%= image_tag 'comex-urbano-logo.png' %>
+        <% end %>
+	    </div>
+
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	        <li>
+	        	<%= link_to destroy_user_session_path, method: :delete do %>
+	        		Salir <span class="glyphicon glyphicon-arrow-right"></span>
+	        	<% end %>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
 	<div class="container">
 		<div class="row">
 		  <div class="col-md-3">
