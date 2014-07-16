@@ -4,48 +4,30 @@
       <div class="col col-12">
         <div class="col-inner">
           <div class="slider">
-
-            <div class="featured-post">
-              <div class="image">
-                <%= link_to '/videos/1' do %>
-                    <i class="i play"></i>
-                    <%= image_tag 'placeholder/featured-image.jpg' %>
+            <% @landing_pages.each do |landing_page| %>
+                <% landing_page.images.each do |banner| %>
+                    <div class="featured-post">
+                      <div class="image">
+                        <%= link_to banner.link do %>
+                            <i class="i play"></i>
+                            <%= image_tag banner.photo.url(:original) %>
+                        <% end %>
+                      </div>
+                      <div class="description">
+                        <div class="category">
+                          <%= link_to banner.link do %>
+                              <p><%= banner.name %></p>
+                          <% end %>
+                        </div>
+                        <div class="title">
+                          <%= link_to banner.link do %>
+                              <p><%= banner.description %></p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
                 <% end %>
-              </div>
-              <div class="description">
-                <div class="category">
-                  <%= link_to '/videos/1' do %>
-                      <p>Festival Internacional Comex urbano</p>
-                  <% end %>
-                </div>
-                <div class="title">
-                  <%= link_to '/videos/1' do %>
-                    <p>FICU es un festival que da apertura al arte urbano y digital en México</p>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <div class="featured-post">
-              <div class="image">
-                <%= link_to '/videos/2' do %>
-                    <i class="i play"></i>
-                    <%= image_tag 'placeholder/featured-image2.jpg' %>
-                <% end %>
-              </div>
-              <div class="description">
-                <div class="category">
-                  <%= link_to '/videos/2' do %>
-                      <p>Festival Internacional Arte urbano</p>
-                  <% end %>
-                </div>
-                <div class="title">
-                  <%= link_to '/videos/2' do %>
-                      <p>FIC</p>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-
+            <% end %>
           </div>
         </div>
       </div>
@@ -115,6 +97,7 @@
                 <div class="post-va">
                   <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
                   <span class="post-date">11 sep 2014</span>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
                   <a class="post-read-more" href="/videos/1">Leer más</a>
@@ -131,6 +114,7 @@
                 <div class="post-va">
                   <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
                   <span class="post-date">11 sep 2014</span>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
                   <a class="post-read-more" href="/videos/1">Leer más</a>
@@ -147,6 +131,7 @@
                 <div class="post-va">
                   <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
                   <span class="post-date">11 sep 2014</span>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
                   <a class="post-read-more" href="/videos/1">Leer más</a>
@@ -163,6 +148,7 @@
                 <div class="post-va">
                   <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
                   <span class="post-date">11 sep 2014</span>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
                   <a class="post-read-more" href="/videos/1">Leer más</a>
@@ -179,6 +165,7 @@
                 <div class="post-va">
                   <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
                   <span class="post-date">11 sep 2014</span>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
                   <a class="post-read-more" href="/videos/1">Leer más</a>
@@ -195,6 +182,7 @@
                 <div class="post-va">
                   <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
                   <span class="post-date">11 sep 2014</span>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
                     quam. Praesent ut congue enim.</p>
                   <a class="post-read-more" href="/videos/1">Leer más</a>

@@ -5,7 +5,7 @@ class Image < ActiveRecord::Base
                     :styles => {
                         :thumb=> "100x100#",
                         :small  => "300x300>",
-                        :large => "600x600>"
+                        :large => "1228x396#"
                     }
 
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
