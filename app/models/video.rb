@@ -20,4 +20,9 @@ class Video < ActiveRecord::Base
       @link_id = "http://player.vimeo.com/video/"+$1
     end
   end
+
+  def youtube_id
+    regex = /youtube.com.*(?:\/|v=)([^&$]+)/
+    id = self.link.match(regex)[1]
+  end
 end
