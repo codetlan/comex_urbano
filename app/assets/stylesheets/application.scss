@@ -1,4 +1,7 @@
 
+$brand-primary: #000;
+$border-radius-base: 0px;
+
 // Dependencies
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -16,6 +19,10 @@
 @import "global/icons";
 @import "global/skeleton";
 @import "global/skin";
+
+// Admin
+@import "admin/skeleton";
+@import "admin/skin";
 
 // Home
 @import "home/skeleton";
