@@ -38,16 +38,18 @@
 
 .posts-list {
   .post {
-    padding-top: 15px;
+    padding: 11px 0;
     @include clearfix;
 
     .post-image {
       float: left;
+      height: 230px;
+      overflow: hidden;
     }
 
     .post-description {
-      margin-left: 340px;
-      height: 187px;
+      margin-left: 355px;
+      height: 230px;
       display: table;
 
       .post-va {
@@ -66,8 +68,8 @@
       display: block;
     }
 
-    & + .post {
-      margin-bottom: 12px;
+    &:first-child {
+      padding-top: 0;
     }
 
     @include max-screen(920px) {

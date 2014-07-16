@@ -117,7 +117,7 @@ img + img {
   }
 
   .social-links {
-    margin: 5px 120px 0 0px;
+    margin: 5px 170px 0 0px;
     float: left;
 
     ul li {
@@ -270,7 +270,7 @@ img + img {
     }
   }
 
-  @include max-screen(690px) {
+  @include max-screen(840px) {
     margin-bottom: 40px;
 
     .page-navigation {
@@ -311,12 +311,22 @@ img + img {
 }
 
 .ytube-subscribe {
-  margin-bottom: 25px;
+  margin: -10px 0 25px 0;
+  @include clearfix;
+
+  .fb-btn {
+    margin: 2px 5px 0 0;
+    float: right;
+  }
+
+  .ytube-btn {
+    float: right;
+  }
 }
 
 .side-lastest-videos {
   .label-videos {
-    padding: 5px;
+    padding: 2px 5px;
     margin-bottom: 10px;
   }
 
@@ -353,6 +363,7 @@ img + img {
 
   iframe {
     display: block;
+    height: 150px;
   }
 }
 
