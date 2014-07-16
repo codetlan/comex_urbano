@@ -1,0 +1,24 @@
+<fieldset>
+  <div class="field">
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :link %>
+    <br>
+    <%= f.text_field :link %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %>
+    <br>
+    <%= f.file_field :photo %>
+    <%= f.hidden_field :_destroy %>
+  </div>
+  <%= link_to "Eliminar Banner", "#", class: "remove_fields" %>
+</fieldset>
