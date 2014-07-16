@@ -1,6 +1,7 @@
 class BannersController < ApplicationController
   layout 'admin'
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, :only => [:index, :create, :destroy]
 
   # GET /roles
   # GET /roles.json
