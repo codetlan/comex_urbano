@@ -72,5 +72,34 @@ $(document).ready(function () {
 
     responsiveNavigation();
 
+    $('#edit_landing_page_1 .remove_fields').on('click', function (event) {
+        console.log($(this).prev('input[type=hidden]'));
+        $(this).prev('input[type=hidden]').val('1');
+        $(this).closest('fieldset').hide();
+        event.preventDefault();
+    });
+
+    $('#edit_landing_page_1 .add_fields').on('click', function (event) {
+        time = new Date().getTime();
+        regexp = new RegExp($(this).data('id'), 'g');
+        $(this).before($(this).data('fields').replace(regexp, time));
+        event.preventDefault()
+    });
+
+    $('#new_image').fileupload({
+        dataType: "script",
+        /*add: function (e, data) {
+            data.context = $(tmpl("template-upload", data.files[0]));
+            $('#new_image').append(data.context);
+            data.submit()
+        },*/
+        add: function (e, data) {
+            data.context = $('<p/>').text('Uploading...').appendTo('#new_image');
+            data.submit();
+        },
+        done: function (e, data) {
+            data.context.text('Upload finished.');
+        }
+    })
 })
 ;

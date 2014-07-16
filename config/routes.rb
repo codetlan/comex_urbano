@@ -35,7 +35,7 @@ ComexUrbano::Application.routes.draw do
   resources :videos, :photos, :posts, :abouts, only: [:index, :show]
 
 
-  resources :image
+  resources :images
 
   resources :banners
 
