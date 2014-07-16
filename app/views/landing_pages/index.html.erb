@@ -32,21 +32,3 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-<h1>Banners de Home</h1>
-
-<div id="paintings">
-  <%= render 'images/image' %>
-</div>
-<div class="clear"></div>
-<br>
-<div>
-  <%= form_for Image.new do |f| %>
-      <%= f.label :photo, "Subir Banner:" %>
-      <%= f.file_field :photo, multiple: true, name: "image[photo]" %>
-  <% end %>
-</div>
-
-<!--<= link_to 'New Landing page', new_landing_page_path %>-->

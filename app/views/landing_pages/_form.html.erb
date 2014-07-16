@@ -41,6 +41,14 @@
       <br>
       <%= f.text_field :terms %>
     </div>
+    <br>
+    <div>
+      <div>Agregar Banners</div><br>
+      <%= f.fields_for :images do |builder| %>
+          <%= render 'image_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Agregar Banner", f, :images %>
+    </div>
     <div class="actions">
       <%= f.submit %>
     </div>

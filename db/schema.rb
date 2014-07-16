@@ -20,16 +20,6 @@ ActiveRecord::Schema.define(version: 20140715073649) do
     t.datetime "updated_at"
   end
 
-  create_table "assets", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.integer  "landing_page_id"
-  end
-
   create_table "banners", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -71,6 +61,9 @@ ActiveRecord::Schema.define(version: 20140715073649) do
   create_table "images", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "description"
+    t.string   "link"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -126,9 +119,9 @@ ActiveRecord::Schema.define(version: 20140715073649) do
   end
 
   create_table "sections", force: true do |t|
-    t.string   "name"
-    t.text     "description"
     t.string   "title"
+    t.text     "description"
+    t.integer  "category_id"
     t.integer  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -140,7 +133,6 @@ ActiveRecord::Schema.define(version: 20140715073649) do
     t.string   "secondary_banner_content_type"
     t.integer  "secondary_banner_file_size"
     t.datetime "secondary_banner_updated_at"
-    t.integer  "category_id"
   end
 
   create_table "users", force: true do |t|
