@@ -19,7 +19,7 @@
         <td><%= video.name %></td>
         <td><%= video.description.html_safe %></td>
         <td>
-          <iframe width="300" height="200" src="<%= video.youtube_embed(video.link) %>"></iframe>
+          <iframe width="300" height="200" src="<%= video.link_embed(video.link) %>"></iframe>
         </td>
         <td><%= video.visit %></td>
         <td><%= video.active %></td>
