@@ -1,33 +1,46 @@
-<%= link_to 'Nuevo video', new_video_path %>
+<div class="clearfix">
+  <div class="pull-left">
+    <h2>Videos</h2>
+    <p>Agrega videos a la sección de videos.</p> 
+  </div>
+  <div class="pull-right">
+    <%= link_to new_video_path, class: "btn btn-primary" do %>
+      <span class="glyphicon glyphicon-plus">Nuevo</span>
+    <% end %>
+  </div>
+</div>
+
 
 <br><br>
 
-<table>
+<table class="table table-striped">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Titulo</th>
     <th>Link</th>
-    <th>Visit</th>
-    <th>Active</th>
-    <th></th>
-    <th></th>
+    <th>Visitas</th>
+    <th>Activo</th>
     <th></th>
   </tr>
   </thead>
-
   <tbody>
   <% @videos.each do |video| %>
       <tr>
         <td><%= video.name %></td>
-        <td><%= video.description.html_safe %></td>
-        <td>
-          <iframe width="300" height="200" src="<%= video.link_embed(video.link) %>"></iframe>
-        </td>
+        <td><%= video.link_embed(video.link) %></td>
         <td><%= video.visit %></td>
         <td><%= video.active %></td>
-        <td><%= link_to 'Edit', '/admin/videos/' + video.id.to_s + '/edit' %></td>
-        <td><%= link_to 'Destroy', video, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td>
+          <div class="btn-group btn-group-sm">
+            <%= link_to '/admin/videos/' + video.id.to_s + '/edit', class: "btn btn-default btn-lg" do %>
+              <span class="glyphicon glyphicon-pencil"></span> Editar
+            <% end %>
+            <%= link_to video, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
+              <span class="glyphicon glyphicon-trash"></span> Borrar
+            <% end %>
+          </div>
+        </td>
+    
       </tr>
   <% end %>
   </tbody>
