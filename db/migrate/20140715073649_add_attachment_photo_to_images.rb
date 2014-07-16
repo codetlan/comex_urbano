@@ -7,7 +7,7 @@ class AddAttachmentPhotoToImages < ActiveRecord::Migration
   end
 
   def self.down
-    drop_attached_file :images, :photo
+    drop_attached_file :image, :photo
     remove_column :images, :landing_page_id
   end
 end

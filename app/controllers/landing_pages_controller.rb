@@ -10,7 +10,7 @@ class LandingPagesController < ApplicationController
     @landing_pages = LandingPage.all
     @categories = Category.all.where('active = ?', 1)
     @landing_page = LandingPage.first
-    @image = Image.new
+    @images = Image.all
   end
 
   # GET /landing_pages/1
@@ -34,7 +34,7 @@ class LandingPagesController < ApplicationController
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
     @landing_page = LandingPage.find(params[:id])
-    5.times { @landing_page.images.build }
+   #1.times { @landing_page.images.build }
   end
 
   # POST /landing_pages
@@ -90,6 +90,6 @@ class LandingPagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landing_page_params
-      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, images_attributes:[:photo, :landing_page_id])
+      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, images_attributes:[:id, :photo, :_destroy])
     end
 end

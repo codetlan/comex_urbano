@@ -9,4 +9,8 @@ class Image < ActiveRecord::Base
                     }
 
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+  def default_name
+    self.name ||= File.basename(photo.filename, '.*').titleize if image
+  end
 end
