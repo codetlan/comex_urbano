@@ -1,16 +1,46 @@
 class BannersController < ApplicationController
+  layout 'admin'
+  before_action :set_banner, only: [:show, :edit, :update, :destroy]
+
+  # GET /roles
+  # GET /roles.json
+  def index
+    @banners = Banner.all
+  end
+
   def create
-    @banner = Banner.new(params[:photo])
+    @banner = Banner.new(banner_params)
 
     respond_to do |format|
-      if @photo.save format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json {
-          data = {thumb: view_context.image_tag(@banner.photo.url(:thumb))}
-          render json: data, status: :created, location: @banner }
+      if @banner.save
+        format.html { redirect_to '/admin/banners', notice: 'Role was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @banners }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @banner.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # DELETE /roles/1
+  # DELETE /roles/1.json
+  def destroy
+    @banner.destroy
+    respond_to do |format|
+      format.html { redirect_to '/admin/banners' }
+      format.json { head :no_content }
+    end
+  end
+
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_banner
+    @banner = Banner.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def banner_params
+    params.require(:banner).permit(:photo, :landing_page_id)
   end
 end

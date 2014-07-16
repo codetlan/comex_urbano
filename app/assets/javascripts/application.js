@@ -88,7 +88,7 @@ $(document).ready(function () {
         event.preventDefault()
     });
 
-    $('#new_image').fileupload({
+    $('#new_banner').fileupload({
         dataType: "script",
         /*add: function (e, data) {
             data.context = $(tmpl("template-upload", data.files[0]));
@@ -96,7 +96,7 @@ $(document).ready(function () {
             data.submit()
         },*/
         add: function (e, data) {
-            data.context = $('<p/>').text('Uploading...').appendTo('#new_image');
+            data.context = $('<p/>').text('Uploading...').appendTo('#new_banner');
             data.submit();
         },
         done: function (e, data) {

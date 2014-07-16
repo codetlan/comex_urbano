@@ -45,6 +45,8 @@ ComexUrbano::Application.routes.draw do
 
   get '/admin' => 'admin#index'
 
+  get '/admin/banners' => 'banners#index'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -215,16 +215,13 @@
                   </div>
               <% end %>
               <div class="ads-list">
-                <div class="ad">
-                  <%= link_to '#' do %>
-                      <%= image_tag 'placeholder/placead1.jpg' %>
-                  <% end %>
-                </div>
-                <div class="ad">
-                  <%= link_to '#' do %>
-                      <%= image_tag 'placeholder/placead2.jpg' %>
-                  <% end %>
-                </div>
+                <% @banners.each do |banner| %>
+                    <div class="ad">
+                      <%= link_to '#' do %>
+                          <%= image_tag banner.photo.url %>
+                      <% end %>
+                    </div>
+                <% end %>
               </div>
             </div>
           </div>

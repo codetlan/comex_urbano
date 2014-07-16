@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
     @videos = Video.all
+    @banners = Banner.all
   end
 
 end

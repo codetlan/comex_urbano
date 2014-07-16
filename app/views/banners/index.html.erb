@@ -1,0 +1,16 @@
+<div class="clearfix admin-head">
+  <div class="pull-left">
+    <h1>Banners</h1>
+    <p>Sube nuevos banners al sitio web.</p>
+  </div>
+</div>
+
+<div id="paintings">
+  <%= render 'banners/banner' %>
+</div>
+<div class="clear"></div>
+
+<%= form_for Banner.new do |f| %>
+    <%= f.label :photo, "Upload paintings:" %>
+    <%= f.file_field :photo, multiple: true, name: "banner[photo]" %>
+<% end %>
