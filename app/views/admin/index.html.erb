@@ -1,15 +1,7 @@
 <% if user_signed_in? %>
-    <div class="wrapper">
-      <div class="cols-12">
-        <div class="col col-10">
-          <div class="col-inner">
-            <%= render :template => "landing_pages/list" %>
-          </div>
-        </div>
-      </div>
-    </div>
+  <%= render :template => "landing_pages/list" %>
 <% else %>
-    <li>
-      <%= render :template => "devise/sessions/new" %>
-    </li>
+  <li>
+    <%= render :template => "devise/sessions/new" %>
+  </li>
 <% end %>

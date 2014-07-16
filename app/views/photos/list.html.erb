@@ -1,28 +1,33 @@
-<%= link_to 'Nueva Imagen', new_photo_path %>
+<div class="clearfix admin-head">
+  <div class="pull-left">
+    <h1>Galeria</h1>
+    <p>Sube nuevas imagenes a la galeria.</p> 
+  </div>
+  <div class="pull-right">
+    <%= link_to new_photo_path, class: "btn btn-primary" do %>
+      <span class="glyphicon glyphicon-plus">Nueva</span>
+    <% end %>
+  </div>
+</div>
 
-<br><br>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Image</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody>
+<div class="row">
   <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.name %></td>
-        <td><%= photo.description %></td>
-        <td><%= image_tag photo.image.url(:square) %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      </tr>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <%= image_tag photo.image.url(:square) %>
+        <div class="caption">
+          <h3><%= photo.name %></h3>
+          <p><%= photo.description %></p>
+          <div class="btn-group btn-group-xs">
+            <%= link_to edit_photo_path(photo), class: "btn btn-default btn-lg" do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to photo, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-  </tbody>
-</table>
+</div>
