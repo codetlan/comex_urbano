@@ -38,7 +38,7 @@
               <div class="navigation">
                 <ul>
                   <% @categories.each do |category| %>
-                      <li><%= link_to category.name, '/' + category.link %></li>
+                      <li><%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '' %> %></li>
                   <% end %>
                 </ul>
               </div>

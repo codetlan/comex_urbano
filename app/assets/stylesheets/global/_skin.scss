@@ -71,6 +71,10 @@ p {
         font-family: $font-bold;
         text-transform: uppercase;
         font-size: 12px;
+
+        &.active {
+          font-family: $font-black;
+        }
       }
     }
   }
