@@ -36,9 +36,25 @@
           <div class="col-inner">
             <div class="site-navigation">
               <div class="navigation">
-                <ul>
+                <ul class="nav-list">
                   <% @categories.each do |category| %>
-                      <li><%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '' %> %></li>
+                      <li>
+                        <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '' %>
+                        <% unless category.sections.empty? %>
+                          <div class="nav-dropdown">
+                            <div class="nav-dropdown-padding">
+                              <ul>
+                                <% category.sections.each_with_index do |section, index| %>
+                                  <li><%= link_to section.title, '#' %></li>
+                                  <% unless index == category.sections.size - 1 %>
+                                    <li class="separator"><%= image_tag 'dropdown-separator.png' %></li>
+                                  <% end %>
+                                <% end %>
+                              </ul>
+                            </div>
+                          </div>
+                        <% end %>
+                      </li>
                   <% end %>
                 </ul>
               </div>

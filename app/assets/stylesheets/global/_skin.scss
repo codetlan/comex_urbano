@@ -41,6 +41,7 @@ h6 {
 
 a {
   color: #0079bc;
+  text-decoration: none !important;
 }
 
 p {
@@ -63,7 +64,7 @@ p {
   background: rgba(0,0,0,.77);
 
   .navigation {
-    ul li {
+    .nav-list > li {
       list-style: none;
 
       a {
@@ -74,6 +75,28 @@ p {
 
         &.active {
           font-family: $font-black;
+        }
+      }
+
+      .nav-dropdown {
+
+        ul {
+          list-style: none;
+          background: #000;
+          background: rgba(0,0,0,.9);
+          text-align: center;
+          border: 1px solid $white-color;
+        }
+
+        a {
+          text-transform: none;
+          color: $white-color;
+          font-size: 9px;
+          font-family: $font-bold;
+
+          &:hover {
+            background: #636363
+          }
         }
       }
     }
@@ -131,11 +154,12 @@ p {
 
         a {
           color: $black-color;
-          font-family: $font-black;
+          font-family: $font-bold;
           text-transform: uppercase;
           @include text-size-x-small;
 
           &.active {
+            font-family: $font-black;
             border-bottom: 10px solid $black-color;
           } 
         }
