@@ -24,12 +24,16 @@
     <div class="field">
       <%= f.label :description %>
       <br>
-      <%= f.cktext_area :description, :class => 'someclass', :cols => 10, :ckeditor => {:language => 'es', :toolbar => 'mini'} %>
+      <%= f.text_area :description, :class => 'ckeditor' %>
     </div>
     <div class="field">
       <%= f.label :image %>
       <br/>
       <%= f.file_field :image %>
+    </div>
+    <div class="field">
+      <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+      <%= f.text_field :tag_list %>
     </div>
     <div class="field">
       <%= f.label :active %>

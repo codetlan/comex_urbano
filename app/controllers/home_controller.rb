@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @landing_pages = LandingPage.all
     @videos = Video.all
     @banners = Banner.all
+    @posts = Post.all
   end
 
 end

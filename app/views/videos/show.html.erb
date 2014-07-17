@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <div class="post-show-header-wrap">
   <div class="wrapper">
     <div class="cols-12">
@@ -11,7 +10,7 @@
             <div class="post-desc">
               <div class="post-desc-inner">
                 <h1><%= @video.name %></h1>
-                <p><%= @video.description %></p>
+                <p><%= truncate_html(@video.description) %></p>
                 <div class="share-links">
                   <span class='st_fblike_hcount' displayText='Facebook Like'></span>
                   <span class='st_twitter_hcount' displayText='Tweet'></span>
@@ -33,24 +32,13 @@
         <div class="col-inner">
           <div class="title-page">
             <h1><%= @video.name %></h1>
-            <h4>Festival Internacional</h4>
-            <h4>Comex Urbano</h4>
           </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt quam. Praesent ut congue enim. Nulla sed ultrices nunc. Nunc pharetra tristique magna, id tincidunt nisl venenatis at. Aliquam mollis diam vel velit interdum faucibus. Aenean purus nulla, pharetra vel molestie quis, pretium a nulla. Donec non urna et nulla iaculis euismod et id nulla.</p>
-          <%= image_tag 'sections/post-show-1.jpg' %>
-
-          <p>Vivamus condimentum tempor accumsan. Duis eget elit imperdiet, elementum quam at, interdum neque. In condimentum est in lacinia volutpat. In a sollicitudin nisi, a volutpat nunc. Cras sit amet orci congue, fermentum nisl vel, posuere velit. Suspendisse a orci ac mi convallis rhoncus et quis odio. Nunc at leo sem. Mauris non tristique mi.</p>
-
-          <p>Nam consectetur auctor mi ut bibendum. Donec elementum mi libero, ut vestibulum dolor lobortis quis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam sollicitudin sem eu sem tristique convallis. Proin quis risus eleifend, ornare urna in, eleifend tortor. Aliquam quis semper arcu. Quisque facilisis leo ut eros suscipit laoreet. Integer pretium urna eget tristique ullamcorper. Mauris aliquet vitae tortor eu dignissim. Suspendisse volutpat id neque et pretium. Sed dapibus, velit ut cursus faucibus, purus dolor tempor mauris, varius dictum risus tortor cursus tortor.</p>
+          <p><%= @video.content.present? ? @video.content.html_safe : '' %></p>
 
           <div class="post-meta">
             <div class="tags">
               Tags:
-              <a href="#">ficu</a>,
-              <a href="#">skinpop</a>,
-              <a href="#">ilustración</a>,
-              <a href="#">arte</a>,
-              <a href="#">urbano</a>
+              <%= raw @video.tag_list.map { |t| link_to t, tag_video_path(t) }.join(', ') %>
             </div>
             <div class="share-links">
               <span class='st_fblike_hcount' displayText='Facebook Like'></span>

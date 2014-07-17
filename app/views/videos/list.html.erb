@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <div class="clearfix admin-head">
   <div class="pull-left">
     <h1>Videos</h1>
@@ -18,8 +19,8 @@
           <img src="http://img.youtube.com/vi/<%= video.youtube_id %>/0.jpg" alt="">
         <% end %>
         <div class="caption">
-          <h3><%= video.name %></h3>
-          <p><%= video.description %> <br>
+          <h3><%= video.name %></h3><br>
+          <p><%= video.description.html_safe %> <br>
           Visitas: <%= video.visit %> <br>
           Publicado: <%= video.active %></p>
           <div class="btn-group btn-group-xs">

@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <%= link_to 'Nuevo Post', new_post_path %>
 
 <br><br>
@@ -8,7 +10,7 @@
     <th>Title</th>
     <th>Introduction</th>
     <th>Description</th>
-    <th>Active</th>
+    <th>Tags:</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,6 +23,7 @@
         <td><%= post.title %></td>
         <td><%= post.introduction %></td>
         <td><%= post.description.html_safe %></td>
+        <td><%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>

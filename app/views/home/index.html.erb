@@ -87,108 +87,24 @@
             <h1>Lo nuevo</h1>
           </div>
           <div class="posts-list">
-            <div class="post">
-              <div class="post-image">
-                <%= link_to '/videos/1' do %>
-                    <%= image_tag 'placeholder/post2.jpg' %>
-                <% end %>
-              </div>
-              <div class="post-description">
-                <div class="post-va">
-                  <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
-                  <span class="post-date">11 sep 2014</span>
+            <% @posts.each do |post| %>
+                <div class="post">
+                  <div class="post-image">
+                    <%= link_to '/posts/'+post.id.to_s do %>
+                        <%= image_tag post.image.url %>
+                    <% end %>
+                  </div>
+                  <div class="post-description">
+                    <div class="post-va">
+                      <a href="/posts/<%= post.id.to_s %>" class="post-title"><%= post.title %></a>
+                      <span class="post-date">11 sep 2014</span>
 
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
-                    quam. Praesent ut congue enim.</p>
-                  <a class="post-read-more" href="/videos/1">Leer más</a>
+                      <p><%= truncate_html(post.introduction, 189, '-') %></p>
+                      <a class="post-read-more" href="/posts/<%= post.id.to_s %>">Leer más</a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-image">
-                <%= link_to '/videos/2' do %>
-                    <%= image_tag 'placeholder/post1.jpg' %>
-                <% end %>
-              </div>
-              <div class="post-description">
-                <div class="post-va">
-                  <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
-                  <span class="post-date">11 sep 2014</span>
-
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
-                    quam. Praesent ut congue enim.</p>
-                  <a class="post-read-more" href="/videos/1">Leer más</a>
-                </div>
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-image">
-                <%= link_to '#' do %>
-                    <%= image_tag 'placeholder/post3.jpg' %>
-                <% end %>
-              </div>
-              <div class="post-description">
-                <div class="post-va">
-                  <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
-                  <span class="post-date">11 sep 2014</span>
-
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
-                    quam. Praesent ut congue enim.</p>
-                  <a class="post-read-more" href="/videos/1">Leer más</a>
-                </div>
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-image">
-                <%= link_to '#' do %>
-                    <%= image_tag 'placeholder/post4.jpg' %>
-                <% end %>
-              </div>
-              <div class="post-description">
-                <div class="post-va">
-                  <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
-                  <span class="post-date">11 sep 2014</span>
-
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
-                    quam. Praesent ut congue enim.</p>
-                  <a class="post-read-more" href="/videos/1">Leer más</a>
-                </div>
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-image">
-                <%= link_to '#' do %>
-                    <%= image_tag 'placeholder/post5.jpg' %>
-                <% end %>
-              </div>
-              <div class="post-description">
-                <div class="post-va">
-                  <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
-                  <span class="post-date">11 sep 2014</span>
-
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
-                    quam. Praesent ut congue enim.</p>
-                  <a class="post-read-more" href="/videos/1">Leer más</a>
-                </div>
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-image">
-                <%= link_to '#' do %>
-                    <%= image_tag 'placeholder/post6.jpg' %>
-                <% end %>
-              </div>
-              <div class="post-description">
-                <div class="post-va">
-                  <a href="/videos/1" class="post-title">Festival Internacional <br> Comex urbano</a>
-                  <span class="post-date">11 sep 2014</span>
-
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis adipiscing nibh, ut tincidunt
-                    quam. Praesent ut congue enim.</p>
-                  <a class="post-read-more" href="/videos/1">Leer más</a>
-                </div>
-              </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>

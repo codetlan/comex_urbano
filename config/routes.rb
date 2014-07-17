@@ -47,6 +47,10 @@ ComexUrbano::Application.routes.draw do
 
   get '/admin/banners' => 'banners#index'
 
+  get 'tags/:tag', to: 'posts#index', as: :tag
+
+  get 'videos/tags/:tag', to: 'videos#index', as: :tag_video
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

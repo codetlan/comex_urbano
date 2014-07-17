@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   layout 'admin', :only => [:list, :new, :edit]
 
-  before_filter :authenticate_user!, :only => [:list, :new, :edit, :show]
+  before_filter :authenticate_user!, :only => [:list, :new, :edit]
   #filter_resource_access
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -9,7 +9,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #@posts = Post.all
-    @posts = Post.search(params[:search])
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag])
+    else
+      @posts = Post.search(params[:search])
+    end
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
   end
@@ -80,13 +84,13 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :introduction, :description, :active, :image)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :introduction, :description, :active, :image, :tag_list)
+  end
 end

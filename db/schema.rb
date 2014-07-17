@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715073649) do
+ActiveRecord::Schema.define(version: 20140717022951) do
 
   create_table "abouts", force: true do |t|
     t.string   "name"
@@ -59,13 +59,16 @@ ActiveRecord::Schema.define(version: 20140715073649) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
   create_table "images", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "description"
+    t.string   "link"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "landing_page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "landing_pages", force: true do |t|
@@ -132,6 +135,24 @@ ActiveRecord::Schema.define(version: 20140715073649) do
     t.datetime "secondary_banner_updated_at"
   end
 
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -153,6 +174,7 @@ ActiveRecord::Schema.define(version: 20140715073649) do
   create_table "videos", force: true do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "content"
     t.string   "link"
     t.integer  "visit"
     t.integer  "active"

@@ -46,11 +46,7 @@
           <div class="post-meta">
             <div class="tags">
               Tags:
-              <a href="#">ficu</a>,
-              <a href="#">skinpop</a>,
-              <a href="#">ilustración</a>,
-              <a href="#">arte</a>,
-              <a href="#">urbano</a>
+              <%= raw @photo.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
             </div>
             <div class="share-links">
               <span class='st_fblike_hcount' displayText='Facebook Like'></span>

@@ -8,7 +8,11 @@ class VideosController < ApplicationController
   # GET /videos.json
   def index
     #@videos = Video.all
-    @videos = Video.search(params[:search])
+    if params[:tag]
+      @videos = Video.tagged_with(params[:tag])
+    else
+      @videos = Video.search(params[:search])
+    end
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
     @section = Section.joins(:category).where('categories.name = ?', 'Videos').order('sections.created_at ASC').limit(1)
@@ -71,7 +75,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/videos'}
+      format.html { redirect_to '/admin/videos' }
       format.json { head :no_content }
     end
   end
@@ -81,14 +85,14 @@ class VideosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_video
-      @video = Video.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_video
+    @video = Video.find(params[:id])
 
-    end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def video_params
-      params.require(:video).permit(:name, :description, :link, :visit, :active, :section_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def video_params
+    params.require(:video).permit(:name, :description, :content, :link, :visit, :active, :section_id, :tag_list)
+  end
 end

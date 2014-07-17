@@ -1,5 +1,6 @@
 class Video < ActiveRecord::Base
   belongs_to :section
+  acts_as_taggable
 
   def self.search(search)
     if search

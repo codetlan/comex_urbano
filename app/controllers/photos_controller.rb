@@ -8,7 +8,11 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     #@photos = Photo.all
-    @photos = Photo.search(params[:search])
+    if params[:tag]
+      @photos = Photo.tagged_with(params[:tag])
+    else
+      @photos = Photo.search(params[:search])
+    end
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
     @section = Section.joins(:category).where('categories.name = ?', 'Galeria')
@@ -80,13 +84,13 @@ class PhotosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def photo_params
-      params.require(:photo).permit(:name, :description, :image, :visit, :active)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def photo_params
+    params.require(:photo).permit(:name, :description, :image, :visit, :active, :tag_list)
+  end
 end
