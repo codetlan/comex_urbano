@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 20140717022951) do
   create_table "videos", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "content"
+    t.text     "content"
     t.string   "link"
     t.integer  "visit"
     t.integer  "active"
