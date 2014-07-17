@@ -112,34 +112,7 @@
         <div class="col-inner">
           <div class="sidebar">
             <%= render partial: 'shared/youtube_subscribe' %>
-            <div class="side-lastest-videos">
-              <div class="label-videos">
-                <h6>Últimos</h6>
-              </div>
-              <% @videos.each do |video| %>
-                  <div class="video-box">
-                    <div class="video">
-                      <%= link_to '#' do %>
-                          <!--<i class="i play"></i>--<
-                          <!--<= image_tag 'placeholder/vid1.jpg' %>-->
-                          <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
-                      <% end %>
-                    </div>
-                    <div class="video-description">
-                      <%= link_to video.name, '#' %>
-                    </div>
-                  </div>
-              <% end %>
-              <div class="ads-list">
-                <% @banners.each do |banner| %>
-                    <div class="ad">
-                      <%= link_to '#' do %>
-                          <%= image_tag banner.photo.url %>
-                      <% end %>
-                    </div>
-                <% end %>
-              </div>
-            </div>
+            <%= render partial: 'shared/latest_videos', locals: { videos: true, banners: true } %>
           </div>
         </div>
       </div>
