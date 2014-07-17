@@ -1,0 +1,33 @@
+<div class="side-lastest-videos">
+  <% if videos %>
+    <div class="label-videos">
+      <h6>Últimos</h6>
+    </div>
+    <% latest_videos.each do |video| %>
+        <div class="video-box">
+          <div class="video">
+            <%= link_to '#' do %>
+                <!--<i class="i play"></i>--<
+                <!--<= image_tag 'placeholder/vid1.jpg' %>-->
+                <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
+            <% end %>
+          </div>
+          <div class="video-description">
+            <%= link_to video.name, '#' %>
+          </div>
+        </div>
+    <% end %>  
+  <% end %>
+  
+  <% if banners %>
+    <div class="ads-list">
+      <% site_banners.each do |banner| %>
+          <div class="ad">
+            <%= link_to '#' do %>
+              <%= image_tag banner.photo.url %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -308,3 +308,18 @@ p {
     color: $blue-color;
   }
 }
+
+.section-heading {
+  .section-heading-description {
+    background: #000;
+    background: rgba(0,0,0,.7);
+
+    .section-heading-description-inner {
+      p {
+        color: $white-color;
+        @include text-size-large; 
+      }
+    }
+  }
+
+}

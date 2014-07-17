@@ -11,4 +11,12 @@ module ApplicationHelper
   def human_date(date)
   	date.strftime('%e de %B del %Y')
   end
+
+  def latest_videos
+    @videos = Video.all
+  end
+
+  def site_banners
+    @banners = Banner.all
+  end
 end
