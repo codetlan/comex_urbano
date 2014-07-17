@@ -1,6 +1,6 @@
 <div class="list-group">
-  <%= link_to 'Menu', '/admin/categories', class: request.fullpath == "/admin/categories" ? "active list-group-item" : "list-group-item" %>
   <%= link_to 'Home', '/admin', class: request.fullpath == '/admin' ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Menu', '/admin/categories', class: request.fullpath == "/admin/categories" ? "active list-group-item" : "list-group-item" %>
   <%= link_to 'Videos', '/admin/videos', class: request.fullpath == '/admin/videos' ? 'active list-group-item' : 'list-group-item' %>
   <%= link_to 'Galeria', '/admin/photos', class: request.fullpath == '/admin/photos' ? 'active list-group-item' : 'list-group-item' %>
   <%= link_to 'Blog', '/admin/posts', class: request.fullpath == '/admin/posts' ? 'active list-group-item' : 'list-group-item' %>
