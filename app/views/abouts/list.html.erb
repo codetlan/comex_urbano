@@ -1,25 +1,20 @@
-<%= link_to 'Nueva Pregunta', new_about_path %>
+<div class="clearfix admin-head">
+  <div class="pull-left">
+    <h1>Secciones de acerca de Comex Urbano</h1>
+  </div>
+</div>
 
-<br><br>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @abouts.each do |about| %>
-      <tr>
-        <td><%= about.name %></td>
-        <td><%= about.description.html_safe %></td>
-        <td><%= link_to 'Edit', edit_about_path(about) %></td>
-        <td><%= link_to 'Destroy', about, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<% @abouts.each do |about| %>
+  <h3><%= about.name %></h3>
+  <%= truncate(strip_tags(about.description.html_safe), length: 200, omission: '... (continued)') %>
+  <br>
+  <div class="btn-group btn-group-xs">
+    <%= link_to edit_about_path(about), class: "btn btn-default btn-lg" do %>
+      <span class="glyphicon glyphicon-pencil"></span> Editar sección
+    <% end %>
+    <%= link_to about, method: :delete, data: {confirm: '¿Esta seguro de borrar?'}, class: "btn btn-default btn-lg" do %>
+      <span class="glyphicon glyphicon-trash"></span> Borrar sección
+    <% end %>
+  </div>
+  <br><br><br>
+<% end %>
