@@ -513,3 +513,18 @@ img + img {
 .about-page-intro {
   margin-bottom: 50px;
 }
+
+/* In your CSS */
+.Collage{
+
+  /* define how much padding you want in between your images */
+  padding:2px;
+
+}
+
+.Collage img{
+
+  /* ensures padding at the bottom of the image is correct */
+  vertical-align:bottom;
+
+}

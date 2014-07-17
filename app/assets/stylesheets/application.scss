@@ -32,17 +32,3 @@ $border-radius-base: 0px;
 @import "comming/skeleton";
 @import "comming/skin";
 
-/* In your CSS */
-.Collage{
-
-  /* define how much padding you want in between your images */
-  padding:2px;
-
-}
-
-.Collage img{
-
-  /* ensures padding at the bottom of the image is correct */
-  vertical-align:bottom;
-
-}
