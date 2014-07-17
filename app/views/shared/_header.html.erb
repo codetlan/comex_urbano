@@ -45,7 +45,7 @@
                             <div class="nav-dropdown-padding">
                               <ul>
                                 <% category.sections.each_with_index do |section, index| %>
-                                  <li><%= link_to section.title, '#' %></li>
+                                  <li><%= link_to section.title, '/'+category.link+'/section/'+section.id.to_s %></li>
                                   <% unless index == category.sections.size - 1 %>
                                     <li class="separator"><%= image_tag 'dropdown-separator.png' %></li>
                                   <% end %>

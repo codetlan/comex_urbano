@@ -15,7 +15,11 @@ class PhotosController < ApplicationController
     end
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
-    @section = Section.joins(:category).where('categories.name = ?', 'Galeria')
+    if params[:section_id].present?
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'photos')
+    else
+      @section = Section.joins(:category).where('categories.link = ?', 'photos').order('sections.created_at ASC').limit(1)
+    end
   end
 
   # GET /photos/1
@@ -29,14 +33,12 @@ class PhotosController < ApplicationController
   # GET /photos/new
   def new
     @photo = Photo.new
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
+    @section = Section.joins(:category).where('categories.link = ?', 'photos')
   end
 
   # GET /photos/1/edit
   def edit
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
+    @section = Section.joins(:category).where('categories.link = ?', 'photos')
   end
 
   # POST /photos
@@ -91,6 +93,6 @@ class PhotosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def photo_params
-    params.require(:photo).permit(:name, :description, :image, :visit, :active, :tag_list)
+    params.require(:photo).permit(:name, :description, :image, :visit, :active, :section_id, :tag_list)
   end
 end

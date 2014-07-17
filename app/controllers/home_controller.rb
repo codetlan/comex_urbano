@@ -8,5 +8,4 @@ class HomeController < ApplicationController
     @banners = Banner.all
     @posts = Post.all
   end
-
 end

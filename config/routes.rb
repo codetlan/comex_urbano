@@ -51,6 +51,10 @@ ComexUrbano::Application.routes.draw do
 
   get 'videos/tags/:tag', to: 'videos#index', as: :tag_video
 
+  get 'photos/section/:section_id', to: 'photos#index', as: :photos_section
+
+  get 'videos/section/:section_id', to: 'videos#index', as: :videos_section
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

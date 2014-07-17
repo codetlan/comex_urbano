@@ -57,39 +57,15 @@
     <%= render partial: 'shared/section_youtube_subscribe' %>
     <div class="videos-list">
       <div class="wrapper">
-        <div class="cols-12">
-          <% section.photos.each do |photo| %>
-              <div class="col col-4">
-                <div class="col-inner">
-                  <div class="video-box">
-                    <div class="video">
-                      <%= link_to '/photos/'+photo.id.to_s do %>
-                          <!--<i class="i play"></i>-->
-
-                      <% end %>
-                    </div>
-                    <div class="video-description">
-                      <%= link_to '/photos/'+photo.id.to_s do %>
-                          <h3>photo</h3>
-                          <%= truncate_html(photo.description) %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+        <div class="cols-12 Collage">
+          <% section.photos.each_with_index do |photo, index| %>
+              <div class="video">
+                <%= link_to '/photos/'+photo.id.to_s do %>
+                    <!--<i class="i play"></i>-->
+                    <%= image_tag photo.image.url %>
+                <% end %>
               </div>
           <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="wrapper">
-      <div class="cols-12">
-        <div class="col col-12">
-          <div class="col-inner">
-            <div class="title-page">
-              <h1><%= section.title %></h1>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -97,16 +73,10 @@
     <div class="main-content">
       <div class="wrapper">
         <div class="cols-12">
-          <div class="col col-9">
-            <div class="col-inner">
-              <!--<= image_tag 'sections/arte-urbano.jpg' %>-->
-              <%= section.description.html_safe %>
-            </div>
-          </div>
           <div class="col col-3">
             <div class="col-inner">
               <div class="sidebar">
-                <%= render partial: 'shared/latest_videos', locals: { videos: false, banners: true } %>
+                <%= render partial: 'shared/latest_videos', locals: {videos: false, banners: false} %>
               </div>
             </div>
           </div>

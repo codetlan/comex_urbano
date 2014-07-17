@@ -20,6 +20,10 @@
 //= require_tree .
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require jquery.collageCaption
+//= require jquery.collagePlus
+//= require jquery.removeWhitespace
+//= require ckeditor/adapters/jquery
 
 
 function responsiveNavigation() {
@@ -34,6 +38,8 @@ function responsiveNavigation() {
 }
 
 $(document).ready(function () {
+    $('textarea.ckeditor').ckeditor();
+
     $("#videos_search input").keyup(function () {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
         return false;
@@ -91,10 +97,10 @@ $(document).ready(function () {
     $('#new_banner').fileupload({
         dataType: "script",
         /*add: function (e, data) {
-            data.context = $(tmpl("template-upload", data.files[0]));
-            $('#new_image').append(data.context);
-            data.submit()
-        },*/
+         data.context = $(tmpl("template-upload", data.files[0]));
+         $('#new_image').append(data.context);
+         data.submit()
+         },*/
         add: function (e, data) {
             data.context = $('<p/>').text('Uploading...').appendTo('#new_banner');
             data.submit();
@@ -102,6 +108,23 @@ $(document).ready(function () {
         done: function (e, data) {
             data.context.text('Upload finished.');
         }
-    })
-})
-;
+    });
+
+    collage();
+
+    var resizeTimer = null;
+    $(window).bind('resize', function () {
+// set a timer to re-apply the plugin
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(collage, 200);
+    });
+});
+
+function collage() {
+    $('.Collage').removeWhitespace().collagePlus(
+        {
+            'fadeSpeed': 2000,
+            'targetHeight': 200
+        }
+    ).collageCaption();
+};

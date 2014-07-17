@@ -15,7 +15,11 @@ class VideosController < ApplicationController
     end
     @categories = Category.all.where('active = ?', 1)
     @landing_pages = LandingPage.all
-    @section = Section.joins(:videos, :category).where('categories.name = ?', 'Videos').order('sections.created_at ASC').limit(1)
+    if params[:section_id].present?
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
+    else
+      @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').limit(1)
+    end
   end
 
   # GET /videos/1
@@ -29,15 +33,13 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
+    @section = Section.joins(:category).where('categories.link = ?', 'videos')
     @video = Video.new
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
   end
 
   # GET /videos/1/edit
   def edit
-    @categories = Category.all.where('active = ?', 1)
-    @landing_page = LandingPage.first
+    @section = Section.joins(:category).where('categories.link = ?', 'videos')
   end
 
   # POST /videos

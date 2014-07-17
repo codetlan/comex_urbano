@@ -7,8 +7,6 @@ class LandingPagesController < ApplicationController
   # GET /landing_pages
   # GET /landing_pages.json
   def index
-    @landing_pages = LandingPage.all
-    @categories = Category.all.where('active = ?', 1)
     @landing_page = LandingPage.first
     @images = Image.all
   end

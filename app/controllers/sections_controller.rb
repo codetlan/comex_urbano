@@ -8,7 +8,9 @@ class SectionsController < ApplicationController
   # GET /sections
   # GET /sections.json
   def index
-    @sections = Section.all
+    @sections_videos = Section.joins(:category).where('categories.link = ?', 'videos')
+    @sections_photos = Section.joins(:category).where('categories.link = ?', 'photos')
+
     @categories = Category.all.where('active = ?', 1)
     @landing_page = LandingPage.first
   end

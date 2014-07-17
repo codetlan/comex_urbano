@@ -106,18 +106,7 @@
           <div class="col col-3">
             <div class="col-inner">
               <div class="sidebar">
-                <div class="ads-list">
-                  <div class="ad">
-                    <%= link_to '#' do %>
-                        <%= image_tag 'placeholder/placead1.jpg' %>
-                    <% end %>
-                  </div>
-                  <div class="ad">
-                    <%= link_to '#' do %>
-                        <%= image_tag 'placeholder/placead2.jpg' %>
-                    <% end %>
-                  </div>
-                </div>
+                <%= render partial: 'shared/latest_videos', locals: { videos: false, banners: true } %>
               </div>
             </div>
           </div>

@@ -1,11 +1,11 @@
-<div class="post-show-header-wrap">
+<div class="post-show-header-wrap" xmlns="http://www.w3.org/1999/html">
   <div class="wrapper">
     <div class="cols-12">
       <div class="col col-12">
         <div class="col-inner">
           <div class="post-show-video">
             <div class="video">
-              <iframe class="yvid" src="<%= @video.link_embed(@video.link) %>"></iframe>
+              <iframe src="<%= @video.link_embed(@video.link) %>?wmode=transparent&showinfo=0" width="640" height="360" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="post-desc">
               <div class="post-desc-inner">
