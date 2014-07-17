@@ -1,18 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Nuevo Post', new_post_path %>
+<div class="clearfix admin-head">
+  <div class="pull-left">
+    <h1>Blog</h1>
+    <p>Agrega nuevas entradas al blog.</p> 
+  </div>
+  <div class="pull-right">
+    <%= link_to new_post_path, class: "btn btn-primary" do %>
+      <span class="glyphicon glyphicon-plus"></span>Nueva entrada
+    <% end %>
+  </div>
+</div>
 
-<br><br>
-
-<table>
+<table class="table table-striped table-hover">
   <thead>
   <tr>
-    <th>Title</th>
-    <th>Introduction</th>
-    <th>Description</th>
+    <th>Titulo</th>
+    <th>Fecha de creación</th>
     <th>Tags:</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
   </thead>
@@ -20,12 +25,19 @@
   <tbody>
   <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
-        <td><%= post.introduction %></td>
-        <td><%= post.description.html_safe %></td>
+        <td><%= link_to post.title, edit_post_path(post) %></td>
+        <td><%= human_date post.created_at %></td>
         <td><%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td>
+          <div class="btn-group btn-group-xs">
+            <%= link_to edit_post_path(post), class: "btn btn-default btn-lg" do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to post, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </div>
+        </td>
       </tr>
   <% end %>
   </tbody>
