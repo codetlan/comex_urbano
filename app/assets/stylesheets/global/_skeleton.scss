@@ -98,9 +98,30 @@ img + img {
     float: left;
     margin: 5px 10px 0 0;
 
-    ul li {
+    .nav-list > li {
       float: left;
       padding-left: 90px;
+      position: relative;
+
+      .nav-dropdown {
+        width: 180px;
+        position: absolute;
+        display: none;
+
+        .nav-dropdown-padding {
+          padding-top: 10px;
+        }
+
+        .separator img {
+          display: block;
+          margin: 4px auto;
+        }
+
+        a {
+          display: block;
+          padding: 9px 0;
+        }
+      }
 
       @include max-screen(1200px) {
         padding-left: 65px;
@@ -112,6 +133,12 @@ img + img {
 
       &:first-child {
         padding-left: 0;
+      }
+
+      &:hover {
+        .nav-dropdown {
+          display: block;
+        }
       }
     }
   }
