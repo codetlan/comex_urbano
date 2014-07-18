@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20140717022951) do
 
   create_table "photos", force: true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.integer  "visit"
     t.integer  "active"
     t.datetime "created_at"
