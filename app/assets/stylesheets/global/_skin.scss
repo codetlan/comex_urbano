@@ -256,6 +256,13 @@ p {
     border-bottom: 5px solid $black-color;
     text-transform: uppercase;
   }
+
+  .query-search {
+    text-transform: none;
+    font-size: 20px;
+    font-family: $font-bold;
+    color: $secondary-color;
+  }
 }
 
 .about-page {

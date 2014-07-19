@@ -331,9 +331,13 @@ img + img {
 
   h1, .title {
     margin-bottom: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     width: 100%;
     @include inline-block; 
+
+    .query-search {
+      padding-left: 15px;
+    }
   }
 }
 

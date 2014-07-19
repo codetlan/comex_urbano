@@ -44,6 +44,7 @@
     .post-image {
       float: left;
       height: 230px;
+      width: 305px;
       overflow: hidden;
     }
 
@@ -77,6 +78,10 @@
         width: 200px;
       }
 
+      .post-image {
+        width: 220px;
+      }
+
       .post-description {
         margin-left: 220px;
         height: auto;
@@ -87,6 +92,8 @@
       .post-image {
         float: none;
         margin-bottom: 10px;
+        height: 150px;
+        width: 100%;
 
         img {
           width: 100%;
