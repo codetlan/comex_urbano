@@ -55,6 +55,7 @@ ComexUrbano::Application.routes.draw do
 
   get 'videos/section/:section_id', to: 'videos#index', as: :videos_section
 
+  get 'search/', to: 'home#search', as: :search
 
 
   # The priority is based upon order of creation: first created -> highest priority.

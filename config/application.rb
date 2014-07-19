@@ -26,5 +26,14 @@ module ComexUrbano
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+
+    config.to_prepare do
+        Devise::SessionsController.layout "sessions"
+        Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "admin" : "sessions" }
+        Devise::ConfirmationsController.layout "sessions"
+        Devise::UnlocksController.layout "sessions"
+        Devise::PasswordsController.layout "sessions"
+    end
+
   end
 end
