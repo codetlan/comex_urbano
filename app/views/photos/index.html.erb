@@ -55,16 +55,23 @@
       </div>
     </div>
     <%= render partial: 'shared/section_youtube_subscribe' %>
+
     <div class="videos-list">
       <div class="wrapper">
         <div class="cols-12 Collage">
           <% section.photos.each_with_index do |photo, index| %>
-              <div class="video">
-                <%= link_to '/photos/'+photo.id.to_s do %>
-                    <!--<i class="i play"></i>-->
-                    <%= image_tag photo.image.url %>
-                <% end %>
-              </div>
+              <!--<div class="col col-4">
+                <div class="col-inner">
+                  <div class="video-box">
+                    <div class="video">-->
+                      <%= link_to '/photos/'+photo.id.to_s do %>
+                          <!--<i class="i play"></i>-->
+                          <%= image_tag photo.image.url %>
+                      <% end %>
+                  <!--  </div>
+                  </div>
+                </div>
+              </div>  -->
           <% end %>
         </div>
       </div>

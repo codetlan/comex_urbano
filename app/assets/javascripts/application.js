@@ -40,6 +40,8 @@ function responsiveNavigation() {
 $(document).ready(function () {
     $('textarea.ckeditor').ckeditor();
 
+    collage();
+
     $("#videos_search input").keyup(function () {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
         return false;
@@ -110,8 +112,6 @@ $(document).ready(function () {
         }
     });
 
-    collage();
-
     var resizeTimer = null;
     $(window).bind('resize', function () {
 // set a timer to re-apply the plugin
@@ -123,8 +123,8 @@ $(document).ready(function () {
 function collage() {
     $('.Collage').removeWhitespace().collagePlus(
         {
-            'fadeSpeed': 2000,
-            'targetHeight': 200
+            'fadeSpeed': 10,
+            'targetHeight': 300
         }
     ).collageCaption();
 };
