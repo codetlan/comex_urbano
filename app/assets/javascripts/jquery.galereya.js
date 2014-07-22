@@ -308,7 +308,7 @@
                 desc = data[i].description;
                 url = data[i].url;
                 $img.addClass('galereya-cell-img')
-                    .wrap('<a href='+url+'><div class="galereya-cell" data-index="' + i + '"></div></a>')
+                    .wrap('<div class="galereya-cell" data-index="' + i + '"></div>')
                     .parent()
                     .append('<div class="galereya-cell-desc">\
                                 <div class="galereya-cell-desc-title">' + title + '</div>\
