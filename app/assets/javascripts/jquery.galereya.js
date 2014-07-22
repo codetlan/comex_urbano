@@ -219,8 +219,8 @@
                 .wrap('<div class="galereya-cell" data-index="' + $cells.length + '"><a href="/photos/3"></a></div>')
                 .parent()
                 .append('<div class="galereya-cell-desc">\
-                                <div class="galereya-cell-desc-title">' + info.title + '</div>\
-                                <div class="galereya-cell-desc-text">' + info.description + '</div>\
+                                <div class="galereya-cell-desc-title"></div>\
+                                <div class="galereya-cell-desc-text"></div>\
                             </div>')
                 .append('<div class="galereya-cell-overlay" />');
             $cell.click(Handlers.cellClick);
@@ -311,8 +311,8 @@
                     .wrap('<a href='+url+'><div class="galereya-cell" data-index="' + i + '"></div></a>')
                     .parent()
                     .append('<div class="galereya-cell-desc">\
-                                <div class="galereya-cell-desc-title">' + title + '</div>\
-                                <div class="galereya-cell-desc-text">' + desc + '</div>\
+                                <div class="galereya-cell-desc-title"></div>\
+                                <div class="galereya-cell-desc-text"></div>\
                             </div>')
                     .append('<div class="galereya-cell-overlay" />');
             });
