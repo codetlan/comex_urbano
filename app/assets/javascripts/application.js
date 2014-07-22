@@ -24,6 +24,7 @@
 //= require jquery.collagePlus
 //= require jquery.removeWhitespace
 //= require ckeditor/adapters/jquery
+//= require jquery.galereya
 
 
 function responsiveNavigation() {
@@ -37,10 +38,42 @@ function responsiveNavigation() {
     }
 }
 
+function collage() {
+    $('.Collage').removeWhitespace().collagePlus(
+        {
+            'fadeSpeed': 300,
+            'targetHeight': 300
+        }
+    ).collageCaption();
+}
+
 $(document).ready(function () {
     $('textarea.ckeditor').ckeditor();
 
     collage();
+    $('#gal1').galereya({
+        // spacing between cells of the masonry grid
+        spacing: 3,
+
+        // waving visual effect
+        wave: false,
+
+        // waving visual effect timeout duration
+        waveTimeout: 300,
+
+        // special CSS modifier for the gallery
+        modifier: '',
+
+        // speed of the slide show
+        //slideShowSpeed: 10000,
+
+        // speed of appearance of cells
+        cellFadeInSpeed: 200,
+
+
+        // set to true, if you don't want to show the slider on a cell click.
+        disableSliderOnClick: true
+    });
 
     $("#videos_search input").keyup(function () {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
@@ -120,11 +153,3 @@ $(document).ready(function () {
     });
 });
 
-function collage() {
-    $('.Collage').removeWhitespace().collagePlus(
-        {
-            'fadeSpeed': 10,
-            'targetHeight': 300
-        }
-    ).collageCaption();
-};
