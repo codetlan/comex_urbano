@@ -291,7 +291,6 @@
          * Building DOM
          */
         var buildDOM = function () {
-            alert(4554);
             if (categories.length > 0) {
                 $categoriesList = $('<ul class="galereya-cats" />');
                 $top = $('<div class="galereya-top" />');
@@ -309,7 +308,7 @@
                 desc = data[i].description;
                 url = data[i].url;
                 $img.addClass('galereya-cell-img')
-                    .wrap('<div class="galereya-cell" data-index="' + i + '"></div>')
+                    .wrap('<a href='+url+'><div class="galereya-cell" data-index="' + i + '"></div></a>')
                     .parent()
                     .append('<div class="galereya-cell-desc">\
                                 <div class="galereya-cell-desc-title">' + title + '</div>\
