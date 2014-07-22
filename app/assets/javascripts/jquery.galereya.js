@@ -291,6 +291,7 @@
          * Building DOM
          */
         var buildDOM = function () {
+            alert(4554);
             if (categories.length > 0) {
                 $categoriesList = $('<ul class="galereya-cats" />');
                 $top = $('<div class="galereya-top" />');
