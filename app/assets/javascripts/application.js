@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.galereya
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
@@ -24,7 +25,6 @@
 //= require jquery.collagePlus
 //= require jquery.removeWhitespace
 //= require ckeditor/adapters/jquery
-//= require jquery.galereya
 
 
 function responsiveNavigation() {

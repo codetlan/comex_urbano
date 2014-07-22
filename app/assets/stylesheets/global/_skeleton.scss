@@ -650,7 +650,7 @@ img + img {
 .galereya-cell {
   position: absolute;
 
-  //display: none;
+  display: none;
   overflow: hidden;
 
   width: 150px;
@@ -891,7 +891,7 @@ img + img {
 /*Media queries for hi-res devices*/
 @media
 (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi){
+(min-resolution: 192dppx){
   .galereya-slider-close {
     background-image: url('../img/galereya-close@2x.png');
   }
