@@ -10,25 +10,25 @@ ComexUrbano::Application.routes.draw do
   get '/proximamente' => 'static#proximamente'
 
 
-  resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update]
+  resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update, :destroy]
 
   resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
 
   resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
 
-  resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update] do
+  resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update, :destroy] do
     get '/'  => 'videos#list', on: :collection
   end
 
-  resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update] do
+  resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update, :destroy] do
     get '/' => 'photos#list', on: :collection
   end
 
-  resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update] do
+  resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update, :destroy] do
     get '/' => 'posts#list', on: :collection
   end
 
-  resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update] do
+  resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update, :destroy] do
     get '/' => 'abouts#list', on: :collection
   end
 
