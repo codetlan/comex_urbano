@@ -21,10 +21,10 @@
 //= require_tree .
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
-//= require jquery.collageCaption
-//= require jquery.collagePlus
-//= require jquery.removeWhitespace
 //= require ckeditor/adapters/jquery
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 
 
 function responsiveNavigation() {
@@ -38,19 +38,10 @@ function responsiveNavigation() {
     }
 }
 
-function collage() {
-    $('.Collage').removeWhitespace().collagePlus(
-        {
-            'fadeSpeed': 300,
-            'targetHeight': 300
-        }
-    ).collageCaption();
-}
 
 $(document).ready(function () {
     $('textarea.ckeditor').ckeditor();
 
-    collage();
     $('#gal1').galereya({
         // spacing between cells of the masonry grid
         spacing: 3,
@@ -73,6 +64,15 @@ $(document).ready(function () {
 
         // set to true, if you don't want to show the slider on a cell click.
         disableSliderOnClick: true
+    });
+
+    $( ".datepicker" ).datepicker({
+        format: 'dd-mm-yyyy',
+        language: 'es',
+        autoclose: true,
+        minViewMode: 'days',
+        todayHighlight: true,
+        forceParse: false
     });
 
     $("#videos_search input").keyup(function () {
@@ -145,11 +145,5 @@ $(document).ready(function () {
         }
     });
 
-    var resizeTimer = null;
-    $(window).bind('resize', function () {
-// set a timer to re-apply the plugin
-        if (resizeTimer) clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(collage, 200);
-    });
 });
 

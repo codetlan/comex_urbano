@@ -38,6 +38,7 @@
         <%= f.select :section_id, @section.collect { |p| [p.title, p.id] }, class: 'form-control' %>
       </div>
     </div>
+
     <div class="form-group">
       <%= f.label :tag_list, 'Tags:', class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
@@ -45,6 +46,14 @@
         <p>Tags separadas por coma (,).</p>
       </div>
     </div>
+
+    <div class="form-group">
+      <%= f.label :posted_at, 'Fecha de publicación:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :posted_at, class: 'form-control datepicker', value: (@photo.posted_at.blank? ? '' : @photo.posted_at.strftime('%d-%m-%Y'))%>
+      </div>
+    </div>
+
     <div class="form-group">
       <%= f.label :visit, 'Visitas:', class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">

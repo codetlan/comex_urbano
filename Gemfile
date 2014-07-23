@@ -29,6 +29,7 @@ group :assets do
   gem 'jquery-rails'
   gem 'jquery-turbolinks'
   gem "jquery-fileupload-rails"
+  gem 'bootstrap-datepicker-rails'
 end
 
 
