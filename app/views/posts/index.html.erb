@@ -71,6 +71,7 @@
                 <h1>BLOG</h1>
               </div>
               <div class="posts-list">
+                <%= @year %>
                 <% section.posts.where("to_char(posted_at, '%Y') LIKE '%#{@year}%'").each do |post| %>
                     <div class="post">
                       <div class="post-image">
