@@ -72,7 +72,6 @@
               </div>
               <div class="posts-list">
                 <% section.posts.where("to_char(posts.posted_at, '%Y') LIKE ?", @year).each do |post| %>
-                    <%= post.to_yaml %>
                     <div class="post">
                       <div class="post-image">
                         <%= link_to '/posts/'+post.id.to_s do %>

@@ -58,7 +58,9 @@
     <div class="videos-list">
       <div class="wrapper">
         <div class="cols-12">
-          <% section.videos.where("to_char(videos.posted_at, '%Y') LIKE ?", @year).each do |video| %>
+          <%= section.videos.to_yaml %>
+          <% section.videos.where("to_char(posted_at, '%Y') LIKE ?", @year).each do |video| %>
+              <%= video.to_yaml %>
               <div class="col col-4">
                 <div class="col-inner">
                   <div class="video-box">
