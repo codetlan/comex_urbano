@@ -1,5 +1,6 @@
 class Photo < ActiveRecord::Base
   belongs_to :section
+  has_many :publications, :as => :published
   acts_as_taggable
 
   # This method associates the attribute ":avatar" with a file attachment

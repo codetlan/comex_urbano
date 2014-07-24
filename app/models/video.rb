@@ -1,5 +1,6 @@
 class Video < ActiveRecord::Base
   belongs_to :section
+  has_many :publications, :as => :published
   acts_as_taggable
 
   def self.search(search)

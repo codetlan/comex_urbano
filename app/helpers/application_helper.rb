@@ -9,7 +9,15 @@ module ApplicationHelper
   end
 
   def human_date(date)
-  	date.strftime('%e de %B del %Y')
+    if !date.nil?
+      date.strftime('%e de %B del %Y')
+    end
+  end
+
+  def blog_date(date)
+    if !date.nil?
+      date.strftime('%e %b %Y')
+    end
   end
 
   def latest_videos
@@ -18,5 +26,13 @@ module ApplicationHelper
 
   def site_banners
     @banners = Banner.all
+  end
+
+  def menu
+    @categories = Category.all.where('active = ?', 1)
+  end
+
+  def home_details
+    @landing_pages = LandingPage.all
   end
 end

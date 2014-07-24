@@ -19,7 +19,7 @@
                 <div class="page-navigation">
                   <ul>
                     <li>
-                      <%= link_to 'Ultimos videos', '#', class: 'active' %>
+                      <%= link_to 'Ultimos videos', '/videos', class: 'active' %>
                     </li>
                     <li>
                       <%= link_to 'Más vistos', '#' %>
@@ -29,22 +29,22 @@
                 <div class="years-timeline">
                   <ul>
                     <li>
-                      <%= link_to '2014', '#', class: 'active' %>
+                      <%= link_to '2014', videos_section_path(:section_id => section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2013', '#' %>
+                      <%= link_to '2013', videos_section_path(:section_id => section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2012', '#' %>
+                      <%= link_to '2012', videos_section_path(:section_id => section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2011', '#' %>
+                      <%= link_to '2011', videos_section_path(:section_id => section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2010', '#' %>
+                      <%= link_to '2010', videos_section_path(:section_id => section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2009', '#' %>
+                      <%= link_to '2009', videos_section_path(:section_id => section.id, :year => 2009), class: @year == '2009' ? 'active' : '' %>
                     </li>
                   </ul>
                 </div>
@@ -58,7 +58,7 @@
     <div class="videos-list">
       <div class="wrapper">
         <div class="cols-12">
-          <% section.videos.each do |video| %>
+          <% section.videos.where('strftime("%Y", posted_at) LIKE ?', "%#{@year}%").each do |video| %>
               <div class="col col-4">
                 <div class="col-inner">
                   <div class="video-box">

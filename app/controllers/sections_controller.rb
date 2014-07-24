@@ -10,26 +10,21 @@ class SectionsController < ApplicationController
   def index
     @sections_videos = Section.joins(:category).where('categories.link = ?', 'videos')
     @sections_photos = Section.joins(:category).where('categories.link = ?', 'photos')
-
-    @categories = Category.all.where('active = ?', 1)
-    @landing_page = LandingPage.first
+    @sections_posts = Section.joins(:category).where('categories.link = ?', 'posts')
   end
 
   # GET /sections/1
   # GET /sections/1.json
   def show
-    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /sections/new
   def new
     @section = Section.new
-    @categories = Category.all.where('active = ?', 1)
   end
 
   # GET /sections/1/edit
   def edit
-    @categories = Category.all.where('active = ?', 1)
   end
 
   # POST /sections

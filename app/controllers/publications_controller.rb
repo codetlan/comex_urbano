@@ -1,8 +1,8 @@
-class VideosController < ApplicationController
+class PublicationsController < ApplicationController
   layout 'admin', :only => [:list, :new, :edit]
 
   before_filter :authenticate_user!, :only => [:list, :new, :edit]
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy]
 
   # GET /videos
   # GET /videos.json
@@ -16,18 +16,7 @@ class VideosController < ApplicationController
     #end
 
 
-    @commentable = find_commentable
 
-    #@commentable.each do |comment|
-     puts @commentable.to_yaml
-    #end
-
-    if params[:section_id].present?
-      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
-    else
-      @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').limit(1)
-    end
-    @year = params[:year].present? ? params[:year] : ''
   end
 
   # GET /videos/1
@@ -37,7 +26,7 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
-    @video = Video.new
+    @publication = Publication.new
     @section = Section.joins(:category).where('categories.link = ?', 'videos')
   end
 
@@ -49,16 +38,15 @@ class VideosController < ApplicationController
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(video_params)
+    @publication = Publication.new(publication_params)
 
     respond_to do |format|
-      if @video.save
-        @publication = Publication.create(:content => @video.content + @video.name + @video.description + @video.tag_list.join(' '), :published_id => @video.id, :published_type => 'Video')
+      if @publication.save
         format.html { redirect_to '/admin/videos', notice: 'Video was successfully created.' }
-        format.json { render action: 'list', status: :created, location: @video }
+        format.json { render action: 'list', status: :created, location: @publication }
       else
         format.html { render action: 'new' }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
+        format.json { render json: @publication.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,14 +55,12 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1.json
   def update
     respond_to do |format|
-      if @video.update(video_params)
-        @publication = Publication.find_by_published_id(@video.id)
-        @publication.update(:content => @video.content + @video.name + @video.description + @video.tag_list.join(' '))
+      if @publication.update(publication_params)
         format.html { redirect_to '/admin/videos', notice: 'Video was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
+        format.json { render json: @publication.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -82,7 +68,7 @@ class VideosController < ApplicationController
   # DELETE /videos/1
   # DELETE /videos/1.json
   def destroy
-    @video.destroy
+    @publication.destroy
     respond_to do |format|
       format.html { redirect_to '/admin/videos' }
       format.json { head :no_content }
@@ -90,24 +76,27 @@ class VideosController < ApplicationController
   end
 
   def list
-    @videos = Video.all
+    @publications = Publication.all
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_video
-    @video = Video.find(params[:id])
+  def set_publication
+    @publication = Publication.find(params[:id])
 
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def video_params
-    params.require(:video).permit(:name, :description, :content, :link, :visit, :active, :section_id, :tag_list, :posted_at)
+  def publication_params
+    params.require(:video).permit(:content, :published_id, :published_type)
   end
 
   def find_commentable
     params.each do |name, value|
+      puts name.to_yaml + 'nameeee'
       if name =~ /(.+)_id$/
+        puts $1.to_yaml + 'idsssss'
+        puts value.to_yaml + 'valueeeee'
         return $1.classify.constantize.find(value)
       end
     end

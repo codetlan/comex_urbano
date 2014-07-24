@@ -37,7 +37,7 @@
             <div class="site-navigation">
               <div class="navigation">
                 <ul class="nav-list">
-                  <% @categories.each do |category| %>
+                  <% menu.each do |category| %>
                       <li>
                         <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '' %>
                         <% unless category.sections.empty? %>
@@ -63,7 +63,7 @@
             <div class="site-search">
               <div class="social-links">
                 <ul>
-                  <% @landing_pages.each do |landing_page| %>
+                  <% home_details.each do |landing_page| %>
                       <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
                       <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
                       <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
@@ -71,8 +71,8 @@
                   <% end %>
                 </ul>
               </div>
-              <form action="<%= request.fullpath %>" class="search-form" method='get'>
-                <input id="search" name="search" type="text" placeholder="Buscar">
+              <form action="/search" class="search-form" method='get'>
+                <input id="search" name="name" type="text" placeholder="Buscar">
               </form>
             </div>
           </div>

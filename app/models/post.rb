@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+  belongs_to :section
+
+  default_scope -> { order("posted_at DESC") }
   acts_as_taggable
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, styles: {

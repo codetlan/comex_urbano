@@ -9,34 +9,36 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #@posts = Post.all
-    if params[:tag]
-      @posts = Post.tagged_with(params[:tag])
+    #if params[:tag]
+    #  @posts = Post.tagged_with(params[:tag])
+    #elsif params[:year]
+    #  @posts = Post.search(params[:search]).where("strftime('%Y', posted_at) = ?", params[:year])
+    #else
+    #  @posts = Post.search(params[:search])
+    #end
+
+    if params[:section_id].present?
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'posts')
     else
-      @posts = Post.search(params[:search])
+      @section = Section.joins(:category).where('categories.link = ?', 'posts').order('sections.created_at ASC').limit(1)
     end
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
+    @year = params[:year].present? ? params[:year] : ''
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
-    @videos = Video.all
   end
 
   # GET /posts/new
   def new
     @post = Post.new
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
+    @section = Section.joins(:category).where('categories.link = ?', 'posts')
   end
 
   # GET /posts/1/edit
   def edit
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
+    @section = Section.joins(:category).where('categories.link = ?', 'posts')
   end
 
   # POST /posts
@@ -46,6 +48,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        @publication = Publication.create(:content => @post.title + @post.introduction + @post.description + @post.tag_list.join(' '), :published_id => @post.id, :published_type => 'Post')
         format.html { redirect_to '/admin/posts', notice: 'Post was successfully created.' }
         format.json { render action: 'list', status: :created, location: @post }
       else
@@ -60,6 +63,8 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        @publication = Publication.find_by_published_id(@post.id)
+        @publication.update(:content => @post.title + @post.introduction + @post.description + @post.tag_list.join(' '))
         format.html { redirect_to '/admin/posts', notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else

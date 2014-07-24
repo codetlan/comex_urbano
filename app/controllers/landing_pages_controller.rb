@@ -14,23 +14,17 @@ class LandingPagesController < ApplicationController
   # GET /landing_pages/1
   # GET /landing_pages/1.json
   def show
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
   end
 
   # GET /landing_pages/new
   def new
     @landing_page = LandingPage.new
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
 
     5.times { @landing_page.images.build }
   end
 
   # GET /landing_pages/1/edit
   def edit
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
     @landing_page = LandingPage.find(params[:id])
    #1.times { @landing_page.images.build }
   end

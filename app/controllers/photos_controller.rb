@@ -7,27 +7,23 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    #@photos = Photo.all
-    if params[:tag]
-      @photos = Photo.tagged_with(params[:tag])
-    else
-      @photos = Photo.search(params[:search])
-    end
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
+    #if params[:tag]
+    #  @photos = Photo.tagged_with(params[:tag])
+    #else
+    #  @photos = Photo.search(params[:search])
+    #end
+
     if params[:section_id].present?
       @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'photos')
     else
       @section = Section.joins(:category).where('categories.link = ?', 'photos').order('sections.created_at ASC').limit(1)
     end
+    @year = params[:year].present? ? params[:year] : ''
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
-    @videos = Video.all
   end
 
   # GET /photos/new
@@ -48,6 +44,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
+        @publication = Publication.create(:content => @photo.name + @photo.description + @photo.tag_list.join(' '), :published_id => @photo.id, :published_type => 'Photo')
         format.html { redirect_to '/admin/photos', notice: 'Photo was successfully created.' }
         format.json { render action: 'list', status: :created, location: @photo }
       else
@@ -62,6 +59,8 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
+        @publication = Publication.find_by_published_id(@photo.id)
+        @publication.update(:content => @photo.name + @photo.description + @photo.tag_list.join(' '))
         format.html { redirect_to '/admin/photos', notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else

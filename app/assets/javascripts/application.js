@@ -75,7 +75,7 @@ $(document).ready(function () {
         forceParse: false
     });
 
-    $("#videos_search input").keyup(function () {
+    /*$("#videos_search input").keyup(function () {
         $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
         return false;
     });
@@ -88,7 +88,7 @@ $(document).ready(function () {
     $("#posts_search input").keyup(function () {
         $.get($("#posts_search").attr("action"), $("#posts_search").serialize(), null, "script");
         return false;
-    });
+    });*/
 
     $('.slider').bxSlider({
         autoHover: true,
@@ -102,12 +102,12 @@ $(document).ready(function () {
         $('.navigation').toggle();
     });
 
-    $('.search-form input').keyup(function () {
+    /*$('.search-form input').keyup(function () {
         console.log($(".search-form").attr("action"));
         $.get($(".search-form").attr("action"), $(".search-form").serialize(), null, "script");
         return false;
 
-    });
+    });*/
 
     $(window).resize(function () {
         responsiveNavigation();

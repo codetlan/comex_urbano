@@ -5,8 +5,6 @@ class RolesController < ApplicationController
   # GET /roles.json
   def index
     @roles = Role.all
-    @categories = Category.all.where('active = ?', 1)
-    @landing_pages = LandingPage.all
   end
 
   # GET /roles/1

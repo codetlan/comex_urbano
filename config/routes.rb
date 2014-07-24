@@ -32,7 +32,11 @@ ComexUrbano::Application.routes.draw do
     get '/' => 'abouts#list', on: :collection
   end
 
-  resources :videos, :photos, :posts, :abouts, only: [:index, :show]
+  resources :videos, :photos, only: [:index, :show] do
+    resources :publications
+  end
+
+  resources :posts, :abouts, only: [:index, :show]
 
 
   resources :images
@@ -55,7 +59,15 @@ ComexUrbano::Application.routes.draw do
 
   get 'videos/section/:section_id', to: 'videos#index', as: :videos_section
 
+  get 'posts/section/:section_id', to: 'posts#index', as: :posts_section
+
   get 'search/', to: 'home#search', as: :search
+
+  #get 'posts/search/:section_id', to: 'posts#index', as: :posts_search
+
+  #get 'videos/search/:section_id/:year', to: 'videos#index', as: :videos_year
+
+  #get 'photos/search/:section_id/:year', to: 'photos#index', as: :photos_year
 
 
   # The priority is based upon order of creation: first created -> highest priority.
