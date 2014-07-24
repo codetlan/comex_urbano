@@ -25,6 +25,7 @@ class Video < ActiveRecord::Base
 
   def youtube_id
     regex = /youtube.com.*(?:\/|v=)([^&$]+)/
+    puts self.link.match(regex)[1].to_yaml
     id = self.link.match(regex)[1]
   end
 end
