@@ -44,7 +44,7 @@
                       <%= link_to '2010', videos_section_path(:section_id => section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2009', videos_section_path(:section_id => section.id, :year => 2009), class: @year == '2009' ? 'active' : '' %>
+                      <%= link_to '2009', videos_section_path(:section_id => section.id, :year => 20), class: @year == '2009' ? 'active' : '' %>
                     </li>
                   </ul>
                 </div>
@@ -58,7 +58,7 @@
     <div class="videos-list">
       <div class="wrapper">
         <div class="cols-12">
-          <% section.videos.where('extract(year from posted_at) LIKE ?', "%#{@year}%").each do |video| %>
+          <% section.videos.where('posted_at.strftime("%Y") LIKE ?', "%#{@year}%").each do |video| %>
               <div class="col col-4">
                 <div class="col-inner">
                   <div class="video-box">
