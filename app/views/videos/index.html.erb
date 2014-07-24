@@ -59,7 +59,7 @@
       <div class="wrapper">
         <div class="cols-12">
           <%= @year %>
-          <% section.videos.where("to_char(videos.posted_at, ) LIKE '%#{@year}%'").each do |video| %>
+          <% section.videos.where("to_char(videos.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").each do |video| %>
               <div class="col col-4">
                 <div class="col-inner">
                   <div class="video-box">
