@@ -71,7 +71,7 @@
                 <h1>BLOG</h1>
               </div>
               <div class="posts-list">
-                <% section.posts.where('strftime("%Y", posted_at) LIKE ?', "%#{@year}%").each do |post| %>
+                <% section.posts.where("to_char(photos.posted_at, '%Y') LIKE ?", @year).each do |post| %>
                     <div class="post">
                       <div class="post-image">
                         <%= link_to '/posts/'+post.id.to_s do %>

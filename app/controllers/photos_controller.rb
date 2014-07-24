@@ -13,12 +13,12 @@ class PhotosController < ApplicationController
     #  @photos = Photo.search(params[:search])
     #end
 
+    @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
       @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'photos')
     else
       @section = Section.joins(:category).where('categories.link = ?', 'photos').order('sections.created_at ASC').limit(1)
     end
-    @year = params[:year].present? ? params[:year] : ''
   end
 
   # GET /photos/1

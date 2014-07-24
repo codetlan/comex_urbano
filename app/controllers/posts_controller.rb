@@ -16,13 +16,12 @@ class PostsController < ApplicationController
     #else
     #  @posts = Post.search(params[:search])
     #end
-
+    @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
       @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'posts')
     else
       @section = Section.joins(:category).where('categories.link = ?', 'posts').order('sections.created_at ASC').limit(1)
     end
-    @year = params[:year].present? ? params[:year] : ''
   end
 
   # GET /posts/1

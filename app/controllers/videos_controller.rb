@@ -15,19 +15,12 @@ class VideosController < ApplicationController
     #  @videos = Video.search(params[:search])
     #end
 
-
-    @commentable = find_commentable
-
-    #@commentable.each do |comment|
-     puts @commentable.to_yaml
-    #end
-
+    @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
       @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
     else
       @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').limit(1)
     end
-    @year = params[:year].present? ? params[:year] : ''
   end
 
   # GET /videos/1
