@@ -21,7 +21,7 @@
         <div class="caption">
           <h3><%= video.name %></h3><br>
           <p><%= video.description.html_safe %> <br>
-          Visitas: <%= video.visit %> <br>
+          Visitas: <%= video.impressionist_count %> <br>
           Publicado: <%= video.active %></p>
           <div class="btn-group btn-group-xs">
             <%= link_to '/admin/videos/' + video.id.to_s + '/edit', class: "btn btn-default btn-lg" do %>

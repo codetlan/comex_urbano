@@ -29,7 +29,7 @@
                 <div class="years-timeline">
                   <ul>
                     <li>
-                      <%= link_to '2014', photos_section_path(:section_id => section.id, :year => 2014), class: @year == '2014' ? 'active' : ''%>
+                      <%= link_to '2014', photos_section_path(:section_id => section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
                     </li>
                     <li>
                       <%= link_to '2013', photos_section_path(:section_id => section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
@@ -66,7 +66,7 @@
                   <div class="video"> -->
               <!--<= link_to '/photos/'+photo.id.to_s do %>
                   <!--<i class="i play"></i>-->
-                  <%= image_tag photo.image.url, :data => {:url => '/photos/'+photo.id.to_s} %>
+              <%= image_tag photo.image.url, :data => {:url => '/photos/'+photo.id.to_s} %>
               <!--< end %>
               <!-- </div>
              </div>

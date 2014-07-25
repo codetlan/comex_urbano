@@ -57,6 +57,7 @@ gem 'meta_request'
 gem 'ckeditor', '4.0.4'
 gem 'truncate_html'
 gem 'acts-as-taggable-on'
+gem 'impressionist'
 #gem 'declarative_authorization'
 
 # Use ActiveModel has_secure_password

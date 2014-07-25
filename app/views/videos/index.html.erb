@@ -22,7 +22,7 @@
                       <%= link_to 'Ultimos videos', '/videos', class: 'active' %>
                     </li>
                     <li>
-                      <%= link_to 'Más vistos', '#' %>
+                      <%= link_to 'Más vistos', videos_section_path(:section_id => section.id, :visit => true) %>
                     </li>
                   </ul>
                 </div>

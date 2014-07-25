@@ -3,6 +3,7 @@ class VideosController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_video, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=>[:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /videos
   # GET /videos.json
@@ -14,10 +15,10 @@ class VideosController < ApplicationController
     #else
     #  @videos = Video.search(params[:search])
     #end
-
+    @visit = params[:visit]
     @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
-      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
+      @section = Section.joins(:category, :videos).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
     else
       @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').limit(1)
     end
