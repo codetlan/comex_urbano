@@ -1,24 +1,38 @@
-<fieldset>
-  <div class="field">
-    <%= f.label :name %>
-    <br>
-    <%= f.text_field :name %>
+<fieldset class="panel panel-default">
+  <div class="panel-body">
+    <div class="form-group">
+      <%= f.label :name, 'Nombre:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, 'Descripción:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :link, 'Link:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :link, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :photo, 'Imagen:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.file_field :photo, class: 'form-control'  %>
+        <%= f.hidden_field :_destroy %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= link_to "Eliminar Banner", "#", class: "remove_fields" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %>
-    <br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :link %>
-    <br>
-    <%= f.text_field :link %>
-  </div>
-  <div class="field">
-    <%= f.label :photo %>
-    <br>
-    <%= f.file_field :photo %>
-    <%= f.hidden_field :_destroy %>
-  </div>
-  <%= link_to "Eliminar Banner", "#", class: "remove_fields" %>
 </fieldset>

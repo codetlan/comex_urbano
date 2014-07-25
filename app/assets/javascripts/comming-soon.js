@@ -8,8 +8,6 @@ function commingSoon() {
 			contentH = content.outerHeight(),
 			limitHeight = header.outerHeight() + content.outerHeight() + footer.outerHeight();
 
-	console.log(winH,limitHeight);
-
 	if ( winH > limitHeight) {
 		page.height(winH).removeClass('not-fit');
 		content.css('top', winH/2 - contentH/2);

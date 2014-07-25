@@ -11,45 +11,79 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :facebook %>
-      <br>
-      <%= f.text_field :facebook %>
+    <div class="form-group">
+      <%= f.label :facebook, 'Facebook:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-facebook"></i></div>
+          <%= f.text_field :facebook, class: 'form-control' %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :twitter %>
-      <br>
-      <%= f.text_field :twitter %>
+
+    <div class="form-group">
+      <%= f.label :twitter, 'Twitter:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+          <%= f.text_field :twitter, class: 'form-control' %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :youtube %>
-      <br>
-      <%= f.text_field :youtube %>
+
+    <div class="form-group">
+      <%= f.label :youtube, 'Youtube:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-youtube"></i></div>
+          <%= f.text_field :youtube, class: 'form-control' %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :vimeo %>
-      <br>
-      <%= f.text_field :vimeo %>
+
+    <div class="form-group">
+      <%= f.label :vimeo, 'Youtube:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-vimeo-square"></i></div>
+          <%= f.text_field :vimeo, class: 'form-control' %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :copyright %>
-      <br>
-      <%= f.text_field :copyright %>
+
+    <div class="form-group">
+      <%= f.label :copyright, 'Copyright:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :copyright, class: 'form-control' %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :terms %>
-      <br>
-      <%= f.text_field :terms %>
+
+    <div class="form-group">
+      <%= f.label :terms, 'Terminos y Condiciones:', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :terms, class: 'form-control' %>
+      </div>
     </div>
-    <br>
+
+    <br><br>
     <div>
-      <div>Agregar Banners</div><br>
-      <%= f.fields_for :images do |builder| %>
+      <div class="clearfix">
+        <div class="pull-left">
+          <h3>Agregar Banners</h3>
+        </div>
+        <div class="pull-right">
+          <%= link_to_add_fields "Agregar Banner", f, :images %>
+        </div>
+      </div>
+      <br>
+      <div id="banners-items">
+        <%= f.fields_for :images do |builder| %>
           <%= render 'image_fields', f: builder %>
-      <% end %>
-      <%= link_to_add_fields "Agregar Banner", f, :images %>
+        <% end %>
+      </div>
     </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <br><br>
+    
 <% end %>

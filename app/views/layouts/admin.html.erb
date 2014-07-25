@@ -39,14 +39,18 @@
 	  </div>
 	</nav>
 
-	<div class="container">
-		<div class="row">
-		  <div class="col-md-3">
-				<%= render partial: 'shared/admin/header' %>
-		  </div>
-		  <div class="col-md-9">
-		  	<%= yield %>
-		  </div>
+	<div class="wrapper">
+		<div class="cols-12">
+			<div class="col col-3">
+				<div class="col-inner">
+					<%= render partial: 'shared/admin/header' %>	
+				</div>
+			</div>
+			<div class="col col-9">
+				<div class="col-inner">
+					<%= yield %>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

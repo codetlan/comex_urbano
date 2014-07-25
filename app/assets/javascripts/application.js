@@ -115,18 +115,19 @@ $(document).ready(function () {
 
     responsiveNavigation();
 
-    $('#edit_landing_page_1 .remove_fields').on('click', function (event) {
-        console.log($(this).prev('input[type=hidden]'));
+    $('#edit_landing_page_1').on('click', '.remove_fields', function (event) {
         $(this).prev('input[type=hidden]').val('1');
         $(this).closest('fieldset').hide();
         event.preventDefault();
+        return false;
     });
 
-    $('#edit_landing_page_1 .add_fields').on('click', function (event) {
+    $('#edit_landing_page_1').on('click', '.add_fields', function (event) {
         time = new Date().getTime();
         regexp = new RegExp($(this).data('id'), 'g');
-        $(this).before($(this).data('fields').replace(regexp, time));
+        $('#banners-items').before($(this).data('fields').replace(regexp, time));
         event.preventDefault()
+        return false;
     });
 
     $('#new_banner').fileupload({
