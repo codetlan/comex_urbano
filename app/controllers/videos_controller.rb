@@ -18,7 +18,7 @@ class VideosController < ApplicationController
     @visit = params[:visit]
     @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
-      @section = Section.joins(:category, :videos).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
     else
       @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').limit(1)
     end
