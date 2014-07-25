@@ -38,7 +38,7 @@
           <div class="post-meta">
             <div class="tags">
               Tags:
-              <%= raw @photo.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+              <%= raw @photo.tag_list.map { |t| link_to t, search_path(:name => t) }.join(', ') %>
             </div>
             <div class="share-links">
               <span class='st_fblike_hcount' displayText='Facebook Like'></span>
