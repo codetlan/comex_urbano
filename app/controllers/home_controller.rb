@@ -3,6 +3,25 @@ class HomeController < ApplicationController
 
   def index
     @posts = Post.all
+    @videos = []
+    @photos = []
+    @posts = []
+
+    @publications = Publication.all
+
+    @publications.each do |publication|
+      @type = publication.published_type
+      if @type == 'Video'
+        result = @type.classify.constantize.find(publication.published_id)
+        @videos.push(result)
+      elsif @type == 'Photo'
+        result = @type.classify.constantize.find(publication.published_id)
+        @photos.push(result)
+      elsif @type == 'Post'
+        result = @type.classify.constantize.find(publication.published_id)
+        @posts.push(result)
+      end
+    end
   end
 
   def search

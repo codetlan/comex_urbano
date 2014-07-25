@@ -86,33 +86,93 @@
           <div class="title-page">
             <h1>Lo nuevo</h1>
           </div>
-          <div class="posts-list">
-            <% @posts.each do |post| %>
-                <div class="post">
-                  <div class="post-image">
-                    <%= link_to '/posts/'+post.id.to_s do %>
-                        <%= image_tag post.image.url %>
-                    <% end %>
-                  </div>
-                  <div class="post-description">
-                    <div class="post-va">
-                      <a href="/posts/<%= post.id.to_s %>" class="post-title"><%= post.title %></a>
-                      <span class="post-date">11 sep 2014</span>
 
-                      <p><%= truncate_html(post.introduction, 189, '-') %></p>
-                      <a class="post-read-more" href="/posts/<%= post.id.to_s %>">Leer más</a>
+          <div class="search-result-section">
+            <div class="search-result-section-title">
+              <h4>Videos</h4>
+            </div>
+            <div class="posts-list">
+              <% @videos.each do |video| %>
+                  <div class="post">
+                    <div class="post-image">
+                      <%= link_to '#' do %>
+                          <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
+                      <% end %>
+                    </div>
+                    <div class="post-description">
+                      <div class="post-va">
+                        <a href="#" class="post-title"><%= video.name %></a>
+                        <span class="post-date"><%= blog_date video.posted_at %></span>
+
+                        <p><%= truncate_html(video.description) %></p>
+                        <a class="post-read-more" href="videos/<%= video.id.to_s %>">Leer más</a>
+                      </div>
                     </div>
                   </div>
-                </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
+
+          <div class="search-result-section">
+            <div class="search-result-section-title">
+              <h4>Galería</h4>
+            </div>
+            <div class="posts-list">
+              <% @photos.each do |photo| %>
+                  <div class="post">
+                    <div class="post-image">
+                      <%= link_to '#' do %>
+                          <%= image_tag photo.image.url %>
+                      <% end %>
+                    </div>
+                    <div class="post-description">
+                      <div class="post-va">
+                        <a href="#" class="post-title"><%= photo.name %></a>
+                        <span class="post-date"><%= blog_date photo.posted_at %></span>
+
+                        <p><%= truncate_html(photo.description, 100, '') %></p>
+                        <a class="post-read-more" href="photos/<%= photo.id.to_s %>">Leer más</a>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="search-result-section">
+            <div class="search-result-section-title">
+              <h4>Blog</h4>
+            </div>
+            <div class="posts-list">
+              <% @posts.each do |post| %>
+                  <div class="post">
+                    <div class="post-image">
+                      <%= link_to '#' do %>
+                          <%= image_tag post.image.url %>
+                      <% end %>
+                    </div>
+                    <div class="post-description">
+                      <div class="post-va">
+                        <a href="#" class="post-title"><%= post.title %></a>
+                        <span class="post-date"><%= blog_date post.posted_at %></span>
+
+                        <p><%= truncate_html(post.introduction) %></p>
+                        <a class="post-read-more" href="posts/<%= post.id.to_s %>">Leer más</a>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+
+
         </div>
       </div>
       <div class="col col-3">
         <div class="col-inner">
           <div class="sidebar">
             <%= render partial: 'shared/youtube_subscribe' %>
-            <%= render partial: 'shared/latest_videos', locals: { videos: true, banners: true } %>
+            <%= render partial: 'shared/latest_videos', locals: {videos: true, banners: true} %>
           </div>
         </div>
       </div>
