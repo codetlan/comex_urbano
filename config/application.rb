@@ -35,5 +35,6 @@ module ComexUrbano
         Devise::PasswordsController.layout "sessions"
     end
 
+    config.exceptions_app = self.routes
   end
 end

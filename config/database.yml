@@ -7,8 +7,8 @@ development:
   adapter: postgresql
   encoding: unicode
   database: comexurbano
-  username: simiographics
-  password: 1234567890
+  username: user
+  password: 123
   pool: 5
 
 # Warning: The database defined as "test" will be erased and
