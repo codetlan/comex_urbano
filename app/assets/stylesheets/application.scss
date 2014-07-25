@@ -36,3 +36,10 @@ $border-radius-base: 0px;
 // Comming Soon
 @import "comming/skeleton";
 @import "comming/skin";
+
+.thumbnail {
+	border: {
+		width: 2px;
+		color: #bbbbbb;
+	}
+}

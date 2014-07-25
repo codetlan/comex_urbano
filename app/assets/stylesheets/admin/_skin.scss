@@ -2,6 +2,25 @@
  	border-bottom: 5px solid black; 
 
  	h1 {
+ 		font-size: 32px;
  		text-transform: uppercase;
  	}
+}
+
+.video-admin {
+	h5 {
+		font-family: $font-bold;
+		border-bottom: 1px solid #d2d2d2;
+	}
+
+	.caption {
+		border-top: 2px solid #777777;
+	}
+
+	p {
+		font: {
+			size: 12px;
+			family: $font-medium;
+		}
+	}
 }
