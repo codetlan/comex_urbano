@@ -354,3 +354,17 @@ p {
   }
 
 }
+
+.error {
+  .error-inner {
+    text-align: center;
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}

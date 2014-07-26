@@ -26,6 +26,11 @@
       }
     }
 
+    &.col-center {
+      float: none;
+      margin: 0 auto;
+    }
+
     &.alpha .col-inner {
       padding-left: 0;
     }
