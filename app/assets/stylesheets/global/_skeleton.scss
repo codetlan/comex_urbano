@@ -944,3 +944,13 @@ img + img {
     padding: 1px 25px 1px 10px;
   }
 }
+
+.error {
+  margin: 100px 0px;
+
+  .error-inner {
+    .error-icon {
+      margin-bottom: 20px;
+    }
+  }
+}
