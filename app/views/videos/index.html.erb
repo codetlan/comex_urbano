@@ -60,7 +60,7 @@
           <% @videos.each do |video| %>
               <div class="col col-4">
                 <div class="col-inner">
-                  <div class="video-box">
+                  <div class="video-box video-box-large">
                     <div class="video">
                       <%= link_to '/videos/'+video.id.to_s do %>
                           <!--<i class="i play"></i>-->
@@ -69,8 +69,8 @@
                     </div>
                     <div class="video-description">
                       <%= link_to '/videos/'+video.id.to_s do %>
-                          <h3><%= video.name %></h3>
-                          <%= truncate_html(video.description) %>
+                        <h5 class="video-title"><%= video.name %></h5>
+                        <p><%= truncate_html(video.description) %></p>
                       <% end %>
                     </div>
                   </div>

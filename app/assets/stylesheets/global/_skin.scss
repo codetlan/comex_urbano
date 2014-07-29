@@ -47,6 +47,7 @@ a {
 p {
   color: $text-color;
   text-align: justify;
+  font-family: $font-medium;
   @include text-size-regular;
 }
 
@@ -69,12 +70,13 @@ p {
 
       a {
         color: $white-color;
-        font-family: $font-bold;
+        font-family: $font-black;
         text-transform: uppercase;
         font-size: 12px;
 
         &.active {
           font-family: $font-black;
+          color: #c2c2c2;
         }
       }
 
@@ -84,7 +86,6 @@ p {
           list-style: none;
           background: #000;
           background: rgba(0,0,0,.9);
-          text-align: center;
           border: 1px solid $white-color;
         }
 
@@ -265,12 +266,6 @@ p {
   }
 }
 
-.about-page {
-   p {
-    @include text-size-large;
-   }
-}
-
 .ytube-subscribe {
   text-align: right;
 }
@@ -292,14 +287,17 @@ p {
   }
   .video-description {
     background-color: $black-color;
+    line-height: 15px;
 
-    h3 {
+    .video-title {
       color: #dbdbdb;
+      font-size: 18px;
+      font-family: $font-bold;
     }
 
     p {
       color: #fff;
-      @include text-size-x-small;
+      font-family: $font-regular;
     }
 
     a {
@@ -307,6 +305,7 @@ p {
       font-family: $font-black;
       line-height: 14px;
       font-size: 12px;
+      line-height: 15px;
     }
   }
 }
@@ -322,15 +321,24 @@ p {
 
     .post-desc {
       h1 {
-        color: $white-color;
-        border: 6px solid $white-color;
+        color: #dbdbdb;
+        border: 5px solid $white-color;
+        font-size: 22px;
+        line-height: 26px;
       }
 
       p {
         color: $white-color;
-        @include text-size-regular;
+        font-size: 12px;
+        font-family: $font-bold;
       }
     }
+  }
+}
+
+.post-main-content {
+  p {
+    @include text-size-large;
   }
 }
 
