@@ -90,7 +90,7 @@ ComexUrbano::Application.configure do
       :storage => :s3,
       :s3_protocol => 'http',
       :s3_credentials => {
-          :bucket => 'comex_urbano',
+          :bucket => 'comexurbano',
           :access_key_id => 'AKIAIU4SZHJL7WDODQ4A',
           :secret_access_key => '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'
       }
