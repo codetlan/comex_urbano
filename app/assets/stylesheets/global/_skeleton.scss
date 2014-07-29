@@ -511,9 +511,11 @@ img + img {
 
 .post-share-links {
   margin-bottom: 35px;
+  @include clearfix;
 
   .links {
     text-align: right;
+    @include clearfix;
   }
 }
 

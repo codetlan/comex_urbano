@@ -11,11 +11,6 @@
               <div class="post-desc-inner">
                 <h1><%= @photo.name %></h1>
                 <p><%= @photo.description.present? ? truncate_html(@photo.description.html_safe) : '' %></p>
-                <div class="share-links">
-                  <span class='st_fblike_hcount' displayText='Facebook Like'></span>
-                  <span class='st_twitter_hcount' displayText='Tweet'></span>
-                  <span class='st_sharethis_hcount' displayText='ShareThis'></span>
-                </div>
               </div>
             </div>
           </div>
@@ -24,6 +19,7 @@
     </div>
   </div>
 </div>
+<%= render partial: 'shared/post_share_links' %>
 <%= render partial: 'shared/section_youtube_subscribe' %>
 <div class="main-content">
   <div class="wrapper">
