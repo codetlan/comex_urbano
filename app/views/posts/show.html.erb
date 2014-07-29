@@ -1,21 +1,16 @@
-<div class="post-show-header-wrap">
+<div class="post-show-header-wrap" xmlns="http://www.w3.org/1999/html">
   <div class="wrapper">
     <div class="cols-12">
       <div class="col col-12">
         <div class="col-inner">
           <div class="post-show-video">
             <div class="video">
-              <%= image_tag @post.image.url %>
+              <%= image_tag @post.image.url(:post_show) %>
             </div>
             <div class="post-desc">
               <div class="post-desc-inner">
                 <h1><%= @post.title %></h1>
-                <p><%= truncate(@post.introduction, :length => 20) %></p>
-                <div class="share-links">
-                  <span class='st_fblike_hcount' displayText='Facebook Like'></span>
-                  <span class='st_twitter_hcount' displayText='Tweet'></span>
-                  <span class='st_sharethis_hcount' displayText='ShareThis'></span>
-                </div>
+                <p><%= truncate_html(@post.introduction, 10) %></p>
               </div>
             </div>
           </div>

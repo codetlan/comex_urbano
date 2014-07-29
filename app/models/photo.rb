@@ -6,10 +6,10 @@ class Photo < ActiveRecord::Base
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, styles: {
-      thumb: '100x100>',
       list: '240x180#',
       photo: '720x485#',
-      post: "305x231#"
+      post: "305x231#",
+      photo_show: '722x384#'
   }
 
   # Validate the attached image is image/jpg, image/png, etc

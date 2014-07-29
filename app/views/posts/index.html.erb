@@ -9,7 +9,7 @@
                 <p><%= @section.description.html_safe %></p>
               </div>
             </div>
-            <%= image_tag @section.main_banner.url(:original) %>
+            <%= image_tag @section.main_banner.url(:main_banner) %>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
                 <div class="post">
                   <div class="post-image">
                     <%= link_to '/posts/'+post.id.to_s do %>
-                        <%= image_tag post.image.url %>
+                        <%= image_tag post.image.url(:post) %>
                     <% end %>
                   </div>
                   <div class="post-description">

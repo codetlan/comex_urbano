@@ -7,7 +7,8 @@ class Post < ActiveRecord::Base
       thumb: '100x100>',
       square: '200x200#',
       medium: '300x300>',
-      post: "305x231#"
+      post: "305x231#",
+      post_show: '722x384#'
   }
 
   # Validate the attached image is image/jpg, image/png, etc

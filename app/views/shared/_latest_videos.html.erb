@@ -24,7 +24,7 @@
       <% site_banners.each do |banner| %>
           <div class="ad">
             <%= link_to '#' do %>
-              <%= image_tag banner.photo.url %>
+              <%= image_tag banner.photo.url(:ads) %>
             <% end %>
           </div>
       <% end %>
