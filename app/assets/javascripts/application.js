@@ -115,8 +115,10 @@ $(document).ready(function () {
 
     responsiveNavigation();
 
-    $('#edit_landing_page_1').on('click', '.remove_fields', function (event) {
+    $('#banners-items').on('click', '.remove_fields', function (event) {
+        console.log('2222');
         $(this).prev('input[type=hidden]').val('1');
+        console.log($(this).parent().parent());
         $(this).closest('fieldset').hide();
         event.preventDefault();
         return false;
