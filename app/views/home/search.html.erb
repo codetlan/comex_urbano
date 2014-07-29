@@ -12,7 +12,7 @@
               <h4>Videos</h4>
             </div>
             <div class="posts-list">
-              <% @videos.each do |video| %>
+              <% @videos.first(3).each do |video| %>
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
@@ -38,7 +38,7 @@
               <h4>Galería</h4>
             </div>
             <div class="posts-list">
-              <% @photos.each do |photo| %>
+              <% @photos.first(3).each do |photo| %>
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
@@ -64,7 +64,7 @@
               <h4>Blog</h4>
             </div>
             <div class="posts-list">
-              <% @posts.each do |post| %>
+              <% @posts.first(3).each do |post| %>
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>

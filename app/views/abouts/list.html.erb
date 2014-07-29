@@ -6,7 +6,7 @@
 
 <% @abouts.each do |about| %>
   <h3><%= about.name %></h3>
-  <%= truncate(strip_tags(about.description.html_safe), length: 200, omission: '... (continued)') %>
+  <%= truncate(strip_tags(about.description.html_safe), length: 200, omission: '... (continua)') %>
   <br>
   <div class="btn-group btn-group-xs">
     <%= link_to edit_about_path(about), class: "btn btn-default btn-lg" do %>

@@ -20,7 +20,7 @@
     <th>Title</th>
     <th>Banner</th>
     <th>Categoria</th>
-    <th>Active</th>
+    <th>Activo</th>
     <th></th>
     <th></th>
   </tr>
@@ -32,7 +32,7 @@
         <td><%= section.title %></td>
         <td><%= image_tag section.main_banner.url(:medium) %></td>
         <td><%= section.category.present? ? section.category.name : '' %></td>
-        <td><%= section.active %></td>
+        <td><%= section.active == 1 ? 'Si' : 'No' %></td>
         <td>
           <div class="btn-group btn-group-xs">
             <%= link_to edit_section_path(section), class: "btn btn-default btn-lg" do %>
@@ -56,7 +56,7 @@
     <th>Title</th>
     <th>Banner</th>
     <th>Categoria</th>
-    <th>Active</th>
+    <th>Activo</th>
     <th></th>
     <th></th>
   </tr>
@@ -68,7 +68,7 @@
         <td><%= section.title %></td>
         <td><%= image_tag section.main_banner.url(:medium) %></td>
         <td><%= section.category.present? ? section.category.name : '' %></td>
-        <td><%= section.active %></td>
+        <td><%= section.active == 1 ? 'Si' : 'No' %></td>
         <td>
           <div class="btn-group btn-group-xs">
             <%= link_to edit_section_path(section), class: "btn btn-default btn-lg" do %>
@@ -93,7 +93,7 @@
     <th>Title</th>
     <th>Banner</th>
     <th>Categoria</th>
-    <th>Active</th>
+    <th>Activo</th>
     <th></th>
     <th></th>
   </tr>
@@ -105,7 +105,7 @@
         <td><%= section.title %></td>
         <td><%= image_tag section.main_banner.url(:medium) %></td>
         <td><%= section.category.present? ? section.category.name : '' %></td>
-        <td><%= section.active %></td>
+        <td><%= section.active == 1 ? 'Si' : 'No' %></td>
         <td>
           <div class="btn-group btn-group-xs">
             <%= link_to edit_section_path(section), class: "btn btn-default btn-lg" do %>

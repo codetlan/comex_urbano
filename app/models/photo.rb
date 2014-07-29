@@ -2,13 +2,14 @@ class Photo < ActiveRecord::Base
   belongs_to :section
   has_many :publications, :as => :published
   acts_as_taggable
+  is_impressionable
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, styles: {
       thumb: '100x100>',
-      square: '200x200#',
-      medium: '300x300>',
-      photo: '720x485#'
+      list: '240x180#',
+      photo: '720x485#',
+      post: "305x231#"
   }
 
   # Validate the attached image is image/jpg, image/png, etc

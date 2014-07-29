@@ -9,7 +9,7 @@
                     <div class="featured-post">
                       <div class="image">
                         <%= link_to banner.link do %>
-                            <%= image_tag banner.photo.url(:original) %>
+                            <%= image_tag banner.photo.url(:main_banner) %>
                         <% end %>
                       </div>
                       <div class="description">
@@ -42,32 +42,32 @@
             <div class="page-navigation">
               <ul>
                 <li>
-                  <%= link_to 'Ultimos videos', '#', class: 'active' %>
+                  <%= link_to 'Ultimos videos', '/', class: request.fullpath == '/' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to 'Más vistos', '#' %>
+                  <%= link_to 'Más vistos', root_path(:visit => true), class: @visit == 'true' ? 'active' : '' %>
                 </li>
               </ul>
             </div>
             <div class="years-timeline">
               <ul>
                 <li>
-                  <%= link_to '2014', '#', class: 'active' %>
+                  <%= link_to '2014', root_path(:year => 2014), class: @year == '2014' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to '2013', '#' %>
+                  <%= link_to '2013', root_path(:year => 2013), class: @year == '2013' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to '2012', '#' %>
+                  <%= link_to '2012', root_path(:year => 2012), class: @year == '2012' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to '2011', '#' %>
+                  <%= link_to '2011', root_path(:year => 2011), class: @year == '2011' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to '2010', '#' %>
+                  <%= link_to '2010', root_path(:year => 2010), class: @year == '2010' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to '2009', '#' %>
+                  <%= link_to '2009', root_path(:year => 2009), class: @year == '2009' ? 'active' : '' %>
                 </li>
               </ul>
             </div>
@@ -91,7 +91,7 @@
               <h4>Videos</h4>
             </div>
             <div class="posts-list">
-              <% @videos.each do |video| %>
+              <% @videos.first(3).each do |video| %>
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
@@ -117,11 +117,11 @@
               <h4>Galería</h4>
             </div>
             <div class="posts-list">
-              <% @photos.each do |photo| %>
+              <% @photos.first(3).each do |photo| %>
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
-                          <%= image_tag photo.image.url %>
+                          <%= image_tag photo.image.url(:post) %>
                       <% end %>
                     </div>
                     <div class="post-description">
@@ -143,11 +143,11 @@
               <h4>Blog</h4>
             </div>
             <div class="posts-list">
-              <% @posts.each do |post| %>
+              <% @posts.first(3).each do |post| %>
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
-                          <%= image_tag post.image.url %>
+                          <%= image_tag post.image.url(:post) %>
                       <% end %>
                     </div>
                     <div class="post-description">

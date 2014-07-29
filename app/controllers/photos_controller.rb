@@ -3,21 +3,22 @@ class PhotosController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=>[:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /photos
   # GET /photos.json
   def index
-    #if params[:tag]
-    #  @photos = Photo.tagged_with(params[:tag])
-    #else
-    #  @photos = Photo.search(params[:search])
-    #end
-
+    @visit = params[:visit]
     @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
-      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'photos')
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'photos').first()
+      @photos = @section.photos.where("to_char(photos.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").order('photos.posted_at DESC')
+      if @visit
+        @photos.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+      end
     else
-      @section = Section.joins(:category).where('categories.link = ?', 'photos').order('sections.created_at ASC').limit(1)
+      @section = Section.joins(:category).where('categories.link = ?', 'photos').order('sections.created_at ASC').first()
+      @photos = @section.photos.order('photos.posted_at DESC')
     end
   end
 
@@ -59,7 +60,7 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        @publication = Publication.find_by_published_id(@photo.id)
+        @publication = Publication.find_by_published_id_and_published_type(@photo.id, 'Photo')
         @publication.update(:content => @photo.name + @photo.description + @photo.tag_list.join(' '))
         format.html { redirect_to '/admin/photos', notice: 'Photo was successfully updated.' }
         format.json { head :no_content }

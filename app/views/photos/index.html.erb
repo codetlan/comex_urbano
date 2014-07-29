@@ -1,94 +1,93 @@
-<% @section.each do |section| %>
-    <div class="section-heading">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-12">
-            <div class="col-inner">
-              <%= image_tag section.main_banner.url(:original) %>
+<div class="section-heading">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <%= image_tag @section.main_banner.url(:original) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="filters-wrap">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="filters">
+            <div class="page-navigation">
+              <ul>
+                <li>
+                  <%= link_to 'Ultimas fotos', '/photos', class: request.fullpath == '/photos' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to 'Más vistas', photos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : ''  %>
+                </li>
+              </ul>
+            </div>
+            <div class="years-timeline">
+              <ul>
+                <li>
+                  <%= link_to '2014', photos_section_path(:section_id => @section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2013', photos_section_path(:section_id => @section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2012', photos_section_path(:section_id => @section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2011', photos_section_path(:section_id => @section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2010', photos_section_path(:section_id => @section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2009', photos_section_path(:section_id => @section.id, :year => 2009), class: @year == '2009' ? 'active' : '' %>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="filters-wrap">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-12">
-            <div class="col-inner">
-              <div class="filters">
-                <div class="page-navigation">
-                  <ul>
-                    <li>
-                      <%= link_to 'Ultimas fotos', '/photos', class: 'active' %>
-                    </li>
-                    <li>
-                      <%= link_to 'Más vistas', '#' %>
-                    </li>
-                  </ul>
-                </div>
-                <div class="years-timeline">
-                  <ul>
-                    <li>
-                      <%= link_to '2014', photos_section_path(:section_id => section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2013', photos_section_path(:section_id => section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2012', photos_section_path(:section_id => section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2011', photos_section_path(:section_id => section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2010', photos_section_path(:section_id => section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2009', photos_section_path(:section_id => section.id, :year => 2009), class: @year == '2009' ? 'active' : '' %>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <%= render partial: 'shared/section_youtube_subscribe' %>
+  </div>
+</div>
+<%= render partial: 'shared/section_youtube_subscribe' %>
 
-    <div class="videos-list">
-      <div class="wrapper">
-        <div id="gal1" class="cols-12">
-          <% section.photos.where("to_char(photos.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").each do |photo| %>
-              <!-- <div class="col col-4">
-                <div class="col-inner">
-                     <div class="video-box">
-                  <div class="video"> -->
-              <!--<= link_to '/photos/'+photo.id.to_s do %>
-                  <!--<i class="i play"></i>-->
-              <%= image_tag photo.image.url, :data => {:url => '/photos/'+photo.id.to_s} %>
-              <!--< end %>
-              <!-- </div>
-             </div>
-           </div>
-            </div> -->
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="main-content">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-3">
+<div class="videos-list">
+  <div class="wrapper">
+    <div id="gal1" class="cols-12">
+      <% @photos.each do |photo| %>
+          <!-- <div class="col col-4">
             <div class="col-inner">
-              <div class="sidebar">
-                <%= render partial: 'shared/latest_videos', locals: {videos: false, banners: false} %>
-              </div>
-            </div>
+                 <div class="video-box">
+              <div class="video"> -->
+          <!--<= link_to '/photos/'+photo.id.to_s do %>
+              <!--<i class="i play"></i>-->
+          <%= image_tag photo.image.url, :data => {:url => '/photos/'+photo.id.to_s} %>
+          <!--< end %>
+          <!-- </div>
+         </div>
+       </div>
+        </div> -->
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-3">
+        <div class="col-inner">
+          <div class="sidebar">
+            <%= render partial: 'shared/latest_videos', locals: {videos: false, banners: false} %>
           </div>
         </div>
       </div>
     </div>
-<% end %>
+  </div>
+</div>
+
 

@@ -20,10 +20,9 @@
         <% end %>
         <div class="caption">
           <h5><%= video.name %></h5>
-          <p><%= video.description.html_safe %> <br>
-          Visitas: <%= video.impressionist_count %> <br>
-          Publicado: <%= video.active %></p>
-          <br>
+          <p><%= video.description.present? ? truncate_html(video.description.html_safe, 95,'...') : '' %> <br>
+          Visitas: <%= video.impressionist_count  %> <br>
+          Publicado: <%= video.active == 1 ? 'Si' : 'No' %></p><br>
           <div class="btn-group btn-group-xs">
             <%= link_to '/admin/videos/' + video.id.to_s + '/edit', class: "btn btn-default btn-lg" do %>
               <span class="glyphicon glyphicon-pencil"></span>

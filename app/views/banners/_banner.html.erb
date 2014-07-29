@@ -2,7 +2,7 @@
   <% @banners.each do |banner| %>
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <%= image_tag banner.photo.url %>
+          <%= image_tag banner.photo.url(:ads) %>
           <div class="caption">
             <div class="btn-group btn-group-xs">
               <%= link_to banner, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>

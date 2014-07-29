@@ -4,23 +4,22 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, :only => [:list, :new, :edit]
   #filter_resource_access
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=>[:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /posts
   # GET /posts.json
   def index
-    #@posts = Post.all
-    #if params[:tag]
-    #  @posts = Post.tagged_with(params[:tag])
-    #elsif params[:year]
-    #  @posts = Post.search(params[:search]).where("strftime('%Y', posted_at) = ?", params[:year])
-    #else
-    #  @posts = Post.search(params[:search])
-    #end
+    @visit = params[:visit]
     @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
-      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'posts')
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'posts').first()
+      @posts = @section.posts.where("to_char(posts.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").order('posts.posted_at DESC')
+      if @visit
+        @posts.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+      end
     else
-      @section = Section.joins(:category).where('categories.link = ?', 'posts').order('sections.created_at ASC').limit(1)
+      @section = Section.joins(:category).where('categories.link = ?', 'posts').order('sections.created_at ASC').first()
+      @posts = @section.posts.order('posts.posted_at DESC')
     end
   end
 
@@ -62,7 +61,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        @publication = Publication.find_by_published_id(@post.id)
+        @publication = Publication.find_by_published_id_and_published_type(@post.id, 'Post')
         @publication.update(:content => @post.title + @post.introduction + @post.description + @post.tag_list.join(' '))
         format.html { redirect_to '/admin/posts', notice: 'Post was successfully updated.' }
         format.json { head :no_content }

@@ -1,10 +1,9 @@
-<% @section.each do |section| %>
     <div class="section-heading">
       <div class="wrapper">
         <div class="cols-12">
           <div class="col col-12">
             <div class="col-inner">
-              <%= image_tag section.main_banner.url(:original) %>
+              <%= image_tag @section.main_banner.url(:original) %>
             </div>
           </div>
         </div>
@@ -19,32 +18,32 @@
                 <div class="page-navigation">
                   <ul>
                     <li>
-                      <%= link_to 'Ultimos videos', '/videos', class: 'active' %>
+                      <%= link_to 'Ultimos videos', '/videos', class: request.fullpath == '/videos' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to 'Más vistos', videos_section_path(:section_id => section.id, :visit => true) %>
+                      <%= link_to 'Más vistos', videos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>
                     </li>
                   </ul>
                 </div>
                 <div class="years-timeline">
                   <ul>
                     <li>
-                      <%= link_to '2014', videos_section_path(:section_id => section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
+                      <%= link_to '2014', videos_section_path(:section_id => @section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2013', videos_section_path(:section_id => section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
+                      <%= link_to '2013', videos_section_path(:section_id => @section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2012', videos_section_path(:section_id => section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
+                      <%= link_to '2012', videos_section_path(:section_id => @section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2011', videos_section_path(:section_id => section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
+                      <%= link_to '2011', videos_section_path(:section_id => @section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2010', videos_section_path(:section_id => section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
+                      <%= link_to '2010', videos_section_path(:section_id => @section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
                     </li>
                     <li>
-                      <%= link_to '2009', videos_section_path(:section_id => section.id, :year => 20), class: @year == '2009' ? 'active' : '' %>
+                      <%= link_to '2009', videos_section_path(:section_id => @section.id, :year => 20), class: @year == '2009' ? 'active' : '' %>
                     </li>
                   </ul>
                 </div>
@@ -58,7 +57,7 @@
     <div class="videos-list">
       <div class="wrapper">
         <div class="cols-12">
-          <% section.videos.where("to_char(videos.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").each do |video| %>
+          <% @videos.each do |video| %>
               <div class="col col-4">
                 <div class="col-inner">
                   <div class="video-box">
@@ -87,7 +86,7 @@
         <div class="col col-12">
           <div class="col-inner">
             <div class="title-page">
-              <h1><%= section.title %></h1>
+              <h1><%= @section.title %></h1>
             </div>
           </div>
         </div>
@@ -100,7 +99,7 @@
           <div class="col col-9">
             <div class="col-inner">
               <!--<= image_tag 'sections/arte-urbano.jpg' %>-->
-              <%= section.description.html_safe %>
+              <%= @section.description.html_safe %>
             </div>
           </div>
           <div class="col col-3">
@@ -113,4 +112,3 @@
         </div>
       </div>
     </div>
-<% end %>

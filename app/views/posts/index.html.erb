@@ -1,106 +1,104 @@
-<% @section.each do |section| %>
-    <div class="section-heading">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-12">
-            <div class="col-inner">
-              <div class="section-heading-content">
-                <div class="section-heading-description">
-                  <div class="section-heading-description-inner">
-                    <p><%= section.description.html_safe %></p>
+<div class="section-heading">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="section-heading-content">
+            <div class="section-heading-description">
+              <div class="section-heading-description-inner">
+                <p><%= @section.description.html_safe %></p>
+              </div>
+            </div>
+            <%= image_tag @section.main_banner.url(:original) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="filters">
+            <div class="page-navigation">
+              <ul>
+                <li>
+                  <%= link_to 'Ultimos videos', '/posts', class: request.fullpath == '/posts' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to 'Más vistos', posts_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>
+                </li>
+              </ul>
+            </div>
+            <div class="years-timeline">
+              <ul>
+                <li>
+                  <%= link_to '2014', posts_section_path(:section_id => @section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2013', posts_section_path(:section_id => @section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2012', posts_section_path(:section_id => @section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2011', posts_section_path(:section_id => @section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2010', posts_section_path(:section_id => @section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2009', posts_section_path(:section_id => @section.id, :year => 2009), class: @year == '2009' ? 'active' : '' %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-content">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-9">
+        <div class="col-inner">
+          <div class="title-page">
+            <h1>BLOG</h1>
+          </div>
+          <div class="posts-list">
+            <% @posts.each do |post| %>
+                <div class="post">
+                  <div class="post-image">
+                    <%= link_to '/posts/'+post.id.to_s do %>
+                        <%= image_tag post.image.url %>
+                    <% end %>
+                  </div>
+                  <div class="post-description">
+                    <div class="post-va">
+                      <a href="/posts/<%= post.id.to_s %>" class="post-title"><%= post.title %></a>
+                      <span class="post-date"><%= blog_date post.posted_at %></span>
+
+                      <p><%= truncate_html(post.introduction, 189, '-') %></p>
+                      <a class="post-read-more" href="/posts/<%= post.id.to_s %>">Leer más</a>
+                    </div>
                   </div>
                 </div>
-                <%= image_tag section.main_banner.url(:original) %>
-              </div>
-            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col col-3">
+        <div class="col-inner">
+          <div class="sidebar">
+            <%= render partial: 'shared/youtube_subscribe' %>
+            <%= render partial: 'shared/latest_videos', locals: {videos: true, banners: true} %>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="filters-wrap">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-12">
-            <div class="col-inner">
-              <div class="filters">
-                <div class="page-navigation">
-                  <ul>
-                    <li>
-                      <%= link_to 'Ultimos videos', '/posts', class: 'active' %>
-                    </li>
-                    <li>
-                      <%= link_to 'Más vistos', '#' %>
-                    </li>
-                  </ul>
-                </div>
-                <div class="years-timeline">
-                  <ul>
-                    <li>
-                      <%= link_to '2014', posts_section_path(:section_id => section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2013', posts_section_path(:section_id => section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2012', posts_section_path(:section_id => section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2011', posts_section_path(:section_id => section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2010', posts_section_path(:section_id => section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2009', posts_section_path(:section_id => section.id, :year => 2009), class: @year == '2009' ? 'active' : '' %>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="main-content">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-9">
-            <div class="col-inner">
-              <div class="title-page">
-                <h1>BLOG</h1>
-              </div>
-              <div class="posts-list">
-                <% section.posts.where("to_char(posts.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").each do |post| %>
-                    <div class="post">
-                      <div class="post-image">
-                        <%= link_to '/posts/'+post.id.to_s do %>
-                            <%= image_tag post.image.url %>
-                        <% end %>
-                      </div>
-                      <div class="post-description">
-                        <div class="post-va">
-                          <a href="/posts/<%= post.id.to_s %>" class="post-title"><%= post.title %></a>
-                          <span class="post-date"><%= blog_date post.posted_at %></span>
-
-                          <p><%= truncate_html(post.introduction, 189, '-') %></p>
-                          <a class="post-read-more" href="/posts/<%= post.id.to_s %>">Leer más</a>
-                        </div>
-                      </div>
-                    </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="col col-3">
-            <div class="col-inner">
-              <div class="sidebar">
-                <%= render partial: 'shared/youtube_subscribe' %>
-                <%= render partial: 'shared/latest_videos', locals: {videos: true, banners: true} %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-<% end %>
+  </div>
+</div>

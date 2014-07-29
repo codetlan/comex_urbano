@@ -3,24 +3,22 @@ class VideosController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_video, only: [:show, :edit, :update, :destroy]
-  impressionist :actions=>[:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
+  impressionist :actions => [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /videos
   # GET /videos.json
   def index
-    #if params[:tag]
-    #  @videos = Video.tagged_with(params[:tag])
-    #elsif params[:year]
-    #  @posts = Video.search(params[:search]).where("strftime('%Y', posted_at) = ?", params[:year])
-    #else
-    #  @videos = Video.search(params[:search])
-    #end
     @visit = params[:visit]
     @year = params[:year].present? ? params[:year] : ''
     if params[:section_id].present?
-      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos')
+      @section = Section.joins(:category).where('sections.id = ? and categories.link = ?', params[:section_id], 'videos').first()
+      @videos = @section.videos.where("to_char(videos.posted_at, 'YYYY-MM-DD') LIKE '%#{@year}%'").order('videos.posted_at DESC')
+      if @visit
+        @videos.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+      end
     else
-      @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').limit(1)
+      @section = Section.joins(:category).where('categories.link = ?', 'videos').order('sections.created_at ASC').first()
+      @videos = @section.videos.order('videos.posted_at DESC')
     end
   end
 
@@ -62,7 +60,7 @@ class VideosController < ApplicationController
   def update
     respond_to do |format|
       if @video.update(video_params)
-        @publication = Publication.find_by_published_id(@video.id)
+        @publication = Publication.find_by_published_id_and_published_type(@video.id, 'Video')
         @publication.update(:content => @video.content + @video.name + @video.description + @video.tag_list.join(' '))
         format.html { redirect_to '/admin/videos', notice: 'Video was successfully updated.' }
         format.json { head :no_content }
