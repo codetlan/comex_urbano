@@ -116,9 +116,7 @@ $(document).ready(function () {
     responsiveNavigation();
 
     $('#banners-items').on('click', '.remove_fields', function (event) {
-        console.log('2222');
         $(this).prev('input[type=hidden]').val('1');
-        console.log($(this).parent().parent());
         $(this).closest('fieldset').hide();
         event.preventDefault();
         return false;
@@ -128,7 +126,7 @@ $(document).ready(function () {
         time = new Date().getTime();
         regexp = new RegExp($(this).data('id'), 'g');
         $('#banners-items').before($(this).data('fields').replace(regexp, time));
-        event.preventDefault()
+        event.preventDefault();
         return false;
     });
 

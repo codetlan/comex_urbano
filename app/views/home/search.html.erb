@@ -42,7 +42,7 @@
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
-                          <%= image_tag photo.image.url %>
+                          <%= image_tag photo.image.url(:post) %>
                       <% end %>
                     </div>
                     <div class="post-description">
@@ -68,7 +68,7 @@
                   <div class="post">
                     <div class="post-image">
                       <%= link_to '#' do %>
-                          <%= image_tag post.image.url %>
+                          <%= image_tag post.image.url(:post) %>
                       <% end %>
                     </div>
                     <div class="post-description">
