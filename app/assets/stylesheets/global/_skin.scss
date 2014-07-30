@@ -364,15 +364,14 @@ p {
 }
 
 .error {
-  .error-inner {
+  text-align: center;
+
+  p, h1 {
     text-align: center;
+    color: $white-color;
+  }
 
-    h1 {
-      text-transform: uppercase;
-    }
-
-    p {
-      text-align: center;
-    }
+  a:hover {
+    color: $white-color;
   }
 }

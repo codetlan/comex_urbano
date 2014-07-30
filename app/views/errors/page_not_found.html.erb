@@ -1,16 +1,41 @@
-<div class="error">
-	<div class="wrapper">
-		<div class="cols-12">
-			<div class="col col-8 col-center">
-				<div class="col-inner">
-					<div class="error-inner">
-						<%= image_tag 'error.png', class: 'error-icon' %>
-						<h1>Error 404</h1>
-						<p>Oops, la pagina a la que quieres accesar no existe o se ha movido de lugar.</p>
-						<p><%= link_to "Ir al Inicio", root_path %></p>
-					</div>
-				</div>
-			</div>
+
+<div class="comming-soon">
+	<div class="comming-soon-header">
+		<div class="social-links">
+      <ul>
+        <% home_details.each do |landing_page| %>
+            <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
+            <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
+            <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
+            <li><%= link_to image_tag('vimeo.png'), "#" %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="comex-brand">
+    	<%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
+          <%= image_tag 'comex-logo.png' %>
+      <% end %>
+    </div>
+	</div>
+
+	<div class="comming-soon-content">
+		<div class="error">
+			<%= image_tag 'error.png', class: 'error-icon' %>
+			<h1>OOOOOOOOOOPS</h1>
+			<p>Oops, la pagina a la que quieres accesar no existe o se ha movido de lugar.</p>
+			<p><%= link_to "Ir al Inicio", root_path %></p>
 		</div>
+	</div>
+
+	<div class="comming-soon-footer">
+		<ul>
+      <% home_details.each do |landing_page| %>
+          <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
+          <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
+          <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
+          <li><%= link_to image_tag('vimeo.png'), "#" %></li>
+      <% end %>
+    </ul>
+    <p>Copyright © 2014 Consorcio Comex, S.A de C.V <br> Términos y Condiciones Aviso de Privacidad Soporte Técnico</p>
 	</div>
 </div>
