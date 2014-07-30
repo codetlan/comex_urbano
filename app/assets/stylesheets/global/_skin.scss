@@ -375,3 +375,13 @@ p {
     color: $white-color;
   }
 }
+
+.slider-wrap {
+  .next a {
+    background-image: url('arrow-right.png');
+  }
+
+  .prev a {
+    background-image: url('arrow-left.png');
+  }
+}

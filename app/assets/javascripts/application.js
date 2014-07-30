@@ -93,9 +93,13 @@ $(document).ready(function () {
     $('.slider').bxSlider({
         autoHover: true,
         pager: false,
-        controls: false,
-        auto: true,
-        pause: 4000
+        controls: true,
+        auto: false,
+        pause: 4000,
+        nextSelector: $('.slider-controler.next'),
+        prevSelector: $('.slider-controler.prev'),
+        nextText: '',
+        prevText: ''
     });
 
     $('.mobile-menu').click(function () {
