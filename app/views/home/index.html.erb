@@ -3,30 +3,34 @@
     <div class="cols-12">
       <div class="col col-12">
         <div class="col-inner">
-          <div class="slider">
-            <% home_details.each do |landing_page| %>
-                <% landing_page.images.each do |banner| %>
-                    <div class="featured-post">
-                      <div class="image">
-                        <%= link_to banner.link do %>
-                            <%= image_tag banner.photo.url(:principal) %>
-                        <% end %>
-                      </div>
-                      <div class="description">
-                        <div class="category">
+          <div class="slider-wrap">
+            <div class="slider-controler next"></div>
+            <div class="slider-controler prev"></div>
+              <div class="slider">
+              <% home_details.each do |landing_page| %>
+                  <% landing_page.images.each do |banner| %>
+                      <div class="featured-post" style="height: auto;">
+                        <div class="image">
                           <%= link_to banner.link do %>
-                              <p><%= banner.name %></p>
+                              <%= image_tag banner.photo.url(:principal) %>
                           <% end %>
                         </div>
-                        <div class="title">
-                          <%= link_to banner.link do %>
-                              <p><%= banner.description %></p>
-                          <% end %>
+                        <div class="description">
+                          <div class="category">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.name %></p>
+                            <% end %>
+                          </div>
+                          <div class="title">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.description %></p>
+                            <% end %>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                <% end %>
-            <% end %>
+                  <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
