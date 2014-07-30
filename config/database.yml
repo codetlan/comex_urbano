@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: comexurbano
-  username: simiographics
+  username: postgres
   password: patito86
   pool: 5
 

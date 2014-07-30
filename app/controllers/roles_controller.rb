@@ -1,4 +1,7 @@
 class RolesController < ApplicationController
+  layout 'admin'
+
+  before_filter :authenticate_user!
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles
@@ -69,6 +72,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name, :description, :active)
+      params.require(:role).permit(:name, :description, :active, :role_ids)
     end
 end

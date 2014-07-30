@@ -20,4 +20,14 @@ class ApplicationController < ActionController::Base
     end
   end
   #end
+
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to '/404', :alert => exception.message
+  end
 end

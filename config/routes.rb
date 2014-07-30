@@ -3,9 +3,13 @@ ComexUrbano::Application.routes.draw do
   resources :abouts
 
 
-  resources :roles
 
   devise_for :users
+
+  scope "/admin" do
+    resources :users
+    resources :roles
+  end
 
   get '/proximamente' => 'static#proximamente'
 
