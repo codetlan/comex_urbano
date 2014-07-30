@@ -9,6 +9,7 @@ body {
 
 img {
   max-width: 100%;
+  max-height: 100%;
 }
 
 p + p,
@@ -963,11 +964,7 @@ img + img {
 }
 
 .error {
-  margin: 100px 0px;
-
-  .error-inner {
-    .error-icon {
-      margin-bottom: 20px;
-    }
-  }
+  .error-icon {
+    margin-bottom: 25px;
+  } 
 }
