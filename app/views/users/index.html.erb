@@ -29,7 +29,11 @@
   <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= 'fsfsfs' %></td>
+        <td>
+          <% user.roles.each do |role| %>
+              <%= role.name %>
+          <% end %>
+        </td>
         <td>
           <div class="btn-group btn-group-xs">
             <% if can? :create, @user %>

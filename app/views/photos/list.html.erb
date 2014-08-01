@@ -2,35 +2,45 @@
 <div class="clearfix admin-head">
   <div class="pull-left">
     <h1>Galería</h1>
-    <p>Sube nuevas imagenes a la galeria.</p> 
+
+    <p>Sube nuevas imagenes a la galeria.</p>
   </div>
   <div class="pull-right">
-    <%= link_to new_photo_path, class: "btn btn-primary" do %>
-      <span class="glyphicon glyphicon-plus">Nueva</span>
+    <% if can? :create, Photo %>
+        <%= link_to new_photo_path, class: "btn btn-primary" do %>
+            <span class="glyphicon glyphicon-plus">Nueva entrada</span>
+        <% end %>
     <% end %>
   </div>
 </div>
 
 <div class="row">
   <% @photos.each do |photo| %>
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail video-admin">
-        <%= image_tag photo.image.url(:list) %>
-        <div class="caption">
-          <h5><%= photo.name %></h5>
-          <p><%= photo.description.present? ? truncate_html(photo.description.html_safe, 80,'...') : '' %><br>
-            Visitas: <%= photo.impressionist_count  %> <br>
-            Publicado: <%= photo.active == 1 ? 'Si' : 'No' %></p><br>
-          <div class="btn-group btn-group-xs">
-            <%= link_to edit_photo_path(photo), class: "btn btn-default btn-lg" do %>
-              <span class="glyphicon glyphicon-pencil"></span>
-            <% end %>
-            <%= link_to photo, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
-              <span class="glyphicon glyphicon-trash"></span>
-            <% end %>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail video-admin">
+          <%= image_tag photo.image.url(:list) %>
+          <div class="caption">
+            <h5><%= photo.name %></h5>
+
+            <p><%= photo.description.present? ? truncate_html(photo.description.html_safe, 80, '...') : '' %><br>
+              Visitas: <%= photo.impressionist_count %> <br>
+              Publicado: <%= photo.active == 1 ? 'Si' : 'No' %></p><br>
+
+            <div class="btn-group btn-group-xs">
+              <% if can? :update, photo %>
+                  <%= link_to edit_photo_path(photo), class: "btn btn-default btn-lg" do %>
+                      <span class="glyphicon glyphicon-pencil"></span>
+                  <% end %>
+              <% end %>
+
+              <% if can? :destroy, photo %>
+                  <%= link_to photo, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
+                      <span class="glyphicon glyphicon-trash"></span>
+                  <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   <% end %>
 </div>

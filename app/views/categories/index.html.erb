@@ -7,8 +7,10 @@
     <p>Opciones del Menu.</p>
   </div>
   <div class="pull-right">
-    <%= link_to new_category_path, class: "btn btn-primary" do %>
-        <span class="glyphicon glyphicon-pencil">Nuevo</span>
+    <% if can? :create, Category %>
+        <%= link_to new_category_path, class: "btn btn-primary" do %>
+            <span class="glyphicon glyphicon-pencil">Nuevo</span>
+        <% end %>
     <% end %>
   </div>
 </div>
@@ -34,11 +36,15 @@
         <td><%= category.active == 1 ? 'Si' : 'No' %></td>
         <td>
           <div class="btn-group btn-group-xs">
-            <%= link_to edit_category_path(category), class: "btn btn-default btn-lg" do %>
-                <span class="glyphicon glyphicon-pencil"></span>
+            <% if can? :update, Category %>
+                <%= link_to edit_category_path(category), class: "btn btn-default btn-lg" do %>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                <% end %>
             <% end %>
-            <%= link_to category, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
-                <span class="glyphicon glyphicon-trash"></span>
+            <% if can? :destroy, Category %>
+                <%= link_to category, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-lg" do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                <% end %>
             <% end %>
           </div>
         </td>
