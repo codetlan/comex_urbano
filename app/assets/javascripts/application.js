@@ -160,5 +160,11 @@ $(document).ready(function () {
         ).collageCaption();
     };
 
+    $('.image-gallery').mouseenter(function(event) {
+        $(this).find('.image-cover').fadeIn(400);
+    }).mouseleave(function(event) {
+        $(this).find('.image-cover').fadeOut(400);
+    });;
+
 });
 

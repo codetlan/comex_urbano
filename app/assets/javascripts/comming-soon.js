@@ -10,8 +10,6 @@ commingSoon = function() {
 			contentH = content.outerHeight(),
 			limitHeight = header.outerHeight() + content.outerHeight() + footer.outerHeight();
 
-	console.log(content.outerHeight());
-
 	if ( winH > limitHeight) {
 		page.height(winH).removeClass('not-fit');
 		content.css('top', '50%');
@@ -46,5 +44,4 @@ ready = function() {
 
 };
 
-$(document).ready(ready);
 $(document).on('page:load', ready);

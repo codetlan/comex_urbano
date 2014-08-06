@@ -57,15 +57,23 @@
 
 <div class="videos-list">
   <div class="wrapper">
-    <div class="cols-12 Collage">
-      <% @photos.each do |photo| %>
-          <div class="video">
-            <%= link_to '/photos/'+photo.id.to_s do %>
-                <!--<i class="i play"></i>-->
-                <%= image_tag photo.image.url %>
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="Collage">
+            <% @photos.each do |photo| %>
+              <div class="image-gallery">
+                <%= link_to '/photos/'+photo.id.to_s do %>
+                  <div class="image-cover">
+                    <h5><%= photo.name %></h5>
+                  </div>
+                  <%= image_tag photo.image.url %>
+                <% end %>
+              </div>
             <% end %>
           </div>
-      <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
