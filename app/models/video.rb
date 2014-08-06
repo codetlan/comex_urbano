@@ -1,6 +1,6 @@
 class Video < ActiveRecord::Base
   belongs_to :section
-  has_many :publications, :as => :published
+  has_many :publications, :as => :published, dependent: :destroy
   acts_as_taggable
   is_impressionable
 
