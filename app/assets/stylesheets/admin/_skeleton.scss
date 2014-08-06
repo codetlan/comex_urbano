@@ -8,6 +8,8 @@
 }
 
 .navbar-brand {
+	padding: 15px 0px;
+
 	img {
 		height: 18px;
 	}
@@ -26,4 +28,8 @@
 		margin-bottom: 8px;
 		@include inline-block;
 	}
+}
+
+.logout {
+	padding: 15px 0px;
 }

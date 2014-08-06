@@ -51,6 +51,12 @@ p {
   @include text-size-regular;
 }
 
+label.error {
+  color: red;
+  font-family: $font-regular;
+  font-size: 11px;
+}
+
 .header {
   background: $black-color;
 
@@ -363,7 +369,7 @@ p {
 
 }
 
-.error {
+.error-page {
   text-align: center;
 
   p, h1 {
@@ -384,4 +390,9 @@ p {
   .prev a {
     background-image: url('arrow-left.png');
   }
+}
+
+.rqrd {
+  color: red;
+  font-size: 15px;
 }

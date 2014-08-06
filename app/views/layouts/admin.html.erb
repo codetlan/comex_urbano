@@ -13,31 +13,44 @@
 <body class="admin-page">
 
 	<nav class="navbar navbar-inverse" role="navigation">
-	  <div class="container">
+	  <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-12">
+          <div class="col-inner">
+            <div class="fl">
+              <%= link_to root_path, class: "navbar-brand" do %>
+                <%= image_tag 'comex-urbano-logo.png' %>
+              <% end %>
+            </div>
 
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <%= link_to root_path, class: "navbar-brand" do %>
-        	<%= image_tag 'comex-urbano-logo.png' %>
-        <% end %>
-	    </div>
-
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav navbar-right">
-	        <li>
-	        	<%= link_to destroy_user_session_path, method: :delete do %>
-	        		Salir <span class="glyphicon glyphicon-arrow-right"></span>
-	        	<% end %>
-	        </li>
-	      </ul>
-	    </div>
+            <div class="fr logout">
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                Salir <span class="glyphicon glyphicon-arrow-right"></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
 	  </div>
 	</nav>
+
+  <div class="flash">
+    <div class="wrapper">
+      <div class="cols-12">
+        <div class="col col-12">
+          <div class="col-inner">
+            <% if flash[:notice] %>
+              <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+            <% elsif flash[:error] %>
+              <div class="alert alert-danger" role="alert"><%= flash[:error] %></div>
+            <% elsif flash[:success] %>
+              <div class="alert alert-success" role="alert"><%= flash[:success] %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 	<div class="wrapper">
 		<div class="cols-12">

@@ -24,3 +24,13 @@
 		}
 	}
 }
+
+.logout {
+	a {
+		color: $gray-color;
+
+		&:hover {
+			color: $white-color;
+		}
+	}
+}

@@ -72,7 +72,9 @@ $(document).ready(function () {
         autoclose: true,
         minViewMode: 'days',
         todayHighlight: true,
-        forceParse: false
+        forceParse: false,
+    }).on('changeDate', function(ev){
+        $(this).valid();
     });
 
     /*$("#videos_search input").keyup(function () {
@@ -148,6 +150,13 @@ $(document).ready(function () {
         done: function (e, data) {
             data.context.text('Upload finished.');
         }
+    });
+
+    $('.validate-form-js').validate({
+        errorPlacement: function(error, element) {
+            var container = element.closest('.col-sm-10');
+            container.append(error);
+        },
     });
 
 });
