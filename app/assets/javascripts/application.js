@@ -26,6 +26,10 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 
+//= require jquery.collageCaption
+//= require jquery.collagePlus
+//= require jquery.removeWhitespace
+
 
 function responsiveNavigation() {
     var winWidth = $(window).width(),
@@ -66,7 +70,7 @@ $(document).ready(function () {
         disableSliderOnClick: true
     });
 
-    $( ".datepicker" ).datepicker({
+    $(".datepicker").datepicker({
         format: 'dd-mm-yyyy',
         language: 'es',
         autoclose: true,
@@ -77,20 +81,6 @@ $(document).ready(function () {
         $(this).valid();
     });
 
-    /*$("#videos_search input").keyup(function () {
-        $.get($("#videos_search").attr("action"), $("#videos_search").serialize(), null, "script");
-        return false;
-    });
-
-    $("#photos_search input").keyup(function () {
-        $.get($("#photos_search").attr("action"), $("#photos_search").serialize(), null, "script");
-        return false;
-    });
-
-    $("#posts_search input").keyup(function () {
-        $.get($("#posts_search").attr("action"), $("#posts_search").serialize(), null, "script");
-        return false;
-    });*/
 
     $('.slider').bxSlider({
         autoHover: true,
@@ -108,12 +98,6 @@ $(document).ready(function () {
         $('.navigation').toggle();
     });
 
-    /*$('.search-form input').keyup(function () {
-        console.log($(".search-form").attr("action"));
-        $.get($(".search-form").attr("action"), $(".search-form").serialize(), null, "script");
-        return false;
-
-    });*/
 
     $(window).resize(function () {
         responsiveNavigation();
@@ -158,6 +142,23 @@ $(document).ready(function () {
             container.append(error);
         },
     });
+
+    collage();
+    var resizeTimer = null;
+    
+    $(window).bind('resize', function () {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(collage, 200);
+    });
+
+    function collage() {
+        $('.Collage').removeWhitespace().collagePlus(
+            {
+                'fadeSpeed': 2000,
+                'targetHeight': 200
+            }
+        ).collageCaption();
+    };
 
 });
 

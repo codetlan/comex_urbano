@@ -21,7 +21,7 @@
                   <%= link_to 'Ultimas fotos', '/photos', class: request.fullpath == '/photos' ? 'active' : '' %>
                 </li>
                 <li>
-                  <%= link_to 'Más vistas', photos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : ''  %>
+                  <%= link_to 'Más vistas', photos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>
                 </li>
               </ul>
             </div>
@@ -57,20 +57,14 @@
 
 <div class="videos-list">
   <div class="wrapper">
-    <div id="gal1" class="cols-12">
+    <div class="cols-12 Collage">
       <% @photos.each do |photo| %>
-          <!-- <div class="col col-4">
-            <div class="col-inner">
-                 <div class="video-box">
-              <div class="video"> -->
-          <!--<= link_to '/photos/'+photo.id.to_s do %>
-              <!--<i class="i play"></i>-->
-          <%= image_tag photo.image.url, :data => {:url => '/photos/'+photo.id.to_s} %>
-          <!--< end %>
-          <!-- </div>
-         </div>
-       </div>
-        </div> -->
+          <div class="video">
+            <%= link_to '/photos/'+photo.id.to_s do %>
+                <!--<i class="i play"></i>-->
+                <%= image_tag photo.image.url %>
+            <% end %>
+          </div>
       <% end %>
     </div>
   </div>
