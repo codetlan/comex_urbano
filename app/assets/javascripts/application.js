@@ -42,31 +42,37 @@ function responsiveNavigation() {
     }
 }
 
+function bindCollage() {
+    setTimeout(function() {
+        $('.Collage').removeWhitespace().collagePlus({
+        'effect' : 'effect-5',
+        'direction'       : 'vertical',
+        'targetHeight': 400
+    });
+    }, 300);
+}
 
-$(document).ready(function () {
+var resizeTimer = null;
+
+$(window).resize(function () {
+    responsiveNavigation();
+    bindCollage();
+});
+
+$(document).on("ready page:load", function() {
+    console.log('Doc Loaded...');
+
     $('textarea.ckeditor').ckeditor();
 
+    responsiveNavigation();
+    bindCollage();
+
     $('#gal1').galereya({
-        // spacing between cells of the masonry grid
         spacing: 3,
-
-        // waving visual effect
         wave: false,
-
-        // waving visual effect timeout duration
         waveTimeout: 300,
-
-        // special CSS modifier for the gallery
         modifier: '',
-
-        // speed of the slide show
-        //slideShowSpeed: 10000,
-
-        // speed of appearance of cells
         cellFadeInSpeed: 200,
-
-
-        // set to true, if you don't want to show the slider on a cell click.
         disableSliderOnClick: true
     });
 
@@ -97,13 +103,6 @@ $(document).ready(function () {
     $('.mobile-menu').click(function () {
         $('.navigation').toggle();
     });
-
-
-    $(window).resize(function () {
-        responsiveNavigation();
-    });
-
-    responsiveNavigation();
 
     $('#banners-items').on('click', '.remove_fields', function (event) {
         $(this).prev('input[type=hidden]').val('1');
@@ -143,28 +142,10 @@ $(document).ready(function () {
         },
     });
 
-    collage();
-    var resizeTimer = null;
-    
-    $(window).bind('resize', function () {
-        if (resizeTimer) clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(collage, 200);
-    });
-
-    function collage() {
-        $('.Collage').removeWhitespace().collagePlus(
-            {
-                'fadeSpeed': 2000,
-                'targetHeight': 200
-            }
-        ).collageCaption();
-    };
-
     $('.image-gallery').mouseenter(function(event) {
         $(this).find('.image-cover').fadeIn(400);
     }).mouseleave(function(event) {
         $(this).find('.image-cover').fadeOut(400);
     });;
-
 });
 
