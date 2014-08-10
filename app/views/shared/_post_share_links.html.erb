@@ -4,12 +4,33 @@
       <div class="col col-12">
         <div class="col-inner">
           <div class="links">
-            <span class='st_fblike_vcount' displayText='Facebook Like'></span>
-            <span class='st_twitter_vcount' displayText='Tweet'></span>
-            <span class='st_sharethis_vcount' displayText='Compartir'></span>
+            <%= link_to "javascript:window.open('#{tw_url}','Facebook Share','width=560, height=300')", class: 'sharer-box tw-sharer' do %>
+              <span class="count"></span>
+            <% end %>
+
+            <%= link_to "javascript:window.open('#{fb_url}','Facebook Share','width=560, height=300')", class: 'sharer-box fb-sharer' do %>
+              <span class="count"></span>
+            <% end %>
           </div>  
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  var fb = $('.fb-sharer span.count'),
+      twitter = $('.tw-sharer span.count');
+
+  $.getJSON('http://cdn.api.twitter.com/1/urls/count.json?url=<%= request.original_url %>&callback=?', function(json, textStatus) {
+    twitter.text(json.count);
+  });
+
+  $.getJSON('http://graph.facebook.com/?id=<%= request.original_url %>&callback=?', function(json, textStatus) {
+    if ( json.shares ) {
+      fb.text(json.shares);
+    } else {
+      fb.text('0');
+    };
+  });
+</script>

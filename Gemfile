@@ -32,6 +32,9 @@ group :assets do
   gem 'bootstrap-datepicker-rails'
 end
 
+gem 'meta-tags'
+
+
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

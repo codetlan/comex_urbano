@@ -45,10 +45,12 @@ function responsiveNavigation() {
 function bindCollage() {
     setTimeout(function() {
         $('.Collage').removeWhitespace().collagePlus({
-        'effect' : 'effect-5',
-        'direction'       : 'vertical',
-        'targetHeight': 400
-    });
+            'targetHeight'    : 400,
+            'fadeSpeed'       : "fast",
+            'effect'          : 'default',
+            'direction'       : 'vertical',
+            'allowPartialLastRow' : false
+        });
     }, 300);
 }
 

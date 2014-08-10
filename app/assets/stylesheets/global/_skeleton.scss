@@ -520,10 +520,19 @@ img + img {
 .post-share-links {
   margin-bottom: 35px;
   @include clearfix;
+  
+  .sharer-box {
+    display: block;
+    position: relative;
+    width: 58px;
+    height: 58px;
+    float: right;
+    margin-left: 20px;
+    padding-top: 4px;
 
-  .links {
-    text-align: right;
-    @include clearfix;
+    .count {
+
+    }
   }
 }
 

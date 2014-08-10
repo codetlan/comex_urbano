@@ -412,3 +412,24 @@ label.error {
     }
   }
 }
+
+.post-share-links {
+
+  .sharer-box {
+    text-align: center;
+  }
+
+  .count {
+    color: #444444;
+    font-size: 15px;
+    font-family: $font-bold;
+  }
+
+  .fb-sharer {
+    background: url('fb-sharer.png');
+  }
+
+  .tw-sharer {
+    background: url('tw-sharer.png');
+  }
+}

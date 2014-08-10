@@ -1,8 +1,3 @@
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "544def9f-8b89-4b7d-a20c-07b4a9e4fe33", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-
 <div class="header-wrap">
   <div class="header">
     <div class="wrapper">
@@ -40,7 +35,7 @@
                 <ul class="nav-list">
                   <% menu.each do |category| %>
                       <li>
-                        <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '' %>
+                        <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '', data: { no_turbolink: true } %>
                         <% unless category.sections.empty? %>
                           <div class="nav-dropdown">
                             <div class="nav-dropdown-padding">

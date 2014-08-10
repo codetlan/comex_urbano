@@ -86,6 +86,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     meta_request (0.3.0)
       callsite
       rack-contrib
@@ -185,6 +187,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   jquery-turbolinks
+  meta-tags
   meta_request
   paperclip
   pg
