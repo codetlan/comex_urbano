@@ -93,10 +93,7 @@ class PublicationsController < ApplicationController
 
   def find_commentable
     params.each do |name, value|
-      puts name.to_yaml + 'nameeee'
       if name =~ /(.+)_id$/
-        puts $1.to_yaml + 'idsssss'
-        puts value.to_yaml + 'valueeeee'
         return $1.classify.constantize.find(value)
       end
     end

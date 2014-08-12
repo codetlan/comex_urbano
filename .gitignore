@@ -16,3 +16,4 @@
 /tmp
 .idea/*
 /config/settings.yml
+/config/database.yml
