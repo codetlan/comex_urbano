@@ -31,7 +31,8 @@ img + img {
   left: 0;
   width: 100%;
   position: fixed;
-  z-index: 15;
+  z-index: 500;
+
 }
 
 .header {
@@ -524,7 +525,7 @@ img + img {
   .sharer-box {
     display: block;
     position: relative;
-    width: 58px;
+    width: 57px;
     height: 58px;
     float: right;
     margin-left: 20px;

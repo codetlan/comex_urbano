@@ -32,7 +32,8 @@
 
 <% fb_url = "https://www.facebook.com/dialog/share?app_id=596902290420493&display=popup&href=#{request.original_url}&redirect_uri=#{request.original_url}" %>
 <% tw_url = "https://twitter.com/intent/tweet?url=#{URI.encode(request.original_url)}&text=#{URI.encode(@photo.name)}&via=PinturasComex" %>
-<%= render partial: 'shared/post_share_links', locals: { fb_url: fb_url, tw_url: tw_url } %>
+
+<%= render partial: 'shared/post_share_links', locals: { fb_url: fb_url, tw_url: tw_url, title: @photo.name, sumary: @photo.description, image: @photo.image.url(:photo_show) } %>
 
 <%= render partial: 'shared/section_youtube_subscribe' %>
 <div class="main-content">
