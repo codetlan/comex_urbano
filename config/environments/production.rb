@@ -95,4 +95,21 @@ ComexUrbano::Application.configure do
           :secret_access_key => '5UPfvyOFx88CyfTnr4E6IxSGTJfs31y3HNdabMe2'
       }
   }
+
+  config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.delivery_method = :letter_opener
+
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      domain: 'gmail.com',
+      authentication: "plain",
+      enable_starttls_auto: true,
+      user_name: 'comexurbano@comex.com.mx',
+      password: 'Urbano2014'
+  }
+
+  config.action_mailer.default :charset => "utf-8"
+  config.action_controller.asset_host = 'http://urbano-demo.herokuapp.com'
+  config.action_mailer.asset_host = config.action_controller.asset_host
 end
