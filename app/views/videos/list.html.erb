@@ -22,7 +22,7 @@
               <img src="http://img.youtube.com/vi/<%= video.youtube_id %>/0.jpg" alt="">
           <% end %>
           <div class="caption">
-            <h5><%= video.name %></h5>
+            <h5><%= video.name.present? ? truncate_html(video.name.html_safe, 20, '...') : '' %></h5>
 
             <p><%= video.description.present? ? truncate_html(video.description.html_safe, 95, '...') : '' %> <br>
               Visitas: <%= video.impressionist_count %> <br>
