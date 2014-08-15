@@ -87,7 +87,6 @@ label.error {
       }
 
       .nav-dropdown {
-
         ul {
           list-style: none;
           background: #000;
@@ -103,6 +102,23 @@ label.error {
 
           &:hover {
             background: #636363
+          }
+        }
+      }
+    }
+
+    @include max-screen(580px) {
+      .nav-list > li {
+        border-top: 1px solid #fff;
+
+        .nav-dropdown {
+
+          ul {
+            border-width: 1px 0 1px 0;
+
+            li a {
+              background: #999;
+            }
           }
         }
       }
@@ -328,7 +344,6 @@ label.error {
     .post-desc {
       h1 {
         color: #dbdbdb;
-        border: 5px solid $white-color;
         font-size: 22px;
         line-height: 26px;
       }

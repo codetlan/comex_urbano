@@ -1,5 +1,13 @@
 .comming-soon {
 	background: $black-color; 
+
+	.comming-soon-header {
+		.social-links {
+			ul {
+				list-style: none;
+			}
+		}
+	}
 }
 
 .comming-soon-content {
