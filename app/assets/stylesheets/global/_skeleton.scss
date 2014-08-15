@@ -1,4 +1,4 @@
-
+  
 body {
   padding-top: 120px;
 
@@ -147,6 +147,28 @@ img + img {
       &:hover {
         .nav-dropdown {
           display: block;
+        }
+      }
+    }
+
+    @include max-screen(580px) {
+      .nav-list {
+        height: 230px;
+        overflow-y: scroll;
+
+        > li {
+          padding: 0;
+          float: none;
+
+          .nav-dropdown {
+            width: auto;
+            position: relative;
+            display: block;
+
+            .nav-dropdown-padding {
+              padding: 0;
+            }
+          }
         }
       }
     }
@@ -489,11 +511,10 @@ img + img {
     }
 
     .post-desc-inner {
-      padding: 50px 120px;
+      padding: 50px;
 
       h1 {
-        padding: 30px 35px;
-        margin-bottom: 24px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -539,6 +560,10 @@ img + img {
 
 .post-main-content {
   margin-top: -90px;
+
+  @include max-screen(790px) {
+    margin-top: 0;
+  }
 }
 
 .post-meta {

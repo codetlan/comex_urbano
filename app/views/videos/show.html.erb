@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<% fb_url = "https://www.facebook.com/dialog/share?app_id=596902290420493&display=popup&href=#{request.original_url}&redirect_uri=#{request.original_url}" %>1
+<% fb_url = "https://www.facebook.com/dialog/share?app_id=596902290420493&display=popup&href=#{request.original_url}&redirect_uri=#{request.original_url}" %>
 <% tw_url = "https://twitter.com/intent/tweet?url=#{URI.encode(request.original_url)}&text=#{URI.encode(@video.name)}&via=PinturasComex" %>
 
 <%= render partial: 'shared/post_share_links', locals: { fb_url: fb_url, tw_url: tw_url, title: @video.name, sumary: @video.description, image: '' } %>
