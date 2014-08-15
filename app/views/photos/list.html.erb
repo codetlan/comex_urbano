@@ -19,7 +19,7 @@
         <div class="thumbnail video-admin">
           <%= image_tag photo.image.url(:list) %>
           <div class="caption">
-            <h5><%= photo.name %></h5>
+            <h5><%= photo.name.present? ? truncate_html(photo.name.html_safe, 40, '...') : '' %></h5>
 
             <p><%= photo.description.present? ? truncate_html(photo.description.html_safe, 80, '...') : '' %><br>
               Visitas: <%= photo.impressionist_count %> <br>
