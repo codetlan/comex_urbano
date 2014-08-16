@@ -148,6 +148,6 @@ $(document).on("ready page:load", function() {
         $(this).find('.image-cover').fadeIn(400);
     }).mouseleave(function(event) {
         $(this).find('.image-cover').fadeOut(400);
-    });;
+    });
 });
 
