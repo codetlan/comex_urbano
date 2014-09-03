@@ -1,14 +1,41 @@
-<div class="section-heading">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-12">
-        <div class="col-inner">
-          <%= image_tag @section.main_banner.url(:main_banner) %>
-        </div>
-      </div>
+<div class="hero-intro">
+  <div class="slider-wrap">
+    <div class="slider-pager"></div>
+      <div class="slider">
+      <% home_details.each do |landing_page| %>
+          <% landing_page.images.each do |banner| %>
+              <div class="featured-post" style="height: auto;">
+                <%= link_to banner.link do %>
+                  <div class="image" style="background-image: url('<%= banner.photo.url(:principal) %>');">
+                  </div>
+                <% end %>
+                <div class="description">
+                  <div class="wrapper">
+                    <div class="cols-12">
+                      <div class="col col-12">
+                        <div class="col-inner">
+                          <div class="category">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.name %></p>
+                            <% end %>
+                          </div>
+                          <div class="title">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.description %></p>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+      <% end %>
     </div>
   </div>
 </div>
+
 <div class="filters-wrap">
   <div class="wrapper">
     <div class="cols-12">
@@ -53,7 +80,6 @@
     </div>
   </div>
 </div>
-<%= render partial: 'shared/section_youtube_subscribe' %>
 
 <div class="videos-list">
   <div class="wrapper">
@@ -71,20 +97,6 @@
                 <% end %>
               </div>
             <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="main-content">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-3">
-        <div class="col-inner">
-          <div class="sidebar">
-            <%= render partial: 'shared/latest_videos', locals: {videos: false, banners: false} %>
           </div>
         </div>
       </div>
