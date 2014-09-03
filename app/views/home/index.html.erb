@@ -103,7 +103,7 @@
                       </div>
                       <div class="post-description">
                         <div class="post-va">
-                          <%= link_to video.name, video_path(video), class: 'post-title' %>
+                          <%= link_to video.name, 'videos/'+ video.id.to_s, class: 'post-title' %>
                           <span class="post-date"><%= blog_date video.posted_at %></span>
                           <p><%= truncate_html(video.description) %></p>
                           <a class="post-read-more" href="videos/<%= video.id.to_s %>">Leer más</a>
