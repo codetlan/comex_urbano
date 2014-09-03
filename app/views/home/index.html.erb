@@ -133,7 +133,7 @@
                       </div>
                       <div class="post-description">
                         <div class="post-va">
-                          <a href="#" class="post-title"><%= photo.name %></a>
+                          <a href="photos/<%= photo.id.to_s %>" class="post-title"><%= photo.name %></a>
                           <span class="post-date"><%= blog_date photo.posted_at %></span>
 
                           <p><%= truncate_html(photo.description, 100, '') %></p>
@@ -164,7 +164,7 @@
                       </div>
                       <div class="post-description">
                         <div class="post-va">
-                          <a href="#" class="post-title"><%= post.title %></a>
+                          <a href="posts/<%= post.id.to_s %>" class="post-title"><%= post.title %></a>
                           <span class="post-date"><%= blog_date post.posted_at %></span>
 
                           <p><%= truncate_html(post.introduction) %></p>
