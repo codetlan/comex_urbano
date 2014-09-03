@@ -337,7 +337,7 @@ label.error {
 
 .post-show-header-wrap {
   .post-show-video {
-    background: $black-color;
+    background: #e5e5e5;
 
     .video {
 
@@ -345,21 +345,35 @@ label.error {
 
     .post-desc {
       h1 {
-        color: #dbdbdb;
+        color: $black-color;
+        font-family: $font-medium;
         font-size: 22px;
         line-height: 26px;
       }
 
       p {
-        color: $white-color;
-        font-size: 12px;
-        font-family: $font-bold;
+        color: #58595b;
+        font-size: 13px;
+        font-family: $font-regular-italic;
       }
     }
   }
 }
 
-.post-main-content {
+.post-show-content {
+  border-top: 2px solid #a7a7a7;
+
+  .post-show-title {
+    font-size: 18px;
+    font-family: $font-bold;
+  }
+
+  .post-show-date {
+    font-size: 14px;
+    color: #767676;
+    font-family: $font-regular-italic;
+  }
+
   p {
     @include text-size-large;
   }
