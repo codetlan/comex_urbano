@@ -127,7 +127,7 @@
                 <% @photos.first(3).each do |photo| %>
                     <div class="post">
                       <div class="post-image">
-                        <%= link_to '#' do %>
+                        <%= link_to 'photos/' + photo.id.to_s do %>
                             <%= image_tag photo.image.url(:post) %>
                         <% end %>
                       </div>
@@ -158,7 +158,7 @@
                 <% @posts.first(3).each do |post| %>
                     <div class="post">
                       <div class="post-image">
-                        <%= link_to '#' do %>
+                        <%= link_to 'posts/' + post.id.to_s do %>
                             <%= image_tag post.image.url(:post) %>
                         <% end %>
                       </div>
