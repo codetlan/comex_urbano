@@ -18,7 +18,7 @@
             <div class="page-navigation">
               <ul>
                 <li>
-                  <%= link_to 'Ultimas fotos', '/photos', class: request.fullpath == '/photos' ? 'active' : '' %>
+                  <%= link_to 'Ultimas', '/photos', class: request.fullpath == '/photos' ? 'active' : '' %>
                 </li>
                 <li>
                   <%= link_to 'Más vistas', photos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>

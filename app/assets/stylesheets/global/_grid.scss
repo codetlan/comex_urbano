@@ -2,6 +2,7 @@
 .wrapper {
   width: 1300px;
   margin: 0 auto;
+  position: relative;
   @include clearfix;
 
   @include max-screen(1300px) {

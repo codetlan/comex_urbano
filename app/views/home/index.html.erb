@@ -1,21 +1,19 @@
 <div class="hero-intro">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-12">
-        <div class="col-inner">
-          <div class="slider-wrap">
-            <div class="slider-controler next"></div>
-            <div class="slider-controler prev"></div>
-              <div class="slider">
-              <% home_details.each do |landing_page| %>
-                  <% landing_page.images.each do |banner| %>
-                      <div class="featured-post" style="height: auto;">
-                        <div class="image">
-                          <%= link_to banner.link do %>
-                              <%= image_tag banner.photo.url(:principal) %>
-                          <% end %>
-                        </div>
-                        <div class="description">
+  <div class="slider-wrap">
+    <div class="slider-pager"></div>
+      <div class="slider">
+      <% home_details.each do |landing_page| %>
+          <% landing_page.images.each do |banner| %>
+              <div class="featured-post" style="height: auto;">
+                <%= link_to banner.link do %>
+                  <div class="image" style="background-image: url('<%= banner.photo.url(:principal) %>');">
+                  </div>
+                <% end %>
+                <div class="description">
+                  <div class="wrapper">
+                    <div class="cols-12">
+                      <div class="col col-12">
+                        <div class="col-inner">
                           <div class="category">
                             <%= link_to banner.link do %>
                                 <p><%= banner.name %></p>
@@ -28,15 +26,16 @@
                           </div>
                         </div>
                       </div>
-                  <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+      <% end %>
     </div>
   </div>
 </div>
+
 <div class="filters-wrap">
   <div class="wrapper">
     <div class="cols-12">
@@ -46,7 +45,7 @@
             <div class="page-navigation">
               <ul>
                 <li>
-                  <%= link_to 'Ultimos videos', '/', class: request.fullpath == '/' ? 'active' : '' %>
+                  <%= link_to 'Ultimos', '/', class: request.fullpath == '/' ? 'active' : '' %>
                 </li>
                 <li>
                   <%= link_to 'Más vistos', root_path(:visit => true), class: @visit == 'true' ? 'active' : '' %>
@@ -89,84 +88,100 @@
           <div class="title-page">
             <h1>Lo nuevo</h1>
           </div>
-
-          <div class="search-result-section">
-            <div class="search-result-section-title">
-              <h4>Videos</h4>
-            </div>
-            <div class="posts-list">
-              <% @videos.first(3).each do |video| %>
-                  <div class="post">
-                    <div class="post-image">
-                      <%= link_to '#' do %>
-                          <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
-                      <% end %>
-                    </div>
-                    <div class="post-description">
-                      <div class="post-va">
-                        <a href="#" class="post-title"><%= video.name %></a>
-                        <span class="post-date"><%= blog_date video.posted_at %></span>
-
-                        <p><%= truncate_html(video.description) %></p>
-                        <a class="post-read-more" href="videos/<%= video.id.to_s %>">Leer más</a>
+          
+          <% unless @videos.empty? %>
+            <div class="search-result-section">
+              <div class="search-result-section-title">
+                <h4>Videos</h4>
+              </div>
+              <div class="posts-list">
+                <% @videos.first(3).each do |video| %>
+                    <div class="post">
+                      <div class="post-image">
+                        <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
+                      </div>
+                      <div class="post-description">
+                        <div class="post-va">
+                          <%= link_to video.name, video_path(video), class: 'post-title' %>
+                          <span class="post-date"><%= blog_date video.posted_at %></span>
+                          <p><%= truncate_html(video.description) %></p>
+                          <a class="post-read-more" href="videos/<%= video.id.to_s %>">Leer más</a>
+                          <div class="post-share">
+                            <div class="addthis_native_toolbox" data-url="<%= video_url(video) %>" data-title="<%= video.name %>"></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
+          
+          <% unless @photos.empty? %>
+            <div class="search-result-section">
+              <div class="search-result-section-title">
+                <h4>Galería</h4>
+              </div>
+              <div class="posts-list">
+                <% @photos.first(3).each do |photo| %>
+                    <div class="post">
+                      <div class="post-image">
+                        <%= link_to '#' do %>
+                            <%= image_tag photo.image.url(:post) %>
+                        <% end %>
+                      </div>
+                      <div class="post-description">
+                        <div class="post-va">
+                          <a href="#" class="post-title"><%= photo.name %></a>
+                          <span class="post-date"><%= blog_date photo.posted_at %></span>
 
-          <div class="search-result-section">
-            <div class="search-result-section-title">
-              <h4>Galería</h4>
-            </div>
-            <div class="posts-list">
-              <% @photos.first(3).each do |photo| %>
-                  <div class="post">
-                    <div class="post-image">
-                      <%= link_to '#' do %>
-                          <%= image_tag photo.image.url(:post) %>
-                      <% end %>
-                    </div>
-                    <div class="post-description">
-                      <div class="post-va">
-                        <a href="#" class="post-title"><%= photo.name %></a>
-                        <span class="post-date"><%= blog_date photo.posted_at %></span>
-
-                        <p><%= truncate_html(photo.description, 100, '') %></p>
-                        <a class="post-read-more" href="photos/<%= photo.id.to_s %>">Leer más</a>
+                          <p><%= truncate_html(photo.description, 100, '') %></p>
+                          <a class="post-read-more" href="photos/<%= photo.id.to_s %>">Leer más</a>
+                          <div class="post-share">
+                            <div class="addthis_native_toolbox" data-url="<%= photo_url(photo) %>" data-title="<%= photo.name %>"></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
+          
+          <% unless @posts.empty? %>
+            <div class="search-result-section">
+              <div class="search-result-section-title">
+                <h4>Blog</h4>
+              </div>
+              <div class="posts-list">
+                <% @posts.first(3).each do |post| %>
+                    <div class="post">
+                      <div class="post-image">
+                        <%= link_to '#' do %>
+                            <%= image_tag post.image.url(:post) %>
+                        <% end %>
+                      </div>
+                      <div class="post-description">
+                        <div class="post-va">
+                          <a href="#" class="post-title"><%= post.title %></a>
+                          <span class="post-date"><%= blog_date post.posted_at %></span>
 
-          <div class="search-result-section">
-            <div class="search-result-section-title">
-              <h4>Blog</h4>
-            </div>
-            <div class="posts-list">
-              <% @posts.first(3).each do |post| %>
-                  <div class="post">
-                    <div class="post-image">
-                      <%= link_to '#' do %>
-                          <%= image_tag post.image.url(:post) %>
-                      <% end %>
-                    </div>
-                    <div class="post-description">
-                      <div class="post-va">
-                        <a href="#" class="post-title"><%= post.title %></a>
-                        <span class="post-date"><%= blog_date post.posted_at %></span>
-
-                        <p><%= truncate_html(post.introduction) %></p>
-                        <a class="post-read-more" href="posts/<%= post.id.to_s %>">Leer más</a>
+                          <p><%= truncate_html(post.introduction) %></p>
+                          <a class="post-read-more" href="posts/<%= post.id.to_s %>">Leer más</a>
+                          <div class="post-share">
+                            <div class="addthis_native_toolbox" data-url="<%= post_url(post) %>" data-title="<%= post.title %>"></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
+
+          <% if @videos.empty? && @photos.empty? && @posts.empty? %>
+            <h3>No se encontraron publicaciones.</h3>
+          <% end %>
 
 
         </div>

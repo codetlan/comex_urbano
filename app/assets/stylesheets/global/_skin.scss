@@ -58,30 +58,24 @@ label.error {
 }
 
 .header {
-  background: $black-color;
+  background: $white-color;
 
   .mobile-menu {
     border: 1px solid shade($white-color, 70%);
     border-radius: $radius;
   }
-}
-
-.site-links {
-  background: #333333;
-  background: rgba(0,0,0,.77);
 
   .navigation {
     .nav-list > li {
       list-style: none;
 
       a {
-        color: $white-color;
-        font-family: $font-black;
+        color: $black-color;
+        font-family: $font-medium;
         text-transform: uppercase;
-        font-size: 12px;
+        font-size: 15px;
 
         &.active {
-          font-family: $font-black;
           color: #c2c2c2;
         }
       }
@@ -108,6 +102,8 @@ label.error {
     }
 
     @include max-screen(580px) {
+      background: $white-color;
+      
       .nav-list > li {
         border-top: 1px solid #fff;
 
@@ -124,6 +120,10 @@ label.error {
       }
     }
   }
+}
+
+.site-links {
+  background: $white-color;
 
   .social-links ul {
     list-style: none;
@@ -131,15 +131,14 @@ label.error {
 
   .search-form {
     input[type="text"] {
-      background: $white-color;
+      background: #58595b;
       border: 0;
-      background-color: $white-color;
-      font-size: 8px;
-      color: #333;
-      font-weight: bold;
+      font-size: 13px;
+      color: $white-color;
+      font-family: $font-bold;
 
       @include placeholder {
-        color: #333;
+        color: $white-color;
       }
     }
   }
@@ -169,21 +168,21 @@ label.error {
       list-style: none;
 
       li {
-        border-bottom: 3px solid $black-color;
+        border-bottom: 3px solid #58595b;
       }
 
       .footer-nav-item {
         text-align: center;     
 
         a {
-          color: $black-color;
-          font-family: $font-bold;
+          color: #58595b;
+          font-family: $font-medium;
+          font-size: 14px;
           text-transform: uppercase;
-          @include text-size-x-small;
 
           &.active {
-            font-family: $font-black;
-            border-bottom: 10px solid $black-color;
+            color: $black-color;
+            border-bottom: 10px solid #58595b;
           } 
         }
       }
@@ -219,7 +218,7 @@ label.error {
 }
 
 .filters {
-  border-bottom: 2px solid $black-color;
+  border-bottom: 2px solid #58595b;
 
   .page-navigation {
     ul li {
@@ -228,13 +227,12 @@ label.error {
       a {
         font-size: 14px;
         text-transform: uppercase;
-        color: $gray-color;
-        font-family: $font-bold;
+        color: #58595b;
+        font-family: $font-medium;
 
         &.active {
           color: $black-color;
-          font-family: $font-black;
-          border-bottom: 10px solid $black-color;
+          border-bottom: 10px solid #58595b;
         }
       }
     }
@@ -245,14 +243,13 @@ label.error {
       list-style: none;
 
       a {
-        color: $gray-color;
+        color: #58595b;
         font-size: 14px;
-        font-family: $font-bold;
+        font-family: $font-medium;
 
         &.active {
           color: $black-color;
-          font-family: $font-black;
-          border-bottom: 10px solid $black-color;
+          border-bottom: 10px solid #58595b;
         }
       }
     }
@@ -274,9 +271,9 @@ label.error {
 .title-page {
 
   h1, .title {
-    font-size: 25px;
+    font-size: 26px;
     font-family: $font-black;
-    border-bottom: 5px solid $black-color;
+    border-bottom: 5px solid #58595b;
     text-transform: uppercase;
   }
 
@@ -289,16 +286,20 @@ label.error {
 }
 
 .ytube-subscribe {
-  text-align: right;
+  .ytube-btn, .fb-btn {
+    border: 1px solid #c4c4c4;
+    text-align: center;
+  }
 }
 
 .side-lastest-videos {
   .label-videos {
-    background-color: $black-color;
+    background-color: #58595b;
 
     h6 {
       color: $white-color;
       font-size: 12px;
+      font-family: $font-bold;
     }
   }
 }
@@ -308,18 +309,18 @@ label.error {
     
   }
   .video-description {
-    background-color: $black-color;
+    background-color: #e6e6e6;
     line-height: 15px;
 
     .video-title {
-      color: #dbdbdb;
-      font-size: 18px;
-      font-family: $font-bold;
+      color: $black-color;
+      font-size: 20px;
+      font-family: $font-medium;
     }
 
     p {
-      color: #fff;
-      font-family: $font-regular;
+      color: #484848;
+      font-family: $font-regular-italic;
     }
 
     a {
@@ -398,12 +399,19 @@ label.error {
 }
 
 .slider-wrap {
-  .next a {
-    background-image: url('arrow-right.png');
-  }
 
-  .prev a {
-    background-image: url('arrow-left.png');
+  .slider-pager {
+    background: $black-color;
+    text-align: center;
+
+    .bx-pager-item > a {
+      background: url('slider-dot-active.png');
+      @include hide-text;
+
+      &.active {
+        background: url('slider-dot.png');
+      }
+    }
   }
 }
 

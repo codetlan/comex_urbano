@@ -1,114 +1,117 @@
-    <div class="section-heading">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-12">
-            <div class="col-inner">
-              <%= image_tag @section.main_banner.url(:main_banner) %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="filters-wrap">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-12">
-            <div class="col-inner">
-              <div class="filters">
-                <div class="page-navigation">
-                  <ul>
-                    <li>
-                      <%= link_to 'Ultimos videos', '/videos', class: request.fullpath == '/videos' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to 'Más vistos', videos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>
-                    </li>
-                  </ul>
-                </div>
-                <div class="years-timeline">
-                  <ul>
-                    <li>
-                      <%= link_to '2014', videos_section_path(:section_id => @section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2013', videos_section_path(:section_id => @section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2012', videos_section_path(:section_id => @section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2011', videos_section_path(:section_id => @section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2010', videos_section_path(:section_id => @section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
-                    </li>
-                    <li>
-                      <%= link_to '2009', videos_section_path(:section_id => @section.id, :year => 20), class: @year == '2009' ? 'active' : '' %>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <%= render partial: 'shared/section_youtube_subscribe' %>
-    <div class="videos-list">
-      <div class="wrapper">
-        <div class="cols-12">
-          <% @videos.each do |video| %>
-              <div class="col col-4">
-                <div class="col-inner">
-                  <div class="video-box video-box-large">
-                    <div class="video">
-                      <%= link_to '/videos/'+video.id.to_s do %>
-                          <!--<i class="i play"></i>-->
-                              <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                      <% end %>
-                    </div>
-                    <div class="video-description">
-                      <%= link_to videos_path do %>
-                        <h5 class="video-title"><%= video.name %></h5>
-                        <p><%= truncate_html(video.description) %></p>
-                      <% end %>
+<div class="hero-intro">
+  <div class="slider-wrap">
+    <div class="slider-pager"></div>
+      <div class="slider">
+      <% home_details.each do |landing_page| %>
+          <% landing_page.images.each do |banner| %>
+              <div class="featured-post" style="height: auto;">
+                <%= link_to banner.link do %>
+                  <div class="image" style="background-image: url('<%= banner.photo.url(:principal) %>');">
+                  </div>
+                <% end %>
+                <div class="description">
+                  <div class="wrapper">
+                    <div class="cols-12">
+                      <div class="col col-12">
+                        <div class="col-inner">
+                          <div class="category">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.name %></p>
+                            <% end %>
+                          </div>
+                          <div class="title">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.description %></p>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
           <% end %>
-        </div>
-      </div>
+      <% end %>
     </div>
+  </div>
+</div>
 
-    <div class="wrapper">
-      <div class="cols-12">
-        <div class="col col-12">
-          <div class="col-inner">
-            <div class="title-page">
-              <h1><%= @section.title %></h1>
+<div class="filters-wrap">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="filters">
+            <div class="page-navigation">
+              <ul>
+                <li>
+                  <%= link_to 'Ultimos', '/videos', class: request.fullpath == '/videos' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to 'Más vistos', videos_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>
+                </li>
+              </ul>
+            </div>
+            <div class="years-timeline">
+              <ul>
+                <li>
+                  <%= link_to '2014', videos_section_path(:section_id => @section.id, :year => 2014), class: @year == '2014' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2013', videos_section_path(:section_id => @section.id, :year => 2013), class: @year == '2013' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2012', videos_section_path(:section_id => @section.id, :year => 2012), class: @year == '2012' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2011', videos_section_path(:section_id => @section.id, :year => 2011), class: @year == '2011' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2010', videos_section_path(:section_id => @section.id, :year => 2010), class: @year == '2010' ? 'active' : '' %>
+                </li>
+                <li>
+                  <%= link_to '2009', videos_section_path(:section_id => @section.id, :year => 20), class: @year == '2009' ? 'active' : '' %>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="main-content">
-      <div class="wrapper">
-        <div class="cols-12">
-          <div class="col col-9">
+  </div>
+</div>
+<div class="videos-list">
+  <div class="wrapper">
+    <div class="cols-12">
+      <% @videos.each do |video| %>
+          <div class="col col-4">
             <div class="col-inner">
-              <!--<= image_tag 'sections/arte-urbano.jpg' %>-->
-              <%= @section.description.html_safe %>
-            </div>
-          </div>
-          <div class="col col-3">
-            <div class="col-inner">
-              <div class="sidebar">
-                <%= render partial: 'shared/latest_videos', locals: { videos: false, banners: true } %>
+              <div class="video-box video-box-large">
+                <div class="video">
+                  <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+                <div class="video-description">
+                  <%= link_to '/videos/'+video.id.to_s do %>
+                    <h5 class="video-title"><%= video.name %></h5>
+                    <p><%= truncate_html(video.description) %></p>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="banner-bottom">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <%= image_tag 'banner-full.jpg' %>
         </div>
       </div>
     </div>
+  </div>
+</div>

@@ -1,16 +1,27 @@
 .featured-post {
+
+  .image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
   .description {
-    background-color: $black-color;
+    background-color: #2d2d2d;
   }
 
   .category p {
-    color: #dbdbdb;
-    font-size: 14px;
-    font-weight: bold;
+    color: $white-color;
+    font-size: 24px;
+    font-family: $font-medium;
   }
 
   .title p {
-  	font-size: 12px;
+  	font-size: 13px;
+    font-family: $font-medium-italic;
     color: $white-color;
   }
 }
