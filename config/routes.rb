@@ -36,7 +36,7 @@ ComexUrbano::Application.routes.draw do
     get '/' => 'abouts#list', on: :collection
   end
 
-  resources :videos, path: 'videos/', only: [:index, :show] do
+  resources :videos, :photos, only: [:index, :show] do
     resources :publications
   end
 
