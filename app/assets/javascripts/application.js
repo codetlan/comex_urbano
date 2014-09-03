@@ -45,13 +45,12 @@ function responsiveNavigation() {
 function bindCollage() {
     setTimeout(function() {
         $('.Collage').removeWhitespace().collagePlus({
-            'targetHeight'    : 400,
             'fadeSpeed'       : "fast",
             'effect'          : 'default',
-            'direction'       : 'vertical',
+            'direction'       : 'horizontal',
             'allowPartialLastRow' : false
         });
-    }, 300);
+    }, 1000);
 }
 
 var resizeTimer = null;

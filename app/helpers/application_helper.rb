@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def latest_videos
-    @videos = Video.all
+    @videos = Video.all.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
   end
 
   def site_banners

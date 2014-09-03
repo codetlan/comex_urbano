@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:list, :new, :edit]
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  impressionist :actions=>[:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
+  impressionist :actions => [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /photos
   # GET /photos.json
@@ -61,9 +61,14 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.update(photo_params)
         @publication = Publication.find_by_published_id_and_published_type(@photo.id, 'Photo')
-        @publication.update(:content => @photo.name + @photo.description + @photo.tag_list.join(' '))
-        format.html { redirect_to '/admin/photos', notice: 'Photo was successfully updated.' }
-        format.json { head :no_content }
+        if @publication
+          @publication.update(:content => @photo.name + @photo.description + @photo.tag_list.join(' '))
+          format.html { redirect_to '/admin/photos', notice: 'Photo was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @photo.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render action: 'list' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }

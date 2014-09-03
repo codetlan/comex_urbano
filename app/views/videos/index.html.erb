@@ -68,7 +68,7 @@
                       <% end %>
                     </div>
                     <div class="video-description">
-                      <%= link_to '/videos/'+video.id.to_s do %>
+                      <%= link_to videos_path do %>
                         <h5 class="video-title"><%= video.name %></h5>
                         <p><%= truncate_html(video.description) %></p>
                       <% end %>
