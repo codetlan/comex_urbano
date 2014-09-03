@@ -11,7 +11,7 @@ ComexUrbano::Application.routes.draw do
     resources :roles
   end
 
-  get '/proximamente' => 'static#proximamente'
+  #get '/proximamente' => 'static#proximamente'
 
 
   resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update, :destroy]
@@ -78,8 +78,9 @@ ComexUrbano::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  #root 'home#index'
 
+  root 'static#proximamente'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
