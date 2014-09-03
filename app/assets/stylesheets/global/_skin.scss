@@ -83,9 +83,9 @@ label.error {
       .nav-dropdown {
         ul {
           list-style: none;
-          background: #000;
-          background: rgba(0,0,0,.9);
+          background: #78797b;
           border: 1px solid $white-color;
+          text-align: center;
         }
 
         a {
@@ -95,7 +95,7 @@ label.error {
           font-family: $font-bold;
 
           &:hover {
-            background: #636363
+            background: #acadae;
           }
         }
       }
@@ -108,12 +108,13 @@ label.error {
         border-top: 1px solid #fff;
 
         .nav-dropdown {
-
           ul {
+            text-align: left;
             border-width: 1px 0 1px 0;
 
             li a {
               background: #999;
+              font-size: 16px !important;
             }
           }
         }

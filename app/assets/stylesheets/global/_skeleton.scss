@@ -106,7 +106,9 @@ img + img {
     position: relative;
 
     .nav-dropdown {
-      width: 145px;
+      width: 160px;
+      left: 50%;
+      margin-left: -45px;
       position: absolute;
       display: none;
 
@@ -116,7 +118,7 @@ img + img {
 
       .separator img {
         display: block;
-        margin: 3px 10px;
+        margin: 3px auto;
       }
 
       a {
@@ -135,6 +137,10 @@ img + img {
 
     &:first-child {
       padding-left: 0;
+
+      .nav-dropdown {
+        margin-left: -80px;
+      }
     }
 
     &:hover {
@@ -174,9 +180,15 @@ img + img {
         float: none;
 
         .nav-dropdown {
-          width: auto;
+          width: auto !important;
           position: relative;
           display: block;
+          margin: 0 !important;
+          left: 0;
+
+          .separator {
+            display: none !important;
+          }
 
           .nav-dropdown-padding {
             padding: 0;
@@ -437,6 +449,10 @@ img + img {
         @include ellipsis();
         display: block;
       }
+    }
+
+    @include max-screen(590px) {
+      margin-bottom: 30px !important;
     }
   }
 }

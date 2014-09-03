@@ -1,18 +1,38 @@
-<div class="section-heading">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-12">
-        <div class="col-inner">
-          <div class="section-heading-content">
-            <div class="section-heading-description">
-              <div class="section-heading-description-inner">
-                <p><%= @section.description.html_safe %></p>
+<%= render partial: 'shared/dynamic_scripts' %>
+<div class="hero-intro">
+  <div class="slider-wrap">
+    <div class="slider-pager"></div>
+      <div class="slider">
+      <% home_details.each do |landing_page| %>
+          <% landing_page.images.each do |banner| %>
+              <div class="featured-post" style="height: auto;">
+                <%= link_to banner.link do %>
+                  <div class="image" style="background-image: url('<%= banner.photo.url(:principal) %>');">
+                  </div>
+                <% end %>
+                <div class="description">
+                  <div class="wrapper">
+                    <div class="cols-12">
+                      <div class="col col-12">
+                        <div class="col-inner">
+                          <div class="category">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.name %></p>
+                            <% end %>
+                          </div>
+                          <div class="title">
+                            <%= link_to banner.link do %>
+                                <p><%= banner.description %></p>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <%= image_tag @section.main_banner.url(:main_banner) %>
-          </div>
-        </div>
-      </div>
+          <% end %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -84,6 +104,9 @@
 
                       <p><%= truncate_html(post.introduction, 189, '-') %></p>
                       <a class="post-read-more" href="/posts/<%= post.id.to_s %>">Leer más</a>
+                      <div class="post-share">
+                          <div class="addthis_native_toolbox" data-url="<%= post_url(post) %>" data-title="<%= post.title %>"></div>
+                        </div>
                     </div>
                   </div>
                 </div>
