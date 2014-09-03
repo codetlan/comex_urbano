@@ -35,10 +35,12 @@ function responsiveNavigation() {
     var winWidth = $(window).width(),
         nav = $('.navigation');
 
-    if (winWidth <= 580) {
+    nav.removeClass('active');
+    if (winWidth <= 840) {
         nav.hide();
     } else {
         nav.show();
+
     }
 }
 
@@ -62,8 +64,6 @@ $(window).resize(function () {
 });
 
 $(document).on("ready page:load", function() {
-    console.log('Doc Loaded...');
-
     $('textarea.ckeditor').ckeditor();
 
     responsiveNavigation();
@@ -96,14 +96,22 @@ $(document).on("ready page:load", function() {
         controls: true,
         auto: false,
         pause: 4000,
-        nextSelector: $('.slider-controler.next'),
-        prevSelector: $('.slider-controler.prev'),
+        pager: true,
+        pagerSelector: $('.slider-pager'),
         nextText: '',
         prevText: ''
     });
 
     $('.mobile-menu').click(function () {
-        $('.navigation').toggle();
+        var navigation = $('.navigation');
+
+        if ( navigation.hasClass('active')) {
+            navigation.removeClass('active');
+            navigation.hide();
+        } else {
+            navigation.addClass('active');
+            navigation.show();
+        }
     });
 
     $('#banners-items').on('click', '.remove_fields', function (event) {

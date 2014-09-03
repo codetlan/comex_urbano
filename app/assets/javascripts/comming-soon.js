@@ -27,7 +27,6 @@ commingSoon = function() {
 };
 
 ready = function() {
-	console.log("aljsdjas")
 	var imageLoaded = function() {
 		commingSoon();
   }

@@ -6,17 +6,38 @@
           <div class="col-inner">
             <div class="brand">
               <%= link_to root_path do %>
-                  <%= image_tag 'comex-urbano-logo.png' %>
+                  <%= image_tag 'comex-urbano-logo-original.png' %>
               <% end %>
             </div>
             <div class="header-right-content">
+
+              <div class="site-navigation">
+                <div class="navigation">
+                  <ul class="nav-list">
+                    <% menu.each do |category| %>
+                        <li>
+                          <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '', data: { no_turbolink: true } %>
+                          <% unless category.sections.empty? %>
+                            <div class="nav-dropdown">
+                              <div class="nav-dropdown-padding">
+                                <ul>
+                                  <% category.sections.each_with_index do |section, index| %>
+                                    <li><%= link_to section.title, '/'+category.link+'/section/'+section.id.to_s %></li>
+                                    <% unless index == category.sections.size - 1 %>
+                                      <li class="separator"><%= image_tag 'dropdown-separator.png' %></li>
+                                    <% end %>
+                                  <% end %>
+                                </ul>
+                              </div>
+                            </div>
+                          <% end %>
+                        </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
               <div class="mobile-menu">
                 <%= image_tag 'menu.png' %>
-              </div>
-              <div class="comex-logo-brand">
-                <%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
-                    <%= image_tag 'comex-logo.png' %>
-                <% end %>
               </div>
             </div>
           </div>
@@ -30,43 +51,18 @@
       <div class="cols-12">
         <div class="col col-12">
           <div class="col-inner">
-            <div class="site-navigation">
-              <div class="navigation">
-                <ul class="nav-list">
-                  <% menu.each do |category| %>
-                      <li>
-                        <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '', data: { no_turbolink: true } %>
-                        <% unless category.sections.empty? %>
-                          <div class="nav-dropdown">
-                            <div class="nav-dropdown-padding">
-                              <ul>
-                                <% category.sections.each_with_index do |section, index| %>
-                                  <li><%= link_to section.title, '/'+category.link+'/section/'+section.id.to_s %></li>
-                                  <% unless index == category.sections.size - 1 %>
-                                    <li class="separator"><%= image_tag 'dropdown-separator.png' %></li>
-                                  <% end %>
-                                <% end %>
-                              </ul>
-                            </div>
-                          </div>
-                        <% end %>
-                      </li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
 
             <div class="site-search">
               <div class="social-links">
                 <ul>
                   <% home_details.each do |landing_page| %>
-                      <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
-                      <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
-                      <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
-                      <li><%= link_to image_tag('instagram.png'), "#" %></li>
+                      <li><%= link_to image_tag('fb-black.png'), landing_page.facebook, :target => '_blank' %></li>
+                      <li><%= link_to image_tag('youtube-black.png'), landing_page.youtube, :target => '_blank' %></li>
+                      <li><%= link_to image_tag('instagram-black.png'), "#" %></li>
                   <% end %>
                 </ul>
               </div>
+              
               <form action="/search" class="search-form" method='get'>
                 <input id="search" name="name" type="text" placeholder="Buscar">
               </form>
@@ -76,4 +72,5 @@
       </div>
     </div>
   </div>
+
 </div>
