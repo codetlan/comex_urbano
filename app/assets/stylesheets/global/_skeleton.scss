@@ -511,7 +511,7 @@ img + img {
 }
 
 .post-show-header-wrap {
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 
   .post-show-video {
     @include clearfix;
@@ -528,13 +528,21 @@ img + img {
     .post-desc {
       float: left;
       width: 40%;
+      height: 360px;
+      display: table;
     }
 
     .post-desc-inner {
-      padding: 50px;
+      padding: 0 60px;
+      display: table-cell;
+      vertical-align: middle;
 
       h1 {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+      }
+
+      .post-share {
+        margin-top: 5px;
       }
     }
   }
@@ -578,19 +586,17 @@ img + img {
   }
 }
 
-.post-main-content {
-  margin-top: -90px;
-
-  @include max-screen(790px) {
-    margin-top: 0;
-  }
-}
-
 .post-meta {
   margin-top: 30px;
 
   .tags {
     margin-bottom: 25px;
+  }
+}
+
+.post-show-content {
+  .post-share {
+    margin: 20px 0;
   }
 }
 
