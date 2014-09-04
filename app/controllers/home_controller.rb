@@ -7,14 +7,15 @@ class HomeController < ApplicationController
     @photos = []
     @posts = []
 
-    @publications = Publication.all
+    @publications = []
     @year = params[:year]
     @visit = params[:visit]
 
-    @publications.each do |publication|
+    Publication.all.each do |publication|
       @type = publication.published_type
       if @type == 'Video'
         result = @type.classify.constantize.find(publication.published_id)
+        @publications.push(result)
         if params[:year]
           if result.present? && result.posted_at.strftime('%Y') == @year
             @videos.push(result)
@@ -32,6 +33,7 @@ class HomeController < ApplicationController
         end
       elsif @type == 'Photo'
         result = @type.classify.constantize.find(publication.published_id)
+        @publications.push(result)
         if params[:year]
           if result.present? && result.posted_at.strftime('%Y') == @year
             @photos.push(result)
@@ -49,6 +51,7 @@ class HomeController < ApplicationController
         end
       elsif @type == 'Post'
         result = @type.classify.constantize.find(publication.published_id)
+        @publications.push(result)
         if params[:year]
           if result.present? && result.posted_at.strftime('%Y') == @year
             @posts.push(result)
