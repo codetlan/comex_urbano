@@ -13,10 +13,14 @@ ComexUrbano::Application.routes.draw do
 
   get '/proximamente' => 'static#proximamente'
 
+  get '/terminos' => 'static#terminos'
+  get '/privacidad' => 'static#privacidad'
+  get '/contacto' => 'static#contacto'
+
 
   resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update, :destroy]
 
-  resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update]
+  resources :categories, path: '/admin/categories', only: [:index, :new, :edit, :create, :update, :destroy]
 
   resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
 
@@ -28,9 +32,9 @@ ComexUrbano::Application.routes.draw do
     get '/' => 'photos#list', on: :collection
   end
 
-  resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update, :destroy] do
-    get '/' => 'posts#list', on: :collection
-  end
+  #resources :posts, path: '/admin/posts', only: [:list, :new, :edit, :create, :update, :destroy] do
+  #  get '/' => 'posts#list', on: :collection
+  #end
 
   resources :abouts, path: '/admin/abouts', only: [:list, :new, :edit, :create, :update, :destroy] do
     get '/' => 'abouts#list', on: :collection
@@ -40,7 +44,7 @@ ComexUrbano::Application.routes.draw do
     resources :publications
   end
 
-  resources :posts, :abouts, only: [:index, :show]
+  #resources :posts, :abouts, only: [:index, :show]
 
 
   resources :images
@@ -63,7 +67,7 @@ ComexUrbano::Application.routes.draw do
 
   get 'videos/section/:section_id', to: 'videos#index', as: :videos_section
 
-  get 'posts/section/:section_id', to: 'posts#index', as: :posts_section
+  #get 'posts/section/:section_id', to: 'posts#index', as: :posts_section
 
   get 'search/', to: 'home#search', as: :search
 
