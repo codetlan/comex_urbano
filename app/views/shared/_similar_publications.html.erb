@@ -6,7 +6,7 @@
         <div class="col col-2">
           <div class="col-inner">
             <div class="similar-publications-box">
-              <%= link_to photo_path(post) do %>
+              <%= link_to photo_show_path(post) do %>
                 <div class="image">
                   <%= image_tag post.image.url(:photo_show) %>
                 </div>
@@ -23,7 +23,7 @@
         <div class="col col-2">
           <div class="col-inner">
             <div class="similar-publications-box">
-              <%= link_to video_path(post) do %>
+              <%= link_to video_show_path(post) do %>
                 <div class="image">
                   <%= image_tag youtube_thumb(post.link) %>
                 </div>

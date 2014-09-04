@@ -51,7 +51,7 @@
           <div class="Collage" style="padding: 3px;">
             <% @photos.each do |photo| %>
               <div class="image-gallery">
-                <%= link_to '/photos/'+photo.id.to_s do %>
+                <%= link_to photo_show_path(photo) do %>
                   <div class="image-cover">
                     <h5><%= photo.name %></h5>
                   </div>

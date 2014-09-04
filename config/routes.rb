@@ -43,9 +43,15 @@ ComexUrbano::Application.routes.draw do
     resources :publications
   end
 
+  get '/videos/:id', to: 'videos#show', as: :video_show
+
+
   resources :photos, only: [:index, :show] do
     resources :publications
   end
+
+  get '/photos/:id', to: 'photos#show', as: :photo_show
+
 
   #resources :posts, :abouts, only: [:index, :show]
 
