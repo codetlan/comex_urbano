@@ -14,6 +14,8 @@ ComexUrbano::Application.routes.draw do
   get '/proximamente' => 'static#proximamente'
 
   get '/terminos' => 'static#terminos'
+  get '/privacidad' => 'static#privacidad'
+  get '/contacto' => 'static#contacto'
 
 
   resources :sections, path: '/admin/sections', only: [:index, :new, :edit, :create, :update, :destroy]
