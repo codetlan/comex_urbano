@@ -1161,3 +1161,24 @@ label {
 .page {
   margin-top: 50px;
 }
+
+.similar-publications {
+  margin-top: 25px;
+  
+  .similar-publications-box {
+    .image {
+      height: 140px;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: auto;
+        max-width: auto;
+      }
+    }
+
+    .description {
+      margin-top: 8px;
+    }
+  }
+}

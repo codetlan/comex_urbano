@@ -20,6 +20,10 @@ module ApplicationHelper
     end
   end
 
+  def latest_photos
+    @videos = Photo.all.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+  end
+
   def latest_videos
     @videos = Video.all.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
   end
@@ -39,5 +43,9 @@ module ApplicationHelper
   def parse_youtube(url)
     regex = /(?:.be\/|\/watch\?v=|\/(?=p\/))([\w\/\-]+)/
     url.match(regex)[1]
+  end
+
+  def youtube_thumb(link)
+    return "http://img.youtube.com/vi/#{parse_youtube(link)}/hqdefault.jpg"
   end
 end

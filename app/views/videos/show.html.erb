@@ -13,7 +13,7 @@
                 <h1><%= @video.name %></h1>
                 <p><%= truncate_html(@video.description) %></p>
 
-                <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: "http://img.youtube.com/vi/#{parse_youtube(@video.link)}/hqdefault.jpg" } %>
+                <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: youtube_thumb(@video.link) } %>
 
               </div>
             </div>
@@ -54,3 +54,4 @@
     </div>
   </div>
 </div>
+<%= render partial: 'shared/similar_publications' %>

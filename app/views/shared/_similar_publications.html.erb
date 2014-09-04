@@ -1,0 +1,41 @@
+<div class="similar-publications">
+  <div class="wrapper">
+    <div class="cols-12">
+      
+      <% latest_photos.first(3).each do |post| %>
+        <div class="col col-2">
+          <div class="col-inner">
+            <div class="similar-publications-box">
+              <%= link_to photo_path(post) do %>
+                <div class="image">
+                  <%= image_tag post.image.url(:photo_show) %>
+                </div>
+                <div class="description">
+                  <%= post.name %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% latest_videos.first(3).each do |post| %>
+        <div class="col col-2">
+          <div class="col-inner">
+            <div class="similar-publications-box">
+              <%= link_to video_path(post) do %>
+                <div class="image">
+                  <%= image_tag youtube_thumb(post.link) %>
+                </div>
+                <div class="description">
+                  <%= post.name %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
