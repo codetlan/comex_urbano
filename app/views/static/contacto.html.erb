@@ -8,50 +8,50 @@
             <h1 class="post-show-title">Contáctanos</h1>
             <br>
 
-            <%= form_tag '#', class: 'contact-form' do %>
+            <%= form_for @contact, html: {class: 'contact-form'} do |form| %>
               <div class="form-group">
-                <%= label_tag 'name', 'Nombre(s): <i class="rqrd">*</i>'.html_safe %>
+                <%= form.label :name, 'Nombre(s): <i class="rqrd">*</i>'.html_safe %>
                 <div class="row">
                   <div class="col-xs-7">
-                    <%= text_field_tag 'name', '', class: 'form-control', required: true %>
+                    <%= form.text_field :name, class: 'form-control', required: true %>
                   </div>
                 </div>
               </div>
 
               <div class="form-group">
-                <%= label_tag 'last_name', 'Apellido(s):' %>
+                <%= form.label :lastname, 'Apellido(s):' %>
                 <div class="row">
                   <div class="col-xs-7">
-                    <%= text_field_tag 'last_name', '', class: 'form-control' %>
+                    <%= form.text_field :lastname, class: 'form-control' %>
                   </div>
                 </div>
               </div>
 
               <div class="form-group">
-                <%= label_tag 'email', 'Email: <i class="rqrd">*</i>'.html_safe %>
+                <%= form.label :email, 'Email: <i class="rqrd">*</i>'.html_safe %>
                 <div class="row">
                   <div class="col-xs-7">
-                    <%= text_field_tag 'email', '', class: 'form-control', required: true, email: true %>
+                    <%= form.text_field :email, class: 'form-control', required: true, email: true %>
                   </div>
                 </div>
               </div>
 
               <div class="form-group">
-                <%= label_tag 'subject', 'Asunto:' %>
+                <%= form.label :subject, 'Asunto:' %>
                 <div class="row">
                   <div class="col-xs-7">
-                    <%= text_field_tag 'subject', '', class: 'form-control' %>
+                    <%= form.text_field :subject, class: 'form-control' %>
                   </div>
                 </div>
               </div>
 
               <div class="form-group">
-                <%= label_tag 'message', 'Mensaje: <i class="rqrd">*</i>'.html_safe %>
-                <%= text_area_tag 'message', '', rows: 7, class: 'form-control', placeholder: 'Escribir', required: true %>
+                <%= form.label :message, 'Mensaje: <i class="rqrd">*</i>'.html_safe %>
+                <%= form.text_area :message, rows: 7, class: 'form-control', placeholder: 'Escribir', required: true %>
               </div>
               
               <div class="form-actions">
-                <%= submit_tag 'Enviar', class: 'form-action-item' %>
+                <%= form.submit 'Enviar', class: 'form-action-item' %>
                 <%= link_to 'Limpiar', '#', class: 'form-action-item reset-contact-form-js' %>
               </div>
             <% end %>

@@ -60,6 +60,8 @@ ComexUrbano::Application.routes.draw do
 
   resources :banners
 
+  resources :contacts
+
   #namespace :admin do
   # resources :videos
   #end

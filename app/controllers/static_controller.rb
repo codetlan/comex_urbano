@@ -7,7 +7,8 @@ class StaticController < ActionController::Base
     end
   end
 
-  def contacto  
+  def contacto
+    @contact = Contact.new
   end
 
   def privacidad 
