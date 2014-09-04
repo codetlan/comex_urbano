@@ -3,7 +3,6 @@ ComexUrbano::Application.routes.draw do
   resources :abouts
 
 
-
   devise_for :users
 
   scope "/admin" do
@@ -25,7 +24,7 @@ ComexUrbano::Application.routes.draw do
   resources :landing_pages, path: '/admin', only: [:index, :new, :edit, :create, :update]
 
   resources :videos, path: '/admin/videos', only: [:list, :new, :edit, :create, :update, :destroy] do
-    get '/'  => 'videos#list', on: :collection
+    get '/' => 'videos#list', on: :collection
   end
 
   resources :photos, path: '/admin/photos', only: [:list, :new, :edit, :create, :update, :destroy] do
@@ -40,7 +39,11 @@ ComexUrbano::Application.routes.draw do
     get '/' => 'abouts#list', on: :collection
   end
 
-  resources :videos, :photos, only: [:index, :show] do
+  resources :videos, only: [:index, :show] do
+    resources :publications
+  end
+
+  resources :photos, only: [:index, :show] do
     resources :publications
   end
 
@@ -52,7 +55,7 @@ ComexUrbano::Application.routes.draw do
   resources :banners
 
   #namespace :admin do
-   # resources :videos
+  # resources :videos
   #end
 
   get '/admin' => 'admin#index'
