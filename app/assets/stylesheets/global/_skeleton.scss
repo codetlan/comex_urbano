@@ -292,6 +292,10 @@ img + img {
   padding-bottom: 10px;
   @include clearfix;
 
+  &.filters-standalone {
+    margin-top: 25px;
+  }
+
   .page-navigation {
     float: left;
     @include clearfix;
@@ -533,7 +537,7 @@ img + img {
     }
 
     .post-desc-inner {
-      padding: 0 60px;
+      padding: 0 40px;
       display: table-cell;
       vertical-align: middle;
 
@@ -1124,5 +1128,34 @@ img + img {
 .banner-bottom {
   img {
     max-width: 100%;
+  }
+}
+
+.post-share {
+  position: relative;
+  height: 22px;
+
+  .sh {
+    position: absolute;
+  }
+
+  .fb {
+    left: 0;
+    top: 0;
+  }
+
+  .twitter {
+    top: 0;
+    left: 117px;
+  }
+
+  .pin {
+    top: 0;
+    left: 210px;
+  }
+
+  .gplus {
+    top: 1px;
+    left: 307px;
   }
 }
