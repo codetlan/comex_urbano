@@ -7,83 +7,93 @@
             <h1>Resultados <span class="query-search">#<%= @name %></span></h1>
           </div>
 
-          <div class="search-result-section">
-            <div class="search-result-section-title">
-              <h4>Videos</h4>
-            </div>
-            <div class="posts-list">
-              <% @videos.first(3).each do |video| %>
-                  <div class="post">
-                    <div class="post-image">
-                      <%= link_to '#' do %>
-                          <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
-                      <% end %>
-                    </div>
-                    <div class="post-description">
-                      <div class="post-va">
-                        <a href="#" class="post-title"><%= video.name %></a>
-                        <span class="post-date"><%= blog_date video.posted_at %></span>
+          <% unless @videos.empty? %>
+            <div class="search-result-section">
+              <div class="search-result-section-title">
+                <h4>Videos</h4>
+              </div>
+              <div class="posts-list">
+                <% @videos.first(3).each do |video| %>
+                    <div class="post">
+                      <div class="post-image">
+                        <%= link_to '#' do %>
+                            <iframe width="100%" height="100%" src="<%= video.link_embed(video.link) %>?&showinfo=0&autohide=1"></iframe>
+                        <% end %>
+                      </div>
+                      <div class="post-description">
+                        <div class="post-va">
+                          <a href="#" class="post-title"><%= video.name %></a>
+                          <span class="post-date"><%= blog_date video.posted_at %></span>
 
-                        <p><%= truncate_html(video.description) %></p>
-                        <a class="post-read-more" href="videos/<%= video.id.to_s %>">Leer más</a>
+                          <p><%= truncate_html(video.description) %></p>
+                          <a class="post-read-more" href="videos/<%= video.id.to_s %>">Leer más</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
 
-          <div class="search-result-section">
-            <div class="search-result-section-title">
-              <h4>Galería</h4>
-            </div>
-            <div class="posts-list">
-              <% @photos.first(3).each do |photo| %>
-                  <div class="post">
-                    <div class="post-image">
-                      <%= link_to '#' do %>
-                          <%= image_tag photo.image.url(:post) %>
-                      <% end %>
-                    </div>
-                    <div class="post-description">
-                      <div class="post-va">
-                        <a href="#" class="post-title"><%= photo.name %></a>
-                        <span class="post-date"><%= blog_date photo.posted_at %></span>
+          <% unless @photos.empty? %>
+            <div class="search-result-section">
+              <div class="search-result-section-title">
+                <h4>Galería</h4>
+              </div>
+              <div class="posts-list">
+                <% @photos.first(3).each do |photo| %>
+                    <div class="post">
+                      <div class="post-image">
+                        <%= link_to '#' do %>
+                            <%= image_tag photo.image.url(:post) %>
+                        <% end %>
+                      </div>
+                      <div class="post-description">
+                        <div class="post-va">
+                          <a href="#" class="post-title"><%= photo.name %></a>
+                          <span class="post-date"><%= blog_date photo.posted_at %></span>
 
-                        <p><%= truncate_html(photo.description, 100, '') %></p>
-                        <a class="post-read-more" href="photos/<%= photo.id.to_s %>">Leer más</a>
+                          <p><%= truncate_html(photo.description, 100, '') %></p>
+                          <a class="post-read-more" href="photos/<%= photo.id.to_s %>">Leer más</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
 
-          <div class="search-result-section">
-            <div class="search-result-section-title">
-              <h4>Blog</h4>
-            </div>
-            <div class="posts-list">
-              <% @posts.first(3).each do |post| %>
-                  <div class="post">
-                    <div class="post-image">
-                      <%= link_to '#' do %>
-                          <%= image_tag post.image.url(:post) %>
-                      <% end %>
-                    </div>
-                    <div class="post-description">
-                      <div class="post-va">
-                        <a href="#" class="post-title"><%= post.title %></a>
-                        <span class="post-date"><%= blog_date post.posted_at %></span>
+          <% unless @posts.empty? %>
+            <div class="search-result-section">
+              <div class="search-result-section-title">
+                <h4>Blog</h4>
+              </div>
+              <div class="posts-list">
+                <% @posts.first(3).each do |post| %>
+                    <div class="post">
+                      <div class="post-image">
+                        <%= link_to '#' do %>
+                            <%= image_tag post.image.url(:post) %>
+                        <% end %>
+                      </div>
+                      <div class="post-description">
+                        <div class="post-va">
+                          <a href="#" class="post-title"><%= post.title %></a>
+                          <span class="post-date"><%= blog_date post.posted_at %></span>
 
-                        <p><%= truncate_html(post.introduction) %></p>
-                        <a class="post-read-more" href="posts/<%= post.id.to_s %>">Leer más</a>
+                          <p><%= truncate_html(post.introduction) %></p>
+                          <a class="post-read-more" href="posts/<%= post.id.to_s %>">Leer más</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
+
+          <% if @posts.empty? && @photos.empty? && @videos.empty? %>
+            <p class="not-found-text">El término buscado no fue encontrado, intente nuevamente</p>
+          <% end %>
 
         </div>
       </div>

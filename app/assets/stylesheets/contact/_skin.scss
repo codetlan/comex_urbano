@@ -1,0 +1,26 @@
+.contact-form {
+  input[type=text] {
+    background: #58595b;
+    color: $white-color;
+    border: 0;
+    box-shadow: none;
+  }
+
+  textarea {
+    box-shadow: none;
+    border: 2px solid #58595b;
+  }
+  
+  .form-actions {
+    text-align: right;
+
+    .form-action-item {
+      background: none;
+      border: 0;
+      color: $black-color;
+      text-transform: uppercase;
+      font-size: 15px;
+      font-family: $font-bold;
+    }
+  }
+}

@@ -12,9 +12,7 @@
 //
 //= require jquery
 //= require jquery.galereya
-//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require ckeditor/init
 //= require jquery
 //= require bootstrap-sprockets
@@ -52,7 +50,7 @@ function bindCollage() {
             'direction'       : 'horizontal',
             'allowPartialLastRow' : false
         });
-    }, 1000);
+    }, 800);
 }
 
 var resizeTimer = null;

@@ -2,7 +2,7 @@
 * {
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 body {
@@ -51,10 +51,20 @@ p {
   @include text-size-regular;
 }
 
-label.error {
-  color: red;
-  font-family: $font-regular;
-  font-size: 11px;
+strong {
+  font-family: $font-bold;
+  font-weight: normal;
+}
+
+label {
+  font-weight: normal;
+  font-family: $font-medium;
+
+  &.error {
+    color: red;
+    font-family: $font-regular;
+    font-size: 11px;
+  }
 }
 
 .header {
@@ -375,7 +385,7 @@ label.error {
   }
 
   p {
-    @include text-size-large;
+    @include text-size-regular;
   }
 }
 
@@ -473,5 +483,22 @@ label.error {
 
   .big-sharer {
     background: url('global-sharer.png');
+  }
+}
+
+.page {
+  .post-show-title {
+    font-size: 26px;
+  }
+}
+
+.legal {
+  p, ul {
+    @include text-size-small;
+  }
+
+  strong {
+    font-size: 14px;
+    color: $black-color;
   }
 }

@@ -18,6 +18,10 @@ img + img {
   margin-top: 25px;
 }
 
+label {
+  margin-bottom: 10px;
+}
+
 .fl {
   float: left;
 }
@@ -237,7 +241,7 @@ img + img {
     ul li {
       padding-bottom: 8px;
       display: block;
-      width: 25%;
+      width: 33.333%;
       float: left;
 
       a {
@@ -383,7 +387,7 @@ img + img {
 }
 
 .ytube-subscribe {
-  margin: -10px 0 25px 0;
+  margin-bottom: 25px;
   @include clearfix;
 
   .fb-btn { 
@@ -1133,29 +1137,27 @@ img + img {
 
 .post-share {
   position: relative;
-  height: 22px;
+  @include clearfix;
 
   .sh {
-    position: absolute;
-  }
-
-  .fb {
-    left: 0;
-    top: 0;
+    float: left;
+    margin-right: 5px;
   }
 
   .twitter {
-    top: 0;
-    left: 117px;
+    width: 90px;
   }
 
   .pin {
-    top: 0;
-    left: 210px;
+    width: 89px;
   }
 
   .gplus {
-    top: 1px;
-    left: 307px;
+    width: 57px;
+    margin-top: 1px;
   }
+}
+
+.page {
+  margin-top: 50px;
 }
