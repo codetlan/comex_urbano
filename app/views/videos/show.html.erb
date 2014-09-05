@@ -1,8 +1,8 @@
 <% set_meta_tags title: @video.name,
-                 description: @video.description,
+                 description: truncate_html(@video.description.html_safe),
                  og: {
                          title: @video.name,
-                         description: @video.description,
+                         description: truncate_html(@video.description.html_safe),
                          image: youtube_thumb(@video.link),
                          url: request.original_url
                  }
@@ -24,7 +24,7 @@
                 <h1><%= @video.name %></h1>
                 <p><%= truncate_html(@video.description.html_safe) %></p>
 
-                <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: youtube_thumb(@video.link) } %>
+                <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: youtube_thumb(@video.link), descri: truncate_html(@video.description.html_safe) } %>
 
               </div>
             </div>
@@ -41,11 +41,11 @@
       <div class="col col-9">
         <div class="col-inner">
           <div class="post-show-content">
-            <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: "http://img.youtube.com/vi/#{parse_youtube(@video.link)}/hqdefault.jpg" } %>
+            <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: "http://img.youtube.com/vi/#{parse_youtube(@video.link)}/hqdefault.jpg", descri: truncate_html(@video.description.html_safe) } %>
             <h1 class="post-show-title"><%= @video.name %></h1>
             <span class="post-show-date"><%= blog_date @video.created_at %></span>
             <p><%= @video.content.present? ? @video.content.html_safe : '' %></p>
-            <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: "http://img.youtube.com/vi/#{parse_youtube(@video.link)}/hqdefault.jpg" } %>
+            <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: "http://img.youtube.com/vi/#{parse_youtube(@video.link)}/hqdefault.jpg" }, descri: truncate_html(@video.description.html_safe) %>
           </div>
         </div>
       </div>
