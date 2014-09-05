@@ -24,7 +24,7 @@
                 <h1><%= @video.name %></h1>
                 <p><%= truncate_html(@video.description.html_safe) %></p>
 
-                <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: youtube_thumb(@video.link), descri: truncate_html(@video.description.html_safe) } %>
+                <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: youtube_thumb(@video.link), descri: @video.description.html_safe } %>
 
               </div>
             </div>
