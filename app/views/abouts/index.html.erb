@@ -3,7 +3,7 @@
                      description: about.description.html_safe,
                      og: {
                              title: about.name,
-                             description: truncate_html(about.description.html_safe),
+                             description: about.description.html_safe,
                              url: request.original_url,
                              image: about.image.url(:original),
                      }

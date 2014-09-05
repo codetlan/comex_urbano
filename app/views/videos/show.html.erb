@@ -1,8 +1,8 @@
 <% set_meta_tags title: @video.name,
-                 description: truncate_html(@video.description.html_safe),
+                 description: @video.description.html_safe,
                  og: {
                          title: @video.name,
-                         description: truncate_html(@video.description.html_safe),
+                         description: @video.description.html_safe,
                          image: youtube_thumb(@video.link),
                          url: video_show_url(@video)
                  }
