@@ -82,7 +82,6 @@ label {
       a {
         color: $black-color;
         font-family: $font-medium;
-        text-transform: uppercase;
         font-size: 15px;
 
         &.active {
@@ -162,6 +161,7 @@ label {
         border-top: 1px solid shade($white-color, 70%);
 
         a {
+          text-transform: capitalize;
           color: $white-color;
         }
       }
@@ -189,7 +189,6 @@ label {
           color: #58595b;
           font-family: $font-medium;
           font-size: 14px;
-          text-transform: uppercase;
 
           &.active {
             color: $black-color;
@@ -237,7 +236,7 @@ label {
 
       a {
         font-size: 14px;
-        text-transform: uppercase;
+        text-transform: capitalize;
         color: #58595b;
         font-family: $font-medium;
 
@@ -447,10 +446,9 @@ label {
 
     h5 {
       color: $white-color;
-      text-transform: uppercase;
       font-size: 16px;
       border-bottom: 2px solid $white-color;
-      font-family: $font-black;
+      font-family: $font-bold;
     }
   }
 }
@@ -520,8 +518,8 @@ label {
 
   a {
     color: #505050;
-    text-transform: capitalize;
     font-family: $font-medium;
+    text-transform: capitalize;
 
     &:hover {
       color: $black-color;
