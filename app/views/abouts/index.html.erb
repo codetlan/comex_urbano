@@ -3,7 +3,9 @@
     <div class="cols-12">
       <div class="col col-12">
         <div class="col-inner">
-          <%= image_tag 'about/header.jpg' %>
+          <% @abouts.each do |about| %>
+              <%= image_tag about.image.url(:original) %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -48,7 +50,8 @@
         <div class="col col-3">
           <div class="col-inner">
             <div class="sidebar">
-              <%= render partial: 'shared/latest_videos', locals: { videos: false, banners: true } %>
+              <%= render partial: 'shared/youtube_subscribe' %>
+              <%= render partial: 'shared/latest_videos', locals: {videos: false, banners: true} %>
             </div>
           </div>
         </div>
