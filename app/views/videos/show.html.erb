@@ -35,12 +35,6 @@
             <span class="post-show-date"><%= blog_date @video.created_at %></span>
             <p><%= @video.content.present? ? @video.content.html_safe : '' %></p>
             <%= render partial: 'shared/post_share_links', locals: { url: video_url(@video), text: @video.name, media_url: "http://img.youtube.com/vi/#{parse_youtube(@video.link)}/hqdefault.jpg" } %>
-            <div class="post-meta">
-              <div class="tags">
-                Tags:
-                <%= raw @video.tag_list.map { |t| link_to t, search_path(:name => t) }.join(', ') %>
-              </div>
-            </div>
           </div>
         </div>
       </div>
