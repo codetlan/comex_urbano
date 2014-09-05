@@ -483,31 +483,11 @@ label {
 
 // Sections
 .section-heading {
-  margin-bottom: 20px;
-
-  .section-heading-content {
-    position: relative;
-  }
-
-  .section-heading-description {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-
-    .section-heading-description-inner {
-      width: 50%;
-      padding: 30px;
-    }
-  }
-
-  img {
-    display: block;
-    width: 100%;
-  }
+  height: 300px;
+  margin-bottom: 55px;
 
   @include max-screen(580px) {
-    margin: 30px 0 -10px 0;
+    height: 200px;
   }
 }
 
@@ -1184,6 +1164,7 @@ label {
 }
 
 .tags-cloud {
+  margin-bottom: 30px;
   line-height: 1.6em;
 
   .tags-list {

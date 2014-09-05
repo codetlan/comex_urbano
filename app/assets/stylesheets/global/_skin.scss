@@ -396,18 +396,12 @@ label {
 }
 
 .section-heading {
-  .section-heading-description {
-    background: #000;
-    background: rgba(0,0,0,.7);
-
-    .section-heading-description-inner {
-      p {
-        color: $white-color;
-        @include text-size-large; 
-      }
-    }
-  }
-
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .error-page {
