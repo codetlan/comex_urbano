@@ -19,6 +19,15 @@
       <% end %>
   <% end %>
 
+  <div>
+    Tags:
+    <div id="tag_cloud">
+      <% tags_all do |tag, css_class| %>
+          <%= link_to tag.name, search_path(:name => tag.name), class: css_class %>
+      <% end %>
+    </div>
+  </div>
+
   <% if banners %>
       <div class="ads-list">
         <% site_banners.each do |banner| %>
@@ -32,14 +41,6 @@
   <% end %>
 </div>
 
-<div>
-Tags:
-  <div id="tag_cloud">
-    <% tags_all do |tag, css_class| %>
-        <%= link_to tag.name, search_path(:name => tag.name), class: css_class %>
-    <% end %>
-  </div>
-</div>
 
 <script>
     function getListVideosYoutube() {
