@@ -4,7 +4,7 @@
                   title: @photo.name,
                   description: truncate_html(@photo.description.html_safe),
                   image: @photo.image.url(:photo_show),
-                  url: request.original_url
+                  url: photo_show_url(@photo)
                 }
 %>
 
