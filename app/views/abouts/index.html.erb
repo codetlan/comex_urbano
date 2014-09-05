@@ -4,26 +4,25 @@
                      og: {
                              title: about.name,
                              description: truncate_html(about.description.html_safe),
-                             url: request.original_url,
+                             url: about_url(about),
                              image: about.image.url(:original),
                      }
     %>
 
     <div class="section-heading" style="background-image: url(<%= about.image.url(:original) %>)"></div>
-    <%= image_tag about.image.url(:original), :style => 'display:none' %>
     <div class="main-content">
       <div class="wrapper">
         <div class="cols-12">
           <div class="col col-9">
             <div class="col-inner">
               <div class="post-show-content">
-                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
+                <%= render partial: 'shared/post_share_links', locals: {url: about_url(about), text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
                 <h1 class="post-show-title"><%= about.name %></h1>
                 <br>
 
                 <p><%= about.description.html_safe %></p>
 
-                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
+                <%= render partial: 'shared/post_share_links', locals: {url: about_url(about), text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
 
               </div>
             </div>
