@@ -10,7 +10,7 @@
     %>
 
     <div class="section-heading" style="background-image: url(<%= about.image.url(:original) %>)"></div>
-
+    <%= image_tag about.image.url(:original), :style => 'display:none' %>
     <div class="main-content">
       <div class="wrapper">
         <div class="cols-12">
