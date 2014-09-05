@@ -95,17 +95,17 @@
                 <% @photos.first(3).each do |post| %>
                     <div class="post">
                       <div class="post-image">
-                        <%= link_to photo_path(post) do %>
+                        <%= link_to photo_show_path(post) do %>
                           <%= image_tag post.image.url(:post) %>
                         <% end %>
                       </div>
                       <div class="post-description">
                         <div class="post-va">
-                          <%= link_to post.name, photo_path(post), class: 'post-title' %>
+                          <%= link_to post.name, photo_show_path(post), class: 'post-title' %>
                           <span class="post-date"><%= blog_date post.posted_at %></span>
 
                           <p><%= truncate_html(post.description) %></p>
-                          <a class="post-read-more" href="posts/<%= post.id.to_s %>">Leer más</a>
+                          <a class="post-read-more" href="<%= photo_show_path(post) %>">Leer más</a>
                           <%= render partial: 'shared/post_share_links', locals: { url: photo_url(post), text: post.name, media_url: post.image.url(:post) } %>
                           
                         </div>
