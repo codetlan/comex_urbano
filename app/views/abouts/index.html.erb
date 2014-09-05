@@ -1,44 +1,43 @@
-<% set_meta_tags title: '¿Qué es Urbano?',
-                description: '¿QUÉ ES URBANO?',
-                og: {
-                  title: '¿QUÉ ES URBANO?',
-                  description: '',
-                  url: request.original_url
-                }
-%>
+<% @abouts.each do |about| %>
+    <% set_meta_tags title: about.name,
+                     description: about.description,
+                     og: {
+                             title: '¿QUÉ ES URBANO?',
+                             description: '',
+                             url: request.original_url
+                     }
+    %>
 
-<div class="section-heading" style="background-image: url('images/sections/about-intro.jpg')"></div>
+    <div class="section-heading" style="background-image: url(<%= about.image.url(:original) %>)"></div>
 
-<div class="main-content">
-  <div class="wrapper">
-    <div class="cols-12">
-      <div class="col col-9">
-        <div class="col-inner">
-          <div class="post-show-content">
-            <%= render partial: 'shared/post_share_links', locals: { url: request.original_url, text: '¿Qué es Comex urbano?', media_url: '' } %>
-            <h1 class="post-show-title">¿Qué es Comex urbano?</h1>
-            <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet ligula enim. Proin fermentum hendrerit fringilla. Curabitur vitae placerat elit. Mauris id orci in nibh ultricies vulputate. Nulla semper lacus ac enim lacinia, pellentesque blandit est tempor. Fusce molestie diam eu lorem consectetur, quis ornare nisl vulputate. Nunc quis ultrices sem, eget tempor purus. Phasellus nisl velit, tempus sit amet enim congue, pharetra eleifend libero. Mauris quis magna sagittis, dapibus odio id, suscipit est. Maecenas feugiat nibh enim, eget scelerisque sapien tincidunt quis. Proin at pretium metus.</p>
-            <%= image_tag 'sections/post-show-1.jpg' %>
-            <p>Etiam ornare nunc et massa gravida ultricies. Pellentesque nisi nulla, ultrices vel sem ut, pulvinar viverra neque. Duis quis mi eget nunc volutpat dignissim. Nulla nec elit dignissim, adipiscing justo in, faucibus nisl. In placerat mauris nec commodo malesuada. Nunc ultricies est et metus viverra bibendum. Cras pharetra mollis nisi, ut laoreet mi ullamcorper quis.</p>
+    <div class="main-content">
+      <div class="wrapper">
+        <div class="cols-12">
+          <div class="col col-9">
+            <div class="col-inner">
+              <div class="post-show-content">
+                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original)} %>
+                <h1 class="post-show-title"><%= about.name %></h1>
+                <br>
 
-            <p>Sed dignissim purus adipiscing nunc varius tincidunt. Nunc id sem a nisl molestie vehicula. Aenean nec magna tortor. Ut ut lobortis massa. Aliquam vel hendrerit odio. Nunc mattis felis vitae risus euismod, vitae fringilla augue cursus. Nunc eleifend enim nec elit laoreet iaculis. Etiam non arcu erat.</p>
+                <p><%= about.description %></p>
 
-            <%= render partial: 'shared/post_share_links', locals: { url: request.original_url, text: '¿Qué es Comex urbano?', media_url: '' } %>
-            
+                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original)} %>
+
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col col-3">
-        <div class="col-inner">
-          <div class="sidebar">
-            <%= render partial: 'shared/youtube_subscribe' %>
-            <%= render partial: 'shared/latest_videos', locals: { videos: false, banners: true } %>
+          <div class="col col-3">
+            <div class="col-inner">
+              <div class="sidebar">
+                <%= render partial: 'shared/youtube_subscribe' %>
+                <%= render partial: 'shared/latest_videos', locals: {videos: false, banners: true} %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+<% end %>
 
 <%= render partial: 'shared/similar_publications' %>
