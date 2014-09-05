@@ -49,15 +49,21 @@
       <div class="col col-12">
         <div class="col-inner">
           <div class="Collage" style="padding: 3px;">
-            <% @photos.each do |photo| %>
-              <div class="image-gallery">
-                <%= link_to photo_show_path(photo) do %>
-                  <div class="image-cover">
-                    <h5><%= photo.name %></h5>
-                  </div>
-                  <%= image_tag photo.image.url %>
+            <% unless @photos.empty? %>
+                <% @photos.each do |photo| %>
+                    <div class="image-gallery">
+                      <%= link_to photo_show_path(photo) do %>
+                          <div class="image-cover">
+                            <h5><%= photo.name %></h5>
+                          </div>
+                          <%= image_tag photo.image.url %>
+                      <% end %>
+                    </div>
                 <% end %>
-              </div>
+            <% end %>
+
+            <% if @photos.empty? %>
+                <h3>No se encontraron publicaciones.</h3>
             <% end %>
           </div>
         </div>
