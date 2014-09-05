@@ -236,7 +236,7 @@ label {
 
       a {
         font-size: 14px;
-        text-transform: capitalize;
+        #text-transform: capitalize;
         color: #58595b;
         font-family: $font-medium;
 
@@ -284,7 +284,7 @@ label {
     font-size: 26px;
     font-family: $font-black;
     border-bottom: 5px solid #58595b;
-    text-transform: uppercase;
+    //text-transform: uppercase;
   }
 
   .query-search {
