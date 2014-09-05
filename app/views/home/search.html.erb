@@ -63,6 +63,10 @@
             </div>
           <% end %>
 
+          <% if @photos.empty? && @videos.empty? %>
+              <p class="not-found-text">El término buscado no fue encontrado, intente nuevamente</p>
+          <% end %>
+
         </div>
       </div>
       <div class="col col-3">
