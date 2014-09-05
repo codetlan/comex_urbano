@@ -45,7 +45,7 @@
             <div class="page-navigation">
               <ul>
                 <li>
-                  <%= link_to 'Ultimos', '/posts', class: request.fullpath == '/posts' ? 'active' : '' %>
+                  <%= link_to 'Últimos', '/posts', class: request.fullpath == '/posts' ? 'active' : '' %>
                 </li>
                 <li>
                   <%= link_to 'Más vistos', posts_section_path(:section_id => @section.id, :visit => true), class: @visit == 'true' ? 'active' : '' %>
