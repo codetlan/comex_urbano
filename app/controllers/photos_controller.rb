@@ -18,7 +18,7 @@ class PhotosController < ApplicationController
       end
     else
       @section = Section.joins(:category).where('categories.link = ?', 'photos').order('sections.created_at ASC').first()
-      @photos = @section.photos.order('photos.posted_at DESC')
+      @photos = @section.present? && @section.photos.present? ? @section.photos.order('photos.posted_at DESC') : []
     end
   end
 
