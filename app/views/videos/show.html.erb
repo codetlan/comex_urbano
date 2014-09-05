@@ -3,7 +3,7 @@
                  og: {
                          title: @video.name,
                          description: @video.description,
-                         image: @video.image.url(:photo_show),
+                         image: youtube_thumb(@video.link),
                          url: request.original_url
                  }
 %>
