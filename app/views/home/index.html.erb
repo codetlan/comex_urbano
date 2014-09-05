@@ -112,13 +112,13 @@
                                 <span class="post-date"><%= blog_date post.posted_at %></span>
                                 <p><%= truncate_html(post.description) %></p>
                                 <a class="post-read-more" href="<%= photo_show_path(post) %>">Leer más</a>
-                                <%= render partial: 'shared/post_share_links', locals: {url: photo_show_path(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe} %>
+                                <%= render partial: 'shared/post_share_links', locals: {url: photo_show_url(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe} %>
                             <% else %>
                                 <%= link_to post.name, video_show_path(post), class: 'post-title' %>
                                 <span class="post-date"><%= blog_date post.posted_at %></span>
                                 <p><%= truncate_html(post.description) %></p>
                                 <a class="post-read-more" href="<%= video_show_path(post) %>">Leer más</a>
-                                <%= render partial: 'shared/post_share_links', locals: {url: video_show_path(post), text: post.name, media_url: youtube_thumb(post.link), descri: post.description.html_safe} %>
+                                <%= render partial: 'shared/post_share_links', locals: {url: video_show_url(post), text: post.name, media_url: youtube_thumb(post.link), descri: post.description.html_safe} %>
                             <% end %>
                           </div>
                         </div>
