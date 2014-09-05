@@ -19,11 +19,11 @@
       <% end %>
   <% end %>
 
-  <div>
-    Tags:
-    <div id="tag_cloud">
+  <div class="tags-cloud">
+    <h4>Tags</h4>
+    <div class="tags-list">
       <% tags_all do |tag, css_class| %>
-          <%= link_to tag.name, search_path(:name => tag.name), class: css_class %>
+        <%= link_to tag.name, search_path(:name => tag.name), class: css_class %>
       <% end %>
     </div>
   </div>
