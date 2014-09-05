@@ -4,7 +4,7 @@
                          title: @video.name,
                          description: truncate_html(@video.description.html_safe),
                          image: youtube_thumb(@video.link),
-                         url: video_show_url(@photo)
+                         url: video_show_url(@video)
                  }
 %>
 
