@@ -1,6 +1,6 @@
 <% @abouts.each do |about| %>
     <% set_meta_tags title: about.name,
-                     description: about.description,
+                     description: about.description.html_safe,
                      og: {
                              title: about.name,
                              description: truncate_html(about.description.html_safe),
@@ -21,7 +21,7 @@
                 <h1 class="post-show-title"><%= about.name %></h1>
                 <br>
 
-                <p><%= about.description %></p>
+                <p><%= about.description.html_safe %></p>
 
                 <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
 
