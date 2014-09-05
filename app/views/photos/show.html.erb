@@ -21,7 +21,7 @@
               <div class="post-desc-inner">
                 <h1><%= @photo.name %></h1>
                 <p><%= @photo.description.present? ? truncate_html(@photo.description.html_safe) : '' %></p>
-                <%= render partial: 'shared/post_share_links', locals: { url: photo_show_url(@video), text: @photo.name, media_url: @photo.image.url(:photo_show).to_s, descri: @photo.description.html_safe } %>
+                <%= render partial: 'shared/post_share_links', locals: { url: photo_show_url(@photo), text: @photo.name, media_url: @photo.image.url(:photo_show).to_s, descri: @photo.description.html_safe } %>
               </div>
             </div>
           </div>
@@ -37,11 +37,11 @@
       <div class="col col-9">
         <div class="col-inner">
           <div class="post-show-content">
-            <%= render partial: 'shared/post_share_links', locals: { url: photo_show_url(@video), text: @photo.name, media_url: @photo.image.url(:photo_show).to_s, descri: @photo.description.html_safe } %>
+            <%= render partial: 'shared/post_share_links', locals: { url: photo_show_url(@photo), text: @photo.name, media_url: @photo.image.url(:photo_show).to_s, descri: @photo.description.html_safe } %>
             <h1 class="post-show-title"><%= @photo.name %></h1>
             <span class="post-show-date"><%= blog_date @photo.created_at %></span>
             <p><%= @photo.description.present? ? @photo.description.html_safe : '' %></p>
-            <%= render partial: 'shared/post_share_links', locals: { url: photo_show_url(@video), text: @photo.name, media_url: @photo.image.url(:photo_show).to_s, descri: @photo.description.html_safe } %>
+            <%= render partial: 'shared/post_share_links', locals: { url: photo_show_url(@photo), text: @photo.name, media_url: @photo.image.url(:photo_show).to_s, descri: @photo.description.html_safe } %>
             <div class="post-meta">
               <div class="tags">
                 Tags:
