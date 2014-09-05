@@ -50,7 +50,7 @@
                       </div>
                       <div class="post-description">
                         <div class="post-va">
-                          <a href="<%= photo_show_path(video)%>" class="post-title"><%= photo.name %></a>
+                          <a href="<%= photo_show_path(photo)%>" class="post-title"><%= photo.name %></a>
                           <span class="post-date"><%= blog_date photo.posted_at %></span>
 
                           <p><%= truncate_html(photo.description, 100, '') %></p>
