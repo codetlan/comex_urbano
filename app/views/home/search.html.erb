@@ -27,6 +27,7 @@
 
                           <p><%= truncate_html(video.description) %></p>
                           <a class="post-read-more" href="<%= video_show_path(video)%>">Leer más</a>
+                          <%= render partial: 'shared/post_share_links', locals: {url: video_show_path(video), text: video.name, media_url: youtube_thumb(video.link), descri: video.description.html_safe} %>
                         </div>
                       </div>
                     </div>
@@ -55,6 +56,7 @@
 
                           <p><%= truncate_html(photo.description, 100, '') %></p>
                           <a class="post-read-more" href="<%= photo_show_path(photo)%>">Leer más</a>
+                          <%= render partial: 'shared/post_share_links', locals: {url: photo_show_path(photo), text: photo.name, media_url: photo.image.url(:post), descri: photo.description.html_safe} %>
                         </div>
                       </div>
                     </div>

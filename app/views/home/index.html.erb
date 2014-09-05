@@ -113,7 +113,7 @@
                             <% unless post.image.nil? %>
                                 <%= render partial: 'shared/post_share_links', locals: {url: photo_show_path(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe} %>
                             <% else %>
-                                <%= render partial: 'shared/post_share_links', locals: {url: photo_show_path(post), text: post.name, media_url: youtube_thumb(post.link), descri: post.description.html_safe} %>
+                                <%= render partial: 'shared/post_share_links', locals: {url: video_show_path(post), text: post.name, media_url: youtube_thumb(post.link), descri: post.description.html_safe} %>
                             <% end %>
 
                           </div>
