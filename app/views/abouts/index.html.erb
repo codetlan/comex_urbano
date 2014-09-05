@@ -3,7 +3,7 @@
                      description: about.description,
                      og: {
                              title: '¿QUÉ ES URBANO?',
-                             description: about.description,
+                             description: truncate_html(about.description.html_safe),
                              url: request.original_url,
                              image: about.image.url(:original),
                      }
