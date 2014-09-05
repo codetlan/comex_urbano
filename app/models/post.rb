@@ -1,7 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :section
   has_many :publications, :as => :published, dependent: :destroy
-  acts_as_taggable
   is_impressionable
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, styles: {

@@ -48,4 +48,20 @@ module ApplicationHelper
   def youtube_thumb(link)
     return "http://img.youtube.com/vi/#{parse_youtube(link)}/hqdefault.jpg"
   end
+
+  def tags_all(classes = %w{s m l})
+    @tags = ActsAsTaggableOn::Tag.all(
+                     :select => "#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name, COUNT(*) AS count",
+                     :joins  => "LEFT OUTER JOIN #{ActsAsTaggableOn::Tagging.table_name} ON #{ActsAsTaggableOn::Tag.table_name}.id = #{ActsAsTaggableOn::Tagging.table_name}.tag_id",
+                     :group  => "#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name HAVING COUNT(*) > 0",
+                     :order  => "count DESC"
+    ).sort_by(&:name)
+
+
+    max = @tags.sort_by(&:count).last
+    @tags.each do |tag|
+      index = tag.count.to_f / max.count * (classes.size - 1)
+      yield(tag, classes[index.round])
+    end
+  end
 end

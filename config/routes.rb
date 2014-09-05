@@ -70,7 +70,7 @@ ComexUrbano::Application.routes.draw do
 
   get '/admin/banners' => 'banners#index'
 
-  get 'tags/:tag', to: 'posts#index', as: :tag
+  get 'tags/:tag', to: 'photos#index', as: :tag
 
   get 'videos/tags/:tag', to: 'videos#index', as: :tag_video
 
