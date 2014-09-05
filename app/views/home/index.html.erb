@@ -1,13 +1,13 @@
 <div class="hero-intro">
   <div class="slider-wrap">
     <div class="slider-pager"></div>
-      <div class="slider">
+    <div class="slider">
       <% home_details.each do |landing_page| %>
           <% landing_page.images.each do |banner| %>
               <div class="featured-post" style="height: auto;">
                 <%= link_to banner.link do %>
-                  <div class="image" style="background-image: url('<%= banner.photo.url(:principal) %>');">
-                  </div>
+                    <div class="image" style="background-image: url('<%= banner.photo.url(:principal) %>');">
+                    </div>
                 <% end %>
                 <div class="description">
                   <div class="wrapper">
@@ -89,35 +89,43 @@
             <h1>Lo nuevo</h1>
           </div>
 
-          <% unless @photos.empty? %>
-            <div class="search-result-section">
-              <div class="posts-list">
-                <% @photos.first(3).each do |post| %>
-                    <div class="post">
-                      <div class="post-image">
-                        <%= link_to photo_show_path(post) do %>
-                          <%= image_tag post.image.url(:post) %>
-                        <% end %>
-                      </div>
-                      <div class="post-description">
-                        <div class="post-va">
-                          <%= link_to post.name, photo_show_path(post), class: 'post-title' %>
-                          <span class="post-date"><%= blog_date post.posted_at %></span>
+          <% unless @publications.empty? %>
+              <div class="search-result-section">
+                <div class="posts-list">
+                  <% @publications.first(3).each do |post| %>
+                      <div class="post">
+                        <div class="post-image">
+                          <%= link_to photo_show_path(post) do %>
+                              <% unless post.image.nil? %>
+                                  <%= image_tag post.image.url(:post) %>
+                              <% else %>
+                                  <%= image_tag youtube_thumb(post.link) %>
+                              <% end %>
+                          <% end %>
+                        </div>
+                        <div class="post-description">
+                          <div class="post-va">
+                            <%= link_to post.name, photo_show_path(post), class: 'post-title' %>
+                            <span class="post-date"><%= blog_date post.posted_at %></span>
 
-                          <p><%= truncate_html(post.description) %></p>
-                          <a class="post-read-more" href="<%= photo_show_path(post) %>">Leer más</a>
-                          <%= render partial: 'shared/post_share_links', locals: { url: photo_show_path(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe } %>
-                          
+                            <p><%= truncate_html(post.description) %></p>
+                            <a class="post-read-more" href="<%= photo_show_path(post) %>">Leer más</a>
+                            <% unless post.image.nil? %>
+                                <%= render partial: 'shared/post_share_links', locals: {url: photo_show_path(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe} %>
+                            <% else %>
+                                <%= render partial: 'shared/post_share_links', locals: {url: photo_show_path(post), text: post.name, media_url: youtube_thumb(post.link), descri: post.description.html_safe} %>
+                            <% end %>
+
+                          </div>
                         </div>
                       </div>
-                    </div>
-                <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
           <% end %>
 
-          <% if @photos.empty? %>
-            <h3>No se encontraron publicaciones.</h3>
+          <% if @publications.empty? %>
+              <h3>No se encontraron publicaciones.</h3>
           <% end %>
 
 

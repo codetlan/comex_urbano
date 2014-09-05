@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @posts = []
 
     @publications = []
+    @results = []
     @year = params[:year]
     @visit = params[:visit]
 
@@ -16,59 +17,66 @@ class HomeController < ApplicationController
       if @type == 'Video'
         result = @type.classify.constantize.find(publication.published_id)
         @publications.push(result)
-        if params[:year]
-          if result.present? && result.posted_at.strftime('%Y') == @year
-            @videos.push(result)
-          end
-        else
-          @videos.push(result)
-        end
 
-        if @visit
-          if result.present? && result.impressionist_count.present?
-            @videos.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
-          end
-        else
-          @videos.sort! { |a, b| b[:posted_at] <=> a[:posted_at] }
-        end
+        #if params[:year]
+        #  if result.present? && result.posted_at.strftime('%Y') == @year
+            #@videos.push(result)
+        #    @publications.push(result)
+        #  end
+        #else
+          #@videos.push(result)
+        #  @publications.push(result)
+        #end
+
+        #if @visit
+        #  if result.present? && result.impressionist_count.present?
+        #    @publications.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+        #  end
+        #else
+        #  @publications.sort! { |a, b| b[:posted_at] <=> a[:posted_at] }
+        #end
       elsif @type == 'Photo'
         result = @type.classify.constantize.find(publication.published_id)
         @publications.push(result)
-        if params[:year]
-          if result.present? && result.posted_at.strftime('%Y') == @year
-            @photos.push(result)
-          end
-        else
-          @photos.push(result)
-        end
+        #if params[:year]
+         # if result.present? && result.posted_at.strftime('%Y') == @year
+            #@photos.push(result)
+         #   @publications.push(result)
+         # end
+        #else
+          #@photos.push(result)
+         # @publications.push(result)
+        #end
 
-        if @visit
-          if result.present? && result.impressionist_count.present?
-            @photos.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
-          end
-        else
-          @photos.sort! { |a, b| b[:posted_at] <=> a[:posted_at] }
-        end
-      elsif @type == 'Post'
-        result = @type.classify.constantize.find(publication.published_id)
-        @publications.push(result)
-        if params[:year]
-          if result.present? && result.posted_at.strftime('%Y') == @year
-            @posts.push(result)
-          end
-        else
-          @posts.push(result)
-        end
-
-        if @visit
-          if result.present? && result.impressionist_count.present?
-            @posts.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
-          end
-        else
-          @posts.sort! { |a, b| b[:posted_at] <=> a[:posted_at] }
-        end
+        #if @visit
+         # if result.present? && result.impressionist_count.present?
+         #   @photos.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+         #   @publications.push(result)
+         # end
+        #else
+        #  @publications.sort! { |a, b| b[:posted_at] <=> a[:posted_at] }
+        #end
       end
     end
+
+    @publications.sort! { |a, b| b.posted_at <=> a.posted_at }
+
+    if @visit
+      @publications.sort! { |a, b| b.impressionist_count <=> a.impressionist_count }
+    end
+
+    if params[:year]
+      puts 'yearrr'
+      @publications.each do |publication|
+        puts '111'
+        if publication.posted_at.present? && publication.posted_at.strftime('%Y') == @year
+          puts 'enddd'
+          @results.push(publication)
+        end
+      end
+      @publications = @results
+    end
+
   end
 
   def search
