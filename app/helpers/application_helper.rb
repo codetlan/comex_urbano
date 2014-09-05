@@ -50,13 +50,8 @@ module ApplicationHelper
   end
 
   def tags_all(classes = %w{s m l})
-    @tags = ActsAsTaggableOn::Tag.all(
-                     :select => "#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name, COUNT(*) AS count",
-                     :joins  => "LEFT OUTER JOIN #{ActsAsTaggableOn::Tagging.table_name} ON #{ActsAsTaggableOn::Tag.table_name}.id = #{ActsAsTaggableOn::Tagging.table_name}.tag_id",
-                     :group  => "#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name HAVING COUNT(*) > 0",
-                     :order  => "count DESC"
-    ).sort_by(&:name)
-
+    @tags = ActsAsTaggableOn::Tag.all.select("tags.id, tags.name, count(taggings.tag_id) as count").
+        joins(:taggings).group("taggings.tag_id, tags.id, tags.name")
 
     max = @tags.sort_by(&:count).last
     @tags.each do |tag|
