@@ -1,41 +1,44 @@
-
 <div class="comming-soon">
-	<div class="comming-soon-header">
-		<div class="social-links">
+  <div class="comming-soon-header">
+    <div class="social-links">
       <ul>
         <% home_details.each do |landing_page| %>
             <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
-            <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
             <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
-            <li><%= link_to image_tag('instagram.png'), "#" %></li>
+            <li><%= link_to image_tag('instagram.png'), landing_page.vimeo, :target => '_blank' %></li>
         <% end %>
       </ul>
     </div>
     <div class="comex-brand">
-    	<%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
+      <%= link_to 'http://www.comex.com.mx/', target: "_blank" do %>
           <%= image_tag 'comex-logo.png' %>
       <% end %>
     </div>
-	</div>
+  </div>
 
-	<div class="comming-soon-content">
-		<div class="error-page">
-			<%= image_tag 'error.png', class: 'error-icon' %>
-			<h1>OOOOOOOOOOPS</h1>
-			<p>Oops, la pagina a la que quieres accesar no existe o se ha movido de lugar.</p>
-			<p><%= link_to "Ir al Inicio", root_path %></p>
-		</div>
-	</div>
+  <div class="comming-soon-content">
+    <div class="error-page">
+      <%= image_tag 'error.png', class: 'error-icon' %>
+      <h1>OOOOOOOOOOPS</h1>
 
-	<div class="comming-soon-footer">
-		<ul>
+      <p>Oops, la pagina a la que quieres accesar no existe o se ha movido de lugar.</p>
+
+      <p><%= link_to "Ir al Inicio", root_path %></p>
+    </div>
+  </div>
+
+  <div class="comming-soon-footer">
+    <ul>
       <% home_details.each do |landing_page| %>
           <li><%= link_to image_tag('fb.png'), landing_page.facebook, :target => '_blank' %></li>
-          <li><%= link_to image_tag('twitter.png'), landing_page.twitter, :target => '_blank' %></li>
           <li><%= link_to image_tag('youtube.png'), landing_page.youtube, :target => '_blank' %></li>
-          <li><%= link_to image_tag('instagram.png'), "#" %></li>
+          <li><%= link_to image_tag('instagram.png'), landing_page.vimeo, :target => '_blank' %></li>
       <% end %>
     </ul>
-    <p>Copyright © 2014 Consorcio Comex, S.A de C.V <br> Términos y Condiciones Aviso de Privacidad Soporte Técnico</p>
-	</div>
+    <div class="footer-rights">
+      <p>Copyright <%= Time.now.year %> Consorcio Comex, S.A. de C.V</p>
+      <p><%= link_to 'Términos y Condiciones', terms_path %> / <%= link_to 'Aviso de Privacidad', privacy_path %>
+        / <%= link_to 'Contacto', contact_path %></p>
+    </div>
+  </div>
 </div>

@@ -106,7 +106,7 @@
 
                           <p><%= truncate_html(post.description) %></p>
                           <a class="post-read-more" href="<%= photo_show_path(post) %>">Leer más</a>
-                          <%= render partial: 'shared/post_share_links', locals: { url: photo_url(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe } %>
+                          <%= render partial: 'shared/post_share_links', locals: { url: photo_show_path(post), text: post.name, media_url: post.image.url(:post), descri: post.description.html_safe } %>
                           
                         </div>
                       </div>
