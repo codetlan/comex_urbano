@@ -17,12 +17,14 @@
     color: $white-color;
     font-size: 24px;
     font-family: $font-medium;
+    text-transform: capitalize;
   }
 
   .title p {
   	font-size: 13px;
     font-family: $font-medium-italic;
     color: $white-color;
+    text-transform: capitalize;
   }
 }
 
@@ -33,6 +35,7 @@
     .post-title {
       font-family: $font-bold;
       color: $black-color;
+      text-transform: capitalize;
       @include text-size-large; 
     }
 

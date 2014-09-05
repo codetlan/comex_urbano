@@ -513,3 +513,27 @@ label {
     }
   }
 }
+
+.tags-cloud {
+  line-height: 1.6em;
+
+  h4 {
+    font-size: 22px;
+    font-weight: normal;
+    font-family: $font-regular;
+    border-bottom: 1px solid #adadad;
+  }
+
+  a {
+    color: #505050;
+    text-transform: capitalize;
+
+    &:hover {
+      color: $black-color;
+    }
+  }
+
+  .s { font-size: 15px; }
+  .m { font-size: 22px; }
+  .l { font-size: 36px; }
+}

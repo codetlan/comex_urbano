@@ -1182,3 +1182,20 @@ label {
     }
   }
 }
+
+.tags-cloud {
+  line-height: 1.6em;
+
+  .tags-list {
+    margin: -5px;
+  }
+
+  h4 {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+
+  a {
+    margin: 5px;
+  }
+}
