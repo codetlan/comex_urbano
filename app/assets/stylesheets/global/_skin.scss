@@ -520,13 +520,14 @@ label {
   h4 {
     font-size: 22px;
     font-weight: normal;
-    font-family: $font-regular;
+    font-family: $font-medium;
     border-bottom: 1px solid #adadad;
   }
 
   a {
     color: #505050;
     text-transform: capitalize;
+    font-family: $font-medium;
 
     &:hover {
       color: $black-color;

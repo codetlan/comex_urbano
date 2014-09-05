@@ -1,6 +1,6 @@
   
 body {
-  padding-top: 150px;
+  padding-top: 116px;
 
   @include max-screen(600px) {
     padding-top: 70px;
@@ -45,7 +45,7 @@ label {
 
 .header {
   z-index: 100;
-  padding: 30px 0 20px 0;
+  padding: 15px 0;
   position: relative;
 
   .brand {
@@ -204,7 +204,7 @@ label {
 }
 
 .site-links {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   @include clearfix;
 
   @include max-screen(600px) {
@@ -1053,7 +1053,7 @@ label {
     width: 100%;
     padding: 4px 0 8px 0;
     z-index: 6;
-    top: 396px;
+    top: 350px;
 
     .bx-pager-item {
       display: inline-block;
