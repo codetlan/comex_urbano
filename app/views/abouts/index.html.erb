@@ -4,7 +4,7 @@
                      og: {
                              title: about.name,
                              description: truncate_html(about.description.html_safe),
-                             url: about_url(about),
+                             url: 'http://urbano-demo.herokuapp.com',
                              image: about.image.url(:original),
                      }
     %>
@@ -16,13 +16,13 @@
           <div class="col col-9">
             <div class="col-inner">
               <div class="post-show-content">
-                <%= render partial: 'shared/post_share_links', locals: {url: about_url(about), text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
+                <%= render partial: 'shared/post_share_links', locals: {url: 'http://urbano-demo.herokuapp.com', text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
                 <h1 class="post-show-title"><%= about.name %></h1>
                 <br>
 
                 <p><%= about.description.html_safe %></p>
 
-                <%= render partial: 'shared/post_share_links', locals: {url: about_url(about), text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
+                <%= render partial: 'shared/post_share_links', locals: {url: 'http://urbano-demo.herokuapp.com', text: about.name, media_url: about.image.url(:original), descri: about.description.html_safe} %>
 
               </div>
             </div>
