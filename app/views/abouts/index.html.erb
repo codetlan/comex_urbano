@@ -17,13 +17,13 @@
           <div class="col col-9">
             <div class="col-inner">
               <div class="post-show-content">
-                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: about.description} %>
+                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: truncate_html(about.description.html_safe)} %>
                 <h1 class="post-show-title"><%= about.name %></h1>
                 <br>
 
                 <p><%= about.description %></p>
 
-                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: about.description} %>
+                <%= render partial: 'shared/post_share_links', locals: {url: request.original_url, text: about.name, media_url: about.image.url(:original), descri: truncate_html(about.description.html_safe)} %>
 
               </div>
             </div>
