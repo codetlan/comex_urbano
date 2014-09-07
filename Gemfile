@@ -56,6 +56,7 @@ gem 'truncate_html'
 gem 'acts-as-taggable-on'
 gem 'impressionist'
 gem 'cancan'
+gem 'newrelic_rpm'
 #gem 'declarative_authorization'
 
 # Use ActiveModel has_secure_password
