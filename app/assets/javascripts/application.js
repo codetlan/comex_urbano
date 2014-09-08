@@ -126,13 +126,8 @@ $(document).on("ready page:load", function() {
         return false;
     });
 
-    $('#new_banner').fileupload({
+    /*$('#new_banner').fileupload({
         dataType: "script",
-        /*add: function (e, data) {
-         data.context = $(tmpl("template-upload", data.files[0]));
-         $('#new_image').append(data.context);
-         data.submit()
-         },*/
         add: function (e, data) {
             data.context = $('<p/>').text('Uploading...').appendTo('#new_banner');
             data.submit();
@@ -140,7 +135,7 @@ $(document).on("ready page:load", function() {
         done: function (e, data) {
             data.context.text('Upload finished.');
         }
-    });
+    });*/
 
     $('.validate-form-js').validate({
         errorPlacement: function(error, element) {

@@ -1,7 +1,7 @@
 class BannersController < ApplicationController
   layout 'admin'
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, :only => [:index, :create, :destroy]
+  before_filter :authenticate_user!, :only => [:index, :new, :edit, :destroy]
 
   # GET /roles
   # GET /roles.json
@@ -9,15 +9,38 @@ class BannersController < ApplicationController
     @banners = Banner.all
   end
 
+  def show
+  end
+
+
+  def new
+    @banner = Banner.new
+  end
+
+  def edit
+  end
+
   def create
     @banner = Banner.new(banner_params)
 
     respond_to do |format|
       if @banner.save
-        format.html { redirect_to '/admin/banners', notice: 'Role was successfully created.' }
+        format.html { redirect_to '/admin/banners', notice: 'Banner was successfully created.' }
         format.json { render action: 'show', status: :created, location: @banners }
       else
         format.html { render action: 'new' }
+        format.json { render json: @banner.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @banner.update(banner_params)
+        format.html { redirect_to '/admin/banners', notice: 'Banner was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
         format.json { render json: @banner.errors, status: :unprocessable_entity }
       end
     end
@@ -42,6 +65,6 @@ class BannersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def banner_params
-    params.require(:banner).permit(:photo, :landing_page_id)
+    params.require(:banner).permit(:photo, :landing_page_id, :link, :orden, :position)
   end
 end
