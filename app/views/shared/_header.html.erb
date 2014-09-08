@@ -15,7 +15,7 @@
                   <ul class="nav-list">
                     <% menu.each do |category| %>
                         <li>
-                          <%= link_to category.name, '/' + category.link, class: request.fullpath == '/' + category.link ? 'active' : '', data: { no_turbolink: true } %>
+                          <%= link_to category.name, '/' + category.link, class: request.fullpath.match(category.link) ? 'active' : '', data: { no_turbolink: true } %>
                           <% unless category.sections.empty? %>
                             <div class="nav-dropdown">
                               <div class="nav-dropdown-padding">
