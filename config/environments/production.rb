@@ -111,4 +111,5 @@ ComexUrbano::Application.configure do
 
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.asset_host = config.action_controller.asset_host
+  config.i18n.default_locale = :es
 end
