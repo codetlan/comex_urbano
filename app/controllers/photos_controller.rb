@@ -46,7 +46,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.save
         @publication = Publication.create(:content => @photo.name + @photo.description + @photo.tag_list.join(' '), :published_id => @photo.id, :published_type => 'Photo')
-        format.html { redirect_to '/admin/photos', notice: 'Photo was successfully created.' }
+        format.html { redirect_to photos_path, notice: 'La imagen fue creada correctamente.' }
         format.json { render action: 'list', status: :created, location: @photo }
       else
         format.html { render action: 'new' }
@@ -63,7 +63,7 @@ class PhotosController < ApplicationController
         @publication = Publication.find_by_published_id_and_published_type(@photo.id, 'Photo')
         if @publication
           @publication.update(:content => @photo.name + @photo.description + @photo.tag_list.join(' '))
-          format.html { redirect_to '/admin/photos', notice: 'Photo was successfully updated.' }
+          format.html { redirect_to photos_path, notice: 'La imagen fue actualizada corectamente.' }
           format.json { head :no_content }
         else
           format.html { render action: 'edit' }
@@ -81,7 +81,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/photos' }
+      format.html { redirect_to photos_path }
       format.json { head :no_content }
     end
   end

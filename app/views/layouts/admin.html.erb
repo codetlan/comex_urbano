@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>ComexUrbano</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -12,59 +12,62 @@
 </head>
 <body class="admin-page">
 
-	<nav class="navbar navbar-inverse" role="navigation">
-	  <div class="wrapper">
-      <div class="cols-12">
-        <div class="col col-12">
-          <div class="col-inner">
-            <div class="fl">
-              <%= link_to landing_pages_path, class: "navbar-brand" do %>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <div class="fl">
+            <%= link_to landing_pages_path, class: "navbar-brand" do %>
                 <%= image_tag 'comex-urbano-logo.png' %>
-              <% end %>
-            </div>
-
-            <div class="fr logout">
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                Salir <span class="glyphicon glyphicon-arrow-right"></span>
-              <% end %>
-            </div>
+            <% end %>
           </div>
-        </div>
-      </div>
-	  </div>
-	</nav>
 
-  <div class="flash">
-    <div class="wrapper">
-      <div class="cols-12">
-        <div class="col col-12">
-          <div class="col-inner">
-            <% if flash[:notice] %>
-              <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
-            <% elsif flash[:error] %>
-              <div class="alert alert-danger" role="alert"><%= flash[:error] %></div>
-            <% elsif flash[:success] %>
-              <div class="alert alert-success" role="alert"><%= flash[:success] %></div>
+          <div class="fr logout">
+            <%= link_to destroy_user_session_path, method: :delete do %>
+                Salir <span class="glyphicon glyphicon-arrow-right"></span>
             <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
+</nav>
 
-	<div class="wrapper">
-		<div class="cols-12">
-			<div class="col col-3">
-				<div class="col-inner">
-					<%= render partial: 'shared/admin/header' %>	
-				</div>
-			</div>
-			<div class="col col-9">
-				<div class="col-inner">
-					<%= yield %>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="flash">
+  <div class="wrapper">
+    <div class="cols-12">
+      <div class="col col-12">
+        <div class="col-inner">
+          <% if flash[:notice] %>
+              <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+              <%= javascript_tag "$('.alert-info').fadeOut(4000, 'swing');" %>
+          <% elsif flash[:error] %>
+              <div class="alert alert-danger" role="alert"><%= flash[:error] %></div>
+              <%= javascript_tag "$('.alert-danger').fadeOut(4000, 'swing');" %>
+          <% elsif flash[:success] %>
+              <div class="alert alert-success" role="alert" id="flash_success"><%= flash[:success] %></div>
+              <%= javascript_tag "$('.alert-success').fadeOut(4000, 'swing');" %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="cols-12">
+    <div class="col col-3">
+      <div class="col-inner">
+        <%= render partial: 'shared/admin/header' %>
+      </div>
+    </div>
+    <div class="col col-9">
+      <div class="col-inner">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

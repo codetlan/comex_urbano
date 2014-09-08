@@ -36,7 +36,7 @@ class LandingPagesController < ApplicationController
 
     respond_to do |format|
       if @landing_page.save
-        format.html { redirect_to '/admin', notice: 'Gallery was successfully created.' }
+        format.html { redirect_to landing_pages_path, notice: 'Los datos se crearon correctamente.' }
         format.json { render json: 'list', status: :created, location: @landing_page }
       else
         format.html { render action: "new" }
@@ -50,7 +50,7 @@ class LandingPagesController < ApplicationController
   def update
     respond_to do |format|
       if @landing_page.update(landing_page_params)
-        format.html { redirect_to '/admin', notice: 'Landing page was successfully updated.' }
+        format.html { redirect_to landing_pages_path, notice: 'Los datos se actualizaron correctamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -64,7 +64,7 @@ class LandingPagesController < ApplicationController
   def destroy
     @landing_page.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/landing_pages' }
+      format.html { redirect_to landing_pages_path }
       format.json { head :no_content }
     end
   end

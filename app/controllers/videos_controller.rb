@@ -46,7 +46,7 @@ class VideosController < ApplicationController
     respond_to do |format|
       if @video.save
         @publication = Publication.create(:content => @video.content + @video.name + @video.description + @video.tag_list.join(' '), :published_id => @video.id, :published_type => 'Video')
-        format.html { redirect_to '/admin/videos', notice: 'Video was successfully created.' }
+        format.html { redirect_to videos_path, notice: 'El video fue creada correctamente.' }
         format.json { render action: 'list', status: :created, location: @video }
       else
         format.html { render action: 'new' }
@@ -62,7 +62,7 @@ class VideosController < ApplicationController
       if @video.update(video_params)
         @publication = Publication.find_by_published_id_and_published_type(@video.id, 'Video')
         @publication.update(:content => @video.content + @video.name + @video.description + @video.tag_list.join(' '))
-        format.html { redirect_to '/admin/videos', notice: 'Video was successfully updated.' }
+        format.html { redirect_to videos_path, notice: 'El video fue actualizado correctamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'list' }
@@ -76,7 +76,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     respond_to do |format|
-      format.html { redirect_to '/admin/videos' }
+      format.html { redirect_to videos_path }
       format.json { head :no_content }
     end
   end
