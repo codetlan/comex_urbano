@@ -4,8 +4,8 @@
   <%= link_to 'Videos', videos_path, class: request.fullpath.match(videos_path) ? 'active list-group-item' : 'list-group-item' %>
   <%= link_to 'Galería', photos_path, class: request.fullpath.match(photos_path) ? 'active list-group-item' : 'list-group-item' %>
   <%= link_to '¿Qué es Comex urbano?', abouts_path, class: request.fullpath.match(abouts_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Secciones', sections_path, class: request.fullpath.match('/sections') ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Banners Comex', admin_banners_path, class: request.fullpath.match('/admin/banners') ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Secciones', sections_path, class: request.fullpath.match(sections_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Banners Comex', banners_path, class: request.fullpath.match(banners_path) ? 'active list-group-item' : 'list-group-item' %>
   <%= link_to 'Usuarios', users_path, class: request.fullpath.match(users_path) ? 'active list-group-item' : 'list-group-item' %>
   <%= link_to 'Roles', roles_path, class: request.fullpath.match(roles_path) ? 'active list-group-item' : 'list-group-item' %>
 </div>

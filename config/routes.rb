@@ -60,7 +60,7 @@ ComexUrbano::Application.routes.draw do
 
   resources :images
 
-  resources :banners
+  resources :banners, path: '/admin/banners'
 
   resources :contacts
 
@@ -70,7 +70,7 @@ ComexUrbano::Application.routes.draw do
 
   get '/admin' => 'admin#index'
 
-  get '/admin/banners' => 'banners#index'
+  #get '/admin/banners' => 'banners#index'
 
   get 'tags/:tag', to: 'photos#index', as: :tag
 

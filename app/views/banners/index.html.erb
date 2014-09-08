@@ -26,7 +26,7 @@
   <tbody>
   <% @banners.each do |banner| %>
       <tr>
-        <td><%= image_tag banner.photo.url(:ads) %></td>
+        <td><%= image_tag banner.photo.url(:thumb) %></td>
         <td><%= banner.link %></td>
         <td><%= banner.position == 1 ? 'Vertical' : 'Horizontal'  %></td>
         <td><%= banner.orden %></td>
