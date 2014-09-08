@@ -14,7 +14,7 @@ class Ability
     elsif user.role? :blog
       can [:create, :update, :destroy], Post
     else
-      can :read, :all
+      can :admin, :all
     end
   end
 

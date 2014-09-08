@@ -1,11 +1,11 @@
 <div class="list-group">
   <%= link_to 'Configuración', landing_pages_path, class: current_page?(landing_pages_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Menú', categories_path, class: current_page?(categories_path) ? "active list-group-item" : "list-group-item" %>
-  <%= link_to 'Videos', videos_path, class: current_page?(videos_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Galería', photos_path, class: current_page?(photos_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to '¿Qué es Comex urbano?', abouts_path, class: current_page?(abouts_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Secciones', sections_path, class: current_page?(sections_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Banners Comex', admin_banners_path, class: current_page?(admin_banners_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Usuarios', users_path, class: current_page?(users_path) ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Roles', roles_path, class: current_page?(roles_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Menú', categories_path, class: request.fullpath.match(categories_path) ? "active list-group-item" : "list-group-item" %>
+  <%= link_to 'Videos', videos_path, class: request.fullpath.match(videos_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Galería', photos_path, class: request.fullpath.match(photos_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to '¿Qué es Comex urbano?', abouts_path, class: request.fullpath.match(abouts_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Secciones', sections_path, class: request.fullpath.match('/sections') ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Banners Comex', admin_banners_path, class: request.fullpath.match('/admin/banners') ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Usuarios', users_path, class: request.fullpath.match(users_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Roles', roles_path, class: request.fullpath.match(roles_path) ? 'active list-group-item' : 'list-group-item' %>
 </div>
