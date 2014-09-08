@@ -1,11 +1,11 @@
 <div class="list-group">
-  <%= link_to 'Configuración', '/admin', class: request.fullpath == '/admin' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Menú', '/admin/categories', class: request.fullpath == "/admin/categories" ? "active list-group-item" : "list-group-item" %>
-  <%= link_to 'Videos', '/admin/videos', class: request.fullpath == '/admin/videos' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Galería', '/admin/photos', class: request.fullpath == '/admin/photos' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to '¿Qué es Comex urbano?', '/admin/abouts', class: request.fullpath == '/admin/abouts' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Secciones', '/admin/sections', class: request.fullpath == '/admin/sections' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Banners Comex', '/admin/banners', class: request.fullpath == '/admin/banners' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Usuarios', '/admin/users', class: request.fullpath == '/admin/users' ? 'active list-group-item' : 'list-group-item' %>
-  <%= link_to 'Roles', '/admin/roles', class: request.fullpath == '/admin/roles' ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Configuración', landing_pages_path, class: current_page?(landing_pages_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Menú', categories_path, class: current_page?(categories_path) ? "active list-group-item" : "list-group-item" %>
+  <%= link_to 'Videos', videos_path, class: current_page?(videos_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Galería', photos_path, class: current_page?(photos_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to '¿Qué es Comex urbano?', abouts_path, class: current_page?(abouts_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Secciones', sections_path, class: current_page?(sections_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Banners Comex', admin_banners_path, class: current_page?(admin_banners_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Usuarios', users_path, class: current_page?(users_path) ? 'active list-group-item' : 'list-group-item' %>
+  <%= link_to 'Roles', roles_path, class: current_page?(roles_path) ? 'active list-group-item' : 'list-group-item' %>
 </div>

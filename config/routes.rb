@@ -1,6 +1,6 @@
 ComexUrbano::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  resources :abouts
+  #resources :abouts
 
 
   devise_for :users
@@ -49,6 +49,8 @@ ComexUrbano::Application.routes.draw do
   resources :photos, only: [:index, :show] do
     resources :publications
   end
+
+  resources :abouts, only: [:index]
 
   get '/photos/:id', to: 'photos#show', as: :photo_show
 
