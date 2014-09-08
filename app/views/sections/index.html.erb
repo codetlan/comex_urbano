@@ -16,7 +16,6 @@
   <thead>
   <tr>
     <th>Title</th>
-    <th>Banner</th>
     <th>Categoria</th>
     <th>Activo</th>
     <th></th>
@@ -28,7 +27,6 @@
   <% @sections_videos.each do |section| %>
       <tr>
         <td><%= section.title %></td>
-        <td><%= image_tag section.main_banner.url(:medium) %></td>
         <td><%= section.category.present? ? section.category.name : '' %></td>
         <td><%= section.active == 1 ? 'Si' : 'No' %></td>
         <td>
@@ -52,7 +50,6 @@
   <thead>
   <tr>
     <th>Title</th>
-    <th>Banner</th>
     <th>Categoria</th>
     <th>Activo</th>
     <th></th>
@@ -64,7 +61,6 @@
   <% @sections_photos.each do |section| %>
       <tr>
         <td><%= section.title %></td>
-        <td><%= image_tag section.main_banner.url(:medium) %></td>
         <td><%= section.category.present? ? section.category.name : '' %></td>
         <td><%= section.active == 1 ? 'Si' : 'No' %></td>
         <td>
