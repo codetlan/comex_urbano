@@ -1,11 +1,8 @@
 class ErrorsController < ApplicationController
 
   def show
-    respond_to do |format|
-      format.html {render 'errors/page_not_found', layout: 'comming_soon'}
-    end
+    render 'errors/page_not_found', layout: 'comming_soon'
   end
-
   def not_found
     respond_to do |format|
       format.any(:htm, :html, :xls, :xlsx) { render 'errors/page_not_found', :layout => "comming_soon", :formats => [:html] }
@@ -23,7 +20,7 @@ class ErrorsController < ApplicationController
   def internal_error
     respond_to do |format|
       format.html { render 'errors/page_not_found', :layout => "comming_soon" }
-      format.all { render nothing: true, status: 500 }
+      format.all { render nothing: true, status: 500}
     end
   end
 end
