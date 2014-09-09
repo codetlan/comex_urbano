@@ -22,7 +22,7 @@
             <div class="post-desc">
               <div class="post-desc-inner">
                 <h1><%= @video.name %></h1>
-                <p><%= truncate_html(@video.description.html_safe) %></p>
+                <p><%= @video.description.present? ? truncate_html(@video.description.html_safe, 200) : '' %></p>
 
                 <%= render partial: 'shared/post_share_links', locals: { url: video_show_url(@video), text: @video.name, media_url: youtube_thumb(@video.link), descri: @video.description.html_safe } %>
 
