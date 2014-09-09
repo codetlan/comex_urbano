@@ -1,8 +1,11 @@
 class ErrorsController < ApplicationController
 
   def show
-    render 'errors/page_not_found', layout: 'comming_soon'
+    respond_to do |format|
+      format.html {render 'errors/page_not_found', layout: 'comming_soon'}
+    end
   end
+
   def not_found
     respond_to do |format|
       format.any(:htm, :html, :xls, :xlsx) { render 'errors/page_not_found', :layout => "comming_soon", :formats => [:html] }
@@ -12,7 +15,7 @@ class ErrorsController < ApplicationController
 
   def unacceptable
     respond_to do |format|
-      format.html { render :status => 422, :layout => "error_frame" }
+      format.html { render 'errors/page_not_found', :layout => "error_frame" }
       format.all { render nothing: true, status: 422 }
     end
   end
@@ -20,7 +23,7 @@ class ErrorsController < ApplicationController
   def internal_error
     respond_to do |format|
       format.html { render 'errors/page_not_found', :layout => "comming_soon" }
-      format.all { render nothing: true, status: 500}
+      format.all { render nothing: true, status: 500 }
     end
   end
 end

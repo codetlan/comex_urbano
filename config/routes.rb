@@ -147,12 +147,7 @@ ComexUrbano::Application.routes.draw do
   #     resources :products
   #   end
 
-  #%w( 404 422 500 ).each do |code|
-  #  get code, :to => "errors#not_found"
-  #end
-
-  get "/404", :to => "errors#not_found"
-  get "/422", :to => "errors#unacceptable"
-  get "/500", :to => "errors#internal_error"
-
+  %w( 404 422 500 ).each do |code|
+    get code, :to => "errors#show"
+  end
 end
