@@ -204,20 +204,104 @@ label {
 }
 
 .site-links {
-  padding-bottom: 20px;
+  height: 35px;
+  //padding-bottom: 20px;
   @include clearfix;
 
-  @include max-screen(600px) {
-    display: none;
+  .site-navigation {
+    float: left;
+  }
+
+  .site-search {
+    float: right;
+
+    @include max-screen(770px) {
+      display: none;
+    }
+  }
+
+  .navigation {
+    float: left;
+    margin: 5px 10px 0 0;
+
+    .nav-list > li {
+      float: left;
+      padding-left: 90px;
+      position: relative;
+
+      .nav-dropdown {
+        width: 145px;
+        position: absolute;
+        display: none;
+
+        .nav-dropdown-padding {
+          padding-top: 10px;
+        }
+
+        .separator img {
+          display: block;
+          margin: 3px 10px;
+        }
+
+        a {
+          display: block;
+          padding: 8px 10px;
+        }
+      }
+
+      @include max-screen(1200px) {
+        padding-left: 65px;
+      }
+
+      @include max-screen(1060px) {
+        padding-left: 35px;
+      }
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:hover {
+        .nav-dropdown {
+          display: block;
+        }
+      }
+    }
+
+    @include max-screen(580px) {
+      .nav-list {
+        height: 230px;
+        overflow-y: scroll;
+
+        > li {
+          padding: 0;
+          float: none;
+
+          .nav-dropdown {
+            width: auto;
+            position: relative;
+            display: block;
+
+            .nav-dropdown-padding {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
   }
 
   .social-links {
-    margin: 5px 170px 0 0px;
+    margin: 5px 30px 0 0px;
     float: left;
 
     ul li {
       float: left;
-      padding-right: 13px;
+      padding: 0px 5px;
+    }
+
+    @include max-screen(940px) {
+      display: none;
     }
   }
 
@@ -230,7 +314,31 @@ label {
       width: 215px;
     }
   }
+
+  @include max-screen(580px) {
+    margin: 0;
+
+    .navigation {
+      width: 100%;
+      float: none;
+      left: 0;
+      top: 56px;
+      position: fixed;
+      z-index: 10;
+
+      ul li {
+        float: none;
+        padding: 0;
+
+        a {
+          padding: 20px 10px;
+          display: block;
+        }
+      }
+    }
+  }
 }
+
 
 .footer {
   margin-top: 60px;

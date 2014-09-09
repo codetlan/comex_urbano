@@ -80,9 +80,13 @@ label {
       list-style: none;
 
       a {
-        color: $black-color;
+        color: $white-color;
         font-family: $font-medium;
-        font-size: 15px;
+        //text-transform: uppercase;
+        font-size: 12px;
+        //color: $black-color;
+        //font-family: $font-medium;
+        //font-size: 15px;
 
         &.active {
           color: #c2c2c2;
@@ -135,6 +139,62 @@ label {
 .site-links {
   background: $white-color;
 
+  .navigation {
+    .nav-list > li {
+      list-style: none;
+
+      a {
+        color: $black-color;
+        font-family: $font-medium;
+        font-size: 15px;
+
+        &.active {
+          color: #c2c2c2;
+        }
+      }
+
+      .nav-dropdown {
+        ul {
+          list-style: none;
+          background: #78797b;
+          border: 1px solid $white-color;
+          text-align: center;
+        }
+
+        a {
+          text-transform: none;
+          color: $white-color;
+          font-size: 9px;
+          font-family: $font-medium;
+
+          &:hover {
+            background: #acadae;
+          }
+        }
+      }
+    }
+
+    @include max-screen(580px) {
+      background: $white-color;
+
+      .nav-list > li {
+        border-top: 1px solid #fff;
+
+        .nav-dropdown {
+          ul {
+            text-align: left;
+            border-width: 1px 0 1px 0;
+
+            li a {
+              background: #999;
+              font-size: 16px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .social-links ul {
     list-style: none;
   }
@@ -155,14 +215,14 @@ label {
 
   @include max-screen(580px) {
     .navigation {
-      background: $black-color;
+      background: $white-color;
 
       ul li {
         border-top: 1px solid shade($white-color, 70%);
 
         a {
           text-transform: capitalize;
-          color: $white-color;
+          color: $black-color;
         }
       }
     }
