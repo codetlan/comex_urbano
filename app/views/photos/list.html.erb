@@ -21,7 +21,7 @@
           <div class="caption">
             <h5><%= photo.name.present? ? truncate_html(photo.name.html_safe, 20, '...') : '' %></h5>
 
-            <p><%= photo.description.present? ? truncate_html(photo.description.html_safe, 80, '...') : '' %><br>
+            <p><%= photo.description.present? ? truncate_html(photo.description.html_safe, 60, '...') : '' %><br>
               Visitas: <%= photo.impressionist_count %> <br>
               Publicado: <%= photo.active == 1 ? 'Si' : 'No' %></p><br>
 
