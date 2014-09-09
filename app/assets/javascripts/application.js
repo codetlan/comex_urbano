@@ -141,7 +141,7 @@ $(document).on("ready page:load", function() {
         errorPlacement: function(error, element) {
             var container = element.closest('.col-sm-10');
             container.append(error);
-        },
+        }
     });
 
     $('.image-gallery').mouseenter(function(event) {

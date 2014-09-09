@@ -24,16 +24,15 @@
     <div class="form-group">
       <%= f.label :photo, 'Imagen:', class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
-        <%= f.file_field :photo, class: 'form-control' %>
+        <%= f.file_field :photo, :onchange => "readURL(this);", class: 'form-control' %>
       </div>
     </div>
-      <% @landing_page.images.each do |banner| %>
-          <div class="col-sm-6">
-            <div class="thumbnail">
-              <%= image_tag banner.photo.url %>
-            </div>
-          </div>
-      <% end %>
+    <div class="form-group">
+      <div class="col-sm-2 control-label"></div>
+      <div class="col-sm-10">
+        <%= image_tag f.object.photo.url(:original), :id => "preview-photo" %>
+      </div>
+    </div>
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
@@ -43,3 +42,18 @@
     </div>
   </div>
 </fieldset>
+<script>
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-photo')
+                        .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
