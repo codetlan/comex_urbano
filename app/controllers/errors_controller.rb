@@ -3,6 +3,7 @@ class ErrorsController < ApplicationController
   def show
     render 'errors/page_not_found', layout: 'comming_soon'
   end
+
   def not_found
     respond_to do |format|
       format.any(:htm, :html, :xls, :xlsx) { render 'errors/page_not_found', :layout => "comming_soon", :formats => [:html] }
