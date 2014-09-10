@@ -9,8 +9,8 @@ class Photo < ActiveRecord::Base
       list: '240x180#',
       photo: '720x485#',
       post: "305x231#",
-      #photo_show: '722x384#'
-      photo_show: '633x360#'
+      photo_show: '633x360#',
+      thumb: '250x250#'
   }
 
   # Validate the attached image is image/jpg, image/png, etc
