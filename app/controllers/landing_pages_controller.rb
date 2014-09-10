@@ -82,6 +82,6 @@ class LandingPagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landing_page_params
-      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, :privacity, :contact, images_attributes:[:id, :photo, :_destroy, :name, :description, :link])
+      params.require(:landing_page).permit(:facebook, :twitter, :youtube, :vimeo, :copyright, :terms, :photos, :privacity, :contact, images_attributes:[:id, :photo, :_destroy, :name, :description, :link, :position])
     end
 end

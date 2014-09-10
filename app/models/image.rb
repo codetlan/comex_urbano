@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+  default_scope -> { order("position ASC") }
   belongs_to :landing_page
 
   has_attached_file :photo,
