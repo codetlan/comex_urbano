@@ -34,7 +34,7 @@ function responsiveNavigation() {
         nav = $('.navigation');
 
     nav.removeClass('active');
-    if (winWidth <= 840) {
+    if (winWidth <= 450) {
         nav.hide();
     } else {
         nav.show();

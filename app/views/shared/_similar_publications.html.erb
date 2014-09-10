@@ -8,7 +8,7 @@
             <div class="similar-publications-box">
               <%= link_to photo_show_path(post) do %>
                 <div class="image">
-                  <%= image_tag post.image.url(:photo_show) %>
+                  <%= image_tag post.image.url(:thumb) %>
                 </div>
                 <div class="description">
                   <%= post.name %>
