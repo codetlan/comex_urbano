@@ -33,6 +33,7 @@ function responsiveNavigation() {
     var winWidth = $(window).width(),
         nav = $('.navigation');
 
+    console.log(winWidth);
     nav.removeClass('active');
     if (winWidth <= 450) {
         nav.hide();
@@ -60,7 +61,7 @@ $(window).resize(function () {
     bindCollage();
 });
 
-$(document).on("ready page:load", function() {
+$(function() {
     $('textarea.ckeditor').ckeditor();
 
     responsiveNavigation();
@@ -91,7 +92,7 @@ $(document).on("ready page:load", function() {
         autoHover: true,
         pager: false,
         controls: true,
-        auto: false,
+        auto: true,
         pause: 4000,
         pager: true,
         pagerSelector: $('.slider-pager'),
@@ -99,7 +100,8 @@ $(document).on("ready page:load", function() {
         prevText: ''
     });
 
-    $('.mobile-menu').click(function () {
+    $('.mobile-menu').on('tap', function () {
+        console.log("Holaa");
         var navigation = $('.navigation');
 
         if ( navigation.hasClass('active')) {

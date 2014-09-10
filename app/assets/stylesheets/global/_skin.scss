@@ -1,4 +1,4 @@
-
+1
 * {
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
@@ -409,7 +409,12 @@ label {
     background: #e5e5e5;
 
     .video {
-
+      background-position: center center;
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
     }
 
     .post-desc {

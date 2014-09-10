@@ -40,7 +40,7 @@
       padding-right: 0;
     }   
 
-    @include max-screen(760px) {
+    @include max-screen(768px) {
       width: 100%;
       clear: both;
     }

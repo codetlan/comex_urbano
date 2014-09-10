@@ -14,8 +14,7 @@
       <div class="col col-12">
         <div class="col-inner">
           <div class="post-show-video">
-            <div class="video">
-              <%= image_tag @photo.image.url(:photo_show) %>
+            <div class="video" style="background-image: url('<%= @photo.image.url(:photo_show) %>')">
             </div>
             <div class="post-desc">
               <div class="post-desc-inner">
