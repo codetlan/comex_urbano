@@ -147,9 +147,9 @@ ComexUrbano::Application.routes.draw do
   #     resources :products
   #   end
 
-  #%w( 404 422 500 ).each do |code|
-  #  get code, :to => "errors#show"
-  #end
+  %w( 404 422 500 ).each do |code|
+    get code, :to => "errors#show"
+  end
 
-  get '*unmatched_route', :to => 'application#raise_not_found!'
+  #get '*unmatched_route', :to => 'application#raise_not_found!'
 end
