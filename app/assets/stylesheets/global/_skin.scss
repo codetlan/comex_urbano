@@ -78,6 +78,7 @@ label {
   .navigation {
     .nav-list > li {
       list-style: none;
+      text-align: center;
 
       a {
         color: $white-color;
@@ -155,6 +156,7 @@ label {
 
       .nav-dropdown {
         ul {
+          margin-left: 30px;
           list-style: none;
           background: #78797b;
           border: 1px solid $white-color;
