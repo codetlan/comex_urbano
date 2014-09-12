@@ -151,5 +151,5 @@ ComexUrbano::Application.routes.draw do
   #  get code, :to => "errors#show"
   #end
 
-  #get '*unmatched_route', :to => 'application#raise_not_found!'
+  get '*unmatched_route', :to => 'application#raise_not_found!'
 end
