@@ -25,7 +25,11 @@ class Video < ActiveRecord::Base
   end
 
   def youtube_id
-    regex = /youtube.com.*(?:\/|v=)([^&$]+)/
+    if self.link.match('youtube.com')
+      regex = /youtube.com.*(?:\/|v=)([^&$]+)/
+    elsif self.link.match('youtu.be')
+      regex = /youtu.be.*(?:\/|v=)([^&$]+)/
+    end
     id = self.link.match(regex)[1]
   end
 end
