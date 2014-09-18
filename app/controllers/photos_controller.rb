@@ -62,7 +62,7 @@ class PhotosController < ApplicationController
       if @photo.update(photo_params)
         @publication = Publication.find_by_published_id_and_published_type(@photo.id, 'Photo')
         if @publication
-          @publication.update(:content => @photo.name + @photo.description + @photo.tag_list.join(' '))
+          @publication.update(:content => @photo.name + @photo.description + @video.content + @photo.tag_list.join(' '))
           format.html { redirect_to photos_path, notice: 'La imagen fue actualizada corectamente.' }
           format.json { head :no_content }
         else
